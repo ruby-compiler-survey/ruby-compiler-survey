@@ -1,0 +1,191 @@
+Script
+  @name: :__script__
+  @pre_exe: []
+  @file: "/var/examples/fib.rb"
+  @body: \
+    Block
+      @locals: nil
+      @array: [
+        Define [0]
+          @name: :fib
+          @line: 1
+          @arguments: \
+            Parameters
+              @names: [
+                [0] : :n
+              ]
+              @defaults: nil
+              @splat_index: nil
+              @block_arg: nil
+              @block_index: nil
+              @splat: nil
+              @locals: [
+                [0] : :n
+              ]
+              @local_index: 0
+              @optional: []
+              @line: 1
+              @post: []
+              @keywords: nil
+              @required: [
+                [0] : :n
+              ]
+          @body: \
+            Block
+              @locals: nil
+              @array: [
+                If [0]
+                  @line: 2
+                  @condition: \
+                    SendWithArguments
+                      @name: :<=
+                      @block: nil
+                      @privately: false
+                      @vcall_style: false
+                      @line: 2
+                      @arguments: \
+                        Arguments
+                          @splat: nil
+                          @array: [
+                            FixnumLiteral [0]
+                              @value: 2
+                              @line: 2
+                          ]
+                          @line: 2
+                      @receiver: \
+                        LocalVariableAccess
+                          @name: :n
+                          @variable: nil
+                          @line: 2
+                  @else: \
+                    SendWithArguments
+                      @name: :+
+                      @block: nil
+                      @privately: false
+                      @vcall_style: false
+                      @line: 5
+                      @arguments: \
+                        Arguments
+                          @splat: nil
+                          @array: [
+                            SendWithArguments [0]
+                              @name: :fib
+                              @block: nil
+                              @privately: true
+                              @vcall_style: false
+                              @line: 5
+                              @arguments: \
+                                Arguments
+                                  @splat: nil
+                                  @array: [
+                                    SendWithArguments [0]
+                                      @name: :-
+                                      @block: nil
+                                      @privately: false
+                                      @vcall_style: false
+                                      @line: 5
+                                      @arguments: \
+                                        Arguments
+                                          @splat: nil
+                                          @array: [
+                                            FixnumLiteral [0]
+                                              @value: 2
+                                              @line: 5
+                                          ]
+                                          @line: 5
+                                      @receiver: \
+                                        LocalVariableAccess
+                                          @name: :n
+                                          @variable: nil
+                                          @line: 5
+                                  ]
+                                  @line: 5
+                              @receiver: \
+                                Self
+                                  @line: 5
+                          ]
+                          @line: 5
+                      @receiver: \
+                        SendWithArguments
+                          @name: :fib
+                          @block: nil
+                          @privately: true
+                          @vcall_style: false
+                          @line: 5
+                          @arguments: \
+                            Arguments
+                              @splat: nil
+                              @array: [
+                                SendWithArguments [0]
+                                  @name: :-
+                                  @block: nil
+                                  @privately: false
+                                  @vcall_style: false
+                                  @line: 5
+                                  @arguments: \
+                                    Arguments
+                                      @splat: nil
+                                      @array: [
+                                        FixnumLiteral [0]
+                                          @value: 1
+                                          @line: 5
+                                      ]
+                                      @line: 5
+                                  @receiver: \
+                                    LocalVariableAccess
+                                      @name: :n
+                                      @variable: nil
+                                      @line: 5
+                              ]
+                              @line: 5
+                          @receiver: \
+                            Self
+                              @line: 5
+                  @body: \
+                    FixnumLiteral
+                      @value: 1
+                      @line: 3
+              ]
+              @line: 7
+        While [1]
+          @check_first: true
+          @line: 9
+          @condition: \
+            TrueLiteral
+              @line: 9
+          @body: \
+            SendWithArguments
+              @name: :puts
+              @block: nil
+              @privately: true
+              @vcall_style: false
+              @line: 10
+              @arguments: \
+                Arguments
+                  @splat: nil
+                  @array: [
+                    SendWithArguments [0]
+                      @name: :fib
+                      @block: nil
+                      @privately: true
+                      @vcall_style: false
+                      @line: 10
+                      @arguments: \
+                        Arguments
+                          @splat: nil
+                          @array: [
+                            FixnumLiteral [0]
+                              @value: 30
+                              @line: 10
+                          ]
+                          @line: 10
+                      @receiver: \
+                        Self
+                          @line: 10
+                  ]
+                  @line: 10
+              @receiver: \
+                Self
+                  @line: 10
+      ]
+      @line: 1

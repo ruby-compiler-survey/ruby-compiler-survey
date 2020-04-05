@@ -1,0 +1,1405 @@
+JIT: compiling Array#each (1580862882.749417)
+| inline ivar read: Array#@start (slot: 2)
+| inline ivar read: Array#@total (slot: 0)
+| inlining: Fixnum#+ into each. primitive fixnum_add (Fixnum)
+| inline ivar read: Array#@tuple (slot: 1)
+| inlining: Fixnum#< into each. primitive fixnum_compare_operation (Fixnum)
+| inlining: Rubinius::Tuple#[] into each. primitive tuple_at (Rubinius::Tuple)
+| inlining: Fixnum#+ into each. primitive fixnum_add (Fixnum)
+JIT: compiling block in sum near /var/examples/sum-block.rb:3 (1580862883.52913)
+| inlining: Fixnum#+ into sum. primitive fixnum_add (Fixnum)
+JIT: compiling IO#write (1580862883.432632)
+| inlining: Kernel#String into write (IO)
+|| inlining: Kernel#kind_of? into String. primitive Object#kind_of (String)
+||| inlining: direct class used for kind_of (against String)
+| inlining: read to '@num_bytes' on String in #write (slot: 0)
+| inlining: Fixnum#== into write. primitive fixnum_compare_operation (Fixnum)
+| inlining: IO#ensure_open_and_writable into write
+|| inlining: IO#ensure_open into ensure_open_and_writable. generic primitive: jit_stub_io_ensure_open (IO)
+||+ eliding redundant guard: class IO (57)
+|| inline ivar read: IO#@mode (slot: 3)
+|| inlining: Fixnum#& into ensure_open_and_writable. primitive fixnum_and (Fixnum)
+|| inlining: Fixnum#== into ensure_open_and_writable. primitive fixnum_compare_operation (Fixnum)
+| inlining: IO#binmode? into write
+|| inline ivar read: IO#@binmode (abort, using slow lookup)
+|| slow ivar read: @binmode
+|| inlining: NilClass#nil? into binmode?
+|| inlining: BasicObject#! into binmode? (TrueClass)
+||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+| inlining: BasicObject#! into write (FalseClass)
+|| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+|| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+| inlining: IO#external_encoding into write
+|| inline ivar read: IO#@external (slot: 7)
+|| inline ivar read: IO#@external (slot: 7)
+|| inline ivar read: IO#@mode (slot: 3)
+|| inlining: Fixnum#== into external_encoding. primitive fixnum_compare_operation (Fixnum)
+| inline ivar read: IO#@sync (slot: 6)
+| inlining: IO#write into write. generic primitive: jit_stub_io_write (IO)
+| inlining: read to '@num_bytes' on String in #write (slot: 0)
+| inline ivar read: IO#@ibuffer (slot: 2)
+| inline ivar read: IO#@ibuffer (slot: 2)
+| inline ivar read: IO#@ibuffer (slot: 2)
+| inline ivar read: IO#@ibuffer (slot: 2)
+JIT: compiling BasicObject#! (1580862883.920496)
+| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+JIT: compiling Hash::State#initialize (1580862883.948660)
+| inline ivar write: @compare_by_identity (abort, using slow write)
+| slow ivar write: @compare_by_identity
+| inline ivar write: @head (abort, using slow write)
+| slow ivar write: @head
+| inline ivar write: @tail (abort, using slow write)
+| slow ivar write: @tail
+JIT: compiling Hash#__setup__ (1580862883.987142)
+| inline ivar write: @capacity (abort, using slow write)
+| slow ivar write: @capacity
+| inlining: Fixnum#- into __setup__. primitive fixnum_sub (Fixnum)
+| inline ivar write: @mask (abort, using slow write)
+| slow ivar write: @mask
+| inline ivar write: @max_entries (abort, using slow write)
+| slow ivar write: @max_entries
+| inline ivar write: @size (abort, using slow write)
+| slow ivar write: @size
+| inline ivar write: @entries (abort, using slow write)
+| slow ivar write: @entries
+| inlining: Class#allocate into __setup__. primitive class_allocate (<nil>)
+| inlining: Hash::State#initialize into __setup__
+|| inline ivar write: @compare_by_identity (abort, using slow write)
+|| slow ivar write: @compare_by_identity
+|| inline ivar write: @head (abort, using slow write)
+|| slow ivar write: @head
+|| inline ivar write: @tail (abort, using slow write)
+|| slow ivar write: @tail
+| inline ivar write: @state (abort, using slow write)
+| slow ivar write: @state
+| NOT inlining: Class#new into __setup__. too few sends: (2 / 32000) (<nil>) (interp)
+| inlining: Rubinius::Tuple#new into __setup__. generic primitive: jit_stub_tuple_allocate (<nil>)
+JIT: compiling Hash#allocate (1580862884.156328)
+| inlining: Hash#__setup__ into allocate
+|| inline ivar write: @capacity (abort, using slow write)
+|| slow ivar write: @capacity
+|| inlining: Fixnum#- into __setup__. primitive fixnum_sub (Fixnum)
+|| inline ivar write: @mask (abort, using slow write)
+|| slow ivar write: @mask
+|| inline ivar write: @max_entries (abort, using slow write)
+|| slow ivar write: @max_entries
+|| inline ivar write: @size (abort, using slow write)
+|| slow ivar write: @size
+|| inline ivar write: @entries (abort, using slow write)
+|| slow ivar write: @entries
+|| inlining: Class#allocate into __setup__. primitive class_allocate (<nil>)
+|| inlining: Hash::State#initialize into __setup__
+||| inline ivar write: @compare_by_identity (abort, using slow write)
+||| slow ivar write: @compare_by_identity
+||| inline ivar write: @head (abort, using slow write)
+||| slow ivar write: @head
+||| inline ivar write: @tail (abort, using slow write)
+||| slow ivar write: @tail
+|| inline ivar write: @state (abort, using slow write)
+|| slow ivar write: @state
+|| NOT inlining: Class#new into __setup__. too few sends: (2 / 35490) (<nil>) (interp)
+|| inlining: Rubinius::Tuple#new into __setup__. generic primitive: jit_stub_tuple_allocate (<nil>)
+JIT: compiling Rubinius::Runtime#keyword_object? (1580862884.372994)
+| inlining: direct class used for kind_of (regular Ruby class)
+| NOT inlining: Rubinius::Type#try_convert into keyword_object?. too few sends: (6 / 12798) (<nil>) (interp)
+| inlining: read to '@size' on Hash in #keyword_object?
+| inlining: Fixnum#== into keyword_object?. primitive fixnum_compare_operation (Fixnum)
+| inlining: Hash#new_from_literal into keyword_object?
+|| NOT inlining: Hash#allocate into new_from_literal. too complex (<nil>) (jitted)
+| NOT inlining: block was too complex
+| inlining: Fixnum#== into keyword_object?. primitive fixnum_compare_operation (Fixnum)
+| inlining: Rubinius::Tuple#new into keyword_object?. generic primitive: jit_stub_tuple_allocate (<nil>)
+JIT: compiling Hash#new_from_literal (1580862884.611314)
+| NOT inlining: Hash#allocate into new_from_literal. too complex (<nil>) (jitted)
+JIT: compiling Array#shift (1580862884.631557)
+| inlining: Kernel#equal? into shift. primitive object_equal (<nil>)
+| inline ivar read: Array#@total (slot: 0)
+| inlining: Fixnum#== into shift. primitive fixnum_compare_operation (Fixnum)
+| inline ivar read: Array#@tuple (slot: 1)
+| inline ivar read: Array#@start (slot: 2)
+| inlining: Rubinius::Tuple#[] into shift. primitive tuple_at (Rubinius::Tuple)
+| inline ivar read: Array#@tuple (slot: 1)
+| inline ivar read: Array#@start (slot: 2)
+| inlining: Rubinius::Tuple#[]= into shift. primitive tuple_put (Rubinius::Tuple)
+| inline ivar read: Array#@start (slot: 2)
+| inlining: Fixnum#+ into shift. primitive fixnum_add (Fixnum)
+| inline ivar write: @start (slot: 2)
+| inline ivar read: Array#@total (slot: 0)
+| inlining: Fixnum#- into shift. primitive fixnum_sub (Fixnum)
+| inline ivar write: @total (slot: 0)
+JIT: compiling Hash#[]= (1580862884.852365)
+| inline ivar read: Hash#@size (abort, using slow lookup)
+| slow ivar read: @size
+| inline ivar read: Hash#@max_entries (abort, using slow lookup)
+| slow ivar read: @max_entries
+| inlining: Fixnum#> into []=. primitive fixnum_compare_operation (Fixnum)
+| inline ivar read: Hash#@entries (abort, using slow lookup)
+| slow ivar read: @entries
+| NOT inlining: Hash#redistribute into []=. too few sends: (1 / 31930) (Hash) (interp)
+| inlining: Kernel#hash into []=. generic primitive: jit_stub_object_hash (String)
+| NOT inlining: Array#hash into []=. too few sends: (2 / 31930) (Array) (interp)
+| inlining: Kernel#hash into []=. generic primitive: jit_stub_object_hash (Symbol)
+| inline ivar read: Hash#@mask (abort, using slow lookup)
+| slow ivar read: @mask
+| inlining: Fixnum#& into []=. primitive fixnum_and (Fixnum)
+| inline ivar read: Hash#@entries (abort, using slow lookup)
+| slow ivar read: @entries
+| inlining: Rubinius::Tuple#[] into []=. primitive tuple_at (Rubinius::Tuple)
+| inline ivar read: Hash#@state (abort, using slow lookup)
+| slow ivar read: @state
+| inlining: read to '@key' on Hash::Bucket in #[]=
+| inlining: read to '@key_hash' on Hash::Bucket in #[]=|+ eliding redundant guard: class Hash::Bucket (649)
+
+| NOT inlining: Hash::State#match? into []=. too few sends: (3 / 31930) (Hash::State) (interp)
+| inlining: writer to '@value' on Hash::Bucket in #[]=
+| inlining: read to '@link' on Hash::Bucket in #[]=
+| inline ivar read: Hash#@state (abort, using slow lookup)
+| slow ivar read: @state
+| inlining: read to '@key' on Hash::Bucket in #[]=
+| inlining: read to '@key_hash' on Hash::Bucket in #[]=|+ eliding redundant guard: class Hash::Bucket (649)
+
+| NOT inlining: Hash::State#match? into []=. too few sends: (1 / 31930) (Hash::State) (interp)
+| inlining: writer to '@value' on Hash::Bucket in #[]=
+| inlining: read to '@link' on Hash::Bucket in #[]=
+| NOT inlining: Hash#new_bucket into []=. too few sends: (3 / 31930) (Hash) (interp)
+| inlining: writer to '@link' on Hash::Bucket in #[]=
+| inline ivar read: Hash#@entries (abort, using slow lookup)
+| slow ivar read: @entries
+| inlining: Hash#new_bucket into []=
+|| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (String)
+||| inlining: direct class used for kind_of (against String)
+|| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (Array)
+||| inlining: direct class used for kind_of (against String)
+|| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (Symbol)
+||| inlining: direct class used for kind_of (against String)
+|| inlining: Kernel#frozen? into new_bucket. primitive Object#frozen? (String)
+|| NOT inlining: BasicObject#! into new_bucket. too few sends: (2 / 38578) (FalseClass) (jitted)
+|| NOT inlining: BasicObject#! into new_bucket. too few sends: (146 / 38578) (TrueClass) (jitted)
+|| NOT inlining: Hash#compare_by_identity? into new_bucket. too few sends: (2 / 38578) (Hash) (interp)
+|| NOT inlining: BasicObject#! into new_bucket. too few sends: (2 / 38578) (FalseClass) (jitted)
+|| NOT inlining: String#dup into new_bucket. too few sends: (2 / 38578) (String) (interp)
+|| inlining: Kernel#freeze into new_bucket. generic primitive: jit_stub_object_freeze (String)
+|| inline ivar read: Hash#@size (abort, using slow lookup)
+|| slow ivar read: @size
+|| inlining: Fixnum#+ into new_bucket. primitive fixnum_add (Fixnum)
+|| inline ivar write: @size (abort, using slow write)
+|| slow ivar write: @size
+|| inlining: Class#allocate into new_bucket. primitive class_allocate (<nil>)
+|| inline ivar read: Hash#@state (abort, using slow lookup)
+|| slow ivar read: @state
+|| inlining: Hash::Bucket#initialize into new_bucket
+||| inline ivar write: @key (abort, using slow write)
+||| slow ivar write: @key
+||| inline ivar write: @key_hash (abort, using slow write)
+||| slow ivar write: @key_hash
+||| inline ivar write: @value (abort, using slow write)
+||| slow ivar write: @value
+||| inline ivar write: @link (abort, using slow write)
+||| slow ivar write: @link
+||| inline ivar write: @state (abort, using slow write)
+||| slow ivar write: @state
+||| inlining: read to '@tail' on Hash::State in #initialize
+||| inline ivar write: @previous (abort, using slow write)
+||| slow ivar write: @previous
+||| inlining: writer to '@next' on Hash::Bucket in #initialize
+||| inlining: writer to '@tail' on Hash::State in #initialize
+||| inlining: writer to '@tail' on Hash::State in #initialize
+||| inlining: writer to '@head' on Hash::State in #initialize
+|| inline ivar read: Hash#@state (abort, using slow lookup)
+|| slow ivar read: @state
+| inlining: Rubinius::Tuple#[]= into []=. primitive tuple_put (Rubinius::Tuple)
+JIT: compiling Hash#new_bucket (1580862885.412495)
+| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (String)
+|| inlining: direct class used for kind_of (against String)
+| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (Array)
+|| inlining: direct class used for kind_of (against String)
+| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (Symbol)
+|| inlining: direct class used for kind_of (against String)
+| inlining: Kernel#frozen? into new_bucket. primitive Object#frozen? (String)
+| NOT inlining: BasicObject#! into new_bucket. too few sends: (2 / 32000) (FalseClass) (jitted)
+| NOT inlining: BasicObject#! into new_bucket. too few sends: (146 / 32000) (TrueClass) (jitted)
+| NOT inlining: Hash#compare_by_identity? into new_bucket. too few sends: (2 / 32000) (Hash) (interp)
+| NOT inlining: BasicObject#! into new_bucket. too few sends: (2 / 32000) (FalseClass) (jitted)
+| NOT inlining: String#dup into new_bucket. too few sends: (2 / 32000) (String) (interp)
+| inlining: Kernel#freeze into new_bucket. generic primitive: jit_stub_object_freeze (String)
+| inline ivar read: Hash#@size (abort, using slow lookup)
+| slow ivar read: @size
+| inlining: Fixnum#+ into new_bucket. primitive fixnum_add (Fixnum)
+| inline ivar write: @size (abort, using slow write)
+| slow ivar write: @size
+| inlining: Class#allocate into new_bucket. primitive class_allocate (<nil>)
+| inline ivar read: Hash#@state (abort, using slow lookup)
+| slow ivar read: @state
+| inlining: Hash::Bucket#initialize into new_bucket
+|| inline ivar write: @key (abort, using slow write)
+|| slow ivar write: @key
+|| inline ivar write: @key_hash (abort, using slow write)
+|| slow ivar write: @key_hash
+|| inline ivar write: @value (abort, using slow write)
+|| slow ivar write: @value
+|| inline ivar write: @link (abort, using slow write)
+|| slow ivar write: @link
+|| inline ivar write: @state (abort, using slow write)
+|| slow ivar write: @state
+|| inlining: read to '@tail' on Hash::State in #initialize
+|| inline ivar write: @previous (abort, using slow write)
+|| slow ivar write: @previous
+|| inlining: writer to '@next' on Hash::Bucket in #initialize
+|| inlining: writer to '@tail' on Hash::State in #initialize
+|| inlining: writer to '@tail' on Hash::State in #initialize
+|| inlining: writer to '@head' on Hash::State in #initialize
+| inline ivar read: Hash#@state (abort, using slow lookup)
+| slow ivar read: @state
+JIT: compiling Hash#each (1580862885.722436)
+| inline ivar read: Hash#@state (abort, using slow lookup)
+| slow ivar read: @state
+| inline ivar read: Hash#@state (abort, using slow lookup)
+| slow ivar read: @state
+| inlining: read to '@head' on Hash::State in #each
+| inlining: read to '@key' on Hash::Bucket in #each
+| inlining: read to '@value' on Hash::Bucket in #each|+ eliding redundant guard: class Hash::Bucket (649)
+
+| inlining: read to '@next' on Hash::Bucket in #each|+ eliding redundant guard: class Hash::Bucket (649)
+
+JIT: compiling block in puts near core/io.rb:1948 (1580862885.830834)
+| inlining: Kernel#equal? into puts. primitive object_equal (Fixnum)
+| inlining: IO#write into puts
+|| inlining: Kernel#String into write (IO)
+||+ eliding redundant guard: class IO (57)
+||| inlining: Kernel#kind_of? into String. primitive Object#kind_of (String)
+|||| inlining: direct class used for kind_of (against String)
+|| inlining: read to '@num_bytes' on String in #write (slot: 0)
+|| inlining: Fixnum#== into write. primitive fixnum_compare_operation (Fixnum)
+|| inlining: IO#ensure_open_and_writable into write
+||+ eliding redundant guard: class IO (57)
+||| inlining: IO#ensure_open into ensure_open_and_writable. generic primitive: jit_stub_io_ensure_open (IO)
+|||+ eliding redundant guard: class IO (57)
+||| inline ivar read: IO#@mode (slot: 3)
+||| inlining: Fixnum#& into ensure_open_and_writable. primitive fixnum_and (Fixnum)
+||| inlining: Fixnum#== into ensure_open_and_writable. primitive fixnum_compare_operation (Fixnum)
+|| inlining: IO#binmode? into write
+||+ eliding redundant guard: class IO (57)
+||| inline ivar read: IO#@binmode (abort, using slow lookup)
+||| slow ivar read: @binmode
+||| inlining: NilClass#nil? into binmode?
+||| inlining: BasicObject#! into binmode? (TrueClass)
+|||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+|||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+|| inlining: BasicObject#! into write (FalseClass)
+||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+|| inlining: IO#external_encoding into write
+||+ eliding redundant guard: class IO (57)
+||| inline ivar read: IO#@external (slot: 7)
+||| inline ivar read: IO#@external (slot: 7)
+||| inline ivar read: IO#@mode (slot: 3)
+||| inlining: Fixnum#== into external_encoding. primitive fixnum_compare_operation (Fixnum)
+|| inline ivar read: IO#@sync (slot: 6)
+|| inlining: IO#write into write. generic primitive: jit_stub_io_write (IO)
+||+ eliding redundant guard: class IO (57)
+|| inlining: read to '@num_bytes' on String in #write (slot: 0)
+|| inline ivar read: IO#@ibuffer (slot: 2)
+|| inline ivar read: IO#@ibuffer (slot: 2)
+|| inline ivar read: IO#@ibuffer (slot: 2)
+|| inline ivar read: IO#@ibuffer (slot: 2)
+| inlining: String#suffix? into puts
+|| inlining: String#size into suffix?. generic primitive: jit_stub_string_size (String)
+|| inline ivar read: String#@num_bytes (slot: 0)
+|| inlining: Fixnum#> into suffix?. primitive fixnum_compare_operation (Fixnum)
+|| inlining: Fixnum#-@ into suffix?. primitive fixnum_neg (Fixnum)
+|| inlining: String#compare_substring into suffix?. generic primitive: jit_stub_string_compare_substring (String)
+|| inlining: Fixnum#== into suffix?. primitive fixnum_compare_operation (Fixnum)
+| inlining: IO#write into puts
+|| inlining: Kernel#String into write (IO)
+||+ eliding redundant guard: class IO (57)
+||| inlining: Kernel#kind_of? into String. primitive Object#kind_of (String)
+|||| inlining: direct class used for kind_of (against String)
+|| inlining: read to '@num_bytes' on String in #write (slot: 0)
+|| inlining: Fixnum#== into write. primitive fixnum_compare_operation (Fixnum)
+|| inlining: IO#ensure_open_and_writable into write
+||+ eliding redundant guard: class IO (57)
+||| inlining: IO#ensure_open into ensure_open_and_writable. generic primitive: jit_stub_io_ensure_open (IO)
+|||+ eliding redundant guard: class IO (57)
+||| inline ivar read: IO#@mode (slot: 3)
+||| inlining: Fixnum#& into ensure_open_and_writable. primitive fixnum_and (Fixnum)
+||| inlining: Fixnum#== into ensure_open_and_writable. primitive fixnum_compare_operation (Fixnum)
+|| inlining: IO#binmode? into write
+||+ eliding redundant guard: class IO (57)
+||| inline ivar read: IO#@binmode (abort, using slow lookup)
+||| slow ivar read: @binmode
+||| inlining: NilClass#nil? into binmode?
+||| inlining: BasicObject#! into binmode? (TrueClass)
+|||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+|||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+|| inlining: BasicObject#! into write (FalseClass)
+||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+|| inlining: IO#external_encoding into write
+||+ eliding redundant guard: class IO (57)
+||| inline ivar read: IO#@external (slot: 7)
+||| inline ivar read: IO#@external (slot: 7)
+||| inline ivar read: IO#@mode (slot: 3)
+||| inlining: Fixnum#== into external_encoding. primitive fixnum_compare_operation (Fixnum)
+|| inline ivar read: IO#@sync (slot: 6)
+|| inlining: IO#write into write. generic primitive: jit_stub_io_write (IO)
+||+ eliding redundant guard: class IO (57)
+|| inlining: read to '@num_bytes' on String in #write (slot: 0)
+|| inline ivar read: IO#@ibuffer (slot: 2)
+|| inline ivar read: IO#@ibuffer (slot: 2)
+|| inline ivar read: IO#@ibuffer (slot: 2)
+|| inline ivar read: IO#@ibuffer (slot: 2)
+| inlining: Kernel#kind_of? into puts. primitive Object#kind_of (Fixnum)
+|| inlining: direct class used for kind_of (against String)
+| inlining: Thread#guarding? into puts
+|| inlining: Thread#current into guarding?. generic primitive: jit_stub_thread_current (<nil>)
+|| inlining: read to '@recursive_objects' on Thread in #guarding? (slot: 3)
+|| inlining: Kernel#object_id into guarding?. generic primitive: jit_stub_object_id (Fixnum)
+|| inlining: Rubinius::LookupTable#[] into guarding?. generic primitive: jit_stub_lookuptable_aref (Rubinius::LookupTable)
+| NOT inlining: block was too complex
+JIT: compiling Kernel#method_missing (1580862887.368409)
+| inlining: Rubinius#method_missing_reason into method_missing. generic primitive: jit_stub_vm_method_missing_reason (<nil>)
+| inlining: Kernel#equal? into method_missing. primitive object_equal (Symbol)
+|+ eliding guard: detected symbol
+| inlining: Rubinius::Type#object_class into method_missing. primitive Type.object_class (<nil>)
+| inlining: Rubinius::Type#object_kind_of? into method_missing. primitive Type.object_kind_of (<nil>)
+|| inlining: direct class used for kind_of (against Module)
+| inlining: Class#allocate into method_missing. primitive class_allocate (<nil>)
+| inlining: Hash#new_from_literal into method_missing
+|| NOT inlining: Hash#allocate into new_from_literal. too complex (<nil>) (jitted)
+| inlining: Hash#[]= into method_missing
+|| inline ivar read: Hash#@size (abort, using slow lookup)
+|| slow ivar read: @size
+|| inline ivar read: Hash#@max_entries (abort, using slow lookup)
+|| slow ivar read: @max_entries
+|| inlining: Fixnum#> into []=. primitive fixnum_compare_operation (Fixnum)
+|| inline ivar read: Hash#@entries (abort, using slow lookup)
+|| slow ivar read: @entries
+|| NOT inlining: Hash#redistribute into []=. too few sends: (1 / 16654) (Hash) (interp)
+|| inlining: Kernel#hash into []=. generic primitive: jit_stub_object_hash (Symbol)
+||+ eliding guard: detected symbol
+|| inline ivar read: Hash#@mask (abort, using slow lookup)
+|| slow ivar read: @mask
+|| inlining: Fixnum#& into []=. primitive fixnum_and (Fixnum)
+|| inline ivar read: Hash#@entries (abort, using slow lookup)
+|| slow ivar read: @entries
+|| inlining: Rubinius::Tuple#[] into []=. primitive tuple_at (Rubinius::Tuple)
+|| inline ivar read: Hash#@state (abort, using slow lookup)
+|| slow ivar read: @state
+|| inlining: read to '@key' on Hash::Bucket in #[]=
+|| inlining: read to '@key_hash' on Hash::Bucket in #[]=||+ eliding redundant guard: class Hash::Bucket (649)
+
+|| NOT inlining: Hash::State#match? into []=. too few sends: (3 / 16654) (Hash::State) (interp)
+|| inlining: writer to '@value' on Hash::Bucket in #[]=
+|| inlining: read to '@link' on Hash::Bucket in #[]=
+|| inline ivar read: Hash#@state (abort, using slow lookup)
+|| slow ivar read: @state
+|| inlining: read to '@key' on Hash::Bucket in #[]=
+|| inlining: read to '@key_hash' on Hash::Bucket in #[]=||+ eliding redundant guard: class Hash::Bucket (649)
+
+|| NOT inlining: Hash::State#match? into []=. too few sends: (1 / 16654) (Hash::State) (interp)
+|| inlining: writer to '@value' on Hash::Bucket in #[]=
+|| inlining: read to '@link' on Hash::Bucket in #[]=
+|| NOT inlining: Hash#new_bucket into []=. too few sends: (3 / 16654) (Hash) (jitted)
+|| inlining: writer to '@link' on Hash::Bucket in #[]=
+|| inline ivar read: Hash#@entries (abort, using slow lookup)
+|| slow ivar read: @entries
+|| inlining: Hash#new_bucket into []=
+||+ eliding redundant guard: class Hash (645)
+||| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (Symbol)
+|||| inlining: direct class used for kind_of (against String)
+||| inlining: Kernel#frozen? into new_bucket. primitive Object#frozen? (String)
+||| NOT inlining: BasicObject#! into new_bucket. too few sends: (2 / 44806) (FalseClass) (jitted)
+||| NOT inlining: BasicObject#! into new_bucket. too few sends: (146 / 44806) (TrueClass) (jitted)
+||| NOT inlining: Hash#compare_by_identity? into new_bucket. too few sends: (2 / 44806) (Hash) (interp)
+||| NOT inlining: BasicObject#! into new_bucket. too few sends: (2 / 44806) (FalseClass) (jitted)
+||| NOT inlining: String#dup into new_bucket. too few sends: (2 / 44806) (String) (interp)
+||| inlining: Kernel#freeze into new_bucket. generic primitive: jit_stub_object_freeze (String)
+||| inline ivar read: Hash#@size (abort, using slow lookup)
+||| slow ivar read: @size
+||| inlining: Fixnum#+ into new_bucket. primitive fixnum_add (Fixnum)
+||| inline ivar write: @size (abort, using slow write)
+||| slow ivar write: @size
+||| inlining: Class#allocate into new_bucket. primitive class_allocate (<nil>)
+||| inline ivar read: Hash#@state (abort, using slow lookup)
+||| slow ivar read: @state
+||| inlining: Hash::Bucket#initialize into new_bucket
+|||| inline ivar write: @key (abort, using slow write)
+|||| slow ivar write: @key
+|||| inline ivar write: @key_hash (abort, using slow write)
+|||| slow ivar write: @key_hash
+|||| inline ivar write: @value (abort, using slow write)
+|||| slow ivar write: @value
+|||| inline ivar write: @link (abort, using slow write)
+|||| slow ivar write: @link
+|||| inline ivar write: @state (abort, using slow write)
+|||| slow ivar write: @state
+|||| inlining: read to '@tail' on Hash::State in #initialize
+|||| inline ivar write: @previous (abort, using slow write)
+|||| slow ivar write: @previous
+|||| inlining: writer to '@next' on Hash::Bucket in #initialize
+|||| inlining: writer to '@tail' on Hash::State in #initialize
+|||| inlining: writer to '@tail' on Hash::State in #initialize
+|||| inlining: writer to '@head' on Hash::State in #initialize
+||| inline ivar read: Hash#@state (abort, using slow lookup)
+||| slow ivar read: @state
+|| inlining: Rubinius::Tuple#[]= into []=. primitive tuple_put (Rubinius::Tuple)
+| NOT inlining: NoMethodError#initialize into method_missing. too complex (NoMethodError) (interp)
+| inlining: Kernel#raise into method_missing
+|| inlining: Kernel#equal? into raise. primitive object_equal (<nil>)
+|| inlining: Rubinius::GlobalVariables#[] into raise
+||| inline ivar read: Rubinius::GlobalVariables#@internal (abort, using slow lookup)
+||| slow ivar read: @internal
+||| inlining: Rubinius::LookupTable#key? into []. generic primitive: jit_stub_lookuptable_has_key (Rubinius::LookupTable)
+||| inline ivar read: Rubinius::GlobalVariables#@internal (abort, using slow lookup)
+||| slow ivar read: @internal
+||| inlining: Rubinius::LookupTable#[] into []. generic primitive: jit_stub_lookuptable_aref (Rubinius::LookupTable)
+||| inline ivar read: Rubinius::GlobalVariables#@hooks (abort, using slow lookup)
+||| slow ivar read: @hooks
+||| inline ivar read: Rubinius::GlobalVariables#@hooks (abort, using slow lookup)
+||| slow ivar read: @hooks
+||| inline ivar read: Rubinius::GlobalVariables#@alias (abort, using slow lookup)
+||| slow ivar read: @alias
+||| inline ivar read: Rubinius::GlobalVariables#@alias (abort, using slow lookup)
+||| slow ivar read: @alias
+|| inlining: Rubinius#raise_exception into raise. generic primitive: jit_stub_vm_raise_exception (<nil>)
+|| inlining: Exception#backtrace? into raise (NoMethodError)
+||| inline ivar read: NoMethodError#@backtrace (slot: 3)
+||| inline ivar read: NoMethodError#@locations (slot: 1)
+|| inlining: Exception#capture_backtrace! into raise (NoMethodError)
+||| inline ivar write: @locations (slot: 1)
+|| inlining: Kernel#equal? into raise. primitive object_equal (<nil>)
+|| inlining: Exception#exception into raise (NoMethodError)
+|| inlining: Kernel#kind_of? into raise. primitive Object#kind_of (NoMethodError)
+||| inlining: direct class used for kind_of (regular Ruby class)
+| inlining: Kernel#equal? into method_missing. primitive object_equal (NilClass)
+| inlining: Module#=== into method_missing
+|| inlining: Rubinius::Type#object_kind_of? into ===. primitive Type.object_kind_of (<nil>)
+||| inlining: no cache for kind_of fast path
+| inlining: String#<< into method_missing
+|| inlining: Kernel#kind_of? into <<. primitive Object#kind_of (String)
+||| inlining: direct class used for kind_of (against String)
+|| inlining: Rubinius::Type#infect into <<. generic primitive: jit_stub_object_infect (<nil>)
+|| inlining: String#append into <<. generic primitive: jit_stub_string_append (String)
+||+ eliding redundant guard: class String (47)
+| NOT inlining: String#<< into method_missing. too few sends: (2 / 8677) (String) (interp)
+| inlining: Kernel#equal? into method_missing. primitive object_equal (Symbol)
+|+ eliding guard: detected symbol
+| inlining: Kernel#equal? into method_missing. primitive object_equal (Symbol)
+|+ eliding guard: detected symbol
+| inlining: Kernel#equal? into method_missing. primitive object_equal (Symbol)
+|+ eliding guard: detected symbol
+JIT: compiling Module#=== (1580862888.975491)
+| inlining: Rubinius::Type#object_kind_of? into ===. primitive Type.object_kind_of (<nil>)
+|| inlining: no cache for kind_of fast path
+JIT: compiling Rubinius::Runtime#splat_hash_value (1580862888.993483)
+| inlining: direct class used for kind_of (regular Ruby class)
+| NOT inlining: Hash#merge into splat_hash_value. too complex (Hash) (interp)
+JIT: compiling Hash#replace (1580862889.65810)
+| inlining: direct class used for kind_of (regular Ruby class)
+| inlining: Kernel#equal? into replace. primitive object_equal (Hash)
+| inlining: read to '@capacity' on Hash in #replace
+| inline ivar write: @capacity (abort, using slow write)
+| slow ivar write: @capacity
+| inline ivar read: Hash#@capacity (abort, using slow lookup)
+| slow ivar read: @capacity
+| inline ivar write: @entries (abort, using slow write)
+| slow ivar write: @entries
+| inline ivar read: Hash#@capacity (abort, using slow lookup)
+| slow ivar read: @capacity
+| inlining: Fixnum#- into replace. primitive fixnum_sub (Fixnum)
+| inline ivar write: @mask (abort, using slow write)
+| slow ivar write: @mask
+| inline ivar write: @size (abort, using slow write)
+| slow ivar write: @size
+| inlining: read to '@max_entries' on Hash in #replace
+| inline ivar write: @max_entries (abort, using slow write)
+| slow ivar write: @max_entries
+| inlining: Class#allocate into replace. primitive class_allocate (<nil>)
+| inlining: Hash::State#initialize into replace
+|| inline ivar write: @compare_by_identity (abort, using slow write)
+|| slow ivar write: @compare_by_identity
+|| inline ivar write: @head (abort, using slow write)
+|| slow ivar write: @head
+|| inline ivar write: @tail (abort, using slow write)
+|| slow ivar write: @tail
+| inline ivar write: @state (abort, using slow write)
+| slow ivar write: @state
+| inlining: Hash#compare_by_identity? into replace
+|| inline ivar read: Hash#@state (abort, using slow lookup)
+|| slow ivar read: @state
+|| inline ivar read: Hash#@state (abort, using slow lookup)
+|| slow ivar read: @state
+|| inlining: Hash::State#compare_by_identity? into compare_by_identity?
+||| inline ivar read: Hash::State#@compare_by_identity (abort, using slow lookup)
+||| slow ivar read: @compare_by_identity
+| inline ivar read: Hash#@state (abort, using slow lookup)
+| slow ivar read: @state
+| inlining: Hash#each_item into replace (w/ inline block)
+|| inline ivar read: Hash#@state (abort, using slow lookup)
+|| slow ivar read: @state
+|| inline ivar read: Hash#@state (abort, using slow lookup)
+|| slow ivar read: @state
+|| inlining: read to '@head' on Hash::State in #each_item
+|| inlining block into: each_item
+||| inlining: read to '@key' on Hash::Bucket in #replace
+||| inlining: read to '@value' on Hash::Bucket in #replace
+||| inlining: Hash#[]= into replace
+|||+ eliding redundant guard: class Hash (645)
+|||| inline ivar read: Hash#@size (abort, using slow lookup)
+|||| slow ivar read: @size
+|||| inline ivar read: Hash#@max_entries (abort, using slow lookup)
+|||| slow ivar read: @max_entries
+|||| inlining: Fixnum#> into []=. primitive fixnum_compare_operation (Fixnum)
+|||| inline ivar read: Hash#@entries (abort, using slow lookup)
+|||| slow ivar read: @entries
+|||| NOT inlining: Hash#redistribute into []=. too few sends: (1 / 20703) (Hash) (interp)
+|||| inlining: Kernel#hash into []=. generic primitive: jit_stub_object_hash (String)
+|||| NOT inlining: Array#hash into []=. too few sends: (2 / 20703) (Array) (interp)
+|||| inlining: Kernel#hash into []=. generic primitive: jit_stub_object_hash (Symbol)
+|||| inline ivar read: Hash#@mask (abort, using slow lookup)
+|||| slow ivar read: @mask
+|||| inlining: Fixnum#& into []=. primitive fixnum_and (Fixnum)
+|||| inline ivar read: Hash#@entries (abort, using slow lookup)
+|||| slow ivar read: @entries
+|||| inlining: Rubinius::Tuple#[] into []=. primitive tuple_at (Rubinius::Tuple)
+|||| inline ivar read: Hash#@state (abort, using slow lookup)
+|||| slow ivar read: @state
+|||| inlining: read to '@key' on Hash::Bucket in #[]=
+|||| inlining: read to '@key_hash' on Hash::Bucket in #[]=||||+ eliding redundant guard: class Hash::Bucket (649)
+
+|||| NOT inlining: Hash::State#match? into []=. too few sends: (3 / 20703) (Hash::State) (interp)
+|||| inlining: writer to '@value' on Hash::Bucket in #[]=
+|||| inlining: read to '@link' on Hash::Bucket in #[]=
+|||| inline ivar read: Hash#@state (abort, using slow lookup)
+|||| slow ivar read: @state
+|||| inlining: read to '@key' on Hash::Bucket in #[]=
+|||| inlining: read to '@key_hash' on Hash::Bucket in #[]=||||+ eliding redundant guard: class Hash::Bucket (649)
+
+|||| NOT inlining: Hash::State#match? into []=. too few sends: (1 / 20703) (Hash::State) (interp)
+|||| inlining: writer to '@value' on Hash::Bucket in #[]=
+|||| inlining: read to '@link' on Hash::Bucket in #[]=
+|||| NOT inlining: Hash#new_bucket into []=. too few sends: (3 / 20703) (Hash) (jitted)
+|||| inlining: writer to '@link' on Hash::Bucket in #[]=
+|||| inline ivar read: Hash#@entries (abort, using slow lookup)
+|||| slow ivar read: @entries
+|||| inlining: Hash#new_bucket into []=
+||||+ eliding redundant guard: class Hash (645)
+||||| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (String)
+|||||| inlining: direct class used for kind_of (against String)
+||||| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (Array)
+|||||| inlining: direct class used for kind_of (against String)
+||||| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (Symbol)
+|||||| inlining: direct class used for kind_of (against String)
+||||| inlining: Kernel#frozen? into new_bucket. primitive Object#frozen? (String)
+||||| NOT inlining: BasicObject#! into new_bucket. too few sends: (2 / 44806) (FalseClass) (jitted)
+||||| NOT inlining: BasicObject#! into new_bucket. too few sends: (146 / 44806) (TrueClass) (jitted)
+||||| NOT inlining: Hash#compare_by_identity? into new_bucket. too few sends: (2 / 44806) (Hash) (interp)
+||||| NOT inlining: BasicObject#! into new_bucket. too few sends: (2 / 44806) (FalseClass) (jitted)
+||||| NOT inlining: String#dup into new_bucket. too few sends: (2 / 44806) (String) (interp)
+||||| inlining: Kernel#freeze into new_bucket. generic primitive: jit_stub_object_freeze (String)
+||||| inline ivar read: Hash#@size (abort, using slow lookup)
+||||| slow ivar read: @size
+||||| inlining: Fixnum#+ into new_bucket. primitive fixnum_add (Fixnum)
+||||| inline ivar write: @size (abort, using slow write)
+||||| slow ivar write: @size
+||||| inlining: Class#allocate into new_bucket. primitive class_allocate (<nil>)
+||||| inline ivar read: Hash#@state (abort, using slow lookup)
+||||| slow ivar read: @state
+||||| inlining: Hash::Bucket#initialize into new_bucket
+|||||| inline ivar write: @key (abort, using slow write)
+|||||| slow ivar write: @key
+|||||| inline ivar write: @key_hash (abort, using slow write)
+|||||| slow ivar write: @key_hash
+|||||| inline ivar write: @value (abort, using slow write)
+|||||| slow ivar write: @value
+|||||| inline ivar write: @link (abort, using slow write)
+|||||| slow ivar write: @link
+|||||| inline ivar write: @state (abort, using slow write)
+|||||| slow ivar write: @state
+|||||| inlining: read to '@tail' on Hash::State in #initialize
+|||||| inline ivar write: @previous (abort, using slow write)
+|||||| slow ivar write: @previous
+|||||| inlining: writer to '@next' on Hash::Bucket in #initialize
+|||||| inlining: writer to '@tail' on Hash::State in #initialize
+|||||| inlining: writer to '@tail' on Hash::State in #initialize
+|||||| inlining: writer to '@head' on Hash::State in #initialize
+||||| inline ivar read: Hash#@state (abort, using slow lookup)
+||||| slow ivar read: @state
+|||| inlining: Rubinius::Tuple#[]= into []=. primitive tuple_put (Rubinius::Tuple)
+|| inlining: read to '@next' on Hash::Bucket in #each_item
+| inlining: Hash#default into replace
+|| inline ivar read: Hash#@default_proc (abort, using slow lookup)
+|| slow ivar read: @default_proc
+|| inlining: Kernel#equal? into default. primitive object_equal (<nil>)
+|| NOT inlining: BasicObject#! into default. too few sends: (39 / 21637) (FalseClass) (jitted)
+|| inline ivar read: Hash#@default_proc (abort, using slow lookup)
+|| slow ivar read: @default_proc
+|| NOT inlining: Proc#call into default. too few sends: (39 / 21637) (Proc) (interp)
+|| inline ivar read: Hash#@default (abort, using slow lookup)
+|| slow ivar read: @default
+| inline ivar write: @default (abort, using slow write)
+| slow ivar write: @default
+| inlining: Hash#default_proc into replace
+|+ eliding redundant guard: class Hash (645)
+|| inline ivar read: Hash#@default_proc (abort, using slow lookup)
+|| slow ivar read: @default_proc
+| inline ivar write: @default_proc (abort, using slow write)
+| slow ivar write: @default_proc
+| inline ivar read: Hash#@capacity (abort, using slow lookup)
+| slow ivar read: @capacity
+| inlining: Rubinius::Tuple#new into replace. generic primitive: jit_stub_tuple_allocate (<nil>)
+JIT: compiling Rubinius::Runtime#keywords_extra (1580862890.468106)
+| inlining: Rubinius::CompiledCode#of_sender into keywords_extra. primitive CompiledCode.of_sender (<nil>)
+| inlining: read to '@keywords' on Rubinius::CompiledCode in #keywords_extra (slot: 15)
+| inlining: Rubinius::Tuple#fields into keywords_extra. primitive tuple_fields (Rubinius::Tuple)
+| inlining: Fixnum#< into keywords_extra. primitive fixnum_compare_operation (Fixnum)
+| inlining: Rubinius::Tuple#[] into keywords_extra. primitive tuple_at (Rubinius::Tuple)
+| inlining: Hash#delete into keywords_extra
+|| inlining: Kernel#hash into delete. generic primitive: jit_stub_object_hash (Symbol)
+|| inlining: Kernel#hash into delete. generic primitive: jit_stub_object_hash (String)
+|| inlining: Hash#key_index into delete
+||+ eliding redundant guard: class Hash (645)
+||| inline ivar read: Hash#@mask (abort, using slow lookup)
+||| slow ivar read: @mask
+||| inlining: Fixnum#& into key_index. primitive fixnum_and (Fixnum)
+|| inline ivar read: Hash#@entries (abort, using slow lookup)
+|| slow ivar read: @entries
+|| inlining: Rubinius::Tuple#[] into delete. primitive tuple_at (Rubinius::Tuple)
+|| inlining: Hash::Bucket#delete into delete
+||| inline ivar read: Hash::Bucket#@state (abort, using slow lookup)
+||| slow ivar read: @state
+||| inline ivar read: Hash::Bucket#@key (abort, using slow lookup)
+||| slow ivar read: @key
+||| inline ivar read: Hash::Bucket#@key_hash (abort, using slow lookup)
+||| slow ivar read: @key_hash
+||| inlining: Hash::State#match? into delete
+|||| inlining: Fixnum#== into match?. primitive fixnum_compare_operation (Fixnum)
+|||| inlining: Rubinius::Type#object_equal into match?. primitive Type.object_equal (<nil>)
+|||| inlining: String#eql? into match?. generic primitive: jit_stub_string_equal (String)
+||| inlining: Hash::Bucket#remove into delete
+|||+ eliding redundant guard: class Hash::Bucket (649)
+|||| inline ivar read: Hash::Bucket#@previous (abort, using slow lookup)
+|||| slow ivar read: @previous
+|||| inline ivar read: Hash::Bucket#@previous (abort, using slow lookup)
+|||| slow ivar read: @previous
+|||| inline ivar read: Hash::Bucket#@next (abort, using slow lookup)
+|||| slow ivar read: @next
+|||| inlining: writer to '@next' on Hash::Bucket in #remove
+|||| inline ivar read: Hash::Bucket#@next (abort, using slow lookup)
+|||| slow ivar read: @next
+|||| inline ivar read: Hash::Bucket#@next (abort, using slow lookup)
+|||| slow ivar read: @next
+|||| inline ivar read: Hash::Bucket#@previous (abort, using slow lookup)
+|||| slow ivar read: @previous
+|||| inlining: writer to '@previous' on Hash::Bucket in #remove
+|||| inline ivar read: Hash::Bucket#@state (abort, using slow lookup)
+|||| slow ivar read: @state
+|||| inline ivar read: Hash::Bucket#@previous (abort, using slow lookup)
+|||| slow ivar read: @previous
+|||| inlining: writer to '@tail' on Hash::State in #remove
+|||| inline ivar read: Hash::Bucket#@state (abort, using slow lookup)
+|||| slow ivar read: @state
+|||| inline ivar read: Hash::Bucket#@next (abort, using slow lookup)
+|||| slow ivar read: @next
+|||| inlining: writer to '@head' on Hash::State in #remove
+|| inline ivar read: Hash#@entries (abort, using slow lookup)
+|| slow ivar read: @entries
+|| inlining: read to '@link' on Hash::Bucket in #delete
+|| inlining: Rubinius::Tuple#[]= into delete. primitive tuple_put (Rubinius::Tuple)
+|| inline ivar read: Hash#@size (abort, using slow lookup)
+|| slow ivar read: @size
+|| inlining: Fixnum#- into delete. primitive fixnum_sub (Fixnum)
+|| inline ivar write: @size (abort, using slow write)
+|| slow ivar write: @size
+|| inlining: read to '@value' on Hash::Bucket in #delete||+ eliding redundant guard: class Hash::Bucket (649)
+
+|| inlining: read to '@link' on Hash::Bucket in #delete
+|| NOT inlining: Hash::Bucket#delete into delete. too few sends: (1 / 24796) (Hash::Bucket) (interp)
+|| inlining: read to '@link' on Hash::Bucket in #delete
+|| inlining: writer to '@link' on Hash::Bucket in #delete
+|| inline ivar read: Hash#@size (abort, using slow lookup)
+|| slow ivar read: @size
+|| inlining: Fixnum#- into delete. primitive fixnum_sub (Fixnum)
+|| inline ivar write: @size (abort, using slow write)
+|| slow ivar write: @size
+|| inlining: read to '@value' on Hash::Bucket in #delete||+ eliding redundant guard: class Hash::Bucket (649)
+
+| inlining: Fixnum#+ into keywords_extra. primitive fixnum_add (Fixnum)
+| inlining: read to '@size' on Hash in #keywords_extra
+| inlining: Fixnum#== into keywords_extra. primitive fixnum_compare_operation (Fixnum)
+JIT: compiling Hash#find_item (1580862891.227860)
+| inlining: Kernel#hash into find_item. generic primitive: jit_stub_object_hash (String)
+| inlining: Kernel#hash into find_item. generic primitive: jit_stub_object_hash (Symbol)
+| NOT inlining: Array#hash into find_item. too few sends: (3 / 15995) (Array) (interp)
+| inline ivar read: Hash#@entries (abort, using slow lookup)
+| slow ivar read: @entries
+| inlining: Hash#key_index into find_item
+|| inline ivar read: Hash#@mask (abort, using slow lookup)
+|| slow ivar read: @mask
+|| inlining: Fixnum#& into key_index. primitive fixnum_and (Fixnum)
+| inlining: Rubinius::Tuple#[] into find_item. primitive tuple_at (Rubinius::Tuple)
+| inline ivar read: Hash#@state (abort, using slow lookup)
+| slow ivar read: @state
+| inlining: read to '@key' on Hash::Bucket in #find_item
+| inlining: read to '@key_hash' on Hash::Bucket in #find_item|+ eliding redundant guard: class Hash::Bucket (649)
+
+| inlining: Hash::State#match? into find_item
+|| inlining: Fixnum#== into match?. primitive fixnum_compare_operation (Fixnum)
+|| inlining: Rubinius::Type#object_equal into match?. primitive Type.object_equal (<nil>)
+|| inlining: String#eql? into match?. generic primitive: jit_stub_string_equal (String)
+| inlining: read to '@link' on Hash::Bucket in #find_item
+JIT: compiling Hash#delete (1580862891.437766)
+| inlining: Kernel#hash into delete. generic primitive: jit_stub_object_hash (Symbol)
+| inlining: Kernel#hash into delete. generic primitive: jit_stub_object_hash (String)
+| inlining: Hash#key_index into delete
+|| inline ivar read: Hash#@mask (abort, using slow lookup)
+|| slow ivar read: @mask
+|| inlining: Fixnum#& into key_index. primitive fixnum_and (Fixnum)
+| inline ivar read: Hash#@entries (abort, using slow lookup)
+| slow ivar read: @entries
+| inlining: Rubinius::Tuple#[] into delete. primitive tuple_at (Rubinius::Tuple)
+| inlining: Hash::Bucket#delete into delete
+|| inline ivar read: Hash::Bucket#@state (abort, using slow lookup)
+|| slow ivar read: @state
+|| inline ivar read: Hash::Bucket#@key (abort, using slow lookup)
+|| slow ivar read: @key
+|| inline ivar read: Hash::Bucket#@key_hash (abort, using slow lookup)
+|| slow ivar read: @key_hash
+|| inlining: Hash::State#match? into delete
+||| inlining: Fixnum#== into match?. primitive fixnum_compare_operation (Fixnum)
+||| inlining: Rubinius::Type#object_equal into match?. primitive Type.object_equal (<nil>)
+||| inlining: String#eql? into match?. generic primitive: jit_stub_string_equal (String)
+|| inlining: Hash::Bucket#remove into delete
+||+ eliding redundant guard: class Hash::Bucket (649)
+||| inline ivar read: Hash::Bucket#@previous (abort, using slow lookup)
+||| slow ivar read: @previous
+||| inline ivar read: Hash::Bucket#@previous (abort, using slow lookup)
+||| slow ivar read: @previous
+||| inline ivar read: Hash::Bucket#@next (abort, using slow lookup)
+||| slow ivar read: @next
+||| inlining: writer to '@next' on Hash::Bucket in #remove
+||| inline ivar read: Hash::Bucket#@next (abort, using slow lookup)
+||| slow ivar read: @next
+||| inline ivar read: Hash::Bucket#@next (abort, using slow lookup)
+||| slow ivar read: @next
+||| inline ivar read: Hash::Bucket#@previous (abort, using slow lookup)
+||| slow ivar read: @previous
+||| inlining: writer to '@previous' on Hash::Bucket in #remove
+||| inline ivar read: Hash::Bucket#@state (abort, using slow lookup)
+||| slow ivar read: @state
+||| inline ivar read: Hash::Bucket#@previous (abort, using slow lookup)
+||| slow ivar read: @previous
+||| inlining: writer to '@tail' on Hash::State in #remove
+||| inline ivar read: Hash::Bucket#@state (abort, using slow lookup)
+||| slow ivar read: @state
+||| inline ivar read: Hash::Bucket#@next (abort, using slow lookup)
+||| slow ivar read: @next
+||| inlining: writer to '@head' on Hash::State in #remove
+| inline ivar read: Hash#@entries (abort, using slow lookup)
+| slow ivar read: @entries
+| inlining: read to '@link' on Hash::Bucket in #delete
+| inlining: Rubinius::Tuple#[]= into delete. primitive tuple_put (Rubinius::Tuple)
+| inline ivar read: Hash#@size (abort, using slow lookup)
+| slow ivar read: @size
+| inlining: Fixnum#- into delete. primitive fixnum_sub (Fixnum)
+| inline ivar write: @size (abort, using slow write)
+| slow ivar write: @size
+| inlining: read to '@value' on Hash::Bucket in #delete|+ eliding redundant guard: class Hash::Bucket (649)
+
+| inlining: read to '@link' on Hash::Bucket in #delete
+| NOT inlining: Hash::Bucket#delete into delete. too few sends: (1 / 15311) (Hash::Bucket) (interp)
+| inlining: read to '@link' on Hash::Bucket in #delete
+| inlining: writer to '@link' on Hash::Bucket in #delete
+| inline ivar read: Hash#@size (abort, using slow lookup)
+| slow ivar read: @size
+| inlining: Fixnum#- into delete. primitive fixnum_sub (Fixnum)
+| inline ivar write: @size (abort, using slow write)
+| slow ivar write: @size
+| inlining: read to '@value' on Hash::Bucket in #delete|+ eliding redundant guard: class Hash::Bucket (649)
+
+JIT: compiling Rubinius::GlobalVariables#[] (1580862891.998588)
+| inline ivar read: Rubinius::GlobalVariables#@internal (abort, using slow lookup)
+| slow ivar read: @internal
+| inlining: Rubinius::LookupTable#key? into []. generic primitive: jit_stub_lookuptable_has_key (Rubinius::LookupTable)
+| inline ivar read: Rubinius::GlobalVariables#@internal (abort, using slow lookup)
+| slow ivar read: @internal
+| inlining: Rubinius::LookupTable#[] into []. generic primitive: jit_stub_lookuptable_aref (Rubinius::LookupTable)
+| inline ivar read: Rubinius::GlobalVariables#@hooks (abort, using slow lookup)
+| slow ivar read: @hooks
+| inline ivar read: Rubinius::GlobalVariables#@hooks (abort, using slow lookup)
+| slow ivar read: @hooks
+| inline ivar read: Rubinius::GlobalVariables#@alias (abort, using slow lookup)
+| slow ivar read: @alias
+| inline ivar read: Rubinius::GlobalVariables#@alias (abort, using slow lookup)
+| slow ivar read: @alias
+JIT: compiling Object#__script__ (1580862892.131802)
+| inlining: Rubinius::VariableScope#method_visibility into __script__
+|| inline ivar read: Rubinius::VariableScope#@method_visibility (abort, using slow lookup)
+|| slow ivar read: @method_visibility
+|| inline ivar read: Rubinius::VariableScope#@method_visibility (abort, using slow lookup)
+|| slow ivar read: @method_visibility
+|| inlining: Rubinius::VariableScope#script? into method_visibility. generic primitive: jit_stub_variable_scope_script (Rubinius::VariableScope)
+||+ eliding redundant guard: class Rubinius::VariableScope (103)
+|| inlining: Rubinius::VariableScope#top_level_visibility? into method_visibility. generic primitive: jit_stub_variable_scope_top_level_visibility (Rubinius::VariableScope)
+||+ eliding redundant guard: class Rubinius::VariableScope (103)
+|| inline ivar read: Rubinius::VariableScope#@parent (slot: 3)
+|| inline ivar read: Rubinius::VariableScope#@parent (slot: 3)
+| inlining: Rubinius#add_defn_method into __script__
+|| inlining: Rubinius::Type#object_kind_of? into add_defn_method. primitive Type.object_kind_of (<nil>)
+||| inlining: direct class used for kind_of (against String)
+|| inlining: Rubinius::ConstantScope#for_method_definition into add_defn_method
+||| inline ivar read: Rubinius::ConstantScope#@disabled_for_methods (abort, using slow lookup)
+||| slow ivar read: @disabled_for_methods
+||| inline ivar read: Rubinius::ConstantScope#@current_module (slot: 1)
+||| inline ivar read: Rubinius::ConstantScope#@current_module (slot: 1)
+||| inline ivar read: Rubinius::ConstantScope#@module (slot: 0)
+|| inlining: Rubinius::Type#singleton_class_object into add_defn_method. generic primitive: jit_stub_vm_singleton_class_object (<nil>)
+|| inlining: Rubinius::Type#object_kind_of? into add_defn_method. primitive Type.object_kind_of (<nil>)
+||| inlining: direct class used for kind_of (against Integer / Numeric)
+|| inlining: Rubinius#add_method into add_defn_method
+||+ eliding redundant guard: class <nil> (457)
+||| inlining: Rubinius::Type#singleton_class_object into add_method. generic primitive: jit_stub_vm_singleton_class_object (<nil>)
+||| inlining: Rubinius::Type#object_kind_of? into add_method. primitive Type.object_kind_of (<nil>)
+|||| inlining: direct class used for kind_of (against String)
+||| inlining: Module#method_table into add_method (Class)
+|||| inline ivar read: Class#@method_table (slot: 0)
+||| inlining: Module#method_table into add_method
+|||| inline ivar read: <nil>#@method_table (slot: 0)
+||| inlining: Module#method_table into add_method
+|||| inline ivar read: <nil>#@method_table (slot: 0)
+||| inlining: Rubinius::MethodTable#store into add_method. generic primitive: jit_stub_methodtable_store (Rubinius::MethodTable)
+||| inlining: Rubinius::VM#reset_method_cache into add_method. generic primitive: jit_stub_vm_reset_method_cache (<nil>)
+||| inlining: Kernel#equal? into add_method. primitive object_equal (Symbol)
+|||+ eliding guard: detected symbol
+||| inlining: Rubinius::Type#singleton_class_object into add_method. generic primitive: jit_stub_vm_singleton_class_object (<nil>)
+||| inlining: Rubinius::Type#object_kind_of? into add_method. primitive Type.object_kind_of (<nil>)
+|||| inlining: direct class used for kind_of (against Integer / Numeric)
+||| inlining: Kernel#singleton_method_added into add_method
+||| inlining: Kernel#singleton_method_added into add_method
+||| inlining: Kernel#singleton_method_added into add_method
+||| inline ivar read: <nil>#@add_method_hook (abort, using slow lookup)
+||| slow ivar read: @add_method_hook
+||| NOT inlining: Rubinius::Hook#trigger! into add_method. too complex (Rubinius::Hook) (interp)
+||| inlining: Module#=== into add_method
+|||| inlining: Rubinius::Type#object_kind_of? into ===. primitive Type.object_kind_of (<nil>)
+||||| inlining: direct class used for kind_of (eliding because of statically known match)
+||| inlining: Module#=== into add_method
+|||| inlining: Rubinius::Type#object_kind_of? into ===. primitive Type.object_kind_of (<nil>)
+||||| inlining: direct class used for kind_of (regular Ruby class)
+||| inlining: Module#method_added into add_method
+||| inlining: Module#method_added into add_method
+||| inlining: Module#method_added into add_method
+||| inlining: Module#add_ivars into add_method
+|||| inlining: Module#=== into add_ivars
+||||| inlining: Rubinius::Type#object_kind_of? into ===. primitive Type.object_kind_of (<nil>)
+|||||| inlining: direct class used for kind_of (eliding because of statically known match)
+|||| inlining: read to '@literals' on Rubinius::CompiledCode in #add_ivars||||+ eliding redundant guard: class Rubinius::CompiledCode (53)
+ (slot: 18)
+|||| inlining: Enumerable#find_all into add_ivars (Rubinius::Tuple) (w/ inline block)
+||||| inlining: Rubinius::Tuple#each into find_all (w/ inline block)
+|||||+ eliding redundant guard: class Rubinius::Tuple (5)
+|||||| inlining: Rubinius::Tuple#fields into each. primitive tuple_fields (Rubinius::Tuple)
+|||||| inlining: Fixnum#< into each. primitive fixnum_compare_operation (Fixnum)
+|||||| inlining: Rubinius::Tuple#[] into each. primitive tuple_at (Rubinius::Tuple)
+|||||| inlining block into: each
+||||||| inlining block into: find_all
+|||||||| inlining: Kernel#kind_of? into add_ivars. primitive Object#kind_of (Symbol)
+||||||||| inlining: direct class used for kind_of (against Symbol)
+|||||||| inlining: Kernel#kind_of? into add_ivars. primitive Object#kind_of (Rubinius::CompiledCode)
+||||||||| inlining: direct class used for kind_of (against Symbol)
+|||||||| inlining: Kernel#kind_of? into add_ivars. primitive Object#kind_of (String)
+||||||||| inlining: direct class used for kind_of (against Symbol)
+|||||||| inlining: Symbol#is_ivar? into add_ivars. generic primitive: jit_stub_symbol_is_ivar (Symbol)
+||||||| inlining: Array#<< into find_all
+|||||||| inline ivar read: Array#@total (slot: 0)
+|||||||| inlining: Array#set_index into <<. generic primitive: jit_stub_array_aset (Array)
+||||||||+ eliding redundant guard: class Array (6)
+|||||| inlining: Fixnum#+ into each. primitive fixnum_add (Fixnum)
+|||| inlining: Array#empty? into add_ivars
+||||| inline ivar read: Array#@total (slot: 0)
+||||| inlining: Fixnum#== into empty?. primitive fixnum_compare_operation (Fixnum)
+|||| inline ivar read: <nil>#@seen_ivars (slot: 5)
+|||| inline ivar write: @seen_ivars (slot: 5)
+|||| inlining: Module#=== into add_ivars
+||||| inlining: Rubinius::Type#object_kind_of? into ===. primitive Type.object_kind_of (<nil>)
+|||||| inlining: direct class used for kind_of (regular Ruby class)
+|||| inline ivar read: <nil>#@seen_ivars (slot: 5)
+|||| inline ivar read: <nil>#@seen_ivars (slot: 5)
+|||| inlining: read to '@name' on Rubinius::AccessVariable in #add_ivars (slot: 2)
+|||| inlining: Array#include? into add_ivars
+||||| inline ivar read: Array#@start (slot: 2)
+||||| inline ivar read: Array#@total (slot: 0)
+||||| inlining: Fixnum#+ into include?. primitive fixnum_add (Fixnum)
+||||| inline ivar read: Array#@tuple (slot: 1)
+||||| inlining: Fixnum#< into include?. primitive fixnum_compare_operation (Fixnum)
+||||| inlining: Rubinius::Tuple#[] into include?. primitive tuple_at (Rubinius::Tuple)
+||||| inlining: Kernel#equal? into include?. primitive object_equal (Symbol)
+||||| inlining: String#== into include?. generic primitive: jit_stub_string_equal (String)
+||||| inlining: Fixnum#+ into include?. primitive fixnum_add (Fixnum)
+|||| inline ivar read: <nil>#@seen_ivars (slot: 5)
+|||| inlining: read to '@name' on Rubinius::AccessVariable in #add_ivars (slot: 2)
+|||| inlining: Array#<< into add_ivars
+||||| inline ivar read: Array#@total (slot: 0)
+||||| inlining: Array#set_index into <<. generic primitive: jit_stub_array_aset (Array)
+|||||+ eliding redundant guard: class Array (6)
+|||| inlining: read to '@name' on Rubinius::AccessVariable in #add_ivars (slot: 2)
+|||| inline ivar write: @seen_ivars (slot: 5)
+||| inlining: Module#add_ivars into add_method
+|||| NOT inlining: Module#=== into add_ivars. too few sends: (1 / 121) (<nil>) (jitted)
+|||| inlining: read to '@literals' on Rubinius::CompiledCode in #add_ivars||||+ eliding redundant guard: class Rubinius::CompiledCode (53)
+ (slot: 18)
+|||| NOT inlining: Array#empty? into add_ivars. too few sends: (1 / 121) (Array) (interp)
+|||| inline ivar read: Module#@seen_ivars (slot: 5)
+|||| inline ivar write: @seen_ivars (slot: 5)
+|||| inlining: Module#=== into add_ivars
+||||| inlining: Rubinius::Type#object_kind_of? into ===. primitive Type.object_kind_of (<nil>)
+|||||| inlining: direct class used for kind_of (regular Ruby class)
+|||| inline ivar read: Module#@seen_ivars (slot: 5)
+|||| inline ivar read: Module#@seen_ivars (slot: 5)
+|||| inlining: read to '@name' on Rubinius::AccessVariable in #add_ivars (slot: 2)
+|||| inlining: Array#include? into add_ivars
+||||| inline ivar read: Array#@start (slot: 2)
+||||| inline ivar read: Array#@total (slot: 0)
+||||| inlining: Fixnum#+ into include?. primitive fixnum_add (Fixnum)
+||||| inline ivar read: Array#@tuple (slot: 1)
+||||| inlining: Fixnum#< into include?. primitive fixnum_compare_operation (Fixnum)
+||||| inlining: Rubinius::Tuple#[] into include?. primitive tuple_at (Rubinius::Tuple)
+||||| inlining: Kernel#equal? into include?. primitive object_equal (Symbol)
+||||| inlining: String#== into include?. generic primitive: jit_stub_string_equal (String)
+||||| inlining: Fixnum#+ into include?. primitive fixnum_add (Fixnum)
+|||| inline ivar read: Module#@seen_ivars (slot: 5)
+|||| inlining: read to '@name' on Rubinius::AccessVariable in #add_ivars (slot: 2)
+|||| inlining: Array#<< into add_ivars
+||||| inline ivar read: Array#@total (slot: 0)
+||||| inlining: Array#set_index into <<. generic primitive: jit_stub_array_aset (Array)
+|||||+ eliding redundant guard: class Array (6)
+|||| inlining: read to '@name' on Rubinius::AccessVariable in #add_ivars (slot: 2)
+|||| inline ivar write: @seen_ivars (slot: 5)
+||| inlining: Module#add_ivars into add_method
+|||| NOT inlining: Module#=== into add_ivars. too few sends: (1 / 125) (<nil>) (jitted)
+|||| inlining: read to '@literals' on Rubinius::CompiledCode in #add_ivars||||+ eliding redundant guard: class Rubinius::CompiledCode (53)
+ (slot: 18)
+|||| NOT inlining: Array#empty? into add_ivars. too few sends: (1 / 125) (Array) (interp)
+|||| inline ivar read: <nil>#@seen_ivars (slot: 5)
+|||| inline ivar write: @seen_ivars (slot: 5)
+|||| inlining: Module#=== into add_ivars
+||||| inlining: Rubinius::Type#object_kind_of? into ===. primitive Type.object_kind_of (<nil>)
+|||||| inlining: direct class used for kind_of (regular Ruby class)
+|||| inline ivar read: <nil>#@seen_ivars (slot: 5)
+|||| inline ivar read: <nil>#@seen_ivars (slot: 5)
+|||| inlining: read to '@name' on Rubinius::AccessVariable in #add_ivars (slot: 2)
+|||| inlining: Array#include? into add_ivars
+||||| inline ivar read: Array#@start (slot: 2)
+||||| inline ivar read: Array#@total (slot: 0)
+||||| inlining: Fixnum#+ into include?. primitive fixnum_add (Fixnum)
+||||| inline ivar read: Array#@tuple (slot: 1)
+||||| inlining: Fixnum#< into include?. primitive fixnum_compare_operation (Fixnum)
+||||| inlining: Rubinius::Tuple#[] into include?. primitive tuple_at (Rubinius::Tuple)
+||||| inlining: Kernel#equal? into include?. primitive object_equal (Symbol)
+||||| inlining: String#== into include?. generic primitive: jit_stub_string_equal (String)
+||||| inlining: Fixnum#+ into include?. primitive fixnum_add (Fixnum)
+|||| inline ivar read: <nil>#@seen_ivars (slot: 5)
+|||| inlining: read to '@name' on Rubinius::AccessVariable in #add_ivars (slot: 2)
+|||| inlining: Array#<< into add_ivars
+||||| inline ivar read: Array#@total (slot: 0)
+||||| inlining: Array#set_index into <<. generic primitive: jit_stub_array_aset (Array)
+|||||+ eliding redundant guard: class Array (6)
+|||| inlining: read to '@name' on Rubinius::AccessVariable in #add_ivars (slot: 2)
+|||| inline ivar write: @seen_ivars (slot: 5)
+||| inlining: Module#method_table into add_method
+|||| inline ivar read: <nil>#@method_table (slot: 0)
+||| inlining: Module#method_table into add_method
+|||| inline ivar read: <nil>#@method_table (slot: 0)
+||| inlining: Module#method_table into add_method
+|||| inline ivar read: Module#@method_table (slot: 0)
+||| inlining: Rubinius::MethodTable#store into add_method. generic primitive: jit_stub_methodtable_store (Rubinius::MethodTable)
+||| inlining: Kernel#equal? into add_method. primitive object_equal (Symbol)
+|||+ eliding guard: detected symbol
+||| inlining: Rubinius#privatized_method? into add_method
+|||+ eliding redundant guard: class <nil> (457)
+|||| inlining: Array#include? into privatized_method?
+||||+ eliding redundant guard: class Array (6)
+||||| inline ivar read: Array#@start (slot: 2)
+||||| inline ivar read: Array#@total (slot: 0)
+||||| inlining: Fixnum#+ into include?. primitive fixnum_add (Fixnum)
+||||| inline ivar read: Array#@tuple (slot: 1)
+||||| inlining: Fixnum#< into include?. primitive fixnum_compare_operation (Fixnum)
+||||| inlining: Rubinius::Tuple#[] into include?. primitive tuple_at (Rubinius::Tuple)
+||||| inlining: Kernel#equal? into include?. primitive object_equal (Symbol)
+||||| inlining: String#== into include?. generic primitive: jit_stub_string_equal (String)
+||||| inlining: Fixnum#+ into include?. primitive fixnum_add (Fixnum)
+|| inlining: writer to '@serial' on Rubinius::CompiledCode in #add_defn_method (slot: 1)
+
+|+ eliding redundant guard: class Rubinius::CompiledCode (53)
+|| inlining: Rubinius::ConstantScope#current_script into add_defn_method
+||| inlining: read to '@script' on Rubinius::ConstantScope in #current_script
+||| inlining: BasicObject#! into current_script (NilClass)
+|||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+|||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+||| inlining: BasicObject#! into current_script (Rubinius::CompiledCode::Script)
+|||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+|||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+||| inlining: read to '@parent' on Rubinius::ConstantScope in #current_script (slot: 2)
+||| inlining: read to '@script' on Rubinius::ConstantScope in #current_script
+|| inlining: Rubinius::CompiledCode::Script#eval? into add_defn_method
+||| inline ivar read: Rubinius::CompiledCode::Script#@for_eval (abort, using slow lookup)
+||| slow ivar read: @for_eval
+|| inlining: Rubinius::CompiledCode#dup into add_defn_method. generic primitive: jit_stub_compiledcode_dup (Rubinius::CompiledCode)
+||+ eliding redundant guard: class Rubinius::CompiledCode (53)
+|| inlining: writer to '@scope' on Rubinius::CompiledCode in #add_defn_method (slot: 14)
+
+| inlining: Object#sum into __script__
+| NOT inlining: Kernel#puts into __script__. too complex (<nil>) (interp)
+JIT: compiling Fixnum#to_s (1580862894.642788)
+JIT: compiling block in keyword_object? near core/runtime.rb:92 (1580862894.698053)
+| inlining: Kernel#instance_of? into keyword_object?. generic primitive: jit_stub_object_instance_of (Symbol)
+| inlining: Hash#[]= into keyword_object?
+|| inline ivar read: Hash#@size (abort, using slow lookup)
+|| slow ivar read: @size
+|| inline ivar read: Hash#@max_entries (abort, using slow lookup)
+|| slow ivar read: @max_entries
+|| inlining: Fixnum#> into []=. primitive fixnum_compare_operation (Fixnum)
+|| inline ivar read: Hash#@entries (abort, using slow lookup)
+|| slow ivar read: @entries
+|| NOT inlining: Hash#redistribute into []=. too few sends: (1 / 74516) (Hash) (interp)
+|| inlining: Kernel#hash into []=. generic primitive: jit_stub_object_hash (String)
+|| NOT inlining: Array#hash into []=. too few sends: (2 / 74516) (Array) (interp)
+|| inlining: Kernel#hash into []=. generic primitive: jit_stub_object_hash (Symbol)
+|| inline ivar read: Hash#@mask (abort, using slow lookup)
+|| slow ivar read: @mask
+|| inlining: Fixnum#& into []=. primitive fixnum_and (Fixnum)
+|| inline ivar read: Hash#@entries (abort, using slow lookup)
+|| slow ivar read: @entries
+|| inlining: Rubinius::Tuple#[] into []=. primitive tuple_at (Rubinius::Tuple)
+|| inline ivar read: Hash#@state (abort, using slow lookup)
+|| slow ivar read: @state
+|| inlining: read to '@key' on Hash::Bucket in #[]=
+|| inlining: read to '@key_hash' on Hash::Bucket in #[]=||+ eliding redundant guard: class Hash::Bucket (649)
+
+|| NOT inlining: Hash::State#match? into []=. too few sends: (3 / 74516) (Hash::State) (interp)
+|| inlining: writer to '@value' on Hash::Bucket in #[]=
+|| inlining: read to '@link' on Hash::Bucket in #[]=
+|| inline ivar read: Hash#@state (abort, using slow lookup)
+|| slow ivar read: @state
+|| inlining: read to '@key' on Hash::Bucket in #[]=
+|| inlining: read to '@key_hash' on Hash::Bucket in #[]=||+ eliding redundant guard: class Hash::Bucket (649)
+
+|| NOT inlining: Hash::State#match? into []=. too few sends: (1 / 74516) (Hash::State) (interp)
+|| inlining: writer to '@value' on Hash::Bucket in #[]=
+|| inlining: read to '@link' on Hash::Bucket in #[]=
+|| NOT inlining: Hash#new_bucket into []=. too few sends: (3 / 74516) (Hash) (jitted)
+|| inlining: writer to '@link' on Hash::Bucket in #[]=
+|| inline ivar read: Hash#@entries (abort, using slow lookup)
+|| slow ivar read: @entries
+|| inlining: Hash#new_bucket into []=
+||+ eliding redundant guard: class Hash (645)
+||| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (String)
+|||| inlining: direct class used for kind_of (against String)
+||| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (Array)
+|||| inlining: direct class used for kind_of (against String)
+||| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (Symbol)
+|||| inlining: direct class used for kind_of (against String)
+||| inlining: Kernel#frozen? into new_bucket. primitive Object#frozen? (String)
+||| NOT inlining: BasicObject#! into new_bucket. too few sends: (2 / 44806) (FalseClass) (jitted)
+||| NOT inlining: BasicObject#! into new_bucket. too few sends: (146 / 44806) (TrueClass) (jitted)
+||| NOT inlining: Hash#compare_by_identity? into new_bucket. too few sends: (2 / 44806) (Hash) (interp)
+||| NOT inlining: BasicObject#! into new_bucket. too few sends: (2 / 44806) (FalseClass) (jitted)
+||| NOT inlining: String#dup into new_bucket. too few sends: (2 / 44806) (String) (interp)
+||| inlining: Kernel#freeze into new_bucket. generic primitive: jit_stub_object_freeze (String)
+||| inline ivar read: Hash#@size (abort, using slow lookup)
+||| slow ivar read: @size
+||| inlining: Fixnum#+ into new_bucket. primitive fixnum_add (Fixnum)
+||| inline ivar write: @size (abort, using slow write)
+||| slow ivar write: @size
+||| inlining: Class#allocate into new_bucket. primitive class_allocate (<nil>)
+||| inline ivar read: Hash#@state (abort, using slow lookup)
+||| slow ivar read: @state
+||| inlining: Hash::Bucket#initialize into new_bucket
+|||| inline ivar write: @key (abort, using slow write)
+|||| slow ivar write: @key
+|||| inline ivar write: @key_hash (abort, using slow write)
+|||| slow ivar write: @key_hash
+|||| inline ivar write: @value (abort, using slow write)
+|||| slow ivar write: @value
+|||| inline ivar write: @link (abort, using slow write)
+|||| slow ivar write: @link
+|||| inline ivar write: @state (abort, using slow write)
+|||| slow ivar write: @state
+|||| inlining: read to '@tail' on Hash::State in #initialize
+|||| inline ivar write: @previous (abort, using slow write)
+|||| slow ivar write: @previous
+|||| inlining: writer to '@next' on Hash::Bucket in #initialize
+|||| inlining: writer to '@tail' on Hash::State in #initialize
+|||| inlining: writer to '@tail' on Hash::State in #initialize
+|||| inlining: writer to '@head' on Hash::State in #initialize
+||| inline ivar read: Hash#@state (abort, using slow lookup)
+||| slow ivar read: @state
+|| inlining: Rubinius::Tuple#[]= into []=. primitive tuple_put (Rubinius::Tuple)
+JIT: compiling Thread#recursion_guard (1580862895.497507)
+| inlining: Kernel#object_id into recursion_guard. generic primitive: jit_stub_object_id (Fixnum)
+| inlining: Thread#current into recursion_guard. generic primitive: jit_stub_thread_current (<nil>)
+| inlining: read to '@recursive_objects' on Thread in #recursion_guard (slot: 3)
+| inlining: Rubinius::LookupTable#[]= into recursion_guard. generic primitive: jit_stub_lookuptable_store (Rubinius::LookupTable)
+| inlining: Rubinius::LookupTable#delete into recursion_guard. generic primitive: jit_stub_lookuptable_delete (Rubinius::LookupTable)
+JIT: compiling Hash#merge (1580862895.626334)
+| inlining: Kernel#dup into merge (Hash)
+|| inlining: Rubinius::Type#object_class into dup. primitive Type.object_class (<nil>)
+|| NOT inlining: Hash#allocate into dup. too complex (<nil>) (jitted)
+|| inlining: Array#allocate into dup. generic primitive: jit_stub_array_allocate (<nil>)
+|| inlining: Array#allocate into dup. generic primitive: jit_stub_array_allocate (<nil>)
+|| inlining: Rubinius::Type#object_initialize_dup into dup
+||| inlining: Kernel#initialize_dup into object_initialize_dup (Hash)
+|||| inlining: Hash#replace into initialize_dup
+||||+ eliding redundant guard: class Hash (645)
+||||| inlining: direct class used for kind_of (eliding because of statically known match)
+||||| inlining: Kernel#equal? into replace. primitive object_equal (Hash)
+|||||+ eliding redundant guard: class Hash (645)
+||||| inlining: read to '@capacity' on Hash in #replace
+||||| inline ivar write: @capacity (abort, using slow write)
+||||| slow ivar write: @capacity
+||||| inline ivar read: Hash#@capacity (abort, using slow lookup)
+||||| slow ivar read: @capacity
+||||| inline ivar write: @entries (abort, using slow write)
+||||| slow ivar write: @entries
+||||| inline ivar read: Hash#@capacity (abort, using slow lookup)
+||||| slow ivar read: @capacity
+||||| inlining: Fixnum#- into replace. primitive fixnum_sub (Fixnum)
+||||| inline ivar write: @mask (abort, using slow write)
+||||| slow ivar write: @mask
+||||| inline ivar write: @size (abort, using slow write)
+||||| slow ivar write: @size
+||||| inlining: read to '@max_entries' on Hash in #replace
+||||| inline ivar write: @max_entries (abort, using slow write)
+||||| slow ivar write: @max_entries
+||||| inlining: Class#allocate into replace. primitive class_allocate (<nil>)
+||||| inlining: Hash::State#initialize into replace
+|||||| inline ivar write: @compare_by_identity (abort, using slow write)
+|||||| slow ivar write: @compare_by_identity
+|||||| inline ivar write: @head (abort, using slow write)
+|||||| slow ivar write: @head
+|||||| inline ivar write: @tail (abort, using slow write)
+|||||| slow ivar write: @tail
+||||| inline ivar write: @state (abort, using slow write)
+||||| slow ivar write: @state
+||||| inlining: Hash#compare_by_identity? into replace
+|||||| inline ivar read: Hash#@state (abort, using slow lookup)
+|||||| slow ivar read: @state
+|||||| inline ivar read: Hash#@state (abort, using slow lookup)
+|||||| slow ivar read: @state
+|||||| inlining: Hash::State#compare_by_identity? into compare_by_identity?
+||||||| inline ivar read: Hash::State#@compare_by_identity (abort, using slow lookup)
+||||||| slow ivar read: @compare_by_identity
+||||| inline ivar read: Hash#@state (abort, using slow lookup)
+||||| slow ivar read: @state
+||||| inlining: Hash#each_item into replace (w/ inline block)
+|||||| inline ivar read: Hash#@state (abort, using slow lookup)
+|||||| slow ivar read: @state
+|||||| inline ivar read: Hash#@state (abort, using slow lookup)
+|||||| slow ivar read: @state
+|||||| inlining: read to '@head' on Hash::State in #each_item
+|||||| inlining block into: each_item
+||||||| inlining: read to '@key' on Hash::Bucket in #replace
+||||||| inlining: read to '@value' on Hash::Bucket in #replace
+||||||| inlining: Hash#[]= into replace
+|||||||+ eliding redundant guard: class Hash (645)
+|||||||| inline ivar read: Hash#@size (abort, using slow lookup)
+|||||||| slow ivar read: @size
+|||||||| inline ivar read: Hash#@max_entries (abort, using slow lookup)
+|||||||| slow ivar read: @max_entries
+|||||||| inlining: Fixnum#> into []=. primitive fixnum_compare_operation (Fixnum)
+|||||||| inline ivar read: Hash#@entries (abort, using slow lookup)
+|||||||| slow ivar read: @entries
+|||||||| NOT inlining: Hash#redistribute into []=. too few sends: (1 / 24719) (Hash) (interp)
+|||||||| inlining: Kernel#hash into []=. generic primitive: jit_stub_object_hash (String)
+|||||||| NOT inlining: Array#hash into []=. too few sends: (2 / 24719) (Array) (interp)
+|||||||| inlining: Kernel#hash into []=. generic primitive: jit_stub_object_hash (Symbol)
+|||||||| inline ivar read: Hash#@mask (abort, using slow lookup)
+|||||||| slow ivar read: @mask
+|||||||| inlining: Fixnum#& into []=. primitive fixnum_and (Fixnum)
+|||||||| inline ivar read: Hash#@entries (abort, using slow lookup)
+|||||||| slow ivar read: @entries
+|||||||| inlining: Rubinius::Tuple#[] into []=. primitive tuple_at (Rubinius::Tuple)
+|||||||| inline ivar read: Hash#@state (abort, using slow lookup)
+|||||||| slow ivar read: @state
+|||||||| inlining: read to '@key' on Hash::Bucket in #[]=
+|||||||| inlining: read to '@key_hash' on Hash::Bucket in #[]=||||||||+ eliding redundant guard: class Hash::Bucket (649)
+
+|||||||| NOT inlining: Hash::State#match? into []=. too few sends: (3 / 24719) (Hash::State) (interp)
+|||||||| inlining: writer to '@value' on Hash::Bucket in #[]=
+|||||||| inlining: read to '@link' on Hash::Bucket in #[]=
+|||||||| inline ivar read: Hash#@state (abort, using slow lookup)
+|||||||| slow ivar read: @state
+|||||||| inlining: read to '@key' on Hash::Bucket in #[]=
+|||||||| inlining: read to '@key_hash' on Hash::Bucket in #[]=||||||||+ eliding redundant guard: class Hash::Bucket (649)
+
+|||||||| NOT inlining: Hash::State#match? into []=. too few sends: (1 / 24719) (Hash::State) (interp)
+|||||||| inlining: writer to '@value' on Hash::Bucket in #[]=
+|||||||| inlining: read to '@link' on Hash::Bucket in #[]=
+|||||||| NOT inlining: Hash#new_bucket into []=. too few sends: (3 / 24719) (Hash) (jitted)
+|||||||| inlining: writer to '@link' on Hash::Bucket in #[]=
+|||||||| inline ivar read: Hash#@entries (abort, using slow lookup)
+|||||||| slow ivar read: @entries
+|||||||| inlining: Hash#new_bucket into []=
+||||||||+ eliding redundant guard: class Hash (645)
+||||||||| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (String)
+|||||||||| inlining: direct class used for kind_of (against String)
+||||||||| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (Array)
+|||||||||| inlining: direct class used for kind_of (against String)
+||||||||| inlining: Kernel#kind_of? into new_bucket. primitive Object#kind_of (Symbol)
+|||||||||| inlining: direct class used for kind_of (against String)
+||||||||| inlining: Kernel#frozen? into new_bucket. primitive Object#frozen? (String)
+||||||||| NOT inlining: BasicObject#! into new_bucket. too few sends: (2 / 44806) (FalseClass) (jitted)
+||||||||| NOT inlining: BasicObject#! into new_bucket. too few sends: (146 / 44806) (TrueClass) (jitted)
+||||||||| NOT inlining: Hash#compare_by_identity? into new_bucket. too few sends: (2 / 44806) (Hash) (interp)
+||||||||| NOT inlining: BasicObject#! into new_bucket. too few sends: (2 / 44806) (FalseClass) (jitted)
+||||||||| NOT inlining: String#dup into new_bucket. too few sends: (2 / 44806) (String) (interp)
+||||||||| inlining: Kernel#freeze into new_bucket. generic primitive: jit_stub_object_freeze (String)
+||||||||| inline ivar read: Hash#@size (abort, using slow lookup)
+||||||||| slow ivar read: @size
+||||||||| inlining: Fixnum#+ into new_bucket. primitive fixnum_add (Fixnum)
+||||||||| inline ivar write: @size (abort, using slow write)
+||||||||| slow ivar write: @size
+||||||||| inlining: Class#allocate into new_bucket. primitive class_allocate (<nil>)
+||||||||| inline ivar read: Hash#@state (abort, using slow lookup)
+||||||||| slow ivar read: @state
+||||||||| inlining: Hash::Bucket#initialize into new_bucket
+|||||||||| inline ivar write: @key (abort, using slow write)
+|||||||||| slow ivar write: @key
+|||||||||| inline ivar write: @key_hash (abort, using slow write)
+|||||||||| slow ivar write: @key_hash
+|||||||||| inline ivar write: @value (abort, using slow write)
+|||||||||| slow ivar write: @value
+|||||||||| inline ivar write: @link (abort, using slow write)
+|||||||||| slow ivar write: @link
+|||||||||| inline ivar write: @state (abort, using slow write)
+|||||||||| slow ivar write: @state
+|||||||||| inlining: read to '@tail' on Hash::State in #initialize
+|||||||||| inline ivar write: @previous (abort, using slow write)
+|||||||||| slow ivar write: @previous
+|||||||||| inlining: writer to '@next' on Hash::Bucket in #initialize
+|||||||||| inlining: writer to '@tail' on Hash::State in #initialize
+|||||||||| inlining: writer to '@tail' on Hash::State in #initialize
+|||||||||| inlining: writer to '@head' on Hash::State in #initialize
+||||||||| inline ivar read: Hash#@state (abort, using slow lookup)
+||||||||| slow ivar read: @state
+|||||||| inlining: Rubinius::Tuple#[]= into []=. primitive tuple_put (Rubinius::Tuple)
+|||||| inlining: read to '@next' on Hash::Bucket in #each_item
+||||| inlining: Hash#default into replace
+|||||| inline ivar read: Hash#@default_proc (abort, using slow lookup)
+|||||| slow ivar read: @default_proc
+|||||| inlining: Kernel#equal? into default. primitive object_equal (<nil>)
+|||||| NOT inlining: BasicObject#! into default. too few sends: (39 / 24719) (FalseClass) (jitted)
+|||||| inline ivar read: Hash#@default_proc (abort, using slow lookup)
+|||||| slow ivar read: @default_proc
+|||||| NOT inlining: Proc#call into default. too few sends: (39 / 24719) (Proc) (interp)
+|||||| inline ivar read: Hash#@default (abort, using slow lookup)
+|||||| slow ivar read: @default
+||||| inline ivar write: @default (abort, using slow write)
+||||| slow ivar write: @default
+||||| inlining: Hash#default_proc into replace
+|||||+ eliding redundant guard: class Hash (645)
+|||||| inline ivar read: Hash#@default_proc (abort, using slow lookup)
+|||||| slow ivar read: @default_proc
+||||| inline ivar write: @default_proc (abort, using slow write)
+||||| slow ivar write: @default_proc
+||||| inline ivar read: Hash#@capacity (abort, using slow lookup)
+||||| slow ivar read: @capacity
+||||| inlining: Rubinius::Tuple#new into replace. generic primitive: jit_stub_tuple_allocate (<nil>)
+||| NOT inlining: Kernel#initialize_dup into object_initialize_dup. too few sends: (3 / 40307) (Array) (interp)
+||| NOT inlining: Kernel#initialize_dup into object_initialize_dup. too few sends: (2 / 40307) (Rubinius::LoadedFeatures) (interp)
+JIT: compiling Exception#initialize (1580862897.90686)
+| inline ivar write: @reason_message (slot: 0)
+| inline ivar write: @locations (slot: 1)
+| inline ivar write: @backtrace (slot: 3)
+| inline ivar write: @custom_backtrace (slot: 4)
+JIT: compiling Rubinius::VM#backtrace (1580862897.182997)
+| inlining: Kernel#Integer into backtrace
+|| inlining: Kernel#kind_of? into Integer. primitive Object#kind_of (Fixnum)
+||| inlining: direct class used for kind_of (against String)
+|| inlining: Module#=== into Integer
+||| inlining: Rubinius::Type#object_kind_of? into ===. primitive Type.object_kind_of (<nil>)
+|||| inlining: direct class used for kind_of (against Integer / Numeric)
+|| inlining: no cache for kind_of fast path
+| inlining: Fixnum#+ into backtrace. primitive fixnum_add (Fixnum)
+| inlining: Rubinius::VM#backtrace into backtrace. generic primitive: jit_stub_vm_backtrace (<nil>)
+JIT: compiling Kernel#Integer (1580862897.478104)
+| inlining: Kernel#kind_of? into Integer. primitive Object#kind_of (Fixnum)
+|| inlining: direct class used for kind_of (against String)
+| inlining: Module#=== into Integer
+|| inlining: Rubinius::Type#object_kind_of? into ===. primitive Type.object_kind_of (<nil>)
+||| inlining: direct class used for kind_of (against Integer / Numeric)
+| inlining: no cache for kind_of fast path
+JIT: compiling Module#to_s (1580862897.717773)
+| inlining: Rubinius::Type#module_inspect into to_s
+|| inlining: Rubinius::Type#singleton_class_object into module_inspect. generic primitive: jit_stub_vm_singleton_class_object (<nil>)
+||+ eliding redundant guard: class <nil> (459)
+|| inlining: Rubinius::Type#module_name into module_inspect. generic primitive: jit_stub_vm_get_module_name (<nil>)
+||+ eliding redundant guard: class <nil> (459)
+|| inlining: BasicObject#! into module_inspect (String)
+||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+|| inlining: String#== into module_inspect. generic primitive: jit_stub_string_equal (String)
+JIT: compiling block in puts near core/io.rb:1956 (1580862897.955929)
+| NOT inlining: to_ary. Inliner error, method missing.
+| inlining: Module#=== into puts
+|| inlining: Rubinius::Type#object_kind_of? into ===. primitive Type.object_kind_of (<nil>)
+||| inlining: direct class used for kind_of (regular Ruby class)
+| inlining: Fixnum#to_s into puts
+| inlining: Kernel#kind_of? into puts. primitive Object#kind_of (String)
+|| inlining: direct class used for kind_of (against String)
+JIT: compiling Kernel#puts (1580862898.147120)
+| inlining: Rubinius::GlobalVariables#[] into puts
+|| inline ivar read: Rubinius::GlobalVariables#@internal (abort, using slow lookup)
+|| slow ivar read: @internal
+|| inlining: Rubinius::LookupTable#key? into []. generic primitive: jit_stub_lookuptable_has_key (Rubinius::LookupTable)
+|| inline ivar read: Rubinius::GlobalVariables#@internal (abort, using slow lookup)
+|| slow ivar read: @internal
+|| inlining: Rubinius::LookupTable#[] into []. generic primitive: jit_stub_lookuptable_aref (Rubinius::LookupTable)
+|| inline ivar read: Rubinius::GlobalVariables#@hooks (abort, using slow lookup)
+|| slow ivar read: @hooks
+|| inline ivar read: Rubinius::GlobalVariables#@hooks (abort, using slow lookup)
+|| slow ivar read: @hooks
+|| inline ivar read: Rubinius::GlobalVariables#@alias (abort, using slow lookup)
+|| slow ivar read: @alias
+|| inline ivar read: Rubinius::GlobalVariables#@alias (abort, using slow lookup)
+|| slow ivar read: @alias
+| inlining: no cache for kind_of fast path
+| inlining: no cache for kind_of fast path
+| inlining: Rubinius::Runtime#dup_as_array into puts. generic primitive: jit_stub_array_dup_as_array (<nil>)
+JIT: compiling Hash#merge! (1580862898.412272)
+| inlining: direct class used for kind_of (regular Ruby class)
+| inlining: Hash#each_item into merge! (w/ inline block)
+|| inline ivar read: Hash#@state (abort, using slow lookup)
+|| slow ivar read: @state
+|| inline ivar read: Hash#@state (abort, using slow lookup)
+|| slow ivar read: @state
+|| inlining: read to '@head' on Hash::State in #each_item
+|| inlining block into: each_item
+|| inlining: read to '@next' on Hash::Bucket in #each_item
+JIT: compiling Object#sum (1580862898.649681)
+| inlining: Array#each into sum (w/ inline block)
+|| inline ivar read: Array#@start (slot: 2)
+|| inline ivar read: Array#@total (slot: 0)
+|| inlining: Fixnum#+ into each. primitive fixnum_add (Fixnum)
+|| inline ivar read: Array#@tuple (slot: 1)
+|| inlining: Fixnum#< into each. primitive fixnum_compare_operation (Fixnum)
+|| inlining: Rubinius::Tuple#[] into each. primitive tuple_at (Rubinius::Tuple)
+|| inlining block into: each
+||| inlining: Fixnum#+ into sum. primitive fixnum_add (Fixnum)
+|| inlining: Fixnum#+ into each. primitive fixnum_add (Fixnum)
+JIT: compiling IO#puts (1580862898.869099)
+| inlining: Array#empty? into puts
+|| inline ivar read: Array#@total (slot: 0)
+|| inlining: Fixnum#== into empty?. primitive fixnum_compare_operation (Fixnum)
+| NOT inlining: block was too complex
+An exception occurred running /var/examples/sum-block.rbJ
+Thread has been interrupted (Interrupt)
+
+Back.122289)
+| inline ivar write: @reason_message (slot: 0)
+| inline ivar write: @locations (slot: 1)
+| inline ivar write: @backtrace (slot: 3)
+| inline ivar write: @custom_backtrace (slot: 4)
+received_signal at core/rubinius.rb:277

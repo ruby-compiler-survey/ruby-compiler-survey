@@ -1,0 +1,312 @@
+JIT: compiling Fixnum#to_s (1580863248.403945)
+JIT: compiling Object#__script__ (1580863248.438602)
+| inlining: Rubinius#open_class into __script__
+|| inlining: read to '@module' on Rubinius::ConstantScope in #open_class (slot: 0)
+|| inlining: Rubinius#open_class_under into open_class
+||+ eliding redundant guard: class <nil> (457)
+||| inlining: Rubinius::Type#object_kind_of? into open_class_under. primitive Type.object_kind_of (<nil>)
+|||| inlining: direct class used for kind_of (against Module)
+||| inlining: read to '@constant_table' on <nil> in #open_class_under (slot: 2)
+||| inlining: read to '@constant_table' on <nil> in #open_class_under (slot: 2)
+||| inlining: read to '@constant_table' on <nil> in #open_class_under (slot: 2)
+||| inlining: Rubinius::ConstantTable#name? into open_class_under. generic primitive: jit_stub_constant_table_has_name (Rubinius::ConstantTable)
+||| inlining: BasicObject#! into open_class_under (TrueClass)
+|||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+|||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+||| inlining: BasicObject#! into open_class_under (FalseClass)
+|||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+|||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+||| inlining: Class#allocate into open_class_under. generic primitive: jit_stub_class_s_allocate (<nil>)
+||| NOT inlining: Class#initialize into open_class_under. too complex (Class) (interp)
+||| NOT inlining: Class#new into open_class_under. too complex (<nil>) (interp)
+||| inlining: Rubinius::ConstantTable#lookup into open_class_under. generic primitive: jit_stub_constant_table_lookup (Rubinius::ConstantTable)
+||| inlining: read to '@visibility' on Rubinius::ConstantTable::Bucket in #open_class_under (slot: 2)
+||| inlining: Kernel#equal? into open_class_under. primitive object_equal (Symbol)
+||| inlining: read to '@constant' on Rubinius::ConstantTable::Bucket in #open_class_under (slot: 1)
+||| inlining: Rubinius::Type#object_kind_of? into open_class_under. primitive Type.object_kind_of (<nil>)
+|||| inlining: direct class used for kind_of (regular Ruby class)
+||| inlining: Autoload#call into open_class_under
+|||| inlining: read to '@constant' on Autoload in #call||||+ eliding redundant guard: class Autoload (99)
+ (slot: 3)
+|||| inlining: Kernel#equal? into call. primitive object_equal (<nil>)
+|||| inlining: BasicObject#! into call (TrueClass)
+||||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+||||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+|||| inlining: BasicObject#! into call (FalseClass)
+||||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+||||| inlining: Rubinius::Type#object_equal into !. primitive Type.object_equal (<nil>)
+|||| inlining: Thread#current into call. generic primitive: jit_stub_thread_current (<nil>)
+|||| inlining: read to '@thread' on Autoload in #call||||+ eliding redundant guard: class Autoload (99)
+ (slot: 4)
+|||| inlining: Kernel#equal? into call. primitive object_equal (Thread)
+|||| inlining: read to '@constant' on Autoload in #call||||+ eliding redundant guard: class Autoload (99)
+ (slot: 3)
+|||| inlining: Autoload#resolve into call
+||||+ eliding redundant guard: class Autoload (99)
+||||| inlining: Rubinius#synchronize into resolve (w/ inline block)
+|||||| inlining: Rubinius#lock into synchronize. generic primitive: jit_stub_vm_object_lock (<nil>)
+||||||+ eliding redundant guard: class <nil> (457)
+|||||| inlining block into: synchronize
+||||||| inline ivar read: Autoload#@loaded (slot: 5)
+||||||| inline ivar read: Autoload#@thread (slot: 4)
+||||||| inline ivar write: @loaded (slot: 5)
+||||||| inlining: Thread#current into resolve. generic primitive: jit_stub_thread_current (<nil>)
+||||||| inline ivar write: @thread (slot: 4)
+||||||| inline ivar read: Autoload#@path (slot: 2)
+||||||| inlining: <nil>#require into resolve
+|||||||| inlining: Class#allocate into require. primitive class_allocate (<nil>)
+|||||||| inlining: Rubinius::CodeLoader#initialize into require
+||||||||| inlining: Rubinius::Type#coerce_to_path into initialize
+|||||||||| inlining: Rubinius::Type#object_kind_of? into coerce_to_path. primitive Type.object_kind_of (<nil>)
+||||||||||| inlining: direct class used for kind_of (against String)
+||||||||| inline ivar write: @path (abort, using slow write)
+||||||||| slow ivar write: @path
+||||||||| inline ivar write: @short_path (abort, using slow write)
+||||||||| slow ivar write: @short_path
+||||||||| inline ivar write: @load_path (abort, using slow write)
+||||||||| slow ivar write: @load_path
+||||||||| inline ivar write: @file_path (abort, using slow write)
+||||||||| slow ivar write: @file_path
+||||||||| inline ivar write: @feature (abort, using slow write)
+||||||||| slow ivar write: @feature
+||||||||| inline ivar write: @stat (abort, using slow write)
+||||||||| slow ivar write: @stat
+||||||||| inline ivar write: @type (abort, using slow write)
+||||||||| slow ivar write: @type
+|||||||| inlining: Rubinius::CodeLoader#require into require
+||||||||| inlining: <nil>#load_map into require
+|||||||||| inline ivar read: <nil>#@load_map (abort, using slow lookup)
+|||||||||| slow ivar read: @load_map
+|||||||||| inlining: Hash#new_from_literal into load_map
+||||||||||| NOT inlining: Hash#allocate into new_from_literal. too complex (<nil>) (interp)
+|||||||||| inline ivar write: @load_map (abort, using slow write)
+|||||||||| slow ivar write: @load_map
+||||||||| inline ivar read: Rubinius::CodeLoader#@type (abort, using slow lookup)
+||||||||| slow ivar read: @type
+||||||||| inlining: Kernel#equal? into require. primitive object_equal (Symbol)
+||||||||| inlining: Rubinius::CodeLoader#load_file into require
+|||||||||+ eliding redundant guard: class Rubinius::CodeLoader (481)
+|||||||||| inlining: read to '@check_version' on <nil> in #load_file
+|||||||||| inlining: read to '@load_compiled' on <nil> in #load_file
+|||||||||| inline ivar read: Rubinius::CodeLoader#@load_path (abort, using slow lookup)
+|||||||||| slow ivar read: @load_path
+|||||||||| inlining: Rubinius::CodeLoader#load_compiled_file into load_file. generic primitive: jit_stub_compiledfile_load (Rubinius::CodeLoader)
+||||||||||+ eliding redundant guard: class Rubinius::CodeLoader (481)
+|||||||||| inlining: Rubinius::CompiledCode#create_script into load_file
+||||||||||| inlining: Class#allocate into create_script. primitive class_allocate (<nil>)
+||||||||||| inlining: Rubinius::CompiledCode::Script#initialize into create_script
+|||||||||||| inline ivar write: @compiled_code (abort, using slow write)
+|||||||||||| slow ivar write: @compiled_code
+|||||||||||| inline ivar write: @file_path (abort, using slow write)
+|||||||||||| slow ivar write: @file_path
+|||||||||||| inline ivar write: @for_eval (abort, using slow write)
+|||||||||||| slow ivar write: @for_eval
+|||||||||||| inline ivar write: @eval_source (abort, using slow write)
+|||||||||||| slow ivar write: @eval_source
+|||||||||||| inline ivar write: @main (abort, using slow write)
+|||||||||||| slow ivar write: @main
+||||||||||| inlining: Class#allocate into create_script. primitive class_allocate (<nil>)
+||||||||||| inlining: Rubinius::ConstantScope#initialize into create_script
+|||||||||||| inline ivar write: @module (slot: 0)
+|||||||||||| inline ivar write: @parent (slot: 2)
+||||||||||| inlining: writer to '@script' on Rubinius::ConstantScope in #create_script
+||||||||||| inline ivar write: @scope (slot: 14)
+||||||||||| inlining: Rubinius::Type#object_singleton_class into create_script. generic primitive: jit_stub_vm_object_singleton_class (<nil>)
+||||||||||| inlining: Module#method_table into create_script
+|||||||||||| inline ivar read: <nil>#@method_table (slot: 0)
+||||||||||| inline ivar read: Rubinius::CompiledCode#@scope (slot: 14)
+||||||||||| inlining: Rubinius::MethodTable#store into create_script. generic primitive: jit_stub_methodtable_store (Rubinius::MethodTable)
+||||||||||| inlining: Rubinius::VM#reset_method_cache into create_script. generic primitive: jit_stub_vm_reset_method_cache (<nil>)
+||||||||||| inline ivar write: @scope (slot: 14)
+|||||||||| inline ivar read: Rubinius::CodeLoader#@file_path (abort, using slow lookup)
+|||||||||| slow ivar read: @file_path
+|||||||||| inlining: writer to '@file_path' on Rubinius::CompiledCode::Script in #load_file
+|||||||||| inline ivar read: Rubinius::CodeLoader#@load_path (abort, using slow lookup)
+|||||||||| slow ivar read: @load_path
+|||||||||| inlining: writer to '@data_path' on Rubinius::CompiledCode::Script in #load_file
+|||||||||| inline ivar write: @compiled_code (abort, using slow write)
+|||||||||| slow ivar write: @compiled_code
+|||||||||| inlining: read to '@compiled_hook' on <nil> in #load_file
+|||||||||| NOT inlining: Rubinius::Hook#trigger! into load_file. too complex (Rubinius::Hook) (interp)
+|||||||||| inline ivar read: Rubinius::CodeLoader#@load_path (abort, using slow lookup)
+|||||||||| slow ivar read: @load_path
+|||||||||| inlining: CodeTools::Compiler#compiled_name into load_file
+||||||||||| inlining: File#expand_path into compiled_name
+|||||||||||| inlining: Rubinius::Type#coerce_to_path into expand_path
+||||||||||||| inlining: Rubinius::Type#object_kind_of? into coerce_to_path. primitive Type.object_kind_of (<nil>)
+|||||||||||||| inlining: direct class used for kind_of (against String)
+|||||||||||| inlining: String#encoding into expand_path. generic primitive: jit_stub_string_encoding (String)
+|||||||||||| inlining: String#force_encoding into expand_path
+||||||||||||+ eliding redundant guard: class String (47)
+||||||||||||| inlining: Rubinius::Type#coerce_to_encoding into force_encoding
+|||||||||||||| inlining: Module#=== into coerce_to_encoding
+||||||||||||||| inlining: Rubinius::Type#object_kind_of? into ===. primitive Type.object_kind_of (<nil>)
+|||||||||||||||| inlining: direct class used for kind_of (against Encoding)
+||||||||||||| inline ivar write: @encoding (slot: 5)
+||||||||||||| inline ivar read: String#@ascii_only (slot: 6)
+||||||||||||| inline ivar read: String#@encoding (slot: 5)
+||||||||||||| inlining: Encoding#ascii_compatible? into force_encoding. generic primitive: jit_stub_encoding_ascii_compatible_p (Encoding)
+||||||||||||| inlining: read to '@num_bytes' on String in #force_encoding|||||||||||||+ eliding redundant guard: class String (47)
+ (slot: 0)
+||||||||||||| inlining: Fixnum#== into force_encoding. primitive fixnum_compare_operation (Fixnum)
+||||||||||||| inline ivar read: String#@encoding (slot: 5)
+||||||||||||| inlining: Encoding#ascii_compatible? into force_encoding. generic primitive: jit_stub_encoding_ascii_compatible_p (Encoding)
+||||||||||||| inline ivar write: @ascii_only (slot: 6)
+||||||||||||| inline ivar write: @valid_encoding (slot: 7)
+||||||||||||| inline ivar write: @num_chars (slot: 1)
+||||||||||||| inline ivar write: @num_chars (slot: 1)
+||||||||||||| inline ivar write: @valid_encoding (slot: 7)
+||||||||||||| inline ivar write: @ascii_only (slot: 6)
+|||||||||||| inlining: String#[] into expand_path. generic primitive: jit_stub_string_aref (String)
+|||||||||||| inlining: String#== into expand_path. generic primitive: jit_stub_string_equal (String)
+|||||||||||| inlining: read to '@num_bytes' on String in #expand_path (slot: 0)
+|||||||||||| inlining: String#find_string into expand_path. generic primitive: jit_stub_string_index (String)
+|||||||||||| inlining: Fixnum#< into expand_path. primitive fixnum_compare_operation (Fixnum)
+|||||||||||| inlining: Fixnum#- into expand_path. primitive fixnum_sub (Fixnum)
+|||||||||||| inlining: Fixnum#> into expand_path. primitive fixnum_compare_operation (Fixnum)
+|||||||||||| inlining: String#byteslice into expand_path. generic primitive: jit_stub_string_byte_substring (String)
+|||||||||||| inlining: String#== into expand_path. generic primitive: jit_stub_string_equal (String)
+|||||||||||| inlining: Fixnum#+ into expand_path. primitive fixnum_add (Fixnum)
+|||||||||||| inlining: BasicObject#!= into expand_path (String)
+||||||||||||| NOT inlining: ==. No reachable types found in IC.
+|||||||||||| inlining: Array#<< into expand_path
+||||||||||||+ eliding redundant guard: class Array (6)
+||||||||||||| inline ivar read: Array#@total (slot: 0)
+||||||||||||| inlining: Array#set_index into <<. generic primitive: jit_stub_array_aset (Array)
+|||||||||||||+ eliding redundant guard: class Array (6)
+|||||||||||| inlining: Array#empty? into expand_path
+||||||||||||+ eliding redundant guard: class Array (6)
+||||||||||||| inline ivar read: Array#@total (slot: 0)
+||||||||||||| inlining: Fixnum#== into empty?. primitive fixnum_compare_operation (Fixnum)
+|||||||||||| inlining: BasicObject#!= into expand_path (String)
+||||||||||||| NOT inlining: ==. No reachable types found in IC.
+||||||||||| inline ivar read: <nil>#@db (abort, using slow lookup)
+||||||||||| slow ivar read: @db
+||||||||||| inline ivar read: <nil>#@db (abort, using slow lookup)
+||||||||||| slow ivar read: @db
+||||||||||| inlining: String#prefix? into compiled_name
+|||||||||||| inlining: String#size into prefix?. generic primitive: jit_stub_string_size (String)
+|||||||||||| inline ivar read: String#@num_bytes (slot: 0)
+|||||||||||| inlining: Fixnum#> into prefix?. primitive fixnum_compare_operation (Fixnum)
+|||||||||||| inlining: String#compare_substring into prefix?. generic primitive: jit_stub_string_compare_substring (String)
+|||||||||||| inlining: Fixnum#== into prefix?. primitive fixnum_compare_operation (Fixnum)
+||||||||||| inlining: CodeTools::Compiler#compiled_cache_writable? into compiled_name
+|||||||||||| inlining: File#writable? into compiled_cache_writable?
+||||||||||||| inlining: File::Stat#stat into writable?
+|||||||||||||| inlining: Class#allocate into stat. primitive class_allocate (<nil>)
+|||||||||||||| inlining: File::Stat#setup into stat. generic primitive: jit_stub_stat_stat (File::Stat)
+|||||||||||||| inlining: Fixnum#== into stat. primitive fixnum_compare_operation (Fixnum)
+||||||||||||| inlining: File::Stat#writable? into writable?
+|||||||||||||| inlining: File::Stat#superuser? into writable?
+||||||||||||||+ eliding redundant guard: class File::Stat (69)
+||||||||||||||| inlining: FFI call to geteuid() into superuser? (<nil>)
+||||||||||||||| inlining: Fixnum#== into superuser?. primitive fixnum_compare_operation (Fixnum)
+|||||||||||||| inlining: File::Stat#owned? into writable?
+||||||||||||||+ eliding redundant guard: class File::Stat (69)
+||||||||||||||| inlining: File::Stat#uid into owned?. generic primitive: jit_stub_stat_uid (File::Stat)
+|||||||||||||||+ eliding redundant guard: class File::Stat (69)
+||||||||||||||| inlining: FFI call to geteuid() into owned? (<nil>)
+||||||||||||||| inlining: Fixnum#== into owned?. primitive fixnum_compare_operation (Fixnum)
+|||||||||||||| inlining: File::Stat#mode into writable?. generic primitive: jit_stub_stat_mode (File::Stat)
+||||||||||||||+ eliding redundant guard: class File::Stat (69)
+|||||||||||||| inlining: Fixnum#& into writable?. primitive fixnum_and (Fixnum)
+|||||||||||||| inlining: BasicObject#!= into writable? (Fixnum)
+||||||||||||||| inlining: Fixnum#== into !=. primitive fixnum_compare_operation (Fixnum)
+||||||||||| inline ivar write: @db (abort, using slow write)
+||||||||||| slow ivar write: @db
+|||||||||| inlining: File::Stat#stat into load_file
+||||||||||| inlining: Class#allocate into stat. primitive class_allocate (<nil>)
+||||||||||| inlining: File::Stat#setup into stat. generic primitive: jit_stub_stat_stat (File::Stat)
+||||||||||| inlining: Fixnum#== into stat. primitive fixnum_compare_operation (Fixnum)
+|||||||||| inline ivar read: Rubinius::CodeLoader#@stat (abort, using slow lookup)
+|||||||||| slow ivar read: @stat
+|||||||||| inlining: File::Stat#mtime into load_file. generic primitive: jit_stub_stat_mtime (File::Stat)
+|||||||||| inlining: File::Stat#mtime into load_file. generic primitive: jit_stub_stat_mtime (File::Stat)
+|||||||||| inlining: Comparable#>= into load_file (Time)
+||||||||||| inlining: Time#<=> into >=
+|||||||||||+ eliding redundant guard: class Time (67)
+|||||||||||| inlining: Kernel#kind_of? into <=>. primitive Object#kind_of (Time)
+||||||||||||| inlining: direct class used for kind_of (regular Ruby class)
+|||||||||||| inlining: Kernel#kind_of? into <=>. primitive Object#kind_of (Array)
+||||||||||||| inlining: direct class used for kind_of (regular Ruby class)
+|||||||||||| inlining: Time#seconds into <=>. generic primitive: jit_stub_time_seconds (Time)
+||||||||||||+ eliding redundant guard: class Time (67)
+|||||||||||| inlining: Time#seconds into <=>. generic primitive: jit_stub_time_seconds (Time)
+|||||||||||| inlining: Fixnum#<=> into <=>. primitive fixnum_compare (Fixnum)
+|||||||||||| inlining: Numeric#nonzero? into <=> (Fixnum)
+||||||||||||| inlining: Fixnum#zero? into nonzero?
+|||||||||||||| inlining: Fixnum#== into zero?. primitive fixnum_compare_operation (Fixnum)
+|||||||||||| NOT inlining: Array#<=> into <=>. 2996 + 84 > 3000 (Array) (interp)
+|||||||||||| inlining: Kernel#equal? into <=>. primitive object_equal (NilClass)
+||||||||||| NOT inlining: Comparable#compare_int into >=. 2996 + 47 > 3000 (<nil>) (interp)
+||||||||||| inlining: Fixnum#>= into >=. primitive fixnum_compare_operation (Fixnum)
+|||||||||| inline ivar read: Rubinius::CodeLoader#@load_path (abort, using slow lookup)
+|||||||||| slow ivar read: @load_path
+|||||||||| NOT inlining: Rubinius::CodeLoader#compile_file into load_file. 2996 + 37 > 3000 (Rubinius::CodeLoader) (interp)
+|||||||||| inlining: Rubinius::CodeLoader#load_compiled_file into load_file. generic primitive: jit_stub_compiledfile_load (Rubinius::CodeLoader)
+||||||||||+ eliding redundant guard: class Rubinius::CodeLoader (481)
+|||||||||| inline ivar read: Rubinius::CodeLoader#@load_path (abort, using slow lookup)
+|||||||||| slow ivar read: @load_path
+|||||||||| inline ivar read: Rubinius::CodeLoader#@load_path (abort, using slow lookup)
+|||||||||| slow ivar read: @load_path
+|||||||||| inline ivar read: Rubinius::CodeLoader#@load_path (abort, using slow lookup)
+|||||||||| slow ivar read: @load_path
+||||||||| NOT inlining: Rubinius::CodeLoader#load_library into require. 2996 + 22 > 3000 (Rubinius::CodeLoader) (interp)
+|||||||| inlining: read to '@type' on Rubinius::CodeLoader::RequireRequest in #require
+|||||||| inlining: Kernel#equal? into require. primitive object_equal (Symbol)
+||||||||+ eliding guard: detected symbol
+|||||||| inlining: read to '@compiled_code' on Rubinius::CodeLoader in #require
+|||||||| inlining: Rubinius#run_script into require. generic primitive: jit_stub_vm_run_script (<nil>)
+|||||||| inlining: Rubinius::CodeLoader::RequireRequest#passed! into require
+||||||||| inline ivar write: @loaded (abort, using slow write)
+||||||||| slow ivar write: @loaded
+|||||||| NOT inlining: Rubinius::CodeLoader::RequireRequest#remove! into require. 3000 + 14 > 3000 (Rubinius::CodeLoader::RequireRequest) (interp)
+|||||||| NOT inlining: Rubinius::CodeLoader#add_feature into require. 3000 + 61 > 3000 (Rubinius::CodeLoader) (interp)
+|||||||| inline ivar read: <nil>#@loaded_hook (abort, using slow lookup)
+|||||||| slow ivar read: @loaded_hook
+|||||||| inlining: read to '@path' on Rubinius::CodeLoader in #require
+|||||||| NOT inlining: Rubinius::Hook#trigger! into require. too complex (Rubinius::Hook) (interp)
+|||||||| inlining: Kernel#equal? into require. primitive object_equal (Symbol)
+||||||||+ eliding guard: detected symbol
+|||||||| NOT inlining: Rubinius::CodeLoader::RequireRequest#remove! into require. 3000 + 14 > 3000 (Rubinius::CodeLoader::RequireRequest) (interp)
+|||||| inlining: Rubinius#unlock into synchronize. generic primitive: jit_stub_vm_object_unlock (<nil>)
+||||||+ eliding redundant guard: class <nil> (457)
+|||||| inlining: Rubinius#unlock into synchronize. generic primitive: jit_stub_vm_object_unlock (<nil>)
+||||||+ eliding redundant guard: class <nil> (457)
+|||| NOT inlining: BasicObject#! into call. 3000 + 23 > 3000 (TrueClass) (interp)
+||| inlining: Rubinius::Type#object_kind_of? into open_class_under. primitive Type.object_kind_of (<nil>)
+|||| inlining: direct class used for kind_of (against Class)
+||| NOT inlining: Class#superclass into open_class_under. 3000 + 72 > 3000 (<nil>) (interp)
+||| NOT inlining: Class#superclass into open_class_under. 3000 + 72 > 3000 (<nil>) (interp)
+||| NOT inlining: Class#superclass into open_class_under. 3000 + 72 > 3000 (<nil>) (interp)
+||| NOT inlining: BasicObject#!= into open_class_under. 3000 + 13 > 3000 (<nil>) (interp)
+||| NOT inlining: BasicObject#!= into open_class_under. 3000 + 13 > 3000 (<nil>) (interp)
+||| NOT inlining: BasicObject#!= into open_class_under. 3000 + 13 > 3000 (<nil>) (interp)
+||| inlining: Class#allocate into open_class_under. generic primitive: jit_stub_class_s_allocate (<nil>)
+||| NOT inlining: Class#initialize into open_class_under. too complex (Class) (interp)
+| NOT inlining: Rubinius::BlockEnvironment#call_under into __script__. No fast stub. primitive: block_call_under
+| NOT inlining: Rubinius::VariableScope#method_visibility into __script__. 3000 + 55 > 3000 (Rubinius::VariableScope) (interp)
+| NOT inlining: Rubinius#add_defn_method into __script__. 3000 + 166 > 3000 (<nil>) (interp)
+| NOT inlining: Rubinius::VariableScope#method_visibility into __script__. 3000 + 55 > 3000 (Rubinius::VariableScope) (interp)
+| NOT inlining: Rubinius#add_defn_method into __script__. 3000 + 166 > 3000 (<nil>) (interp)
+| NOT inlining: Object#create_point into __script__. 3000 + 32 > 3000 (<nil>) (interp)
+| NOT inlining: Object#print_point into __script__. 3000 + 6 > 3000 (<nil>) (interp)
+JIT: compiling Object#create_point (1580863252.95168)
+| inlining: Class#allocate into create_point. primitive class_allocate (<nil>)
+| inlining: Point#initialize into create_point
+|| inline ivar write: @x (packed index: 0, 24)
+|| inline ivar write: @y (packed index: 1, 32)
+JIT: compiling Object#print_point (1580863252.172073)
+| inlining: Point#to_s into print_point
+|| inline ivar read: Point#@x (packed index: 0, 24)
+|| inline ivar read: Point#@y (packed index: 1, 32)
+An exception occurred running /var/examples/point.rb
+
+Thread has been interrupted (Interrupt)
+
+Backtrace:
+
+  { } in Rubinius::Loader#signals at core/loader.rb:99
+                        Proc#call at core/proc.rb:20
+               Signal.run_handler at core/signal.rb:64
+         Rubinius.received_signal at core/rubinius.rb:277

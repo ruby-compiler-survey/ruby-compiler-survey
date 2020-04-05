@@ -1,0 +1,4309 @@
+
+%s(do
+  (required (do
+      (required (do
+          (sexp 
+            (defun __method_missing (sym ob (args rest)) 
+              (let (cname)
+                (assign cname (callm (index ob 0) inspect))
+                (printf "Method missing: %s#%s
+" (callm (callm cname to_s) __get_raw) (callm (callm sym to_s) __get_raw))
+                (div 0 0)
+                0
+              )
+            ))
+          (sexp (tgc_start (stackframe) __roots_start __roots_end))
+          (sexp 
+            (defun __alloc (size opt) 
+              (let (ptr)
+                (assign ptr (calloc size 1))
+                (if
+                  (eq ptr 0)
+                  (return 0)
+                )
+                (return (tgc_add ptr size opt))
+              )
+            ))
+          (sexp 
+            (defun __alloc_mem (size) (return (__alloc size 0))))
+          (sexp 
+            (defun __alloc_leaf (size) (return (__alloc size 1))))
+          (sexp 
+            (defun __realloc (ptr size) (tgc_realloc ptr size)))
+          (sexp 
+            (defun __array (size) (__alloc_mem (mul size 4))))
+          (sexp 
+            (defun __array_leaf (size) (__alloc_leaf (mul size 4))))
+          (sexp (assign __cnt 0))
+          (sexp 
+            (defun __docnt () (do
+                (assign __cnt (add __cnt 1))
+                (printf "__cnt: %ld
+" __cnt)
+
+              )
+            ))
+          (sexp (atexit tgc_stop))
+
+        ))
+      (required (do
+          (sexp 
+            (defun __new_class_object (size superclass ssize classob) 
+              (let (ob i)
+                (if
+                  (eq classob 0)
+                  (assign classob Class)
+                )
+                (assign ob (__array size))
+                (assign i 6)
+                (while (lt i ssize) (do
+                    (assign (index ob i) (index superclass i))
+                    (assign i (add i 1))
+
+                  ))
+                (while (lt i size) (do
+                    (assign (index ob i) (index __base_vtable i))
+                    (assign i (add i 1))
+
+                  ))
+                (assign (index ob 0) classob)
+                (assign (index ob 3) superclass)
+                (assign (index ob 4) 0)
+                (if
+                  (eq superclass 0)
+                  (assign (index ob 5) 0)
+                  (do
+                    (assign (index ob 5) (index superclass 4))
+                    (assign (index superclass 4) ob)
+
+                  )
+                )
+                ob
+              )
+            ))
+          (sexp 
+            (defun __set_vtable (vtable off ptr) 
+              (let (p)
+                (assign p (index vtable 4))
+                (while (sexp p) (do
+                    (if
+                      (eq (index p off) (index vtable off))
+                      (__set_vtable p off ptr)
+                    )
+                    (assign p (index p 5))
+
+                  ))
+                (assign (index vtable off) ptr)
+              )
+            ))
+          (class Class Object (
+              (defm __initialize () (do
+                  nil
+
+                )
+              ) 
+              (defm allocate () 
+                (let (ob index)
+                  (sexp (assign ob (__array @instance_size)))
+                  (sexp 
+                    (if
+                      (eq ob 0)
+                      (do
+                        (printf "FATAL: Failed to allocate object of size %ld, class %s
+" (mul 4 @instance_size) 
+                          (index self 2))
+                        (div 0 0)
+
+                      )
+                    ))
+                  (sexp (assign (index ob 0) self))
+                  ob
+                )
+              ) 
+              (defm __new () 
+                (let (ob)
+                  (assign ob allocate)
+                  (callm ob __initialize)
+                  ob
+                )
+              ) 
+              (defm new (
+                  (__splat rest)) 
+                (let (ob rest)
+                  (sexp (assign rest (__splat_to_Array __splat (sub numargs 0))))
+                  (assign ob allocate)
+                  (callm ob initialize (
+                      (splat rest)))
+                  ob
+                )
+              ) 
+              (defm name () (do
+                  (sexp (__get_string @name))
+
+                )
+              ) 
+              (defm to_s () (do
+                  name
+
+                )
+              ) 
+              (defm inspect () (do
+                  name
+
+                )
+              ) 
+              (defm != (other) (do
+                  (callm (callm self == (other)) !)
+
+                )
+              ) 
+              (defm superclass () (do
+                  (sexp 
+                    (if
+                      (index self 3)
+                      (index self 3)
+                      Object
+                    ))
+
+                )
+              ) 
+              (defm define_method (sym (block block)) (do
+                  (sexp (printf "define_method %s
+" (callm (callm sym to_s) __get_raw)))
+
+                )
+              ) 
+              (defm attr_accessor (sym) (do
+                  (call attr_reader (sym))
+                  (call attr_writer (sym))
+
+                )
+              ) 
+              (defm attr_reader (sym) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (8))))
+                  (assign (index __env__ 1) __closure__)
+                  (sexp (printf "attr_reader %s
+" (callm (callm sym to_s) __get_raw)))
+                  (call define_method sym (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L64" (self __closure__ __env__) 
+                          (let ()
+                            nil
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 0)))
+
+                    ))
+                )
+              ) 
+              (defm attr_writer (sym) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (8))))
+                  (assign (index __env__ 1) __closure__)
+                  (sexp (printf "attr_writer %s
+" (callm (callm sym to_s) __get_raw)))
+                  (call define_method (
+                      (callm (callm (callm (callm (sexp (call __get_string .L0)) to_s) concat (
+                              (callm (callm sym to_s) to_s))) concat (
+                            (callm (sexp (call __get_string .L1)) to_s))) to_sym () (do
+                          (assign (index __env__ 0) (stackframe))
+                          (assign __tmp_proc 
+                            (defun "__lambda_L65" (self __closure__ __env__ (val default nil)) 
+                              (let ()
+                              )
+                            ))
+                          (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                        ))))
+                )
+              ))
+          )
+          (sexp (assign (index Class 0) Class))
+          (sexp (assign (index Class 2) "Class"))
+
+        ))
+      (required (do
+          (class Kernel Object (
+              (defm puts (s) (do
+                  (sexp (puts (index s 1)))
+
+                )
+              ))
+          )
+
+        ))
+      (required (do
+          (class Object Object (
+              (sexp (assign (index self 4) Class)) (include Kernel) 
+              (defm initialize () (do
+                  nil
+
+                )
+              ) 
+              (defm class () (do
+                  @__class__
+
+                )
+              ) 
+              (defm object_id () (do
+                  (sexp (__int self))
+
+                )
+              ) 
+              (defm hash () (do
+                  object_id
+
+                )
+              ) 
+              (defm eql? (other) (do
+                  (callm self == (other))
+
+                )
+              ) 
+              (defm === (other) (do
+                  (callm self == (other))
+
+                )
+              ) 
+              (defm inspect () 
+                (let (buf)
+                  (sexp (assign buf (__alloc_leaf 20)))
+                  (sexp (snprintf buf 20 "%p" self))
+                  (sexp (assign buf (__get_string buf)))
+                  (callm (callm (callm (callm (callm (sexp (call __get_string .L2)) to_s) concat (
+                            (callm (callm (callm self class) name) to_s))) concat (
+                          (callm (sexp (call __get_string .L3)) to_s))) concat (
+                        (callm buf to_s))) concat (
+                      (callm (sexp (call __get_string .L4)) to_s)))
+                )
+              ) 
+              (defm to_s () (do
+                  inspect
+
+                )
+              ) 
+              (defm == (other) (do
+                  (callm object_id == (
+                      (callm other object_id)))
+
+                )
+              ) 
+              (defm ! () (do
+                  false
+
+                )
+              ) 
+              (defm != (other) (do
+                  (callm (callm self == (other)) !)
+
+                )
+              ) 
+              (defm nil? () (do
+                  false
+
+                )
+              ) 
+              (defm method_missing (sym (__splat rest)) 
+                (let (cname args)
+                  (sexp (assign args (__splat_to_Array __splat (sub numargs 1))))
+                  (assign cname (callm (callm self class) inspect))
+                  (call puts (
+                      (callm (callm (callm (callm (sexp (call __get_string .L5)) to_s) concat (
+                              (callm cname to_s))) concat (
+                            (callm (sexp (call __get_string .L6)) to_s))) concat (
+                          (callm (callm sym to_s) to_s)))))
+                  (sexp (div 0 0))
+                )
+              ) 
+              (defm respond_to? (method) 
+                (let (m voff raw ptr)
+                  (assign m (callm Class method_to_voff))
+                  (assign voff (callm m [] (method)))
+                  (if
+                    (callm voff !)
+                    (return false)
+                  )
+                  (sexp (assign raw (callm voff __get_raw)))
+                  (sexp (assign ptr (index (index self 0) raw)))
+                  (sexp 
+                    (if
+                      (lt ptr __vtable_thunks_start)
+                      (return true)
+                    ))
+                  (sexp 
+                    (if
+                      (gt ptr __vtable_thunks_end)
+                      (return true)
+                    ))
+                  (return false)
+                )
+              ) 
+              (defm is_a? (c) 
+                (let (k)
+                  (sexp (assign k (callm self class)))
+                  (sexp (while (and (ne k c) (ne k Object)) (do
+                        (assign k (callm k superclass))
+
+                      )))
+                  (sexp 
+                    (if
+                      (eq k c)
+                      (return true)
+                      (return false)
+                    ))
+                )
+              ) 
+              (defm kind_of? (c) (do
+                  (call is_a? (c))
+
+                )
+              ) 
+              (defm send (sym (__splat rest)) 
+                (let (args)
+                  (sexp (assign args (__splat_to_Array __splat (sub numargs 1))))
+                  (call __send__ (sym (splat args)))
+                )
+              ) 
+              (defm __send__ (sym (__splat rest)) 
+                (let (args)
+                  (sexp (assign args (__splat_to_Array __splat (sub numargs 1))))
+                  (callm (callm self class) __send_for_obj__ (self sym (splat args)))
+                )
+              ) 
+              (defm p (ob) (do
+                  (call puts (
+                      (callm ob inspect)))
+                  ob
+
+                )
+              ) 
+              (defm exit (code) (do
+                  (sexp (exit (callm code __get_raw)))
+
+                )
+              ) 
+              (defm puts (
+                  (__splat rest)) 
+                (let (na i raw last str)
+                  (sexp (assign str (__splat_to_Array __splat (sub numargs 0))))
+                  (assign na (callm str length))
+                  (if
+                    (callm na == (
+                        (sexp __I0)))
+                    (do
+                      (sexp (puts ""))
+                      (return)
+
+                    )
+                  )
+                  (assign i (sexp __I0))
+                  (while (callm i < (na)) (do
+                      (assign raw (callm str [] (i)))
+                      (if
+                        raw
+                        (do
+                          (assign raw (callm raw to_s))
+                          (assign last (callm raw [] (
+                                (sexp __Ineg1))))
+                          (assign raw (callm raw __get_raw))
+                          (sexp 
+                            (if
+                              (ne raw 0)
+                              (printf "%s" raw)
+                            ))
+                          (if
+                            (callm (callm last ord) != (
+                                (sexp __I10)))
+                            (do
+                              (sexp (puts ""))
+
+                            )
+                          )
+
+                        )
+                        (do
+                          (sexp (puts ""))
+
+                        )
+                      )
+                      (assign i (callm i + (
+                            (sexp __I1))))
+
+                    ))
+                  nil
+                )
+              ) 
+              (defm print (
+                  (__splat rest)) 
+                (let (na i raw str)
+                  (sexp (assign str (__splat_to_Array __splat (sub numargs 0))))
+                  (assign na (callm str length))
+                  (if
+                    (callm na == (
+                        (sexp __I0)))
+                    (do
+                      (sexp (printf "nil"))
+                      (return)
+
+                    )
+                  )
+                  (assign i (sexp __I0))
+                  (while (callm i < (na)) (do
+                      (assign raw (callm (callm (callm str [] (i)) to_s) __get_raw))
+                      (if
+                        raw
+                        (do
+                          (sexp (printf "%s" raw))
+
+                        )
+                      )
+                      (assign i (callm i + (
+                            (sexp __I1))))
+
+                    ))
+                )
+              ) 
+              (defm Array (arg) (do
+                  (if
+                    (callm arg respond_to? (:to_ary))
+                    (do
+                      (callm arg to_ary)
+
+                    )
+                    (do
+                      (if
+                        (callm arg respond_to? (:to_a))
+                        (do
+                          (callm arg to_a)
+
+                        )
+                        (do
+                          (array arg)
+
+                        )
+                      )
+
+                    )
+                  )
+
+                )
+              ) 
+              (defm dup () (do
+                  (callm (callm self class) new)
+
+                )
+              ))
+          )
+
+        ))
+      (required (do
+          (class Proc Object (
+              (defm initialize () (do
+                  (assign @addr nil)
+                  (assign @env nil)
+                  (assign @s nil)
+                  (assign @arity (sexp __I0))
+
+                )
+              ) 
+              (defm __set_raw (addr env s arity) (do
+                  (assign @addr addr)
+                  (assign @env env)
+                  (assign @s s)
+                  (assign @arity arity)
+
+                )
+              ) 
+              (defm arity () (do
+                  @arity
+
+                )
+              ) 
+              (defm call (
+                  (__splat rest)) 
+                (let (arg)
+                  (sexp (assign arg (__splat_to_Array __splat (sub numargs 0))))
+                  (sexp (call @addr (@s 0 @env (splat arg))))
+                )
+              ))
+          )
+          (sexp 
+            (defun __new_proc (addr env self arity) 
+              (let (p)
+                (assign p (callm Proc new))
+                (callm p __set_raw (addr env self (__int arity)))
+                p
+              )
+            ))
+
+        ))
+      (required (do
+          (class Array Object (
+              (defm __initialize () (do
+                  (sexp (assign @len 0))
+                  (sexp (assign @ptr 0))
+                  (sexp (assign @capacity 0))
+
+                )
+              ) 
+              (defm __len () (do
+                  @len
+
+                )
+              ) 
+              (defm __ptr () (do
+                  @ptr
+
+                )
+              ) 
+              (defm __grow (newlen) (do
+                  (sexp (assign @capacity (add (div (mul newlen 4) 3) 4)))
+                  (sexp 
+                    (if
+                      (ne @ptr 0)
+                      (assign @ptr (__realloc @ptr (mul @capacity 4)))
+                      (assign @ptr (__array @capacity))
+                    ))
+
+                )
+              ) 
+              (defm __set (idx obj) 
+                (let (index)
+                  (sexp 
+                    (if
+                      (ge idx @len)
+                      (assign @len (add idx 1))
+                    ))
+                  (sexp (assign (index @ptr idx) obj))
+                )
+              ) 
+              (defm to_a () (do
+                  self
+
+                )
+              ))
+          )
+          (sexp 
+            (defun __splat_to_Array (r na) 
+              (let (splat pos data max)
+                (assign splat (callm Array __new))
+                (assign pos 0)
+                (assign max (sub na 2))
+                (callm splat __grow (max))
+                (while (lt pos max) (do
+                    (callm splat __set (pos (index r pos)))
+                    (assign pos (add pos 1))
+
+                  ))
+                splat
+              )
+            ))
+
+        ))
+      (required (do
+          (class TrueClass Object (
+              (defm ! () (do
+                  false
+
+                )
+              ) 
+              (defm to_s () (do
+                  (sexp (call __get_string .L7))
+
+                )
+              ) 
+              (defm inspect () (do
+                  to_s
+
+                )
+              ) 
+              (defm == (other) (do
+                  (sexp 
+                    (if
+                      (eq other true)
+                      true
+                      false
+                    ))
+
+                )
+              ))
+          )
+          (assign true (callm TrueClass new))
+
+        ))
+      (required (do
+          (class FalseClass Object (
+              (defm __true? () (do
+                  (sexp (sexp 0))
+
+                )
+              ) 
+              (defm to_s () (do
+                  (sexp (call __get_string .L8))
+
+                )
+              ) 
+              (defm inspect () (do
+                  to_s
+
+                )
+              ) 
+              (defm ! () (do
+                  true
+
+                )
+              ))
+          )
+          (assign false (callm FalseClass new))
+
+        ))
+      (required (do
+          (class NilClass Object (
+              (defm __true? () (do
+                  (sexp (sexp 0))
+
+                )
+              ) 
+              (defm == (other) (do
+                  (return (callm other nil?))
+
+                )
+              ) 
+              (defm nil? () (do
+                  true
+
+                )
+              ) 
+              (defm ! () (do
+                  true
+
+                )
+              ) 
+              (defm to_s () (do
+                  (sexp (call __get_string .L0))
+
+                )
+              ) 
+              (defm inspect () (do
+                  (sexp (call __get_string .L9))
+
+                )
+              ))
+          )
+          (assign nil (callm NilClass new))
+
+        ))
+      (required (do
+          (class Class Object (
+              (defm allocate () 
+                (let (is ob i index)
+                  (sexp (assign is @instance_size))
+                  (sexp (assign ob (__array @instance_size)))
+                  (sexp (assign i 1))
+                  (sexp (while (lt i is) (do
+                        (assign (index ob i) nil)
+                        (assign i (add i 1))
+
+                      )))
+                  (sexp (assign (index ob 0) self))
+                  ob
+                )
+              ))
+          )
+
+        ))
+      (required (do
+          (class Range Object (
+              (defm initialize (_min _max) (do
+                  (assign @min _min)
+                  (assign @max _max)
+
+                )
+              ) 
+              (defm to_s () (do
+                  (callm (callm (callm (callm (sexp (call __get_string .L0)) to_s) concat (
+                          (callm @min to_s))) concat (
+                        (callm (sexp (call __get_string .L10)) to_s))) concat (
+                      (callm @max to_s)))
+
+                )
+              ) 
+              (defm inspect () (do
+                  to_s
+
+                )
+              ) 
+              (defm first () (do
+                  @min
+
+                )
+              ) 
+              (defm last () (do
+                  @max
+
+                )
+              ) 
+              (defm member? (val) (do
+                  (if
+                    (callm val !)
+                    (do
+                      (return false)
+
+                    )
+                  )
+                  (return (and (callm val >= (@min)) (callm val <= (@max))))
+
+                )
+              ) 
+              (defm include? (val) (do
+                  (call member? (val))
+
+                )
+              ) 
+              (defm === (val) (do
+                  (call member? (val))
+
+                )
+              ) 
+              (defm each () 
+                (let (i __env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (8))))
+                  (assign (index __env__ 1) __closure__)
+                  (assign i @min)
+                  (while (callm i <= (@max)) (do
+                      (callm (index __env__ 1) call (i))
+                      (assign i (callm i + (
+                            (sexp __I1))))
+
+                    ))
+                )
+              ) 
+              (defm to_a () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 2) __closure__)
+                  (assign (index __env__ 1) (array))
+                  (call each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L66" (self __closure__ __env__ (v default nil)) 
+                          (let ()
+                            (callm (index __env__ 1) << (v))
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (index __env__ 1)
+                )
+              ) 
+              (defm to_enum () (do
+                  (callm RangeEnumerator new (self))
+
+                )
+              ))
+          )
+
+        ))
+      (required (do
+          (class Array Object (
+              (defm initialize (
+                  (__splat rest)) 
+                (let (elements)
+                  (sexp (assign elements (__splat_to_Array __splat (sub numargs 0))))
+                  __initialize
+                  (if
+                    (callm (callm elements length) > (
+                        (sexp __I0)))
+                    (do
+                      (call __grow (
+                          (callm (callm elements [] (
+                                (sexp __I0))) __get_raw)))
+
+                    )
+                  )
+                )
+              ) 
+              (defm capacity () (do
+                  (sexp (__int @capacity))
+
+                )
+              ) 
+              (defm __get (idx) (do
+                  (sexp (index @ptr idx))
+
+                )
+              ) 
+              (defm find () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (8))))
+                  (assign (index __env__ 1) __closure__)
+                  (call each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L67" (self __closure__ __env__ (e default nil)) 
+                          (let (r)
+                            (assign r (callm (index __env__ 1) call (e)))
+                            (if
+                              (callm r != (false))
+                              (preturn e)
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (return nil)
+                )
+              ) 
+              (defm include? (other) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 1) other)
+                  (assign (index __env__ 2) __closure__)
+                  (call each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L68" (self __closure__ __env__ (e default nil)) 
+                          (let ()
+                            (if
+                              (callm e == (
+                                  (index __env__ 1)))
+                              (preturn true)
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (return false)
+                )
+              ) 
+              (defm reject () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 2) __closure__)
+                  (assign (index __env__ 1) (callm (callm self class) new))
+                  (call each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L69" (self __closure__ __env__ (item default nil)) 
+                          (let ()
+                            (if
+                              (callm (callm (index __env__ 2) call (item)) !)
+                              (do
+                                (callm (index __env__ 1) << (item))
+
+                              )
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (index __env__ 1)
+                )
+              ) 
+              (defm collect () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 2) __closure__)
+                  (if
+                    block_given?
+                    (do
+                      (assign (index __env__ 1) (callm Array new))
+                      (call each () (do
+                          (assign (index __env__ 0) (stackframe))
+                          (assign __tmp_proc 
+                            (defun "__lambda_L70" (self __closure__ __env__ (item default nil)) 
+                              (let ()
+                                (callm (index __env__ 1) << (
+                                    (callm (index __env__ 2) call (item))))
+                              )
+                            ))
+                          (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                        ))
+                      (return (index __env__ 1))
+
+                    )
+                    (do
+                      (return self)
+
+                    )
+                  )
+                )
+              ) 
+              (defm detect (
+                  (ifnone default nil)) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (8))))
+                  (assign (index __env__ 1) __closure__)
+                  (callm self each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L71" (self __closure__ __env__ (item default nil)) 
+                          (let ()
+                            (if
+                              (callm (index __env__ 1) call (item))
+                              (do
+                                (preturn item)
+
+                              )
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (if
+                    ifnone
+                    (do
+                      (return (callm ifnone call))
+
+                    )
+                  )
+                  (return nil)
+                )
+              ) 
+              (defm each_with_index (
+                  (block block)) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 1) block)
+                  (assign (index __env__ 2) __closure__)
+                  (callm self each_index () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L72" (self __closure__ __env__ (i default nil)) 
+                          (let ()
+                            (callm (index __env__ 1) call (
+                                (callm self [] (i)) i))
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                )
+              ) 
+              (defm + (other_array) 
+                (let (added)
+                  (assign added (callm self dup))
+                  (callm added concat (other_array))
+                  (return added)
+                )
+              ) 
+              (defm << (obj) 
+                (let (index)
+                  (sexp 
+                    (if
+                      (le @len @capacity)
+                      (callm self __grow (
+                          (mul (add @len 1) 2)))
+                    ))
+                  (sexp (assign (index @ptr @len) obj))
+                  (sexp (assign @len (add @len 1)))
+                  self
+                )
+              ) 
+              (defm == (other) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 1) other)
+                  (assign (index __env__ 2) __closure__)
+                  (if
+                    (callm (callm (index __env__ 1) is_a? (Array)) !)
+                    (do
+                      (return false)
+
+                    )
+                  )
+                  (if
+                    (callm (callm self size) == (
+                        (callm (index __env__ 1) size)))
+                    (do
+                      (callm self each_index () (do
+                          (assign (index __env__ 0) (stackframe))
+                          (assign __tmp_proc 
+                            (defun "__lambda_L73" (self __closure__ __env__ (i default nil)) 
+                              (let ()
+                                (if
+                                  (callm (callm self [] (i)) != (
+                                      (callm (index __env__ 1) [] (i))))
+                                  (do
+                                    (preturn false)
+
+                                  )
+                                )
+                              )
+                            ))
+                          (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                        ))
+                      (return true)
+
+                    )
+                  )
+                  (return false)
+                )
+              ) 
+              (defm (self []) (
+                  (__splat rest)) 
+                (let (__env__ __tmp_proc elements)
+                  (sexp (assign elements (__splat_to_Array __splat (sub numargs 0))))
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 2) __closure__)
+                  (assign (index __env__ 1) (callm self new))
+                  (callm elements each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L74" (self __closure__ __env__ (e default nil)) 
+                          (let ()
+                            (callm (index __env__ 1) << (e))
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (index __env__ 1)
+                )
+              ) 
+              (defm __offset_to_pos (idx) (do
+                  (sexp (assign idx (callm idx __get_raw)))
+                  (sexp 
+                    (if
+                      (lt idx 0)
+                      (do
+                        (assign idx (add @len idx))
+                        (if
+                          (lt idx 0)
+                          (return -1)
+                        )
+
+                      )
+                    ))
+                  (sexp 
+                    (if
+                      (ge idx @len)
+                      (return -1)
+                    ))
+                  (sexp (return idx))
+
+                )
+              ) 
+              (defm __range_get (idx) 
+                (let (start xend tmp)
+                  (assign start (callm idx first))
+                  (assign xend (callm idx last))
+                  (sexp (assign start (__int (callm self __offset_to_pos (start)))))
+                  (sexp (assign xend (__int (callm self __offset_to_pos (xend)))))
+                  (if
+                    (callm start < (
+                        (sexp __I0)))
+                    (do
+                      (return (callm Array new))
+
+                    )
+                  )
+                  (if
+                    (callm xend < (
+                        (sexp __I0)))
+                    (do
+                      (assign xend (callm length - (
+                            (sexp __I1))))
+
+                    )
+                  )
+                  (assign tmp (callm Array new))
+                  (while (callm start <= (xend)) (do
+                      (callm tmp << (
+                          (callm self [] (start))))
+                      (assign start (callm start + (
+                            (sexp __I1))))
+
+                    ))
+                  (return tmp)
+                )
+              ) 
+              (defm [] (idx) 
+                (let (tmp)
+                  (if
+                    (callm idx is_a? (Range))
+                    (return (call __range_get (idx)))
+                  )
+                  (sexp (assign idx (callm self __offset_to_pos (idx))))
+                  (sexp 
+                    (if
+                      (or (or (eq @ptr 0) (gt idx @len)) (lt idx 0))
+                      (return nil)
+                    ))
+                  (sexp (assign tmp (callm self __get (idx))))
+                  (sexp 
+                    (if
+                      (eq tmp 0)
+                      (return nil)
+                      (return tmp)
+                    ))
+                )
+              ) 
+              (defm []= (idx obj) 
+                (let (index)
+                  (sexp (assign idx (callm idx __get_raw)))
+                  (sexp 
+                    (if
+                      (ge idx @capacity)
+                      (callm self __grow (idx))
+                    ))
+                  (sexp 
+                    (if
+                      (ge idx @len)
+                      (assign @len (add idx 1))
+                    ))
+                  (sexp (assign (index @ptr idx) obj))
+                )
+              ) 
+              (defm abbrev (
+                  (pattern default nil)) (do
+                  (sexp (puts "Array#abbrev not implemented"))
+
+                )
+              ) 
+              (defm slice (idx) (do
+                  (callm self [] (idx))
+
+                )
+              ) 
+              (defm assoc (obj) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 1) obj)
+                  (assign (index __env__ 2) __closure__)
+                  (callm self each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L75" (self __closure__ __env__ (item default nil)) 
+                          (let ()
+                            (if
+                              (callm item is_a? (Array))
+                              (do
+                                (if
+                                  (callm (callm item first) == (
+                                      (index __env__ 1)))
+                                  (do
+                                    (preturn item)
+
+                                  )
+                                )
+
+                              )
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (return nil)
+                )
+              ) 
+              (defm at (idx) (do
+                  (return (callm self [] (idx)))
+
+                )
+              ) 
+              (defm clear () (do
+                  (sexp (assign @len 0))
+                  self
+
+                )
+              ) 
+              (defm collect! () (do
+                  nil
+
+                )
+              ) 
+              (defm compact () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (8))))
+                  (assign (index __env__ 1) __closure__)
+                  (return (callm self reject () (do
+                        (assign (index __env__ 0) (stackframe))
+                        (assign __tmp_proc 
+                          (defun "__lambda_L76" (self __closure__ __env__ (item default nil)) 
+                            (let ()
+                              (callm item nil?)
+                            )
+                          ))
+                        (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                      )))
+                )
+              ) 
+              (defm compact! () (do
+                  (sexp (puts "Array#compact! not implemented"))
+
+                )
+              ) 
+              (defm concat (other_array) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 2) __closure__)
+                  (assign (index __env__ 1) self)
+                  (callm other_array each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L77" (self __closure__ __env__ (item default nil)) 
+                          (let ()
+                            (callm (index __env__ 1) << (item))
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (return (index __env__ 1))
+                )
+              ) 
+              (defm dclone () (do
+                  (sexp (puts "Array#dclone not implemented"))
+
+                )
+              ) 
+              (defm delete (obj) 
+                (let (src dest len sob)
+                  (assign src (sexp __I0))
+                  (assign dest (sexp __I0))
+                  (assign len length)
+                  (while (callm src < (len)) (do
+                      (assign sob (callm self [] (src)))
+                      (if
+                        (callm sob != (obj))
+                        (do
+                          (if
+                            (callm src != (dest))
+                            (do
+                              (callm self []= (dest sob))
+
+                            )
+                          )
+                          (assign dest (callm dest + (
+                                (sexp __I1))))
+
+                        )
+                      )
+                      (assign src (callm src + (
+                            (sexp __I1))))
+
+                    ))
+                  (sexp (assign @len (callm dest __get_raw)))
+                  obj
+                )
+              ) 
+              (defm delete_at (idx) 
+                (let (l e x o)
+                  (if
+                    (callm idx < (
+                        (sexp __I0)))
+                    (return nil)
+                  )
+                  (assign l length)
+                  (if
+                    (callm idx >= (l))
+                    (return nil)
+                  )
+                  (assign e (callm self [] (idx)))
+                  (assign x self)
+                  (while (callm idx < (l)) (do
+                      (assign o (callm x [] (
+                            (callm idx + (
+                                (sexp __I1))))))
+                      (callm x []= (idx o))
+                      (assign idx (callm idx + (
+                            (sexp __I1))))
+
+                    ))
+                  (sexp (assign @len (sub @len 1)))
+                  (return e)
+                )
+              ) 
+              (defm delete_if () (do
+                  (sexp (puts "Array#delete_if not implemented"))
+
+                )
+              ) 
+              (defm dup () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 2) __closure__)
+                  (assign (index __env__ 1) (callm (callm self class) new))
+                  (call each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L78" (self __closure__ __env__ (e default nil)) 
+                          (let ()
+                            (callm (index __env__ 1) << (e))
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (index __env__ 1)
+                )
+              ) 
+              (defm each (
+                  (block block)) 
+                (let (i a s el __env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (8))))
+                  (assign (index __env__ 1) __closure__)
+                  (assign i (sexp __I0))
+                  (assign a (callm block arity))
+                  (assign s (callm self size))
+                  (if
+                    (callm a == (
+                        (sexp __I1)))
+                    (do
+                      (while (callm i < (s)) (do
+                          (assign el (callm self [] (i)))
+                          (callm (index __env__ 1) call (el))
+                          (assign i (callm i + (
+                                (sexp __I1))))
+
+                        ))
+                      (return nil)
+
+                    )
+                  )
+                  (while (callm i < (s)) (do
+                      (assign el (callm self [] (i)))
+                      (if
+                        (callm el is_a? (Array))
+                        (do
+                          (callm (index __env__ 1) call (
+                              (splat el)))
+
+                        )
+                        (do
+                          (callm (index __env__ 1) call (el))
+
+                        )
+                      )
+                      (assign i (callm i + (
+                            (sexp __I1))))
+
+                    ))
+                  (return nil)
+                )
+              ) 
+              (defm member? (val) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 1) val)
+                  (assign (index __env__ 2) __closure__)
+                  (callm self each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L79" (self __closure__ __env__ (v default nil)) 
+                          (let ()
+                            (if
+                              (callm v == (
+                                  (index __env__ 1)))
+                              (preturn true)
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (return false)
+                )
+              ) 
+              (defm each_index () 
+                (let (i __env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (8))))
+                  (assign (index __env__ 1) __closure__)
+                  (assign i (sexp __I0))
+                  (while (callm i < (
+                        (callm self size))) (do
+                      (callm (index __env__ 1) call (i))
+                      (assign i (callm i + (
+                            (sexp __I1))))
+
+                    ))
+                )
+              ) 
+              (defm empty? () (do
+                  (return (callm (callm self size) == (
+                        (sexp __I0))))
+
+                )
+              ) 
+              (defm eql? (other_array) 
+                (let (i l)
+                  (if
+                    (callm (callm self object_id) == (
+                        (callm other_array object_id)))
+                    (return true)
+                  )
+                  (if
+                    (callm (callm other_array kind_of? (Array)) !)
+                    (return false)
+                  )
+                  (if
+                    (callm (callm self length) != (
+                        (callm other_array length)))
+                    (return false)
+                  )
+                  (assign i (sexp __I0))
+                  (assign l (callm self length))
+                  (while (callm i < (l)) (do
+                      (if
+                        (callm (callm self [] (i)) != (
+                            (callm other_array [] (i))))
+                        (return false)
+                      )
+                      (assign i (callm i + (
+                            (sexp __I1))))
+
+                    ))
+                  (return true)
+                )
+              ) 
+              (defm fetch (idx (default default nil)) (do
+                  (sexp (puts "Array#fetch not implemented"))
+
+                )
+              ) 
+              (defm fill (obj) (do
+                  (sexp (puts "Array#fill not implemented"))
+
+                )
+              ) 
+              (defm first (
+                  (n default nil)) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 2) __closure__)
+                  (if
+                    n
+                    (do
+                      (if
+                        (callm self empty?)
+                        (do
+                          (return (callm Array new))
+
+                        )
+                      )
+                      (assign (index __env__ 1) (callm Array new))
+                      (if
+                        (callm n >= (
+                            (callm self size)))
+                        (do
+                          (return (callm Array new (self)))
+
+                        )
+                      )
+                      (callm n times () (do
+                          (assign (index __env__ 0) (stackframe))
+                          (assign __tmp_proc 
+                            (defun "__lambda_L80" (self __closure__ __env__ (i default nil)) 
+                              (let ()
+                                (callm (index __env__ 1) << (
+                                    (callm self [] (i))))
+                              )
+                            ))
+                          (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                        ))
+                      (return (index __env__ 1))
+
+                    )
+                  )
+                  (if
+                    (callm self empty?)
+                    (do
+                      (return nil)
+
+                    )
+                    (do
+                      (return (callm self [] (
+                            (sexp __I0))))
+
+                    )
+                  )
+                )
+              ) 
+              (defm flatten (
+                  (level default nil)) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (16))))
+                  (assign (index __env__ 3) __closure__)
+                  (assign (index __env__ 2) (array))
+                  (assign (index __env__ 1) level)
+                  (call each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L81" (self __closure__ __env__ (e default nil)) 
+                          (let ()
+                            (index __env__ 1)
+                            (index __env__ 2)
+                            (if
+                              (callm e is_a? (Array))
+                              (do
+                                (if
+                                  (index __env__ 1)
+                                  (do
+                                    (if
+                                      (callm (index __env__ 1) > (
+                                          (sexp __I1)))
+                                      (assign e (callm e flatten (
+                                            (callm (index __env__ 1) - (
+                                                (sexp __I1))))))
+                                    )
+
+                                  )
+                                  (do
+                                    (assign e (callm e flatten))
+
+                                  )
+                                )
+                                (callm (index __env__ 2) concat (e))
+
+                              )
+                              (do
+                                (callm (index __env__ 2) << (e))
+
+                              )
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (index __env__ 2)
+                )
+              ) 
+              (defm flatten! () (do
+                  (sexp (puts "Array#flatten! not implemented"))
+
+                )
+              ) 
+              (defm frozen? () (do
+                  (sexp (puts "Array#frozen? not implemented"))
+
+                )
+              ) 
+              (defm hash () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 2) __closure__)
+                  (assign (index __env__ 1) (sexp __I5381))
+                  (assign (index __env__ 1) (callm (callm (index __env__ 1) * (
+                          (sexp __I33))) + (
+                        (callm self length))))
+                  (call each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L82" (self __closure__ __env__ (c default nil)) 
+                          (let ()
+                            (assign (index __env__ 1) (callm (callm (index __env__ 1) * (
+                                    (sexp __I33))) + (
+                                  (callm c hash))))
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (index __env__ 1)
+                )
+              ) 
+              (defm index (obj) 
+                (let (i l)
+                  (assign i (sexp __I0))
+                  (assign l length)
+                  (while (callm i < (l)) (do
+                      (if
+                        (callm (callm self [] (i)) == (obj))
+                        (do
+                          (return i)
+
+                        )
+                      )
+                      (assign i (callm i + (
+                            (sexp __I1))))
+
+                    ))
+                  (return nil)
+                )
+              ) 
+              (defm replace (other_array) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (8))))
+                  (assign (index __env__ 1) __closure__)
+                  (sexp (assign @len 0))
+                  (callm other_array each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L83" (self __closure__ __env__ (item default nil)) 
+                          (let ()
+                            (callm self << (item))
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                )
+              ) 
+              (defm insert (idx obj) 
+                (let (pos prev)
+                  (if
+                    (callm idx < (
+                        (sexp __I0)))
+                    (do
+                      (if
+                        (callm (callm (sexp __I0) - (idx)) > (length))
+                        (do
+                          (callm STDERR puts (
+                              (callm (callm (callm (callm (sexp (call __get_string .L11)) to_s) concat (
+                                      (callm idx to_s))) concat (
+                                    (callm (sexp (call __get_string .L12)) to_s))) concat (
+                                  (callm (callm length -) to_s)))))
+                          (call exit (
+                              (sexp __I1)))
+
+                        )
+                      )
+                      (assign idx (callm (callm length + (
+                              (sexp __I1))) + (idx)))
+
+                    )
+                  )
+                  (assign pos length)
+                  (assign prev nil)
+                  (while (callm pos > (idx)) (do
+                      (assign prev (callm pos - (
+                            (sexp __I1))))
+                      (callm self []= (pos (callm self [] (prev))))
+                      (decr pos (sexp __I1))
+
+                    ))
+                  (callm self []= (idx obj))
+                  self
+                )
+              ) 
+              (defm inspect () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (16))))
+                  (assign (index __env__ 3) __closure__)
+                  (assign (index __env__ 2) (sexp (call __get_string .L13)))
+                  (assign (index __env__ 1) true)
+                  (call each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L84" (self __closure__ __env__ (a default nil)) 
+                          (let ()
+                            (if
+                              (callm (index __env__ 1) !)
+                              (do
+                                (callm (index __env__ 2) << (
+                                    (sexp (call __get_string .L14))))
+
+                              )
+                              (do
+                                (assign (index __env__ 1) false)
+
+                              )
+                            )
+                            (callm (index __env__ 2) << (
+                                (callm a inspect)))
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (callm (index __env__ 2) << (
+                      (sexp (call __get_string .L15))))
+                  (index __env__ 2)
+                )
+              ) 
+              (defm join (sep) 
+                (let (size __env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (16))))
+                  (assign (index __env__ 2) sep)
+                  (assign (index __env__ 3) __closure__)
+                  (assign (index __env__ 1) (sexp (call __get_string .L0)))
+                  (assign size (callm self size))
+                  (assign (index __env__ 2) (callm (index __env__ 2) to_s))
+                  (callm self each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L85" (self __closure__ __env__ (item default nil)) 
+                          (let ()
+                            (if
+                              (callm (callm (index __env__ 1) empty?) !)
+                              (do
+                                (callm (index __env__ 1) << (
+                                    (index __env__ 2)))
+
+                              )
+                            )
+                            (callm (index __env__ 1) << (
+                                (callm item to_s)))
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (index __env__ 1)
+                )
+              ) 
+              (defm last (
+                  (n default nil)) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (16))))
+                  (assign (index __env__ 3) __closure__)
+                  (if
+                    n
+                    (do
+                      (if
+                        (callm n >= (
+                            (callm self size)))
+                        (do
+                          (return (callm Array new (self)))
+
+                        )
+                      )
+                      (assign (index __env__ 1) (callm Array new))
+                      (assign (index __env__ 2) (callm (callm self size) - (n)))
+                      (callm n times () (do
+                          (assign (index __env__ 0) (stackframe))
+                          (assign __tmp_proc 
+                            (defun "__lambda_L86" (self __closure__ __env__ (i default nil)) 
+                              (let ()
+                                (callm (index __env__ 1) << (
+                                    (callm self [] (
+                                        (callm i + (
+                                            (index __env__ 2)))))))
+                              )
+                            ))
+                          (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                        ))
+                      (return (index __env__ 1))
+
+                    )
+                  )
+                  (if
+                    (callm self empty?)
+                    (do
+                      (return nil)
+
+                    )
+                    (do
+                      (return (callm self [] (
+                            (sexp __Ineg1))))
+
+                    )
+                  )
+                )
+              ) 
+              (defm length () (do
+                  (sexp (__int @len))
+
+                )
+              ) 
+              (defm collect! () (do
+                  (sexp (puts "Array#collect! not implemented"))
+
+                )
+              ) 
+              (defm map! () (do
+                  (sexp (puts "Array#map! not implemented"))
+
+                )
+              ) 
+              (defm nitems () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (8))))
+                  (assign (index __env__ 1) __closure__)
+                  (return (callm (callm self select () (do
+                          (assign (index __env__ 0) (stackframe))
+                          (assign __tmp_proc 
+                            (defun "__lambda_L87" (self __closure__ __env__ (item default nil)) 
+                              (let ()
+                                (callm item != (nil))
+                              )
+                            ))
+                          (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                        )) size))
+                )
+              ) 
+              (defm pack () (do
+                  (sexp (puts "Array#pack not implemented"))
+
+                )
+              ) 
+              (defm pop () 
+                (let (last_element)
+                  (if
+                    (callm self empty?)
+                    (do
+                      (return nil)
+
+                    )
+                    (do
+                      (assign last_element (callm self last))
+                      (sexp (assign @len (sub @len 1)))
+                      (return last_element)
+
+                    )
+                  )
+                )
+              ) 
+              (defm pretty_print (q) (do
+                  (sexp (puts "Array#pretty_print not implemented"))
+
+                )
+              ) 
+              (defm push (objects) (do
+                  (callm self << (objects))
+
+                )
+              ) 
+              (defm quote () (do
+                  (sexp (puts "Array#quote not implemented"))
+
+                )
+              ) 
+              (defm rassoc (key) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 1) key)
+                  (assign (index __env__ 2) __closure__)
+                  (callm self each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L88" (self __closure__ __env__ (item default nil)) 
+                          (let ()
+                            (if
+                              (callm item is_a? (Array))
+                              (do
+                                (if
+                                  (callm (callm item [] (
+                                        (sexp __I1))) == (
+                                      (index __env__ 1)))
+                                  (do
+                                    (preturn item)
+
+                                  )
+                                )
+
+                              )
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (return nil)
+                )
+              ) 
+              (defm reject! () (do
+                  (sexp (puts "Array#reject! not implemented"))
+
+                )
+              ) 
+              (defm reverse () (do
+                  (callm (callm self dup) reverse!)
+
+                )
+              ) 
+              (defm reverse! () 
+                (let (i j tmp)
+                  (assign i (sexp __I0))
+                  (assign j (callm length - (
+                        (sexp __I1))))
+                  (while (callm i < (j)) (do
+                      (assign tmp (callm self [] (i)))
+                      (callm self []= (i (callm self [] (j))))
+                      (callm self []= (j tmp))
+                      (assign i (callm i + (
+                            (sexp __I1))))
+                      (decr j (sexp __I1))
+
+                    ))
+                  self
+                )
+              ) 
+              (defm reverse_each (
+                  (block block)) (do
+                  (callm (callm self reverse) each (
+                      (to_block block)))
+
+                )
+              ) 
+              (defm rindex (obj) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (16))))
+                  (assign (index __env__ 1) obj)
+                  (assign (index __env__ 3) __closure__)
+                  (assign (index __env__ 2) nil)
+                  (callm self each_with_index () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L89" (self __closure__ __env__ (item default nil) (idx default nil)) 
+                          (let ()
+                            (if
+                              (callm item == (
+                                  (index __env__ 1)))
+                              (do
+                                (assign (index __env__ 2) idx)
+
+                              )
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 2)))
+
+                    ))
+                  (return (index __env__ 2))
+                )
+              ) 
+              (defm shift () 
+                (let (first_element)
+                  (if
+                    (callm self empty?)
+                    (do
+                      (return nil)
+
+                    )
+                    (do
+                      (assign first_element (callm self first))
+                      (callm self delete_at (
+                          (sexp __I0)))
+                      (return first_element)
+
+                    )
+                  )
+                )
+              ) 
+              (defm size () (do
+                  (return (callm self length))
+
+                )
+              ) 
+              (defm partition (
+                  (block block)) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (20))))
+                  (assign (index __env__ 1) block)
+                  (assign (index __env__ 4) __closure__)
+                  (assign (index __env__ 2) (array))
+                  (assign (index __env__ 3) (array))
+                  (call each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L90" (self __closure__ __env__ (e default nil)) 
+                          (let ()
+                            (if
+                              (callm (index __env__ 1) call (e))
+                              (do
+                                (callm (index __env__ 2) << (e))
+
+                              )
+                              (do
+                                (callm (index __env__ 3) << (e))
+
+                              )
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (array (index __env__ 2) (index __env__ 3))
+                )
+              ) 
+              (defm sort_by (
+                  (block block)) 
+                (let (pivot_el part left right __env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (16))))
+                  (assign (index __env__ 1) block)
+                  (assign (index __env__ 3) __closure__)
+                  (if
+                    (callm length <= (
+                        (sexp __I1)))
+                    (return self)
+                  )
+                  (assign pivot_el (callm self [] (
+                        (sexp __I0))))
+                  (assign (index __env__ 2) (callm (index __env__ 1) call (pivot_el)))
+                  (assign part (callm (callm self [] (
+                          (callm Range new (
+                              (sexp __I1) (sexp __Ineg1))))) partition () (do
+                        (assign (index __env__ 0) (stackframe))
+                        (assign __tmp_proc 
+                          (defun "__lambda_L91" (self __closure__ __env__ (e default nil)) 
+                            (let ()
+                              (callm (callm (index __env__ 1) call (e)) < (
+                                  (index __env__ 2)))
+                            )
+                          ))
+                        (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                      )))
+                  (assign left (callm (callm part [] (
+                          (sexp __I0))) sort_by (
+                        (to_block (index __env__ 1)))))
+                  (assign right (callm (callm part [] (
+                          (sexp __I1))) sort_by (
+                        (to_block (index __env__ 1)))))
+                  (callm (callm left + (
+                        (array pivot_el))) + (right))
+                )
+              ) 
+              (defm sort () 
+                (let (part left right __env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 2) __closure__)
+                  (if
+                    (callm length <= (
+                        (sexp __I1)))
+                    (return self)
+                  )
+                  (assign (index __env__ 1) (callm self [] (
+                        (sexp __I0))))
+                  (assign part (callm (callm self [] (
+                          (callm Range new (
+                              (sexp __I1) (sexp __Ineg1))))) partition () (do
+                        (assign (index __env__ 0) (stackframe))
+                        (assign __tmp_proc 
+                          (defun "__lambda_L92" (self __closure__ __env__ (e default nil)) 
+                            (let ()
+                              (index __env__ 1)
+                              (callm (callm e <=> (
+                                    (index __env__ 1))) <= (
+                                  (sexp __I0)))
+                            )
+                          ))
+                        (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                      )))
+                  (assign left (callm (callm part [] (
+                          (sexp __I0))) sort))
+                  (assign right (callm (callm part [] (
+                          (sexp __I1))) sort))
+                  (callm (callm left + (
+                        (array (index __env__ 1)))) + (right))
+                )
+              ) 
+              (defm sort! () (do
+                  (sexp (puts "Array#sort! not implemented"))
+                  self
+
+                )
+              ) 
+              (defm to_a () (do
+                  (return self)
+
+                )
+              ) 
+              (defm to_ary () (do
+                  (return self)
+
+                )
+              ) 
+              (defm to_yaml () (do
+                  (sexp (puts "Array#to_yaml not implemented"))
+
+                )
+              ) 
+              (defm transpose () (do
+                  (sexp (puts "Array#transpose not implemented"))
+
+                )
+              ) 
+              (defm uniq () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 2) __closure__)
+                  (assign (index __env__ 1) (callm Array new))
+                  (callm self each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L93" (self __closure__ __env__ (item default nil)) 
+                          (let ()
+                            (if
+                              (callm (callm (index __env__ 1) include? (item)) !)
+                              (do
+                                (callm (index __env__ 1) << (item))
+
+                              )
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (index __env__ 1)
+                )
+              ) 
+              (defm uniq! () 
+                (let (uniq_arr changes_made)
+                  (assign uniq_arr (callm self uniq))
+                  (assign changes_made (callm (callm uniq_arr size) != (
+                        (callm self size))))
+                  (assign self (callm self uniq))
+                  (if
+                    changes_made
+                    (do
+                      (return self)
+
+                    )
+                    (do
+                      (return nil)
+
+                    )
+                  )
+                )
+              ) 
+              (defm unshift (
+                  (__splat rest)) 
+                (let (objects)
+                  (sexp (assign objects (__splat_to_Array __splat (sub numargs 0))))
+                  (sexp (puts "Array#unshift not implemented"))
+                )
+              ) 
+              (defm values_at () (do
+                  (sexp (puts "Array#values_at not implemented"))
+
+                )
+              ) 
+              (defm yaml_initialize () (do
+                  (sexp (puts "Array#yaml_initialize not implemented"))
+
+                )
+              ) 
+              (defm zip (
+                  (__splat rest)) 
+                (let (__env__ __tmp_proc args)
+                  (sexp (assign args (__splat_to_Array __splat (sub numargs 0))))
+                  (sexp (assign __env__ (call __alloc_mem (16))))
+                  (assign (index __env__ 3) __closure__)
+                  (assign (index __env__ 1) (callm args collect () (do
+                        (assign (index __env__ 0) (stackframe))
+                        (assign __tmp_proc 
+                          (defun "__lambda_L94" (self __closure__ __env__ (a default nil)) 
+                            (let ()
+                              (callm a to_enum)
+                            )
+                          ))
+                        (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                      )))
+                  (call collect () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L95" (self __closure__ __env__ (a default nil)) 
+                          (let ()
+                            (assign (index __env__ 2) (array a))
+                            (callm (index __env__ 1) each () (do
+                                (assign (index __env__ 0) (stackframe))
+                                (assign __tmp_proc 
+                                  (defun "__lambda_L96" (self __closure__ __env__ (e default nil)) 
+                                    (let ()
+                                      (callm (index __env__ 2) << (
+                                          (callm e next)))
+                                    )
+                                  ))
+                                (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                              ))
+                            (index __env__ 2)
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                )
+              ))
+          )
+
+        ))
+      (required (do
+          (class String Object (
+              (defm initialize (
+                  (__splat rest)) 
+                (let (first len str)
+                  (sexp (assign str (__splat_to_Array __splat (sub numargs 0))))
+                  (sexp 
+                    (if
+                      (lt numargs 3)
+                      (assign @buffer "")
+                      (do
+                        (assign first (callm str [] (__I0)))
+                        (assign len (callm first length))
+                        (callm self __copy_raw (
+                            (callm first __get_raw) len))
+
+                      )
+                    ))
+                )
+              ) 
+              (defm inspect () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (16))))
+                  (assign (index __env__ 3) __closure__)
+                  (assign (index __env__ 1) (callm (sexp __I34) chr))
+                  (assign (index __env__ 2) (callm (sexp __I92) chr))
+                  (call each_byte () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L97" (self __closure__ __env__ (b default nil)) 
+                          (let ()
+                            (if
+                              (callm b == (
+                                  (sexp __I34)))
+                              (do
+                                (callm (callm (index __env__ 1) << (
+                                      (index __env__ 2))) << (
+                                    (callm (sexp __I34) chr)))
+
+                              )
+                              (do
+                                (if
+                                  (callm b == (
+                                      (sexp __I27)))
+                                  (do
+                                    (callm (callm (index __env__ 1) << (
+                                          (index __env__ 2))) << (
+                                        (sexp (call __get_string .L16))))
+
+                                  )
+                                  (do
+                                    (if
+                                      (callm b == (
+                                          (sexp __I92)))
+                                      (do
+                                        (callm (callm (index __env__ 1) << (
+                                              (index __env__ 2))) << (
+                                            (index __env__ 2)))
+
+                                      )
+                                      (do
+                                        (if
+                                          (callm b == (
+                                              (sexp __I10)))
+                                          (do
+                                            (callm (callm (index __env__ 1) << (
+                                                  (index __env__ 2))) << (
+                                                (sexp (call __get_string .L17))))
+
+                                          )
+                                          (do
+                                            (callm (index __env__ 1) << (
+                                                (callm b chr)))
+
+                                          )
+                                        )
+
+                                      )
+                                    )
+
+                                  )
+                                )
+
+                              )
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (callm (index __env__ 1) << (
+                      (callm (sexp __I34) chr)))
+                  (index __env__ 1)
+                )
+              ) 
+              (defm hash () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 2) __closure__)
+                  (assign (index __env__ 1) (sexp __I5381))
+                  (call each_byte () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L98" (self __closure__ __env__ (c default nil)) 
+                          (let ()
+                            (assign (index __env__ 1) (callm (callm (index __env__ 1) * (
+                                    (sexp __I33))) + (c)))
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (index __env__ 1)
+                )
+              ) 
+              (defm ! () (do
+                  false
+
+                )
+              ) 
+              (defm nil? () (do
+                  false
+
+                )
+              ) 
+              (defm [] (index) 
+                (let (l b e a src c)
+                  (assign l length)
+                  (if
+                    (callm index is_a? (Range))
+                    (do
+                      (assign b (callm index first))
+                      (assign e (callm index last))
+                      (if
+                        (callm b < (
+                            (sexp __I0)))
+                        (do
+                          (assign b (callm l + (b)))
+                          (if
+                            (callm b < (
+                                (sexp __I0)))
+                            (do
+                              (return nil)
+
+                            )
+                          )
+
+                        )
+                      )
+                      (if
+                        (callm e < (
+                            (sexp __I0)))
+                        (do
+                          (assign e (callm (callm l + (e)) + (
+                                (sexp __I1))))
+                          (if
+                            (callm e < (
+                                (sexp __I0)))
+                            (do
+                              (assign e (sexp __I0))
+
+                            )
+                          )
+
+                        )
+                      )
+                      (if
+                        (callm e > (l))
+                        (do
+                          (assign e l)
+
+                        )
+                      )
+                      (assign e (callm (callm e - (b)) + (
+                            (sexp __I1))))
+                      (assign a (callm String new))
+                      (sexp (assign src (add @buffer (callm b __get_raw))))
+                      (callm a __copy_raw (src e))
+                      (return a)
+
+                    )
+                  )
+                  (if
+                    (callm index < (
+                        (sexp __I0)))
+                    (do
+                      (assign index (callm l + (index)))
+                      (if
+                        (callm index < (
+                            (sexp __I0)))
+                        (do
+                          (return nil)
+
+                        )
+                      )
+
+                    )
+                  )
+                  (if
+                    (callm index >= (l))
+                    (do
+                      (return nil)
+
+                    )
+                  )
+                  (sexp (assign index (callm index __get_raw)))
+                  (sexp (assign c (bindex @buffer index)))
+                  (sexp (__int c))
+                )
+              ) 
+              (defm []= (pos str) (do
+                  (callm STDERR puts (
+                      (callm (callm (callm (callm (callm (sexp (call __get_string .L18)) to_s) concat (
+                                (callm pos to_s))) concat (
+                              (callm (sexp (call __get_string .L19)) to_s))) concat (
+                            (callm str to_s))) concat (
+                          (callm (sexp (call __get_string .L20)) to_s)))))
+                  (callm (sexp __I0) / (
+                      (sexp __I0)))
+
+                )
+              ) 
+              (defm == (other) 
+                (let (s res)
+                  (assign s (callm other is_a? (String)))
+                  (if
+                    (callm s !)
+                    (return false)
+                  )
+                  (sexp (assign res 
+                      (if
+                        (strcmp @buffer (callm other __get_raw))
+                        false
+                        true
+                      )))
+                  (return res)
+                )
+              ) 
+              (defm eql? (other) (do
+                  (callm self == (other))
+
+                )
+              ) 
+              (defm __copy_raw (str len) 
+                (let (bindex)
+                  (sexp (assign len (add (callm len __get_raw) 1)))
+                  (sexp (assign @buffer (__alloc_leaf len)))
+                  (sexp (memmove @buffer str len))
+                  (sexp (assign (bindex @buffer (sub len 1)) 0))
+                  nil
+                )
+              ) 
+              (defm __set_raw (str) (do
+                  (assign @buffer str)
+
+                )
+              ) 
+              (defm __get_raw () (do
+                  @buffer
+
+                )
+              ) 
+              (defm empty? () (do
+                  (callm length == (
+                      (sexp __I0)))
+
+                )
+              ) 
+              (defm chr () (do
+                  (callm self [] (
+                      (sexp __I0)))
+
+                )
+              ) 
+              (defm ord () (do
+                  (callm self [] (
+                      (sexp __I0)))
+
+                )
+              ) 
+              (defm each_byte () 
+                (let (i len __env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (8))))
+                  (assign (index __env__ 1) __closure__)
+                  (assign i (sexp __I0))
+                  (assign len length)
+                  (while (callm i < (len)) (do
+                      (callm (index __env__ 1) call (
+                          (callm self [] (i))))
+                      (assign i (callm i + (
+                            (sexp __I1))))
+
+                    ))
+                  self
+                )
+              ) 
+              (defm <=> (other) 
+                (let (i max)
+                  (if
+                    (callm (callm other kind_of? (String)) !)
+                    (return nil)
+                  )
+                  (assign i (sexp __I0))
+                  (assign max (ternif (callm length > (
+                          (callm other length))) (ternalt (callm other length) length)))
+                  (while (callm i < (max)) (do
+                      (if
+                        (callm (callm self [] (i)) < (
+                            (callm other [] (i))))
+                        (return (sexp __Ineg1))
+                      )
+                      (if
+                        (callm (callm self [] (i)) > (
+                            (callm other [] (i))))
+                        (return (sexp __I1))
+                      )
+                      (assign i (callm i + (
+                            (sexp __I1))))
+
+                    ))
+                  (if
+                    (callm i < (
+                        (callm other length)))
+                    (return (sexp __Ineg1))
+                  )
+                  (if
+                    (callm length > (
+                        (callm other length)))
+                    (return (sexp __I1))
+                  )
+                  (return (sexp __I0))
+                )
+              ) 
+              (defm uniq () (do
+                  nil
+
+                )
+              ) 
+              (defm to_s () (do
+                  self
+
+                )
+              ) 
+              (defm to_sym () 
+                (let (buffer)
+                  (assign buffer @buffer)
+                  (sexp (call __get_symbol buffer))
+                )
+              ) 
+              (defm to_i () 
+                (let (num i len neg s)
+                  (assign num (sexp __I0))
+                  (assign i (sexp __I0))
+                  (assign len length)
+                  (assign neg false)
+                  (if
+                    (callm (callm self [] (
+                          (sexp __I0))) == (
+                        (sexp __I45)))
+                    (do
+                      (assign neg true)
+                      (assign i (callm i + (
+                            (sexp __I1))))
+
+                    )
+                  )
+                  (while (callm i < (len)) (do
+                      (assign s (callm self [] (i)))
+                      (if
+                        (callm (callm (callm Range new (
+                                (sexp __I48) (sexp __I57))) member? (s)) !)
+                        (break)
+                      )
+                      (assign num (callm (callm (callm num * (
+                                (sexp __I10))) + (s)) - (
+                            (sexp __I48))))
+                      (assign i (callm i + (
+                            (sexp __I1))))
+
+                    ))
+                  (if
+                    neg
+                    (do
+                      (return (callm num * (
+                            (sexp __Ineg1))))
+
+                    )
+                  )
+                  (return num)
+                )
+              ) 
+              (defm slice! (b e) 
+                (let (l endp n src dest)
+                  (assign l length)
+                  (if
+                    (callm b < (
+                        (sexp __I0)))
+                    (do
+                      (assign b (callm l + (b)))
+
+                    )
+                  )
+                  (if
+                    (callm b < (
+                        (sexp __I0)))
+                    (do
+                      (return nil)
+
+                    )
+                  )
+                  (assign endp (callm b + (e)))
+                  (if
+                    (callm endp > (l))
+                    (do
+                      (assign e (callm l - (b)))
+
+                    )
+                  )
+                  (assign n (callm String new))
+                  (sexp (assign src (add @buffer (callm b __get_raw))))
+                  (callm n __copy_raw (src e))
+                  (assign endp (callm b + (e)))
+                  (sexp (assign dest (add @buffer (callm b __get_raw))))
+                  (sexp (assign src (add @buffer (callm endp __get_raw))))
+                  (sexp (memmove dest src (callm e __get_raw)))
+                  n
+                )
+              ) 
+              (defm reverse () 
+                (let (buf l)
+                  (assign buf (sexp (call __get_string .L0)))
+                  (assign l length)
+                  (if
+                    (callm l == (
+                        (sexp __I0)))
+                    (do
+                      (return)
+
+                    )
+                  )
+                  (while (callm l > (
+                        (sexp __I0))) (do
+                      (assign l (callm l - (
+                            (sexp __I1))))
+                      (callm buf << (
+                          (callm (callm self [] (l)) chr)))
+
+                    ))
+                  buf
+                )
+              ) 
+              (defm length () 
+                (let (l)
+                  (sexp (assign l (strlen @buffer)))
+                  (sexp (__int l))
+                )
+              ) 
+              (defm size () (do
+                  length
+
+                )
+              ) 
+              (defm count (
+                  (c default nil)) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (16))))
+                  (assign (index __env__ 1) c)
+                  (assign (index __env__ 3) __closure__)
+                  (if
+                    (callm (index __env__ 1) !)
+                    (return length)
+                  )
+                  (assign (index __env__ 2) (sexp __I0))
+                  (assign (index __env__ 1) (callm (index __env__ 1) ord))
+                  (call each_byte () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L99" (self __closure__ __env__ (b default nil)) 
+                          (let ()
+                            (if
+                              (callm b == (
+                                  (index __env__ 1)))
+                              (do
+                                (assign (index __env__ 2) (callm (index __env__ 2) + (
+                                      (sexp __I1))))
+
+                              )
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (index __env__ 2)
+                )
+              ) 
+              (defm concat (other) 
+                (let (ro osize bsize size newb)
+                  (if
+                    (callm other is_a? (Fixnum))
+                    (do
+                      (assign other (callm other chr))
+
+                    )
+                    (do
+                      (assign other (callm other to_s))
+
+                    )
+                  )
+                  (sexp (do
+                      (assign ro (callm other __get_raw))
+                      (assign osize (strlen ro))
+                      (assign bsize (strlen @buffer))
+                      (assign size (add bsize osize))
+                      (assign size (add size 1))
+                      (assign newb (__alloc_leaf size))
+                      (strcpy newb @buffer)
+                      (strcat newb ro)
+                      (assign @buffer newb)
+
+                    ))
+                  self
+                )
+              ) 
+              (defm << (other) (do
+                  (call concat (other))
+
+                )
+              ) 
+              (defm dup () (do
+                  (callm String new (self))
+
+                )
+              ) 
+              (defm + (other) (do
+                  (callm dup concat (other))
+
+                )
+              ) 
+              (defm * (cnt) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 2) __closure__)
+                  (assign (index __env__ 1) (sexp (call __get_string .L0)))
+                  (callm cnt times () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L100" (self __closure__ __env__) 
+                          (let ()
+                            (callm (index __env__ 1) concat (self))
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 0)))
+
+                    ))
+                  (index __env__ 1)
+                )
+              ) 
+              (defm rindex (ch) 
+                (let (l)
+                  (assign l length)
+                  (assign ch (callm ch ord))
+                  (while (callm l > (
+                        (sexp __I0))) (do
+                      (decr l (sexp __I1))
+                      (if
+                        (callm (callm (callm self [] (l)) ord) == (
+                            (callm ch ord)))
+                        (do
+                          (return l)
+
+                        )
+                      )
+
+                    ))
+                  (return nil)
+                )
+              ) 
+              (defm gsub (pattern replacement) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (20))))
+                  (assign (index __env__ 3) replacement)
+                  (assign (index __env__ 4) __closure__)
+                  (if
+                    (callm (callm pattern length) > (
+                        (sexp __I1)))
+                    (do
+                      (callm STDERR puts (
+                          (sexp (call __get_string .L21))))
+                      (call exit (
+                          (callm (sexp __I1) / (
+                              (sexp __I1)))))
+
+                    )
+                  )
+                  (assign (index __env__ 2) (sexp (call __get_string .L0)))
+                  (assign (index __env__ 1) (callm (callm pattern [] (
+                          (sexp __I0))) ord))
+                  (call each_byte () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L101" (self __closure__ __env__ (b default nil)) 
+                          (let ()
+                            (if
+                              (callm b == (
+                                  (index __env__ 1)))
+                              (do
+                                (callm (index __env__ 2) << (
+                                    (index __env__ 3)))
+
+                              )
+                              (do
+                                (callm (index __env__ 2) << (
+                                    (callm b chr)))
+
+                              )
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (index __env__ 2)
+                )
+              ) 
+              (defm split (
+                  (pat default (sexp (call __get_string .L22)))) 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (20))))
+                  (assign (index __env__ 1) pat)
+                  (assign (index __env__ 4) __closure__)
+                  (assign (index __env__ 2) (array))
+                  (assign (index __env__ 3) (sexp (call __get_string .L0)))
+                  (callm self each_byte () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L102" (self __closure__ __env__ (c default nil)) 
+                          (let ()
+                            (if
+                              (callm (callm c chr) == (
+                                  (index __env__ 1)))
+                              (do
+                                (callm (index __env__ 2) << (
+                                    (index __env__ 3)))
+                                (assign (index __env__ 3) (sexp (call __get_string .L0)))
+
+                              )
+                              (do
+                                (if
+                                  (and (callm (index __env__ 1) == (
+                                        (sexp (call __get_string .L22)))) (or (callm c == (
+                                          (sexp __I10))) (or (callm c == (
+                                            (sexp __I13))) (callm c == (
+                                            (sexp __I9))))))
+                                  (do
+                                    (callm (index __env__ 2) << (
+                                        (index __env__ 3)))
+                                    (assign (index __env__ 3) (sexp (call __get_string .L0)))
+
+                                  )
+                                  (do
+                                    (callm (index __env__ 3) << (
+                                        (callm c chr)))
+
+                                  )
+                                )
+
+                              )
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (if
+                    (callm (index __env__ 3) != (
+                        (sexp (call __get_string .L0))))
+                    (callm (index __env__ 2) << (
+                        (index __env__ 3)))
+                  )
+                  (index __env__ 2)
+                )
+              ))
+          )
+          (sexp 
+            (defun __get_string (str) 
+              (let (s)
+                (assign s (callm String new))
+                (callm s __set_raw (str))
+                s
+              )
+            ))
+
+        ))
+      (required (do
+          (class Hash Object (
+              (class Deleted Object (
+                  (defm (self eql?) (other) (do
+                      false
+
+                    )
+                  ))
+              ) 
+              (defm initialize (
+                  (defval default nil)) (do
+                  (assign @length (sexp __I0))
+                  (assign @capacity (sexp __I4))
+                  _alloc_data
+                  (assign @first nil)
+                  (assign @last nil)
+                  (assign @defval defval)
+
+                )
+              ) 
+              (defm (self []) () (do
+                  (callm Hash new)
+
+                )
+              ) 
+              (defm _alloc_data () (do
+                  (assign @data (callm Array new (
+                        (callm @capacity * (
+                            (sexp __I4))))))
+
+                )
+              ) 
+              (defm _bulkinsert (data first) 
+                (let (cur k v)
+                  (assign @length (sexp __I0))
+                  (assign cur first)
+                  (while cur (do
+                      (assign k (callm data [] (cur)))
+                      (if
+                        k
+                        (do
+                          (assign v (callm data [] (
+                                (callm cur + (
+                                    (sexp __I1))))))
+                          (callm self []= (k v))
+
+                        )
+                      )
+                      (assign cur (callm data [] (
+                            (callm cur + (
+                                (sexp __I2))))))
+
+                    ))
+                  nil
+                )
+              ) 
+              (defm _grow () 
+                (let (oldcap olddata oldfirst)
+                  (assign oldcap @capacity)
+                  (assign olddata @data)
+                  (assign oldfirst @first)
+                  (assign @capacity (callm @capacity * (
+                        (sexp __I2))))
+                  _alloc_data
+                  (assign @first nil)
+                  (assign @last nil)
+                  (call _bulkinsert (olddata oldfirst))
+                )
+              ) 
+              (defm _find_slot (key) 
+                (let (pos cap d)
+                  (assign pos (callm (callm (callm key hash) % (@capacity)) * (
+                        (sexp __I4))))
+                  (assign cap (callm @capacity * (
+                        (sexp __I4))))
+                  (while (and (assign d (callm @data [] (pos))) (callm (callm key eql? (d)) !)) (do
+                      (assign pos (callm pos + (
+                            (callm (sexp __I4) % (cap)))))
+
+                    ))
+                  pos
+                )
+              ) 
+              (defm member? (key) 
+                (let (pos)
+                  (assign pos (call _find_slot (key)))
+                  (ternif (callm @data [] (pos)) (ternalt true false))
+                )
+              ) 
+              (defm include? (key) (do
+                  (call member? (key))
+
+                )
+              ) 
+              (defm empty? () (do
+                  (callm @length == (
+                      (sexp __I0)))
+
+                )
+              ) 
+              (defm [] (key) 
+                (let (pos)
+                  (assign pos (call _find_slot (key)))
+                  (ternif (callm @data [] (pos)) (ternalt (callm @data [] (
+                          (callm pos + (
+                              (sexp __I1))))) @defval))
+                )
+              ) 
+              (defm capacity_too_low () (do
+                  (call puts (
+                      (sexp (call __get_string .L23))))
+                  (call exit (
+                      (sexp __I1)))
+
+                )
+              ) 
+              (defm []= (key value) 
+                (let (limit slot new)
+                  (assign limit (callm (callm @capacity * (
+                          (sexp __I3))) / (
+                        (sexp __I4))))
+                  (if
+                    (callm limit <= (@length))
+                    _grow
+                  )
+                  (if
+                    (callm @capacity <= (@length))
+                    capacity_too_low
+                  )
+                  (assign slot (call _find_slot (key)))
+                  (assign new (callm (callm @data [] (slot)) nil?))
+                  (if
+                    new
+                    (do
+                      (assign @length (callm @length + (
+                            (sexp __I1))))
+
+                    )
+                  )
+                  (callm @data []= (
+                      (callm slot + (
+                          (sexp __I1))) value))
+                  (if
+                    (callm new !)
+                    (return)
+                  )
+                  (callm @data []= (slot key))
+                  (if
+                    @last
+                    (do
+                      (callm @data []= (
+                          (callm @last + (
+                              (sexp __I2))) slot))
+
+                    )
+                  )
+                  (if
+                    (callm @first nil?)
+                    (do
+                      (assign @first slot)
+
+                    )
+                  )
+                  (callm @data []= (
+                      (callm slot + (
+                          (sexp __I2))) nil))
+                  (callm @data []= (
+                      (callm slot + (
+                          (sexp __I3))) @last))
+                  (assign @last slot)
+                  nil
+                )
+              ) 
+              (defm __delete_first () 
+                (let (old)
+                  (if
+                    (callm @first !)
+                    (return)
+                  )
+                  (assign old @first)
+                  (assign @first (callm @data [] (
+                        (callm @first + (
+                            (sexp __I2))))))
+                  (if
+                    (callm old == (@last))
+                    (do
+                      (assign @last @first)
+
+                    )
+                  )
+                  (callm @data []= (old nil))
+                  (callm @data []= (
+                      (callm old + (
+                          (sexp __I1))) nil))
+                  (callm @data []= (
+                      (callm old + (
+                          (sexp __I2))) nil))
+                  (callm @data []= (
+                      (callm old + (
+                          (sexp __I3))) nil))
+                  (decr @length (sexp __I1))
+                )
+              ) 
+              (defm shift () 
+                (let (slot key value)
+                  (if
+                    (callm @first !)
+                    (return nil)
+                  )
+                  (assign slot @first)
+                  (assign key (callm @data [] (slot)))
+                  (assign value (callm @data [] (
+                        (callm slot + (
+                            (sexp __I1))))))
+                  __delete_first
+                  (array key value)
+                )
+              ) 
+              (defm length () (do
+                  @length
+
+                )
+              ) 
+              (defm size () (do
+                  @length
+
+                )
+              ) 
+              (defm to_a () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 2) __closure__)
+                  (assign (index __env__ 1) (array))
+                  (call each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L103" (self __closure__ __env__ (k default nil) (v default nil)) 
+                          (let ()
+                            (callm (index __env__ 1) << (
+                                (array k v)))
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 2)))
+
+                    ))
+                  (index __env__ 1)
+                )
+              ) 
+              (defm each () 
+                (let (pos capacity slot key value __env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (8))))
+                  (assign (index __env__ 1) __closure__)
+                  (assign pos (sexp __I0))
+                  (assign capacity (callm @capacity * (
+                        (sexp __I2))))
+                  (assign slot @first)
+                  (while slot (do
+                      (if
+                        (and (assign key (callm @data [] (slot))) (callm Deleted != (key)))
+                        (do
+                          (assign value (callm @data [] (
+                                (callm slot + (
+                                    (sexp __I1))))))
+                          (callm (index __env__ 1) call (key value))
+
+                        )
+                      )
+                      (assign slot (callm @data [] (
+                            (callm slot + (
+                                (sexp __I2))))))
+
+                    ))
+                )
+              ) 
+              (defm delete (key) 
+                (let (slot value)
+                  (assign slot (call _find_slot (key)))
+                  (if
+                    (callm (callm @data [] (slot)) !)
+                    (return nil)
+                  )
+                  (assign value (callm @data [] (
+                        (callm slot + (
+                            (sexp __I1))))))
+                  (callm @data []= (slot Deleted))
+                  (callm @data []= (
+                      (callm slot + (
+                          (sexp __I1))) nil))
+                  value
+                )
+              ))
+          )
+
+        ))
+      (required (do
+          (class IO Object (
+              (defm initialize (fd) 
+                (let (tmp)
+                  (assign @fd fd)
+                  (sexp (assign tmp (__alloc_leaf 256)))
+                  (assign @rawbuf tmp)
+                )
+              ) 
+              (defm to_i () (do
+                  @fd
+
+                )
+              ) 
+              (defm getc () 
+                (let (c tmp len)
+                  (assign c (sexp __I0))
+                  (assign tmp (sexp __I0))
+                  (assign len nil)
+                  (sexp (do
+                      (assign len (read (callm @fd __get_raw) @rawbuf 1))
+                      (if
+                        (le len 0)
+                        (return nil)
+                      )
+                      (assign c (__int (bindex @rawbuf 0)))
+
+                    ))
+                  c
+                )
+              ) 
+              (defm file? () (do
+                  false
+
+                )
+              ))
+          )
+
+        ))
+      (required (do
+          (class File IO (
+              (assign SEPARATOR (sexp (call __get_string .L24))) (assign ALT_SEPARATOR nil) 
+              (defm (self file?) (io) (do
+                  (callm io is_a? (File))
+
+                )
+              ) 
+              (defm path () (do
+                  @path
+
+                )
+              ) 
+              (defm initialize (path (mode default (sexp (call __get_string .L25)))) 
+                (let (rpath fd)
+                  (assign @path path)
+                  (sexp (assign rpath (callm path __get_raw)))
+                  (sexp (assign fd (open rpath 0)))
+                  (sexp 
+                    (if
+                      (le fd 0)
+                      (do
+                        (printf "Failed to open '%s' got %ld
+" rpath fd)
+                        (div 0 0)
+
+                      )
+                    ))
+                  (sexp (assign fd (__int fd)))
+                  (call super (fd))
+                )
+              ) 
+              (defm (self open) (path (mode default (sexp (call __get_string .L25)))) 
+                (let (f)
+                  (assign f (callm File new (path mode)))
+                )
+              ) 
+              (defm (self exists?) (path) 
+                (let (rpath fd)
+                  (sexp (assign rpath (callm path __get_raw)))
+                  (sexp (assign fd (open rpath 0)))
+                  (sexp 
+                    (if
+                      (le fd 0)
+                      (return false)
+                    ))
+                  (sexp (close fd))
+                  (return true)
+                )
+              ) 
+              (defm (self basename) (name) 
+                (let (i)
+                  (assign i (callm name rindex (SEPARATOR)))
+                  (if
+                    (and (callm i !) ALT_SEPARATOR)
+                    (do
+                      (assign i (callm name rindex (ALT_SEPARATOR)))
+
+                    )
+                  )
+                  (if
+                    i
+                    (do
+                      (assign i (callm i + (
+                            (sexp __I1))))
+                      (return (callm name [] (
+                            (callm Range new (i (sexp __Ineg1))))))
+
+                    )
+                  )
+                  (return name)
+                )
+              ) 
+              (defm (self dirname) (dname) 
+                (let (i r d)
+                  (assign i (callm dname rindex (SEPARATOR)))
+                  (if
+                    (and (callm i !) ALT_SEPARATOR)
+                    (do
+                      (assign i (callm dname rindex (ALT_SEPARATOR)))
+
+                    )
+                  )
+                  (if
+                    (and i (callm i > (
+                          (sexp __I0))))
+                    (do
+                      (assign i (callm i - (
+                            (sexp __I1))))
+                      (assign r (callm Range new (
+                            (sexp __I0) i)))
+                      (assign d (callm dname [] (r)))
+                      (return d)
+
+                    )
+                  )
+                  (return nil)
+                )
+              ) 
+              (defm (self expand_path) (path (dir_string default (callm Dir pwd))) 
+                (let (str __env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 2) __closure__)
+                  (if
+                    (callm (callm path [] (
+                          (sexp __I0))) == (
+                        (sexp __I47)))
+                    (return path)
+                  )
+                  (assign str (callm (callm (callm (callm (callm (sexp (call __get_string .L0)) to_s) concat 
+                            (
+                              (callm dir_string to_s))) concat (
+                            (callm (sexp (call __get_string .L24)) to_s))) concat (
+                          (callm path to_s))) split (
+                        (sexp (call __get_string .L24)))))
+                  (assign (index __env__ 1) (array))
+                  (callm str each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L104" (self __closure__ __env__ (e default nil)) 
+                          (let ()
+                            (if
+                              (callm e == (
+                                  (sexp (call __get_string .L26))))
+                              (do
+
+                              )
+                              (do
+                                (if
+                                  (callm e == (
+                                      (sexp (call __get_string .L0))))
+                                  (do
+
+                                  )
+                                  (do
+                                    (if
+                                      (callm e == (
+                                          (sexp (call __get_string .L10))))
+                                      (do
+                                        (callm (index __env__ 1) pop)
+
+                                      )
+                                      (do
+                                        (callm (index __env__ 1) << (e))
+
+                                      )
+                                    )
+
+                                  )
+                                )
+
+                              )
+                            )
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                  (return (callm (callm (sexp (call __get_string .L24)) to_s) concat (
+                        (callm (callm (index __env__ 1) join (
+                              (sexp (call __get_string .L24)))) to_s))))
+                )
+              ))
+          )
+
+        ))
+      (required (do
+          (class Dir Object (
+              (defm (self pwd) () 
+                (let (wd cwd)
+                  (sexp (assign wd (get_current_dir_name)))
+                  (sexp (assign cwd (__get_string wd)))
+                  (assign cwd (callm cwd dup))
+                  (sexp (free wd))
+                  (return cwd)
+                )
+              ))
+          )
+
+        ))
+      (required (do
+          (class Numeric Object ())
+
+        ))
+      (required (do
+          (class Integer Numeric ())
+
+        ))
+      (required (do
+          (class Fixnum Integer (
+              (defm initialize () (do
+                  (sexp (assign @value 0))
+
+                )
+              ) 
+              (defm (self allocate) () 
+                (let (ob index)
+                  (sexp (assign ob (__array_leaf 2)))
+                  (sexp (assign (index ob 0) self))
+                  ob
+                )
+              ) 
+              (defm % (other) 
+                (let (r m)
+                  (sexp (assign r (callm other __get_raw)))
+                  (sexp (assign m (mod @value r)))
+                  (sexp 
+                    (if
+                      (eq (ge m 0) (lt r 0))
+                      (assign m (add m r))
+                    ))
+                  (sexp (__int m))
+                )
+              ) 
+              (defm __set_raw (value) (do
+                  (assign @value value)
+
+                )
+              ) 
+              (defm __get_raw () (do
+                  @value
+
+                )
+              ) 
+              (defm to_i () (do
+                  self
+
+                )
+              ) 
+              (defm [] (i) (do
+                  (sexp __I1)
+
+                )
+              ) 
+              (defm to_s (
+                  (radix default (sexp __I10))) 
+                (let (out n neg digits r)
+                  (if
+                    (or (callm radix < (
+                          (sexp __I2))) (callm radix > (
+                          (sexp __I36))))
+                    (do
+                      (callm STDERR puts (
+                          (callm (callm (callm (sexp (call __get_string .L27)) to_s) concat (
+                                (callm (callm radix inspect) to_s))) concat (
+                              (callm (sexp (call __get_string .L28)) to_s)))))
+                      (callm (sexp __I1) / (
+                          (sexp __I0)))
+
+                    )
+                    (do
+                      (assign out (sexp (call __get_string .L0)))
+                      (assign n self)
+                      (assign neg (callm self < (
+                            (sexp __I0))))
+                      (if
+                        neg
+                        (do
+                          (assign n (callm (sexp __I0) - (n)))
+
+                        )
+                      )
+                      (assign digits (sexp (call __get_string .L29)))
+                      (while (callm n != (
+                            (sexp __I0))) (do
+                          (assign r (callm n % (radix)))
+                          (callm out << (
+                              (callm digits [] (r))))
+                          (if
+                            (callm n < (radix))
+                            (break)
+                          )
+                          (assign n (callm n / (radix)))
+
+                        ))
+                      (if
+                        (callm out empty?)
+                        (do
+                          (assign out (sexp (call __get_string .L30)))
+
+                        )
+                        (do
+                          (if
+                            neg
+                            (do
+                              (callm out << (
+                                  (sexp (call __get_string .L31))))
+
+                            )
+                          )
+
+                        )
+                      )
+                      (callm out reverse)
+
+                    )
+                  )
+                )
+              ) 
+              (defm hash () (do
+                  self
+
+                )
+              ) 
+              (defm inspect () (do
+                  to_s
+
+                )
+              ) 
+              (defm chr () 
+                (let (buf)
+                  (sexp 
+                    (let (buf)
+                      (assign buf (__alloc_leaf 2))
+                      (snprintf buf 2 "%c" @value)
+                      (__get_string buf)
+                    ))
+                )
+              ) 
+              (defm + (other) (do
+                  (sexp (call __int (
+                        (add @value (callm other __get_raw)))))
+
+                )
+              ) 
+              (defm - (other) (do
+                  (sexp (call __int (
+                        (sub @value (callm other __get_raw)))))
+
+                )
+              ) 
+              (defm <= (other) (do
+                  (sexp 
+                    (if
+                      (le @value (callm other __get_raw))
+                      true
+                      false
+                    ))
+
+                )
+              ) 
+              (defm == (other) (do
+                  (if
+                    (callm other nil?)
+                    (do
+                      (return false)
+
+                    )
+                  )
+                  (if
+                    (callm (callm other is_a? (Numeric)) !)
+                    (return false)
+                  )
+                  (sexp 
+                    (if
+                      (eq @value (callm other __get_raw))
+                      true
+                      false
+                    ))
+
+                )
+              ) 
+              (defm ! (
+                  (__splat rest)) 
+                (let (args)
+                  (sexp (assign args (__splat_to_Array __splat (sub numargs 0))))
+                  false
+                )
+              ) 
+              (defm != (other) (do
+                  (if
+                    (callm (callm other is_a? (Numeric)) !)
+                    (return true)
+                  )
+                  (assign other (callm other to_i))
+                  (sexp 
+                    (if
+                      (ne @value (callm other __get_raw))
+                      true
+                      false
+                    ))
+
+                )
+              ) 
+              (defm < (other) (do
+                  (sexp 
+                    (if
+                      (lt @value (callm other __get_raw))
+                      true
+                      false
+                    ))
+
+                )
+              ) 
+              (defm > (other) (do
+                  (sexp 
+                    (if
+                      (gt @value (callm other __get_raw))
+                      true
+                      false
+                    ))
+
+                )
+              ) 
+              (defm >= (other) (do
+                  (sexp 
+                    (if
+                      (ge @value (callm other __get_raw))
+                      true
+                      false
+                    ))
+
+                )
+              ) 
+              (defm <=> (other) (do
+                  (if
+                    (callm (callm other is_a? (Numeric)) !)
+                    (return nil)
+                  )
+                  (if
+                    (callm self > (other))
+                    (do
+                      (return (sexp __I1))
+
+                    )
+                  )
+                  (if
+                    (callm self < (other))
+                    (do
+                      (return (sexp __Ineg1))
+
+                    )
+                  )
+                  (return (sexp __I0))
+
+                )
+              ) 
+              (defm div (other) (do
+                  (sexp (call __int (
+                        (div @value (callm other __get_raw)))))
+
+                )
+              ) 
+              (defm mul (other) (do
+                  (sexp (call __int (
+                        (mul @value (callm other __get_raw)))))
+
+                )
+              ) 
+              (defm * (other) (do
+                  (call mul (other))
+
+                )
+              ) 
+              (defm / (other) (do
+                  (call div (other))
+
+                )
+              ) 
+              (defm ord () (do
+                  self
+
+                )
+              ) 
+              (defm times () 
+                (let (i)
+                  (assign i (sexp __I0))
+                  (while (callm i < (self)) (do
+                      yield
+                      (assign i (callm i + (
+                            (sexp __I1))))
+
+                    ))
+                )
+              ))
+          )
+          (sexp (assign FixNum_cache_size 1000))
+          (sexp (assign FixNum_cache (__array_leaf (mul FixNum_cache_size 2))))
+          (sexp 
+            (defun __int (val) 
+              (let (num)
+                (if
+                  (and (ge val 0) (lt val FixNum_cache_size))
+                  (do
+                    (assign num (add FixNum_cache (mul val 8)))
+                    (if
+                      (eq (index num 0) 0)
+                      (do
+                        (assign (index num 0) Fixnum)
+                        (callm num __set_raw (val))
+                        (return num)
+
+                      )
+                    )
+                    (return num)
+
+                  )
+                )
+                (assign num (callm Fixnum allocate))
+                (callm num __set_raw (val))
+                (return num)
+              )
+            ))
+          (sexp (__compiler_internal integer_list))
+
+        ))
+      (required (do
+          (class Symbol Object (
+              (assign @@symbols (hash)) 
+              (defm initialize (name) (do
+                  (assign @name name)
+
+                )
+              ) 
+              (defm eql? (other) (do
+                  (callm self == (other))
+
+                )
+              ) 
+              (defm <=> (other) (do
+                  (if
+                    (call eql? (other))
+                    (do
+                      (return (sexp __I0))
+
+                    )
+                  )
+                  (callm to_s <=> (
+                      (callm other to_s)))
+
+                )
+              ) 
+              (defm to_s () (do
+                  @name
+
+                )
+              ) 
+              (defm to_sym () (do
+                  self
+
+                )
+              ) 
+              (defm inspect () 
+                (let (o)
+                  (if
+                    (callm @name == (
+                        (sexp (call __get_string .L32))))
+                    (return (sexp (call __get_string .L33)))
+                  )
+                  (if
+                    (callm @name == (
+                        (sexp (call __get_string .L34))))
+                    (return (sexp (call __get_string .L35)))
+                  )
+                  (if
+                    (callm @name == (
+                        (sexp (call __get_string .L36))))
+                    (return (sexp (call __get_string .L37)))
+                  )
+                  (if
+                    (callm @name == (
+                        (sexp (call __get_string .L38))))
+                    (return (sexp (call __get_string .L39)))
+                  )
+                  (if
+                    (callm @name == (
+                        (sexp (call __get_string .L40))))
+                    (return (sexp (call __get_string .L41)))
+                  )
+                  (if
+                    (callm @name == (
+                        (sexp (call __get_string .L42))))
+                    (return (sexp (call __get_string .L43)))
+                  )
+                  (if
+                    (callm @name == (
+                        (sexp (call __get_string .L4))))
+                    (return (sexp (call __get_string .L44)))
+                  )
+                  (if
+                    (callm @name == (
+                        (sexp (call __get_string .L45))))
+                    (return (sexp (call __get_string .L46)))
+                  )
+                  (if
+                    (callm @name == (
+                        (sexp (call __get_string .L47))))
+                    (return (sexp (call __get_string .L48)))
+                  )
+                  (if
+                    (callm @name == (
+                        (sexp (call __get_string .L49))))
+                    (return (sexp (call __get_string .L50)))
+                  )
+                  (if
+                    (callm @name == (
+                        (sexp (call __get_string .L31))))
+                    (return (sexp (call __get_string .L51)))
+                  )
+                  (if
+                    (callm @name == (
+                        (sexp (call __get_string .L24))))
+                    (return (sexp (call __get_string .L52)))
+                  )
+                  (if
+                    (callm @name == (
+                        (sexp (call __get_string .L53))))
+                    (return (sexp (call __get_string .L54)))
+                  )
+                  (assign o (callm (callm @name [] (
+                          (sexp __I0))) ord))
+                  (if
+                    (or (and (callm o >= (
+                            (sexp __I97))) (callm o <= (
+                            (sexp __I122)))) (or (and (callm o >= (
+                              (sexp __I64))) (callm o <= (
+                              (sexp __I91)))) (or (callm o == (
+                              (sexp __I42))) (or (callm o == (
+                                (sexp __I43))) (or (callm o == (
+                                  (sexp __I95))) (callm o == (
+                                  (sexp __I33))))))))
+                    (do
+                      (callm (callm (sexp (call __get_string .L3)) to_s) concat (
+                          (callm to_s to_s)))
+
+                    )
+                    (do
+                      (callm (callm (sexp (call __get_string .L3)) to_s) concat (
+                          (callm (callm to_s inspect) to_s)))
+
+                    )
+                  )
+                )
+              ) 
+              (defm hash () (do
+                  (callm to_s hash)
+
+                )
+              ) 
+              (defm [] (i) (do
+                  (callm to_s [] (i))
+
+                )
+              ) 
+              (defm (self __get_symbol) (name) 
+                (let (sym)
+                  (assign sym (callm @@symbols [] (name)))
+                  (if
+                    (callm sym !)
+                    (do
+                      (assign sym (callm Symbol new (name)))
+                      (callm @@symbols []= (name sym))
+
+                    )
+                  )
+                  sym
+                )
+              ))
+          )
+          (sexp 
+            (defun __get_symbol (name) (callm Symbol __get_symbol (
+                  (__get_string name)))
+            ))
+
+        ))
+      (required (do
+          (class Class Object (
+              (assign @method_to_voff (hash)) 
+              (defm (self method_to_voff) () (do
+                  @method_to_voff
+
+                )
+              ) 
+              (defm method_missing (sym (__splat rest)) 
+                (let (args)
+                  (sexp (assign args (__splat_to_Array __splat (sub numargs 1))))
+                  (sexp 
+                    (if
+                      sym
+                      (printf "WARNING:    Method: '%s'
+" (callm (callm sym to_s) __get_raw))
+                    ))
+                  (sexp (printf "WARNING:    symbol address = %p
+" sym))
+                  (sexp (printf "WARNING:    class '%s'
+" (callm (callm self name) __get_raw)))
+                  (sexp (call exit 1))
+                )
+              ) 
+              (defm __send_for_obj__ (obj sym (__splat rest)) 
+                (let (voff raw args)
+                  (sexp (assign args (__splat_to_Array __splat (sub numargs 2))))
+                  (assign sym (callm sym to_sym))
+                  (assign voff (callm (callm Class method_to_voff) [] (sym)))
+                  (if
+                    (callm voff !)
+                    (do
+                      (return (callm obj method_missing (sym (splat args))))
+
+                    )
+                    (do
+                      (sexp (assign raw (callm voff __get_raw)))
+                      (sexp (callm obj (index self raw) (
+                            (splat args))))
+
+                    )
+                  )
+                )
+              ))
+          )
+          (sexp 
+            (let (i max ptr)
+              (assign i 0)
+              (assign max __vtable_size)
+              (assign h (callm Class method_to_voff))
+              (while (lt i max) (do
+                  (assign ptr (index __vtable_names i))
+                  (if
+                    (ne ptr 0)
+                    (callm h []= (
+                        (__get_symbol ptr) (__int i)))
+                  )
+                  (assign i (add i 1))
+
+                ))
+            ))
+
+        ))
+      (required (do
+          (class Hash Object (
+              (defm (self []) (
+                  (__splat rest)) 
+                (let (h len pos k v args)
+                  (sexp (assign args (__splat_to_Array __splat (sub numargs 0))))
+                  (assign h (callm Hash new))
+                  (assign len (callm args length))
+                  (if
+                    (callm (callm len % (
+                          (sexp __I2))) == (
+                        (sexp __I1)))
+                    (do
+                      (call puts (
+                          (sexp (call __get_string .L55))))
+                      (call exit (
+                          (sexp __I1)))
+
+                    )
+                  )
+                  (assign pos (sexp __I0))
+                  (while (callm pos < (len)) (do
+                      (assign k (callm args [] (pos)))
+                      (assign v (callm args [] (
+                            (callm pos + (
+                                (sexp __I1))))))
+                      (callm h []= (k v))
+                      (assign pos (callm pos + (
+                            (sexp __I2))))
+
+                    ))
+                  h
+                )
+              ) 
+              (defm sort_by () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (8))))
+                  (assign (index __env__ 1) __closure__)
+                  (callm to_a sort_by () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L105" (self __closure__ __env__ (pair default nil)) 
+                          (let ()
+                            (callm (index __env__ 1) call (
+                                (callm pair [] (
+                                    (sexp __I0))) (callm pair [] (
+                                    (sexp __I1)))))
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 1)))
+
+                    ))
+                )
+              ) 
+              (defm collect () (do
+                  (callm to_a collect)
+
+                )
+              ) 
+              (defm inspect () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (16))))
+                  (assign (index __env__ 3) __closure__)
+                  (assign (index __env__ 2) (sexp (call __get_string .L56)))
+                  (assign (index __env__ 1) true)
+                  (call each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L106" (self __closure__ __env__ (k default nil) (v default nil)) 
+                          (let ()
+                            (if
+                              (callm (index __env__ 1) !)
+                              (do
+                                (assign (index __env__ 2) (callm (index __env__ 2) + (
+                                      (sexp (call __get_string .L14)))))
+
+                              )
+                              (do
+                                (assign (index __env__ 1) false)
+
+                              )
+                            )
+                            (assign (index __env__ 2) (callm (index __env__ 2) + (
+                                  (callm k inspect))))
+                            (assign (index __env__ 2) (callm (index __env__ 2) + (
+                                  (sexp (call __get_string .L57)))))
+                            (assign (index __env__ 2) (callm (index __env__ 2) + (
+                                  (callm v inspect))))
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 2)))
+
+                    ))
+                  (assign (index __env__ 2) (callm (index __env__ 2) + (
+                        (sexp (call __get_string .L58)))))
+                  (index __env__ 2)
+                )
+              ) 
+              (defm keys () 
+                (let (__env__ __tmp_proc)
+                  (sexp (assign __env__ (call __alloc_mem (12))))
+                  (assign (index __env__ 2) __closure__)
+                  (assign (index __env__ 1) (array))
+                  (call each () (do
+                      (assign (index __env__ 0) (stackframe))
+                      (assign __tmp_proc 
+                        (defun "__lambda_L107" (self __closure__ __env__ (k default nil) (v default nil)) 
+                          (let ()
+                            (callm (index __env__ 1) << (k))
+                          )
+                        ))
+                      (sexp (call __new_proc (__tmp_proc __env__ self 2)))
+
+                    ))
+                  (index __env__ 1)
+                )
+              ))
+          )
+
+        ))
+      (required (do
+          (class Float Object ())
+
+        ))
+      (required (do
+          (class Struct Object (
+              (defm initialize (
+                  (__splat rest)) 
+                (let (args)
+                  (sexp (assign args (__splat_to_Array __splat (sub numargs 0))))
+                  nil
+                )
+              ))
+          )
+
+        ))
+      (required (do
+          (class Exception Object ())
+
+        ))
+      (required (do
+          (class PP Object ())
+
+        ))
+      (required (do
+          (class Regexp Object (
+              (defm initialize (arg) (do
+                  nil
+
+                )
+              ))
+          )
+
+        ))
+      (required (do
+          (class Enumerator Object ())
+          (class ArrayEnumerator Enumerator (
+              (defm initialize (ary) (do
+                  (assign @ary ary)
+                  (assign @pos (sexp __I0))
+
+                )
+              ) 
+              (defm next () (do
+                  (if
+                    (callm @pos < (
+                        (callm @ary length)))
+                    (do
+                      (assign @pos (callm @pos + (
+                            (sexp __I1))))
+                      (return (callm @ary [] (@pos)))
+
+                    )
+                    (do
+                      (return nil)
+
+                    )
+                  )
+
+                )
+              ))
+          )
+          (class RangeEnumerator Enumerator (
+              (defm initialize (r) (do
+                  (assign @min (callm r first))
+                  (assign @max (callm r last))
+                  rewind
+
+                )
+              ) 
+              (defm rewind () (do
+                  (assign @cur @min)
+
+                )
+              ) 
+              (defm next () 
+                (let (cur)
+                  (if
+                    (callm @cur <= (@max))
+                    (do
+                      (assign cur @cur)
+                      (assign @cur (callm @cur + (
+                            (sexp __I1))))
+                      (return cur)
+
+                    )
+                    (do
+                      (return nil)
+
+                    )
+                  )
+                )
+              ))
+          )
+
+        ))
+      (required (do
+          (sexp (sexp (assign __D_0 (__get_string (index __argv 0)))))
+          (assign ARGV (array))
+          (sexp 
+            (let (__src __i)
+              (assign __i 1)
+              (callm ARGV __grow (
+                  (sub __argc 1)))
+              (while (lt __i __argc) (do
+                  (callm ARGV __set (
+                      (sub __i 1) (__get_string (index __argv __i))))
+                  (assign __i (add __i 1))
+
+                ))
+            ))
+
+        ))
+      (required (do
+          (assign STDIN (callm IO new (
+                (sexp __I0))))
+          (assign STDOUT (callm IO new (
+                (sexp __I1))))
+          (assign STDERR (callm IO new (
+                (sexp __I2))))
+
+        ))
+      (required (do
+          (assign __FILE__ (sexp (call __get_string .L59)))
+          (assign self (callm Object new))
+          (assign E (sexp __I2))
+          (defm raise (
+              (__splat rest)) 
+            (let (exp)
+              (sexp (assign exp (__splat_to_Array __splat (sub numargs 0))))
+              (call puts (
+                  (sexp (call __get_string .L60))))
+              (call puts (
+                  (sexp (call __get_string .L61))))
+              (call puts (
+                  (callm exp inspect)))
+              (call puts (
+                  (sexp (call __get_string .L62))))
+              (sexp (div 0 0))
+            )
+          )
+          (sexp 
+            (defun range (a b) (puts "Compiler range construct is not implemented yet")))
+          (assign LOAD_PATH (array))
+          (assign RUBY_ENGINE (sexp (call __get_string .L63)))
+
+        ))
+      (required (do
+          (sexp 
+            (defun printregs (regs) (do
+                (printf "eax: %08x, ebx: %08x, ecx: %08x, edx: %08x, esi: %08x, edi: %08x, ebp: %08x, esp: %08x
+" 
+                  (index regs 0) (index regs 1) (index regs 2) (index regs 3) (index regs 4) (index regs 5) 
+                  (index regs 6) (index regs 7))
+                (assign sp (index regs 6))
+                (printf "(ebp): %08x, %08x, %08x, %08x, %08x, %08x, %08x, %08x, %08x, %08x
+" (index sp 0) 
+                  (index sp 1) (index sp 2) (index sp 3) (index sp 4) (index sp 5) (index sp 6) (index sp 7) 
+                  (index sp 8) (index sp 9))
+                (assign sp (index regs 7))
+                (printf "(esp): %08x, %08x, %08x, %08x, %08x, %08x, %08x, %08x
+" (index sp 0) (index sp 1) 
+                  (index sp 2) (index sp 3) (index sp 4) (index sp 5) (index sp 6) (index sp 7))
+
+              )
+            ))
+
+        ))
+
+    ))
+  (defm value () (do
+      (sexp __I14)
+
+    )
+  )
+  (defm capture () 
+    (let (a c __env__ __tmp_proc)
+      (sexp (assign __env__ (call __alloc_mem (12))))
+      (assign (index __env__ 2) __closure__)
+      (assign a value)
+      (assign (index __env__ 1) value)
+      (assign c (call value () (do
+            (assign (index __env__ 0) (stackframe))
+            (assign __tmp_proc 
+              (defun "__lambda_L108" (self __closure__ __env__) 
+                (let ()
+                  (index __env__ 1)
+                )
+              ))
+            (sexp (call __new_proc (__tmp_proc __env__ self 0)))
+
+          )))
+      (callm (callm a + (
+            (index __env__ 1))) + (c))
+    )
+  )
+  (while true (do
+      (call puts (capture))
+
+    ))
+
+)

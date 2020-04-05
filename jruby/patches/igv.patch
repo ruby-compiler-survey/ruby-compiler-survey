@@ -1,0 +1,53 @@
+diff --git a/core/src/main/java/org/jruby/ir/util/IGVDumper.java b/core/src/main/java/org/jruby/ir/util/IGVDumper.java
+index 9eed818919..074bb61883 100644
+--- a/core/src/main/java/org/jruby/ir/util/IGVDumper.java
++++ b/core/src/main/java/org/jruby/ir/util/IGVDumper.java
+@@ -1,8 +1,8 @@
+ package org.jruby.ir.util;
+ 
++import java.io.FileOutputStream;
+ import java.io.IOException;
+ import java.io.PrintStream;
+-import java.net.Socket;
+ import org.jruby.ir.representations.CFG;
+ import org.jruby.ir.representations.IGVCFGVisitor;
+ 
+@@ -16,7 +16,7 @@ import static org.jruby.ir.util.IGVHelper.startTag;
+ public class IGVDumper {
+     static final String HOST = "localhost";
+     static final int PORT = 4444;
+-    Socket socket;
++    FileOutputStream stream;
+     PrintStream writer;
+     String baseLabel;
+ 
+@@ -24,8 +24,8 @@ public class IGVDumper {
+         this.baseLabel = baseLabel;
+ 
+         try {
+-            socket = new Socket(HOST, PORT);
+-            writer = new PrintStream(socket.getOutputStream());
++            stream = new FileOutputStream("dump.xml");
++            writer = new PrintStream(stream);
+             startTag(writer, "graphDocument");
+             startTag(writer, "group");
+             startTag(writer, "properties");
+@@ -33,6 +33,7 @@ public class IGVDumper {
+             endTag(writer, "properties");
+ 
+         } catch (IOException e) {
++          e.printStackTrace();
+         }
+     }
+ 
+@@ -45,8 +46,9 @@ public class IGVDumper {
+         endTag(writer, "graphDocument");
+         try {
+             writer.close();
+-            socket.close();
++            stream.close();
+         } catch (IOException e) {
++          e.printStackTrace();
+         }
+     }
+ }

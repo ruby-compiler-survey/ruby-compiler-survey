@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Serif+Pro&display=swap">
+
+<link rel="stylesheet" href="/page.css">
+<link rel="stylesheet" href="/syntax.css">
+
+{% if page.title == "The Ruby Compiler Survey" %}
+<title>{{ page.title }}</title>
+{% else %}
+<title>The Ruby Compiler Survey - {{ page.title }}</title>
+{% endif %}
+
+</head>
+
+<body>
+
+{% unless page.title == "The Ruby Compiler Survey" %}
+<div id="tab">
+  {% if page.back %}
+  <p>Back to the <a href="/">Ruby Compiler Survey</a>, <a href="{{ page.back_link }}">{{ page.back }}</a></p>
+  {% else %}
+  <p>Back to the <a href="/">Ruby Compiler Survey</a></p>
+  {% endif %}
+</div>
+{% endunless %}
+
+<article>
+
+<header>
+{% if page.title == "The Ruby Compiler Survey" %}
+<h1>{{ page.title }}</h1>
+{% else %}
+<h1>The Ruby Compiler Survey</h1>
+<h2>{{ page.title }}</h2>
+{% endif %}
+</header>
+
+{{ content }}
+
+<footer>
+<p>Copyright © 2020 <a href="https://chrisseaton.com/">Chris Seaton</a>.</p>
+</footer>
+
+</article>
+</body>
+</html>

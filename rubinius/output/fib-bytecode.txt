@@ -1,0 +1,65 @@
+
+============= :__script__ ==============
+Arguments:   0 required, 0 post, 0 total
+Arity:       0
+Locals:      0
+Stack size:  5
+Literals:    5: :fib, <compiled code>, :method_visibility, :add_defn_method, :puts
+Lines to IP: 1: 0..13, 9: 14..16, 10: 17..32, 0: 33..36
+
+0000:  push_rubinius              
+0001:  push_literal               :fib
+0003:  push_literal               #<Rubinius::CompiledCode fib file=/var/examples/fib.rb>
+0005:  push_scope                 
+0006:  push_variables             
+0007:  send_stack                 :method_visibility, 0
+0010:  send_stack                 :add_defn_method, 4
+0013:  pop                        
+0014:  push_true                  
+0015:  goto_if_false              0033:
+0017:  push_self                  
+0018:  push_self                  
+0019:  push_int                   30
+0021:  allow_private              
+0022:  send_stack                 :fib, 1
+0025:  allow_private              
+0026:  send_stack                 :puts, 1
+0029:  pop                        
+0030:  check_interrupts           
+0031:  goto                       0014:
+0033:  push_nil                   
+0034:  pop                        
+0035:  push_true                  
+0036:  ret                        
+----------------------------------------
+
+================= :fib =================
+Arguments:   1 required, 0 post, 1 total
+Arity:       1
+Locals:      1: n
+Stack size:  5
+Literals:    4: :<=, :-, :fib, :+
+Line:        1
+Lines to IP: 2: 0..7, 3: 8..10, 5: 11..35, 0: 36..36
+
+0000:  push_local                 0    # n
+0002:  meta_push_2                
+0003:  send_stack                 :<=, 1
+0006:  goto_if_false              0011:
+0008:  meta_push_1                
+0009:  goto                       0036:
+0011:  push_self                  
+0012:  push_local                 0    # n
+0014:  meta_push_1                
+0015:  send_stack                 :-, 1
+0018:  allow_private              
+0019:  send_stack                 :fib, 1
+0022:  push_self                  
+0023:  push_local                 0    # n
+0025:  meta_push_2                
+0026:  send_stack                 :-, 1
+0029:  allow_private              
+0030:  send_stack                 :fib, 1
+0033:  send_stack                 :+, 1
+0036:  ret                        
+----------------------------------------

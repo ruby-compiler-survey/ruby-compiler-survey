@@ -1,0 +1,2559 @@
+
+%s(do
+  (required (do
+      (required (do
+          (sexp 
+            (defun __method_missing (sym ob (args rest)) 
+              (let (cname)
+                (assign cname (callm (index ob 0) inspect))
+                (printf "Method missing: %s#%s
+" (callm (callm cname to_s) __get_raw) (callm (callm sym to_s) __get_raw))
+                (div 0 0)
+                0
+              )
+            ))
+          (sexp (tgc_start (stackframe) __roots_start __roots_end))
+          (sexp 
+            (defun __alloc (size opt) 
+              (let (ptr)
+                (assign ptr (calloc size 1))
+                (if
+                  (eq ptr 0)
+                  (return 0)
+                )
+                (return (tgc_add ptr size opt))
+              )
+            ))
+          (sexp 
+            (defun __alloc_mem (size) (return (__alloc size 0))))
+          (sexp 
+            (defun __alloc_leaf (size) (return (__alloc size 1))))
+          (sexp 
+            (defun __realloc (ptr size) (tgc_realloc ptr size)))
+          (sexp 
+            (defun __array (size) (__alloc_mem (mul size 4))))
+          (sexp 
+            (defun __array_leaf (size) (__alloc_leaf (mul size 4))))
+          (sexp (assign __cnt 0))
+          (sexp 
+            (defun __docnt () (do
+                (assign __cnt (add __cnt 1))
+                (printf "__cnt: %ld
+" __cnt)
+
+              )
+            ))
+          (sexp (atexit tgc_stop))
+
+        ))
+      (required (do
+          (sexp 
+            (defun __new_class_object (size superclass ssize classob) 
+              (let (ob i)
+                (if
+                  (eq classob 0)
+                  (assign classob Class)
+                )
+                (assign ob (__array size))
+                (assign i 6)
+                (while (lt i ssize) (do
+                    (assign (index ob i) (index superclass i))
+                    (assign i (add i 1))
+
+                  ))
+                (while (lt i size) (do
+                    (assign (index ob i) (index __base_vtable i))
+                    (assign i (add i 1))
+
+                  ))
+                (assign (index ob 0) classob)
+                (assign (index ob 3) superclass)
+                (assign (index ob 4) 0)
+                (if
+                  (eq superclass 0)
+                  (assign (index ob 5) 0)
+                  (do
+                    (assign (index ob 5) (index superclass 4))
+                    (assign (index superclass 4) ob)
+
+                  )
+                )
+                ob
+              )
+            ))
+          (sexp 
+            (defun __set_vtable (vtable off ptr) 
+              (let (p)
+                (assign p (index vtable 4))
+                (while (sexp p) (do
+                    (if
+                      (eq (index p off) (index vtable off))
+                      (__set_vtable p off ptr)
+                    )
+                    (assign p (index p 5))
+
+                  ))
+                (assign (index vtable off) ptr)
+              )
+            ))
+          (class Class Object (
+              (defm __initialize () ()) 
+              (defm allocate () (
+                  (sexp (assign ob (__array @instance_size))) (sexp 
+                    (if
+                      (eq ob 0)
+                      (do
+                        (printf "FATAL: Failed to allocate object of size %ld, class %s
+" (mul 4 @instance_size) 
+                          (index self 2))
+                        (div 0 0)
+
+                      )
+                    )) (sexp (assign (index ob 0) self)) ob)
+              ) 
+              (defm __new () (
+                  (assign ob allocate) (callm ob __initialize) ob)
+              ) 
+              (defm new (
+                  (rest rest)) (
+                  (assign ob allocate) (callm ob initialize (
+                      (splat rest))) ob)
+              ) 
+              (defm name () (
+                  (sexp (__get_string @name)))
+              ) 
+              (defm to_s () (name)) 
+              (defm inspect () (name)) 
+              (defm != (other) (
+                  (! (== self other)))
+              ) 
+              (defm superclass () (
+                  (sexp 
+                    (if
+                      (index self 3)
+                      (index self 3)
+                      Object
+                    )))
+              ) 
+              (defm define_method (sym (block block)) (
+                  (sexp (printf "define_method %s
+" (callm (callm sym to_s) __get_raw))))
+              ) 
+              (defm attr_accessor (sym) (
+                  (call attr_reader (sym)) (call attr_writer (sym)))
+              ) 
+              (defm attr_reader (sym) (
+                  (sexp (printf "attr_reader %s
+" (callm (callm sym to_s) __get_raw))) (call define_method sym 
+                    (proc () (nil))))
+              ) 
+              (defm attr_writer (sym) (
+                  (sexp (printf "attr_writer %s
+" (callm (callm sym to_s) __get_raw))) (call define_method 
+                    (
+                      (callm (concat "" (callm sym to_s) "=") to_sym () (proc (val) ())))))
+              ))
+          )
+          (sexp (assign (index Class 0) Class))
+          (sexp (assign (index Class 2) "Class"))
+
+        ))
+      (required (do
+          (class Kernel Object (
+              (defm puts (s) (
+                  (sexp (puts (index s 1))))
+              ))
+          )
+
+        ))
+      (required (do
+          (class Object Object (
+              (sexp (assign (index self 4) Class)) (include Kernel) 
+              (defm initialize () ()) 
+              (defm class () (@__class__)) 
+              (defm object_id () (
+                  (sexp (__int self)))
+              ) 
+              (defm hash () (object_id)) 
+              (defm eql? (other) (
+                  (callm self == (other)))
+              ) 
+              (defm === (other) (
+                  (callm self == (other)))
+              ) 
+              (defm inspect () (
+                  (sexp (assign buf (__alloc_leaf 20))) (sexp (snprintf buf 20 "%p" self)) (sexp (assign buf 
+                      (__get_string buf))) (concat "#<" (callm (callm self class) name) ":" buf ">"))
+              ) 
+              (defm to_s () (inspect)) 
+              (defm == (other) (
+                  (== object_id (callm other object_id)))
+              ) 
+              (defm ! () (false)) 
+              (defm != (other) (
+                  (! (== self other)))
+              ) 
+              (defm nil? () (false)) 
+              (defm method_missing (sym (args rest)) (
+                  (assign cname (callm (callm self class) inspect)) (call puts (
+                      (concat "Method missing " cname "#" (callm sym to_s)))) (sexp (div 0 0)))
+              ) 
+              (defm respond_to? (method) (
+                  (assign m (callm Class method_to_voff)) (assign voff (callm m [] (method))) 
+                  (if
+                    (! voff)
+                    (return false)
+                  ) (sexp (assign raw (callm voff __get_raw))) (sexp (assign ptr (index (index self 0) raw))) 
+                  (sexp 
+                    (if
+                      (lt ptr __vtable_thunks_start)
+                      (return true)
+                    )) (sexp 
+                    (if
+                      (gt ptr __vtable_thunks_end)
+                      (return true)
+                    )) (return false))
+              ) 
+              (defm is_a? (c) (
+                  (sexp (assign k (callm self class))) (sexp (while (and (ne k c) (ne k Object)) (do
+                        (assign k (callm k superclass))
+
+                      ))) (sexp 
+                    (if
+                      (eq k c)
+                      (return true)
+                      (return false)
+                    )))
+              ) 
+              (defm kind_of? (c) (
+                  (call is_a? (c)))
+              ) 
+              (defm send (sym (args rest)) (
+                  (call __send__ (sym (splat args))))
+              ) 
+              (defm __send__ (sym (args rest)) (
+                  (callm (callm self class) __send_for_obj__ (self sym (splat args))))
+              ) 
+              (defm p (ob) (
+                  (call puts (
+                      (callm ob inspect))) ob)
+              ) 
+              (defm exit (code) (
+                  (sexp (exit (callm code __get_raw))))
+              ) 
+              (defm puts (
+                  (str rest)) (
+                  (assign na (callm str length)) 
+                  (if
+                    (== na 0)
+                    (do
+                      (sexp (puts ""))
+                      (return)
+
+                    )
+                  ) (assign i 0) (while (< i na) (do
+                      (assign raw (callm str [] (i)))
+                      (if
+                        raw
+                        (do
+                          (assign raw (callm raw to_s))
+                          (assign last (callm raw [] (-1)))
+                          (assign raw (callm raw __get_raw))
+                          (sexp 
+                            (if
+                              (ne raw 0)
+                              (printf "%s" raw)
+                            ))
+                          (if
+                            (!= (callm last ord) 10)
+                            (do
+                              (sexp (puts ""))
+
+                            )
+                          )
+
+                        )
+                        (do
+                          (sexp (puts ""))
+
+                        )
+                      )
+                      (assign i (+ i 1))
+
+                    )) nil)
+              ) 
+              (defm print (
+                  (str rest)) (
+                  (assign na (callm str length)) 
+                  (if
+                    (== na 0)
+                    (do
+                      (sexp (printf "nil"))
+                      (return)
+
+                    )
+                  ) (assign i 0) (while (< i na) (do
+                      (assign raw (callm (callm (callm str [] (i)) to_s) __get_raw))
+                      (if
+                        raw
+                        (do
+                          (sexp (printf "%s" raw))
+
+                        )
+                      )
+                      (assign i (+ i 1))
+
+                    )))
+              ) 
+              (defm Array (arg) (
+                  (if
+                    (callm arg respond_to? (:to_ary))
+                    (do
+                      (callm arg to_ary)
+
+                    )
+                    (do
+                      (if
+                        (callm arg respond_to? (:to_a))
+                        (do
+                          (callm arg to_a)
+
+                        )
+                        (do
+                          (array arg)
+
+                        )
+                      )
+
+                    )
+                  ))
+              ) 
+              (defm dup () (
+                  (callm (callm self class) new))
+              ))
+          )
+
+        ))
+      (required (do
+          (class Proc Object (
+              (defm initialize () (
+                  (assign @addr nil) (assign @env nil) (assign @s nil) (assign @arity 0))
+              ) 
+              (defm __set_raw (addr env s arity) (
+                  (assign @addr addr) (assign @env env) (assign @s s) (assign @arity arity))
+              ) 
+              (defm arity () (@arity)) 
+              (defm call (
+                  (arg rest)) (
+                  (sexp (call @addr (@s 0 @env (splat arg)))))
+              ))
+          )
+          (sexp 
+            (defun __new_proc (addr env self arity) 
+              (let (p)
+                (assign p (callm Proc new))
+                (callm p __set_raw (addr env self (__int arity)))
+                p
+              )
+            ))
+
+        ))
+      (required (do
+          (class Array Object (
+              (defm __initialize () (
+                  (sexp (assign @len 0)) (sexp (assign @ptr 0)) (sexp (assign @capacity 0)))
+              ) 
+              (defm __len () (@len)) 
+              (defm __ptr () (@ptr)) 
+              (defm __grow (newlen) (
+                  (sexp (assign @capacity (add (div (mul newlen 4) 3) 4))) (sexp 
+                    (if
+                      (ne @ptr 0)
+                      (assign @ptr (__realloc @ptr (mul @capacity 4)))
+                      (assign @ptr (__array @capacity))
+                    )))
+              ) 
+              (defm __set (idx obj) (
+                  (sexp 
+                    (if
+                      (ge idx @len)
+                      (assign @len (add idx 1))
+                    )) (sexp (assign (index @ptr idx) obj)))
+              ) 
+              (defm to_a () (self)))
+          )
+          (sexp 
+            (defun __splat_to_Array (r na) 
+              (let (splat pos data max)
+                (assign splat (callm Array __new))
+                (assign pos 0)
+                (assign max (sub na 2))
+                (callm splat __grow (max))
+                (while (lt pos max) (do
+                    (callm splat __set (pos (index r pos)))
+                    (assign pos (add pos 1))
+
+                  ))
+                splat
+              )
+            ))
+
+        ))
+      (required (do
+          (class TrueClass Object (
+              (defm ! () (false)) 
+              (defm to_s () ("true")) 
+              (defm inspect () (to_s)) 
+              (defm == (other) (
+                  (sexp 
+                    (if
+                      (eq other true)
+                      true
+                      false
+                    )))
+              ))
+          )
+          (assign true (callm TrueClass new))
+
+        ))
+      (required (do
+          (class FalseClass Object (
+              (defm __true? () (
+                  (sexp (sexp 0)))
+              ) 
+              (defm to_s () ("false")) 
+              (defm inspect () (to_s)) 
+              (defm ! () (true)))
+          )
+          (assign false (callm FalseClass new))
+
+        ))
+      (required (do
+          (class NilClass Object (
+              (defm __true? () (
+                  (sexp (sexp 0)))
+              ) 
+              (defm == (other) (
+                  (return (callm other nil?)))
+              ) 
+              (defm nil? () (true)) 
+              (defm ! () (true)) 
+              (defm to_s () ("")) 
+              (defm inspect () ("nil")))
+          )
+          (assign nil (callm NilClass new))
+
+        ))
+      (required (do
+          (class Class Object (
+              (defm allocate () (
+                  (sexp (assign is @instance_size)) (sexp (assign ob (__array @instance_size))) (sexp (assign i 1)) 
+                  (sexp (while (lt i is) (do
+                        (assign (index ob i) nil)
+                        (assign i (add i 1))
+
+                      ))) (sexp (assign (index ob 0) self)) ob)
+              ))
+          )
+
+        ))
+      (required (do
+          (class Range Object (
+              (defm initialize (_min _max) (
+                  (assign @min _min) (assign @max _max))
+              ) 
+              (defm to_s () (
+                  (concat "" @min ".." @max))
+              ) 
+              (defm inspect () (to_s)) 
+              (defm first () (@min)) 
+              (defm last () (@max)) 
+              (defm member? (val) (
+                  (if
+                    (! val)
+                    (do
+                      (return false)
+
+                    )
+                  ) (return (and (>= val @min) (<= val @max))))
+              ) 
+              (defm include? (val) (
+                  (call member? (val)))
+              ) 
+              (defm === (val) (
+                  (call member? (val)))
+              ) 
+              (defm each () (
+                  (assign i @min) (while (<= i @max) (do
+                      (call yield (i))
+                      (assign i (callm i + (1)))
+
+                    )))
+              ) 
+              (defm to_a () (
+                  (assign a (array)) (call each () (proc (v) (
+                        (<< a v)))) a)
+              ) 
+              (defm to_enum () (
+                  (callm RangeEnumerator new (self)))
+              ))
+          )
+
+        ))
+      (required (do
+          (class Array Object (
+              (defm initialize (
+                  (elements rest)) (__initialize 
+                  (if
+                    (> (callm elements length) 0)
+                    (do
+                      (call __grow (
+                          (callm (callm elements [] (0)) __get_raw)))
+
+                    )
+                  ))
+              ) 
+              (defm capacity () (
+                  (sexp (__int @capacity)))
+              ) 
+              (defm __get (idx) (
+                  (sexp (index @ptr idx)))
+              ) 
+              (defm find () (
+                  (call each () (proc (e) (
+                        (assign r (call yield (e))) 
+                        (if
+                          (!= r false)
+                          (return e)
+                        )))) (return nil))
+              ) 
+              (defm include? (other) (
+                  (call each () (proc (e) (
+                        (if
+                          (== e other)
+                          (return true)
+                        )))) (return false))
+              ) 
+              (defm reject () (
+                  (assign a (callm (callm self class) new)) (call each () (proc (item) (
+                        (if
+                          (! (call yield (item)))
+                          (do
+                            (<< a item)
+
+                          )
+                        )))) a)
+              ) 
+              (defm collect () (
+                  (if
+                    block_given?
+                    (do
+                      (assign items (callm Array new))
+                      (call each () (proc (item) (
+                            (<< items (call yield (item))))))
+                      (return items)
+
+                    )
+                    (do
+                      (return self)
+
+                    )
+                  ))
+              ) 
+              (defm detect (
+                  (ifnone default nil)) (
+                  (callm self each () (proc (item) (
+                        (if
+                          (call yield (item))
+                          (do
+                            (return item)
+
+                          )
+                        )))) 
+                  (if
+                    ifnone
+                    (do
+                      (return (callm ifnone call))
+
+                    )
+                  ) (return nil))
+              ) 
+              (defm each_with_index (
+                  (block block)) (
+                  (callm self each_index () (proc (i) (
+                        (callm block call (
+                            (callm self [] (i)) i))))))
+              ) 
+              (defm + (other_array) (
+                  (assign added (callm self dup)) (callm added concat (other_array)) (return added))
+              ) 
+              (defm << (obj) (
+                  (sexp 
+                    (if
+                      (le @len @capacity)
+                      (callm self __grow (
+                          (mul (add @len 1) 2)))
+                    )) (sexp (assign (index @ptr @len) obj)) (sexp (assign @len (add @len 1))) self)
+              ) 
+              (defm == (other) (
+                  (if
+                    (! (callm other is_a? (Array)))
+                    (do
+                      (return false)
+
+                    )
+                  ) 
+                  (if
+                    (== (callm self size) (callm other size))
+                    (do
+                      (callm self each_index () (proc (i) (
+                            (if
+                              (!= (callm self [] (i)) (callm other [] (i)))
+                              (do
+                                (return false)
+
+                              )
+                            ))))
+                      (return true)
+
+                    )
+                  ) (return false))
+              ) 
+              (defm (self []) (
+                  (elements rest)) (
+                  (assign a (callm self new)) (callm elements each () (proc (e) (
+                        (<< a e)))) a)
+              ) 
+              (defm __offset_to_pos (idx) (
+                  (sexp (assign idx (callm idx __get_raw))) (sexp 
+                    (if
+                      (lt idx 0)
+                      (do
+                        (assign idx (add @len idx))
+                        (if
+                          (lt idx 0)
+                          (return -1)
+                        )
+
+                      )
+                    )) (sexp 
+                    (if
+                      (ge idx @len)
+                      (return -1)
+                    )) (sexp (return idx)))
+              ) 
+              (defm __range_get (idx) (
+                  (assign start (callm idx first)) (assign xend (callm idx last)) (sexp (assign start (__int 
+                        (callm self __offset_to_pos (start))))) (sexp (assign xend (__int (callm self __offset_to_pos 
+                          (xend))))) 
+                  (if
+                    (< start 0)
+                    (do
+                      (return (callm Array new))
+
+                    )
+                  ) 
+                  (if
+                    (< xend 0)
+                    (do
+                      (assign xend (- length 1))
+
+                    )
+                  ) (assign tmp (callm Array new)) (while (<= start xend) (do
+                      (<< tmp (callm self [] (start)))
+                      (assign start (callm start + (1)))
+
+                    )) (return tmp))
+              ) 
+              (defm [] (idx) (
+                  (if
+                    (callm idx is_a? (Range))
+                    (return (call __range_get (idx)))
+                  ) (sexp (assign idx (callm self __offset_to_pos (idx)))) (sexp 
+                    (if
+                      (or (or (eq @ptr 0) (gt idx @len)) (lt idx 0))
+                      (return nil)
+                    )) (sexp (assign tmp (callm self __get (idx)))) (sexp 
+                    (if
+                      (eq tmp 0)
+                      (return nil)
+                      (return tmp)
+                    )))
+              ) 
+              (defm []= (idx obj) (
+                  (sexp (assign idx (callm idx __get_raw))) (sexp 
+                    (if
+                      (ge idx @capacity)
+                      (callm self __grow (idx))
+                    )) (sexp 
+                    (if
+                      (ge idx @len)
+                      (assign @len (add idx 1))
+                    )) (sexp (assign (index @ptr idx) obj)))
+              ) 
+              (defm abbrev (
+                  (pattern default nil)) (
+                  (sexp (puts "Array#abbrev not implemented")))
+              ) 
+              (defm slice (idx) (
+                  (callm self [] (idx)))
+              ) 
+              (defm assoc (obj) (
+                  (callm self each () (proc (item) (
+                        (if
+                          (callm item is_a? (Array))
+                          (do
+                            (if
+                              (== (callm item first) obj)
+                              (do
+                                (return item)
+
+                              )
+                            )
+
+                          )
+                        )))) (return nil))
+              ) 
+              (defm at (idx) (
+                  (return (callm self [] (idx))))
+              ) 
+              (defm clear () (
+                  (sexp (assign @len 0)) self)
+              ) 
+              (defm collect! () ()) 
+              (defm compact () (
+                  (return (callm self reject () (proc (item) (
+                          (callm item nil?))))))
+              ) 
+              (defm compact! () (
+                  (sexp (puts "Array#compact! not implemented")))
+              ) 
+              (defm concat (other_array) (
+                  (assign added self) (callm other_array each () (proc (item) (
+                        (<< added item)))) (return added))
+              ) 
+              (defm dclone () (
+                  (sexp (puts "Array#dclone not implemented")))
+              ) 
+              (defm delete (obj) (
+                  (assign src 0) (assign dest 0) (assign len length) (while (< src len) (do
+                      (assign sob (callm self [] (src)))
+                      (if
+                        (!= sob obj)
+                        (do
+                          (if
+                            (!= src dest)
+                            (do
+                              (callm self []= (dest sob))
+
+                            )
+                          )
+                          (assign dest (callm dest + (1)))
+
+                        )
+                      )
+                      (assign src (callm src + (1)))
+
+                    )) (sexp (assign @len (callm dest __get_raw))) obj)
+              ) 
+              (defm delete_at (idx) (
+                  (if
+                    (< idx 0)
+                    (return nil)
+                  ) (assign l length) 
+                  (if
+                    (>= idx l)
+                    (return nil)
+                  ) (assign e (callm self [] (idx))) (assign x self) (while (< idx l) (do
+                      (assign o (callm x [] (
+                            (+ idx 1))))
+                      (callm x []= (idx o))
+                      (assign idx (callm idx + (1)))
+
+                    )) (sexp (assign @len (sub @len 1))) (return e))
+              ) 
+              (defm delete_if () (
+                  (sexp (puts "Array#delete_if not implemented")))
+              ) 
+              (defm dup () (
+                  (assign a (callm (callm self class) new)) (call each () (proc (e) (
+                        (<< a e)))) a)
+              ) 
+              (defm each (
+                  (block block)) (
+                  (assign i 0) (assign a (callm block arity)) (assign s (callm self size)) 
+                  (if
+                    (== a 1)
+                    (do
+                      (while (< i s) (do
+                          (assign el (callm self [] (i)))
+                          (call yield (el))
+                          (assign i (callm i + (1)))
+
+                        ))
+                      (return nil)
+
+                    )
+                  ) (while (< i s) (do
+                      (assign el (callm self [] (i)))
+                      (if
+                        (callm el is_a? (Array))
+                        (do
+                          (call yield (
+                              (splat el)))
+
+                        )
+                        (do
+                          (call yield (el))
+
+                        )
+                      )
+                      (assign i (callm i + (1)))
+
+                    )) (return nil))
+              ) 
+              (defm member? (val) (
+                  (callm self each () (proc (v) (
+                        (if
+                          (== v val)
+                          (return true)
+                        )))) (return false))
+              ) 
+              (defm each_index () (
+                  (assign i 0) (while (< i (callm self size)) (do
+                      (call yield (i))
+                      (assign i (callm i + (1)))
+
+                    )))
+              ) 
+              (defm empty? () (
+                  (return (== (callm self size) 0)))
+              ) 
+              (defm eql? (other_array) (
+                  (if
+                    (== (callm self object_id) (callm other_array object_id))
+                    (return true)
+                  ) 
+                  (if
+                    (! (callm other_array kind_of? (Array)))
+                    (return false)
+                  ) 
+                  (if
+                    (!= (callm self length) (callm other_array length))
+                    (return false)
+                  ) (assign i 0) (assign l (callm self length)) (while (< i l) (do
+                      (if
+                        (!= (callm self [] (i)) (callm other_array [] (i)))
+                        (return false)
+                      )
+                      (assign i (callm i + (1)))
+
+                    )) (return true))
+              ) 
+              (defm fetch (idx (default default nil)) (
+                  (sexp (puts "Array#fetch not implemented")))
+              ) 
+              (defm fill (obj) (
+                  (sexp (puts "Array#fill not implemented")))
+              ) 
+              (defm first (
+                  (n default nil)) (
+                  (if
+                    n
+                    (do
+                      (if
+                        (callm self empty?)
+                        (do
+                          (return (callm Array new))
+
+                        )
+                      )
+                      (assign first_n (callm Array new))
+                      (if
+                        (>= n (callm self size))
+                        (do
+                          (return (callm Array new (self)))
+
+                        )
+                      )
+                      (callm n times () (proc (i) (
+                            (<< first_n (callm self [] (i))))))
+                      (return first_n)
+
+                    )
+                  ) 
+                  (if
+                    (callm self empty?)
+                    (do
+                      (return nil)
+
+                    )
+                    (do
+                      (return (callm self [] (0)))
+
+                    )
+                  ))
+              ) 
+              (defm flatten (
+                  (level default nil)) (
+                  (assign n (array)) (assign l level) (call each () (proc (e) (l n 
+                        (if
+                          (callm e is_a? (Array))
+                          (do
+                            (if
+                              l
+                              (do
+                                (if
+                                  (> l 1)
+                                  (assign e (callm e flatten (
+                                        (- l 1))))
+                                )
+
+                              )
+                              (do
+                                (assign e (callm e flatten))
+
+                              )
+                            )
+                            (callm n concat (e))
+
+                          )
+                          (do
+                            (<< n e)
+
+                          )
+                        )))) n)
+              ) 
+              (defm flatten! () (
+                  (sexp (puts "Array#flatten! not implemented")))
+              ) 
+              (defm frozen? () (
+                  (sexp (puts "Array#frozen? not implemented")))
+              ) 
+              (defm hash () (
+                  (assign h 5381) (assign h (+ (* h 33) (callm self length))) (call each () (proc (c) (
+                        (assign h (+ (* h 33) (callm c hash)))))) h)
+              ) 
+              (defm index (obj) (
+                  (assign i 0) (assign l length) (while (< i l) (do
+                      (if
+                        (== (callm self [] (i)) obj)
+                        (do
+                          (return i)
+
+                        )
+                      )
+                      (assign i (callm i + (1)))
+
+                    )) (return nil))
+              ) 
+              (defm replace (other_array) (
+                  (sexp (assign @len 0)) (callm other_array each () (proc (item) (
+                        (<< self item)))))
+              ) 
+              (defm insert (idx obj) (
+                  (if
+                    (< idx 0)
+                    (do
+                      (if
+                        (> (- 0 idx) length)
+                        (do
+                          (callm STDERR puts (
+                              (concat "IndexError: index " idx " too small for array; minimum " (- length))))
+                          (call exit (1))
+
+                        )
+                      )
+                      (assign idx (+ (+ length 1) idx))
+
+                    )
+                  ) (assign pos length) (assign prev nil) (while (> pos idx) (do
+                      (assign prev (- pos 1))
+                      (callm self []= (pos (callm self [] (prev))))
+                      (decr pos 1)
+
+                    )) (callm self []= (idx obj)) self)
+              ) 
+              (defm inspect () (
+                  (assign str "[") (assign first true) (call each () (proc (a) (
+                        (if
+                          (! first)
+                          (do
+                            (<< str ", ")
+
+                          )
+                          (do
+                            (assign first false)
+
+                          )
+                        ) (<< str (callm a inspect))))) (<< str "]") str)
+              ) 
+              (defm join (sep) (
+                  (assign join_str "") (assign size (callm self size)) (assign sep (callm sep to_s)) (callm self each 
+                    () (proc (item) (
+                        (if
+                          (! (callm join_str empty?))
+                          (do
+                            (<< join_str sep)
+
+                          )
+                        ) (<< join_str (callm item to_s))))) join_str)
+              ) 
+              (defm last (
+                  (n default nil)) (
+                  (if
+                    n
+                    (do
+                      (if
+                        (>= n (callm self size))
+                        (do
+                          (return (callm Array new (self)))
+
+                        )
+                      )
+                      (assign last_n (callm Array new))
+                      (assign delta (- (callm self size) n))
+                      (callm n times () (proc (i) (
+                            (<< last_n (callm self [] (
+                                  (+ i delta)))))))
+                      (return last_n)
+
+                    )
+                  ) 
+                  (if
+                    (callm self empty?)
+                    (do
+                      (return nil)
+
+                    )
+                    (do
+                      (return (callm self [] (-1)))
+
+                    )
+                  ))
+              ) 
+              (defm length () (
+                  (sexp (__int @len)))
+              ) 
+              (defm collect! () (
+                  (sexp (puts "Array#collect! not implemented")))
+              ) 
+              (defm map! () (
+                  (sexp (puts "Array#map! not implemented")))
+              ) 
+              (defm nitems () (
+                  (return (callm (callm self select () (proc (item) (
+                            (!= item nil)))) size)))
+              ) 
+              (defm pack () (
+                  (sexp (puts "Array#pack not implemented")))
+              ) 
+              (defm pop () (
+                  (if
+                    (callm self empty?)
+                    (do
+                      (return nil)
+
+                    )
+                    (do
+                      (assign last_element (callm self last))
+                      (sexp (assign @len (sub @len 1)))
+                      (return last_element)
+
+                    )
+                  ))
+              ) 
+              (defm pretty_print (q) (
+                  (sexp (puts "Array#pretty_print not implemented")))
+              ) 
+              (defm push (objects) (
+                  (<< self objects))
+              ) 
+              (defm quote () (
+                  (sexp (puts "Array#quote not implemented")))
+              ) 
+              (defm rassoc (key) (
+                  (callm self each () (proc (item) (
+                        (if
+                          (callm item is_a? (Array))
+                          (do
+                            (if
+                              (== (callm item [] (1)) key)
+                              (do
+                                (return item)
+
+                              )
+                            )
+
+                          )
+                        )))) (return nil))
+              ) 
+              (defm reject! () (
+                  (sexp (puts "Array#reject! not implemented")))
+              ) 
+              (defm reverse () (
+                  (callm (callm self dup) reverse!))
+              ) 
+              (defm reverse! () (
+                  (assign i 0) (assign j (- length 1)) (while (< i j) (do
+                      (assign tmp (callm self [] (i)))
+                      (callm self []= (i (callm self [] (j))))
+                      (callm self []= (j tmp))
+                      (assign i (callm i + (1)))
+                      (decr j 1)
+
+                    )) self)
+              ) 
+              (defm reverse_each (
+                  (block block)) (
+                  (callm (callm self reverse) each (
+                      (to_block block))))
+              ) 
+              (defm rindex (obj) (
+                  (assign found_index nil) (callm self each_with_index () (proc (item idx) (
+                        (if
+                          (== item obj)
+                          (do
+                            (assign found_index idx)
+
+                          )
+                        )))) (return found_index))
+              ) 
+              (defm shift () (
+                  (if
+                    (callm self empty?)
+                    (do
+                      (return nil)
+
+                    )
+                    (do
+                      (assign first_element (callm self first))
+                      (callm self delete_at (0))
+                      (return first_element)
+
+                    )
+                  ))
+              ) 
+              (defm size () (
+                  (return (callm self length)))
+              ) 
+              (defm partition (
+                  (block block)) (
+                  (assign trueArr (array)) (assign falseArr (array)) (call each () (proc (e) (
+                        (if
+                          (callm block call (e))
+                          (do
+                            (<< trueArr e)
+
+                          )
+                          (do
+                            (<< falseArr e)
+
+                          )
+                        )))) (array trueArr falseArr))
+              ) 
+              (defm sort_by (
+                  (block block)) (
+                  (if
+                    (<= length 1)
+                    (return self)
+                  ) (assign pivot_el (callm self [] (0))) (assign pivot (callm block call (pivot_el))) (assign part 
+                    (callm (callm self [] (
+                          (range 1 -1))) partition () (proc (e) (
+                          (< (callm block call (e)) pivot))))) (assign left (callm (callm part [] (0)) sort_by 
+                      (
+                        (to_block block)))) (assign right (callm (callm part [] (1)) sort_by (
+                        (to_block block)))) (+ (+ left (array pivot_el)) right))
+              ) 
+              (defm sort () (
+                  (if
+                    (<= length 1)
+                    (return self)
+                  ) (assign pivot (callm self [] (0))) (assign part (callm (callm self [] (
+                          (range 1 -1))) partition () (proc (e) (pivot (<= (<=> e pivot) 0))))) (assign left 
+                    (callm (callm part [] (0)) sort)) (assign right (callm (callm part [] (1)) sort)) (+ (+ left 
+                      (array pivot)) right))
+              ) 
+              (defm sort! () (
+                  (sexp (puts "Array#sort! not implemented")) self)
+              ) 
+              (defm to_a () (
+                  (return self))
+              ) 
+              (defm to_ary () (
+                  (return self))
+              ) 
+              (defm to_yaml () (
+                  (sexp (puts "Array#to_yaml not implemented")))
+              ) 
+              (defm transpose () (
+                  (sexp (puts "Array#transpose not implemented")))
+              ) 
+              (defm uniq () (
+                  (assign uniq_arr (callm Array new)) (callm self each () (proc (item) (
+                        (if
+                          (! (callm uniq_arr include? (item)))
+                          (do
+                            (<< uniq_arr item)
+
+                          )
+                        )))) uniq_arr)
+              ) 
+              (defm uniq! () (
+                  (assign uniq_arr (callm self uniq)) (assign changes_made (!= (callm uniq_arr size) (callm self size))) 
+                  (assign self (callm self uniq)) 
+                  (if
+                    changes_made
+                    (do
+                      (return self)
+
+                    )
+                    (do
+                      (return nil)
+
+                    )
+                  ))
+              ) 
+              (defm unshift (
+                  (objects rest)) (
+                  (sexp (puts "Array#unshift not implemented")))
+              ) 
+              (defm values_at () (
+                  (sexp (puts "Array#values_at not implemented")))
+              ) 
+              (defm yaml_initialize () (
+                  (sexp (puts "Array#yaml_initialize not implemented")))
+              ) 
+              (defm zip (
+                  (args rest)) (
+                  (assign enums (callm args collect () (proc (a) (
+                          (callm a to_enum))))) (call collect () (proc (a) (
+                        (assign ary (array a)) (callm enums each () (proc (e) (
+                              (<< ary (callm e next))))) ary))))
+              ))
+          )
+
+        ))
+      (required (do
+          (class String Object (
+              (defm initialize (
+                  (str rest)) (
+                  (sexp 
+                    (if
+                      (lt numargs 3)
+                      (assign @buffer "")
+                      (do
+                        (assign first (callm str [] (__I0)))
+                        (assign len (callm first length))
+                        (callm self __copy_raw (
+                            (callm first __get_raw) len))
+
+                      )
+                    )))
+              ) 
+              (defm inspect () (
+                  (assign buf (callm 34 chr)) (assign esc (callm 92 chr)) (call each_byte () (proc (b) (
+                        (if
+                          (== b 34)
+                          (do
+                            (<< (<< buf esc) (callm 34 chr))
+
+                          )
+                          (do
+                            (if
+                              (== b 27)
+                              (do
+                                (<< (<< buf esc) "e")
+
+                              )
+                              (do
+                                (if
+                                  (== b 92)
+                                  (do
+                                    (<< (<< buf esc) esc)
+
+                                  )
+                                  (do
+                                    (if
+                                      (== b 10)
+                                      (do
+                                        (<< (<< buf esc) "n")
+
+                                      )
+                                      (do
+                                        (<< buf (callm b chr))
+
+                                      )
+                                    )
+
+                                  )
+                                )
+
+                              )
+                            )
+
+                          )
+                        )))) (<< buf (callm 34 chr)) buf)
+              ) 
+              (defm hash () (
+                  (assign h 5381) (call each_byte () (proc (c) (
+                        (assign h (+ (* h 33) c))))) h)
+              ) 
+              (defm ! () (false)) 
+              (defm nil? () (false)) 
+              (defm [] (index) (
+                  (assign l length) 
+                  (if
+                    (callm index is_a? (Range))
+                    (do
+                      (assign b (callm index first))
+                      (assign e (callm index last))
+                      (if
+                        (< b 0)
+                        (do
+                          (assign b (+ l b))
+                          (if
+                            (< b 0)
+                            (do
+                              (return nil)
+
+                            )
+                          )
+
+                        )
+                      )
+                      (if
+                        (< e 0)
+                        (do
+                          (assign e (+ (+ l e) 1))
+                          (if
+                            (< e 0)
+                            (do
+                              (assign e 0)
+
+                            )
+                          )
+
+                        )
+                      )
+                      (if
+                        (> e l)
+                        (do
+                          (assign e l)
+
+                        )
+                      )
+                      (assign e (+ (- e b) 1))
+                      (assign a (callm String new))
+                      (sexp (assign src (add @buffer (callm b __get_raw))))
+                      (callm a __copy_raw (src e))
+                      (return a)
+
+                    )
+                  ) 
+                  (if
+                    (< index 0)
+                    (do
+                      (assign index (+ l index))
+                      (if
+                        (< index 0)
+                        (do
+                          (return nil)
+
+                        )
+                      )
+
+                    )
+                  ) 
+                  (if
+                    (>= index l)
+                    (do
+                      (return nil)
+
+                    )
+                  ) (sexp (assign index (callm index __get_raw))) (sexp (assign c (bindex @buffer index))) 
+                  (sexp (__int c)))
+              ) 
+              (defm []= (pos str) (
+                  (callm STDERR puts (
+                      (concat "ERROR: String#[]= NOT IMPLEMENTED YET; Called with (" pos ",'" str "')"))) 
+                  (/ 0 0))
+              ) 
+              (defm == (other) (
+                  (assign s (callm other is_a? (String))) 
+                  (if
+                    (! s)
+                    (return false)
+                  ) (sexp (assign res 
+                      (if
+                        (strcmp @buffer (callm other __get_raw))
+                        false
+                        true
+                      ))) (return res))
+              ) 
+              (defm eql? (other) (
+                  (callm self == (other)))
+              ) 
+              (defm __copy_raw (str len) (
+                  (sexp (assign len (add (callm len __get_raw) 1))) (sexp (assign @buffer (__alloc_leaf len))) 
+                  (sexp (memmove @buffer str len)) (sexp (assign (bindex @buffer (sub len 1)) 0)) nil)
+              ) 
+              (defm __set_raw (str) (
+                  (assign @buffer str))
+              ) 
+              (defm __get_raw () (@buffer)) 
+              (defm empty? () (
+                  (== length 0))
+              ) 
+              (defm chr () (
+                  (callm self [] (0)))
+              ) 
+              (defm ord () (
+                  (callm self [] (0)))
+              ) 
+              (defm each_byte () (
+                  (assign i 0) (assign len length) (while (< i len) (do
+                      (call yield (
+                          (callm self [] (i))))
+                      (assign i (+ i 1))
+
+                    )) self)
+              ) 
+              (defm <=> (other) (
+                  (if
+                    (! (callm other kind_of? (String)))
+                    (return nil)
+                  ) (assign i 0) (assign max (ternif (> length (callm other length)) (ternalt (callm other length) length))) 
+                  (while (< i max) (do
+                      (if
+                        (< (callm self [] (i)) (callm other [] (i)))
+                        (return -1)
+                      )
+                      (if
+                        (> (callm self [] (i)) (callm other [] (i)))
+                        (return 1)
+                      )
+                      (assign i (callm i + (1)))
+
+                    )) 
+                  (if
+                    (< i (callm other length))
+                    (return -1)
+                  ) 
+                  (if
+                    (> length (callm other length))
+                    (return 1)
+                  ) (return 0))
+              ) 
+              (defm uniq () ()) 
+              (defm to_s () (self)) 
+              (defm to_sym () (
+                  (assign buffer @buffer) (sexp (call __get_symbol buffer)))
+              ) 
+              (defm to_i () (
+                  (assign num 0) (assign i 0) (assign len length) (assign neg false) 
+                  (if
+                    (== (callm self [] (0)) 45)
+                    (do
+                      (assign neg true)
+                      (assign i (callm i + (1)))
+
+                    )
+                  ) (while (< i len) (do
+                      (assign s (callm self [] (i)))
+                      (if
+                        (! (callm (range 48 57) member? (s)))
+                        (break)
+                      )
+                      (assign num (- (+ (* num 10) s) 48))
+                      (assign i (+ i 1))
+
+                    )) 
+                  (if
+                    neg
+                    (do
+                      (return (* num -1))
+
+                    )
+                  ) (return num))
+              ) 
+              (defm slice! (b e) (
+                  (assign l length) 
+                  (if
+                    (< b 0)
+                    (do
+                      (assign b (+ l b))
+
+                    )
+                  ) 
+                  (if
+                    (< b 0)
+                    (do
+                      (return nil)
+
+                    )
+                  ) (assign endp (+ b e)) 
+                  (if
+                    (> endp l)
+                    (do
+                      (assign e (- l b))
+
+                    )
+                  ) (assign n (callm String new)) (sexp (assign src (add @buffer (callm b __get_raw)))) (callm n __copy_raw 
+                    (src e)) (assign endp (+ b e)) (sexp (assign dest (add @buffer (callm b __get_raw)))) 
+                  (sexp (assign src (add @buffer (callm endp __get_raw)))) (sexp (memmove dest src (callm e __get_raw))) n)
+              ) 
+              (defm reverse () (
+                  (assign buf "") (assign l length) 
+                  (if
+                    (== l 0)
+                    (do
+                      (return)
+
+                    )
+                  ) (while (> l 0) (do
+                      (assign l (- l 1))
+                      (<< buf (callm (callm self [] (l)) chr))
+
+                    )) buf)
+              ) 
+              (defm length () (
+                  (sexp (assign l (strlen @buffer))) (sexp (__int l)))
+              ) 
+              (defm size () (length)) 
+              (defm count (
+                  (c default nil)) (
+                  (if
+                    (! c)
+                    (return length)
+                  ) (assign l 0) (assign c (callm c ord)) (call each_byte () (proc (b) (
+                        (if
+                          (== b c)
+                          (do
+                            (assign l (+ l 1))
+
+                          )
+                        )))) l)
+              ) 
+              (defm concat (other) (
+                  (if
+                    (callm other is_a? (Fixnum))
+                    (do
+                      (assign other (callm other chr))
+
+                    )
+                    (do
+                      (assign other (callm other to_s))
+
+                    )
+                  ) (sexp (do
+                      (assign ro (callm other __get_raw))
+                      (assign osize (strlen ro))
+                      (assign bsize (strlen @buffer))
+                      (assign size (add bsize osize))
+                      (assign size (add size 1))
+                      (assign newb (__alloc_leaf size))
+                      (strcpy newb @buffer)
+                      (strcat newb ro)
+                      (assign @buffer newb)
+
+                    )) self)
+              ) 
+              (defm << (other) (
+                  (call concat (other)))
+              ) 
+              (defm dup () (
+                  (callm String new (self)))
+              ) 
+              (defm + (other) (
+                  (callm dup concat (other)))
+              ) 
+              (defm * (cnt) (
+                  (assign s "") (callm cnt times () (proc () (
+                        (callm s concat (self))))) s)
+              ) 
+              (defm rindex (ch) (
+                  (assign l length) (assign ch (callm ch ord)) (while (> l 0) (do
+                      (decr l 1)
+                      (if
+                        (== (callm (callm self [] (l)) ord) (callm ch ord))
+                        (do
+                          (return l)
+
+                        )
+                      )
+
+                    )) (return nil))
+              ) 
+              (defm gsub (pattern replacement) (
+                  (if
+                    (> (callm pattern length) 1)
+                    (do
+                      (callm STDERR puts ("WARNING: String#gsub with strings longer than one character not supported"))
+                      (call exit (
+                          (/ 1 1)))
+
+                    )
+                  ) (assign str "") (assign pb (callm (callm pattern [] (0)) ord)) (call each_byte () (proc 
+                      (b) (
+                        (if
+                          (== b pb)
+                          (do
+                            (<< str replacement)
+
+                          )
+                          (do
+                            (<< str (callm b chr))
+
+                          )
+                        )))) str)
+              ) 
+              (defm split (
+                  (pat default " ")) (
+                  (assign ary (array)) (assign cur "") (callm self each_byte () (proc (c) (
+                        (if
+                          (== (callm c chr) pat)
+                          (do
+                            (<< ary cur)
+                            (assign cur "")
+
+                          )
+                          (do
+                            (if
+                              (and (== pat " ") (or (== c 10) (or (== c 13) (== c 9))))
+                              (do
+                                (<< ary cur)
+                                (assign cur "")
+
+                              )
+                              (do
+                                (<< cur (callm c chr))
+
+                              )
+                            )
+
+                          )
+                        )))) 
+                  (if
+                    (!= cur "")
+                    (<< ary cur)
+                  ) ary)
+              ))
+          )
+          (sexp 
+            (defun __get_string (str) 
+              (let (s)
+                (assign s (callm String new))
+                (callm s __set_raw (str))
+                s
+              )
+            ))
+
+        ))
+      (required (do
+          (class Hash Object (
+              (class Deleted Object (
+                  (defm (self eql?) (other) (false)))
+              ) 
+              (defm initialize (
+                  (defval default nil)) (
+                  (assign @length 0) (assign @capacity 4) _alloc_data (assign @first nil) (assign @last nil) 
+                  (assign @defval defval))
+              ) 
+              (defm (self []) () (
+                  (callm Hash new))
+              ) 
+              (defm _alloc_data () (
+                  (assign @data (callm Array new (
+                        (* @capacity 4)))))
+              ) 
+              (defm _bulkinsert (data first) (
+                  (assign @length 0) (assign cur first) (while cur (do
+                      (assign k (callm data [] (cur)))
+                      (if
+                        k
+                        (do
+                          (assign v (callm data [] (
+                                (+ cur 1))))
+                          (callm self []= (k v))
+
+                        )
+                      )
+                      (assign cur (callm data [] (
+                            (+ cur 2))))
+
+                    )) nil)
+              ) 
+              (defm _grow () (
+                  (assign oldcap @capacity) (assign olddata @data) (assign oldfirst @first) (assign @capacity 
+                    (* @capacity 2)) _alloc_data (assign @first nil) (assign @last nil) (call _bulkinsert 
+                    (olddata oldfirst)))
+              ) 
+              (defm _find_slot (key) (
+                  (assign pos (* (% (callm key hash) @capacity) 4)) (assign cap (* @capacity 4)) (while (and 
+                      (assign d (callm @data [] (pos))) (! (callm key eql? (d)))) (do
+                      (assign pos (+ pos (% 4 cap)))
+
+                    )) pos)
+              ) 
+              (defm member? (key) (
+                  (assign pos (call _find_slot (key))) (ternif (callm @data [] (pos)) (ternalt true false)))
+              ) 
+              (defm include? (key) (
+                  (call member? (key)))
+              ) 
+              (defm empty? () (
+                  (== @length 0))
+              ) 
+              (defm [] (key) (
+                  (assign pos (call _find_slot (key))) (ternif (callm @data [] (pos)) (ternalt (callm @data [] 
+                        (
+                          (+ pos 1))) @defval)))
+              ) 
+              (defm capacity_too_low () (
+                  (call puts ("ERROR: @capacity <= @length *after* _grow")) (call exit (1)))
+              ) 
+              (defm []= (key value) (
+                  (assign limit (/ (* @capacity 3) 4)) 
+                  (if
+                    (<= limit @length)
+                    _grow
+                  ) 
+                  (if
+                    (<= @capacity @length)
+                    capacity_too_low
+                  ) (assign slot (call _find_slot (key))) (assign new (callm (callm @data [] (slot)) nil?)) 
+                  (if
+                    new
+                    (do
+                      (assign @length (+ @length 1))
+
+                    )
+                  ) (callm @data []= (
+                      (+ slot 1) value)) 
+                  (if
+                    (! new)
+                    (return)
+                  ) (callm @data []= (slot key)) 
+                  (if
+                    @last
+                    (do
+                      (callm @data []= (
+                          (+ @last 2) slot))
+
+                    )
+                  ) 
+                  (if
+                    (callm @first nil?)
+                    (do
+                      (assign @first slot)
+
+                    )
+                  ) (callm @data []= (
+                      (+ slot 2) nil)) (callm @data []= (
+                      (+ slot 3) @last)) (assign @last slot) nil)
+              ) 
+              (defm __delete_first () (
+                  (if
+                    (! @first)
+                    (return)
+                  ) (assign old @first) (assign @first (callm @data [] (
+                        (+ @first 2)))) 
+                  (if
+                    (== old @last)
+                    (do
+                      (assign @last @first)
+
+                    )
+                  ) (callm @data []= (old nil)) (callm @data []= (
+                      (+ old 1) nil)) (callm @data []= (
+                      (+ old 2) nil)) (callm @data []= (
+                      (+ old 3) nil)) (decr @length 1))
+              ) 
+              (defm shift () (
+                  (if
+                    (! @first)
+                    (return nil)
+                  ) (assign slot @first) (assign key (callm @data [] (slot))) (assign value (callm @data [] 
+                      (
+                        (+ slot 1)))) __delete_first (array key value))
+              ) 
+              (defm length () (@length)) 
+              (defm size () (@length)) 
+              (defm to_a () (
+                  (assign a (array)) (call each () (proc (k v) (
+                        (<< a (array k v))))) a)
+              ) 
+              (defm each () (
+                  (assign pos 0) (assign capacity (* @capacity 2)) (assign slot @first) (while slot (do
+                      (if
+                        (and (assign key (callm @data [] (slot))) (!= Deleted key))
+                        (do
+                          (assign value (callm @data [] (
+                                (+ slot 1))))
+                          (call yield (key value))
+
+                        )
+                      )
+                      (assign slot (callm @data [] (
+                            (+ slot 2))))
+
+                    )))
+              ) 
+              (defm delete (key) (
+                  (assign slot (call _find_slot (key))) 
+                  (if
+                    (! (callm @data [] (slot)))
+                    (return nil)
+                  ) (assign value (callm @data [] (
+                        (+ slot 1)))) (callm @data []= (slot Deleted)) (callm @data []= (
+                      (+ slot 1) nil)) value)
+              ))
+          )
+
+        ))
+      (required (do
+          (class IO Object (
+              (defm initialize (fd) (
+                  (assign @fd fd) (sexp (assign tmp (__alloc_leaf 256))) (assign @rawbuf tmp))
+              ) 
+              (defm to_i () (@fd)) 
+              (defm getc () (
+                  (assign c 0) (assign tmp 0) (assign len nil) (sexp (do
+                      (assign len (read (callm @fd __get_raw) @rawbuf 1))
+                      (if
+                        (le len 0)
+                        (return nil)
+                      )
+                      (assign c (__int (bindex @rawbuf 0)))
+
+                    )) c)
+              ) 
+              (defm file? () (false)))
+          )
+
+        ))
+      (required (do
+          (class File IO (
+              (assign SEPARATOR "/") (assign ALT_SEPARATOR nil) 
+              (defm (self file?) (io) (
+                  (callm io is_a? (File)))
+              ) 
+              (defm path () (@path)) 
+              (defm initialize (path (mode default "r")) (
+                  (assign @path path) (sexp (assign rpath (callm path __get_raw))) (sexp (assign fd (open rpath 0))) 
+                  (sexp 
+                    (if
+                      (le fd 0)
+                      (do
+                        (printf "Failed to open '%s' got %ld
+" rpath fd)
+                        (div 0 0)
+
+                      )
+                    )) (sexp (assign fd (__int fd))) (call super (fd)))
+              ) 
+              (defm (self open) (path (mode default "r")) (
+                  (assign f (callm File new (path mode))))
+              ) 
+              (defm (self exists?) (path) (
+                  (sexp (assign rpath (callm path __get_raw))) (sexp (assign fd (open rpath 0))) (sexp 
+                    (if
+                      (le fd 0)
+                      (return false)
+                    )) (sexp (close fd)) (return true))
+              ) 
+              (defm (self basename) (name) (
+                  (assign i (callm name rindex (SEPARATOR))) 
+                  (if
+                    (and (! i) ALT_SEPARATOR)
+                    (do
+                      (assign i (callm name rindex (ALT_SEPARATOR)))
+
+                    )
+                  ) 
+                  (if
+                    i
+                    (do
+                      (assign i (+ i 1))
+                      (return (callm name [] (
+                            (range i -1))))
+
+                    )
+                  ) (return name))
+              ) 
+              (defm (self dirname) (dname) (
+                  (assign i (callm dname rindex (SEPARATOR))) 
+                  (if
+                    (and (! i) ALT_SEPARATOR)
+                    (do
+                      (assign i (callm dname rindex (ALT_SEPARATOR)))
+
+                    )
+                  ) 
+                  (if
+                    (and i (> i 0))
+                    (do
+                      (assign i (- i 1))
+                      (assign r (range 0 i))
+                      (assign d (callm dname [] (r)))
+                      (return d)
+
+                    )
+                  ) (return nil))
+              ) 
+              (defm (self expand_path) (path (dir_string default (callm Dir pwd))) (
+                  (if
+                    (== (callm path [] (0)) 47)
+                    (return path)
+                  ) (assign str (callm (concat "" dir_string "/" path) split ("/"))) (assign out (array)) 
+                  (callm str each () (proc (e) (
+                        (if
+                          (== e ".")
+                          (do
+
+                          )
+                          (do
+                            (if
+                              (== e "")
+                              (do
+
+                              )
+                              (do
+                                (if
+                                  (== e "..")
+                                  (do
+                                    (callm out pop)
+
+                                  )
+                                  (do
+                                    (<< out e)
+
+                                  )
+                                )
+
+                              )
+                            )
+
+                          )
+                        )))) (return (concat "/" (callm out join ("/")))))
+              ))
+          )
+
+        ))
+      (required (do
+          (class Dir Object (
+              (defm (self pwd) () (
+                  (sexp (assign wd (get_current_dir_name))) (sexp (assign cwd (__get_string wd))) (assign cwd 
+                    (callm cwd dup)) (sexp (free wd)) (return cwd))
+              ))
+          )
+
+        ))
+      (required (do
+          (class Numeric Object ())
+
+        ))
+      (required (do
+          (class Integer Numeric ())
+
+        ))
+      (required (do
+          (class Fixnum Integer (
+              (defm initialize () (
+                  (sexp (assign @value 0)))
+              ) 
+              (defm (self allocate) () (
+                  (sexp (assign ob (__array_leaf 2))) (sexp (assign (index ob 0) self)) ob)
+              ) 
+              (defm % (other) (
+                  (sexp (assign r (callm other __get_raw))) (sexp (assign m (mod @value r))) (sexp 
+                    (if
+                      (eq (ge m 0) (lt r 0))
+                      (assign m (add m r))
+                    )) (sexp (__int m)))
+              ) 
+              (defm __set_raw (value) (
+                  (assign @value value))
+              ) 
+              (defm __get_raw () (@value)) 
+              (defm to_i () (self)) 
+              (defm [] (i) (1)) 
+              (defm to_s (
+                  (radix default 10)) (
+                  (if
+                    (or (< radix 2) (> radix 36))
+                    (do
+                      (callm STDERR puts (
+                          (concat "ERROR: Invalid radix " (callm radix inspect) " - must be between 2 and 36")))
+                      (/ 1 0)
+
+                    )
+                    (do
+                      (assign out "")
+                      (assign n self)
+                      (assign neg (< self 0))
+                      (if
+                        neg
+                        (do
+                          (assign n (- 0 n))
+
+                        )
+                      )
+                      (assign digits "0123456789abcdefghijklmnopqrstuvwxyz")
+                      (while (!= n 0) (do
+                          (assign r (% n radix))
+                          (<< out (callm digits [] (r)))
+                          (if
+                            (< n radix)
+                            (break)
+                          )
+                          (assign n (/ n radix))
+
+                        ))
+                      (if
+                        (callm out empty?)
+                        (do
+                          (assign out "0")
+
+                        )
+                        (do
+                          (if
+                            neg
+                            (do
+                              (<< out "-")
+
+                            )
+                          )
+
+                        )
+                      )
+                      (callm out reverse)
+
+                    )
+                  ))
+              ) 
+              (defm hash () (self)) 
+              (defm inspect () (to_s)) 
+              (defm chr () (
+                  (sexp 
+                    (let (buf)
+                      (assign buf (__alloc_leaf 2))
+                      (snprintf buf 2 "%c" @value)
+                      (__get_string buf)
+                    )))
+              ) 
+              (defm + (other) (
+                  (sexp (call __int (
+                        (add @value (callm other __get_raw))))))
+              ) 
+              (defm - (other) (
+                  (sexp (call __int (
+                        (sub @value (callm other __get_raw))))))
+              ) 
+              (defm <= (other) (
+                  (sexp 
+                    (if
+                      (le @value (callm other __get_raw))
+                      true
+                      false
+                    )))
+              ) 
+              (defm == (other) (
+                  (if
+                    (callm other nil?)
+                    (do
+                      (return false)
+
+                    )
+                  ) 
+                  (if
+                    (! (callm other is_a? (Numeric)))
+                    (return false)
+                  ) (sexp 
+                    (if
+                      (eq @value (callm other __get_raw))
+                      true
+                      false
+                    )))
+              ) 
+              (defm ! (
+                  (args rest)) (false)
+              ) 
+              (defm != (other) (
+                  (if
+                    (! (callm other is_a? (Numeric)))
+                    (return true)
+                  ) (assign other (callm other to_i)) (sexp 
+                    (if
+                      (ne @value (callm other __get_raw))
+                      true
+                      false
+                    )))
+              ) 
+              (defm < (other) (
+                  (sexp 
+                    (if
+                      (lt @value (callm other __get_raw))
+                      true
+                      false
+                    )))
+              ) 
+              (defm > (other) (
+                  (sexp 
+                    (if
+                      (gt @value (callm other __get_raw))
+                      true
+                      false
+                    )))
+              ) 
+              (defm >= (other) (
+                  (sexp 
+                    (if
+                      (ge @value (callm other __get_raw))
+                      true
+                      false
+                    )))
+              ) 
+              (defm <=> (other) (
+                  (if
+                    (! (callm other is_a? (Numeric)))
+                    (return nil)
+                  ) 
+                  (if
+                    (> self other)
+                    (do
+                      (return 1)
+
+                    )
+                  ) 
+                  (if
+                    (< self other)
+                    (do
+                      (return -1)
+
+                    )
+                  ) (return 0))
+              ) 
+              (defm div (other) (
+                  (sexp (call __int (
+                        (div @value (callm other __get_raw))))))
+              ) 
+              (defm mul (other) (
+                  (sexp (call __int (
+                        (mul @value (callm other __get_raw))))))
+              ) 
+              (defm * (other) (
+                  (call mul (other)))
+              ) 
+              (defm / (other) (
+                  (call div (other)))
+              ) 
+              (defm ord () (self)) 
+              (defm times () (
+                  (assign i 0) (while (< i self) (do
+                      yield
+                      (assign i (callm i + (1)))
+
+                    )))
+              ))
+          )
+          (sexp (assign FixNum_cache_size 1000))
+          (sexp (assign FixNum_cache (__array_leaf (mul FixNum_cache_size 2))))
+          (sexp 
+            (defun __int (val) 
+              (let (num)
+                (if
+                  (and (ge val 0) (lt val FixNum_cache_size))
+                  (do
+                    (assign num (add FixNum_cache (mul val 8)))
+                    (if
+                      (eq (index num 0) 0)
+                      (do
+                        (assign (index num 0) Fixnum)
+                        (callm num __set_raw (val))
+                        (return num)
+
+                      )
+                    )
+                    (return num)
+
+                  )
+                )
+                (assign num (callm Fixnum allocate))
+                (callm num __set_raw (val))
+                (return num)
+              )
+            ))
+          (sexp (__compiler_internal integer_list))
+
+        ))
+      (required (do
+          (class Symbol Object (
+              (assign @@symbols (hash)) 
+              (defm initialize (name) (
+                  (assign @name name))
+              ) 
+              (defm eql? (other) (
+                  (callm self == (other)))
+              ) 
+              (defm <=> (other) (
+                  (if
+                    (call eql? (other))
+                    (do
+                      (return 0)
+
+                    )
+                  ) (<=> to_s (callm other to_s)))
+              ) 
+              (defm to_s () (@name)) 
+              (defm to_sym () (self)) 
+              (defm inspect () (
+                  (if
+                    (== @name "==")
+                    (return ":==")
+                  ) 
+                  (if
+                    (== @name "===")
+                    (return ":===")
+                  ) 
+                  (if
+                    (== @name "!=")
+                    (return ":!=")
+                  ) 
+                  (if
+                    (== @name "<=")
+                    (return ":<=")
+                  ) 
+                  (if
+                    (== @name "<=>")
+                    (return ":<=>")
+                  ) 
+                  (if
+                    (== @name ">=")
+                    (return ":>=")
+                  ) 
+                  (if
+                    (== @name ">")
+                    (return ":>")
+                  ) 
+                  (if
+                    (== @name "<")
+                    (return ":<")
+                  ) 
+                  (if
+                    (== @name "<<")
+                    (return ":<<")
+                  ) 
+                  (if
+                    (== @name ">>")
+                    (return ":>>")
+                  ) 
+                  (if
+                    (== @name "-")
+                    (return ":-")
+                  ) 
+                  (if
+                    (== @name "/")
+                    (return ":/")
+                  ) 
+                  (if
+                    (== @name "%")
+                    (return ":%")
+                  ) (assign o (callm (callm @name [] (0)) ord)) 
+                  (if
+                    (or (and (>= o 97) (<= o 122)) (or (and (>= o 64) (<= o 91)) (or (== o 42) (or (== o 43) 
+                            (or (== o 95) (== o 33))))))
+                    (do
+                      (concat ":" to_s)
+
+                    )
+                    (do
+                      (concat ":" (callm to_s inspect))
+
+                    )
+                  ))
+              ) 
+              (defm hash () (
+                  (callm to_s hash))
+              ) 
+              (defm [] (i) (
+                  (callm to_s [] (i)))
+              ) 
+              (defm (self __get_symbol) (name) (
+                  (assign sym (callm @@symbols [] (name))) 
+                  (if
+                    (! sym)
+                    (do
+                      (assign sym (callm Symbol new (name)))
+                      (callm @@symbols []= (name sym))
+
+                    )
+                  ) sym)
+              ))
+          )
+          (sexp 
+            (defun __get_symbol (name) (callm Symbol __get_symbol (
+                  (__get_string name)))
+            ))
+
+        ))
+      (required (do
+          (class Class Object (
+              (assign @method_to_voff (hash)) 
+              (defm (self method_to_voff) () (@method_to_voff)) 
+              (defm method_missing (sym (args rest)) (
+                  (sexp 
+                    (if
+                      sym
+                      (printf "WARNING:    Method: '%s'
+" (callm (callm sym to_s) __get_raw))
+                    )) (sexp (printf "WARNING:    symbol address = %p
+" sym)) (sexp (printf "WARNING:    class '%s'
+" 
+                      (callm (callm self name) __get_raw))) (sexp (call exit 1)))
+              ) 
+              (defm __send_for_obj__ (obj sym (args rest)) (
+                  (assign sym (callm sym to_sym)) (assign voff (callm (callm Class method_to_voff) [] (sym))) 
+                  (if
+                    (! voff)
+                    (do
+                      (return (callm obj method_missing (sym (splat args))))
+
+                    )
+                    (do
+                      (sexp (assign raw (callm voff __get_raw)))
+                      (sexp (callm obj (index self raw) (
+                            (splat args))))
+
+                    )
+                  ))
+              ))
+          )
+          (sexp 
+            (let (i max ptr)
+              (assign i 0)
+              (assign max __vtable_size)
+              (assign h (callm Class method_to_voff))
+              (while (lt i max) (do
+                  (assign ptr (index __vtable_names i))
+                  (if
+                    (ne ptr 0)
+                    (callm h []= (
+                        (__get_symbol ptr) (__int i)))
+                  )
+                  (assign i (add i 1))
+
+                ))
+            ))
+
+        ))
+      (required (do
+          (class Hash Object (
+              (defm (self []) (
+                  (args rest)) (
+                  (assign h (callm Hash new)) (assign len (callm args length)) 
+                  (if
+                    (== (% len 2) 1)
+                    (do
+                      (call puts ("ERROR: odd number of arguments for Hash"))
+                      (call exit (1))
+
+                    )
+                  ) (assign pos 0) (while (< pos len) (do
+                      (assign k (callm args [] (pos)))
+                      (assign v (callm args [] (
+                            (+ pos 1))))
+                      (callm h []= (k v))
+                      (assign pos (+ pos 2))
+
+                    )) h)
+              ) 
+              (defm sort_by () (
+                  (callm to_a sort_by () (proc (pair) (
+                        (call yield (
+                            (callm pair [] (0)) (callm pair [] (1))))))))
+              ) 
+              (defm collect () (
+                  (callm to_a collect))
+              ) 
+              (defm inspect () (
+                  (assign str "{") (assign first true) (call each () (proc (k v) (
+                        (if
+                          (! first)
+                          (do
+                            (assign str (callm str + (", ")))
+
+                          )
+                          (do
+                            (assign first false)
+
+                          )
+                        ) (assign str (callm str + (
+                              (callm k inspect)))) (assign str (callm str + ("=>"))) (assign str (callm str + 
+                            (
+                              (callm v inspect))))))) (assign str (callm str + ("}"))) str)
+              ) 
+              (defm keys () (
+                  (assign a (array)) (call each () (proc (k v) (
+                        (<< a k)))) a)
+              ))
+          )
+
+        ))
+      (required (do
+          (class Float Object ())
+
+        ))
+      (required (do
+          (class Struct Object (
+              (defm initialize (
+                  (args rest)) ()
+              ))
+          )
+
+        ))
+      (required (do
+          (class Exception Object ())
+
+        ))
+      (required (do
+          (class PP Object ())
+
+        ))
+      (required (do
+          (class Regexp Object (
+              (defm initialize (arg) ()))
+          )
+
+        ))
+      (required (do
+          (class Enumerator Object ())
+          (class ArrayEnumerator Enumerator (
+              (defm initialize (ary) (
+                  (assign @ary ary) (assign @pos 0))
+              ) 
+              (defm next () (
+                  (if
+                    (< @pos (callm @ary length))
+                    (do
+                      (assign @pos (callm @pos + (1)))
+                      (return (callm @ary [] (@pos)))
+
+                    )
+                    (do
+                      (return nil)
+
+                    )
+                  ))
+              ))
+          )
+          (class RangeEnumerator Enumerator (
+              (defm initialize (r) (
+                  (assign @min (callm r first)) (assign @max (callm r last)) rewind)
+              ) 
+              (defm rewind () (
+                  (assign @cur @min))
+              ) 
+              (defm next () (
+                  (if
+                    (<= @cur @max)
+                    (do
+                      (assign cur @cur)
+                      (assign @cur (callm @cur + (1)))
+                      (return cur)
+
+                    )
+                    (do
+                      (return nil)
+
+                    )
+                  ))
+              ))
+          )
+
+        ))
+      (required (do
+          (sexp (sexp (assign __D_0 (__get_string (index __argv 0)))))
+          (assign ARGV (array))
+          (sexp 
+            (let (__src __i)
+              (assign __i 1)
+              (callm ARGV __grow (
+                  (sub __argc 1)))
+              (while (lt __i __argc) (do
+                  (callm ARGV __set (
+                      (sub __i 1) (__get_string (index __argv __i))))
+                  (assign __i (add __i 1))
+
+                ))
+            ))
+
+        ))
+      (required (do
+          (assign STDIN (callm IO new (0)))
+          (assign STDOUT (callm IO new (1)))
+          (assign STDERR (callm IO new (2)))
+
+        ))
+      (required (do
+          (assign __FILE__ "lib/core/stubs.rb")
+          (assign self (callm Object new))
+          (assign E 2)
+          (defm raise (
+              (exp rest)) (
+              (call puts ("ERROR: Exception support not yet implemented")) (call puts ("ERROR: Arguments to raise were:")) 
+              (call puts (
+                  (callm exp inspect))) (call puts ("ERROR =============")) (sexp (div 0 0)))
+          )
+          (sexp 
+            (defun range (a b) (puts "Compiler range construct is not implemented yet")))
+          (assign LOAD_PATH (array))
+          (assign RUBY_ENGINE "vidarh/compiler")
+
+        ))
+      (required (do
+          (sexp 
+            (defun printregs (regs) (do
+                (printf "eax: %08x, ebx: %08x, ecx: %08x, edx: %08x, esi: %08x, edi: %08x, ebp: %08x, esp: %08x
+" 
+                  (index regs 0) (index regs 1) (index regs 2) (index regs 3) (index regs 4) (index regs 5) 
+                  (index regs 6) (index regs 7))
+                (assign sp (index regs 6))
+                (printf "(ebp): %08x, %08x, %08x, %08x, %08x, %08x, %08x, %08x, %08x, %08x
+" (index sp 0) 
+                  (index sp 1) (index sp 2) (index sp 3) (index sp 4) (index sp 5) (index sp 6) (index sp 7) 
+                  (index sp 8) (index sp 9))
+                (assign sp (index regs 7))
+                (printf "(esp): %08x, %08x, %08x, %08x, %08x, %08x, %08x, %08x
+" (index sp 0) (index sp 1) 
+                  (index sp 2) (index sp 3) (index sp 4) (index sp 5) (index sp 6) (index sp 7))
+
+              )
+            ))
+
+        ))
+
+    ))
+  (defm fib (n) (
+      (if
+        (<= n 2)
+        (do
+          1
+
+        )
+        (do
+          (+ (call fib (
+                (- n 1))) (call fib (
+                (- n 2))))
+
+        )
+      ))
+  )
+  (while true (do
+      (call puts (
+          (call fib (30))))
+
+    ))
+
+)

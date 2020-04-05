@@ -1,0 +1,13 @@
+diff --git a/core/src/main/java/org/jruby/RubyInstanceConfig.java b/core/src/main/java/org/jruby/RubyInstanceConfig.java
+index 6bea5a63db..9d767cc07c 100644
+--- a/core/src/main/java/org/jruby/RubyInstanceConfig.java
++++ b/core/src/main/java/org/jruby/RubyInstanceConfig.java
+@@ -1641,7 +1641,7 @@ public class RubyInstanceConfig {
+         JIT, FORCE, OFF;
+ 
+         public boolean shouldPrecompileCLI() {
+-            return this == JIT || this == FORCE;
++            return false;
+         }
+ 
+         public boolean shouldJIT() {
