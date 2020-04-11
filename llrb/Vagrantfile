@@ -3,7 +3,8 @@ Vagrant.configure('2') do |config|
   config.vm.provider "virtualbox" do |v|
     v.memory = 1024
   end
+  config.vm.synced_folder 'patches', '/var/patches'
   config.vm.synced_folder '../examples', '/var/examples'
   config.vm.synced_folder 'output', '/var/output'
-  #config.vm.provision 'shell', path: 'setup.sh'
+  config.vm.provision 'shell', path: 'setup.sh'
 end
