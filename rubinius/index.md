@@ -20,9 +20,9 @@ The Rubinius JIT was originally written by Evan Phoenix, with contributions from
 
 ## Orientation
 
-The Rubinius source code is available at [our mirror](https://github.com/ruby-compiler-survey/rubinius) or the [original repository](https://github.com/rubinius/rubinius). In order to understand the compilation front-end, you also need to look at a separate repository of supporting gems, also available at [our mirror](https://github.com/ruby-compiler-survey/rubinius-code) or the [original repository](https://github.com/rubinius/rubinius-code). We'll use the prefix `rbx/` or `rbx-code/` to differentiate when talking about code paths. We have also archived the LLVM source code, available in [our mirror](https://github.com/ruby-compiler-survey/llvm), or an [original mirror repository](https://github.com/llvm-mirror/llvm).
+The Rubinius source code is available at [our mirror](https://github.com/ruby-compiler-survey/rubinius) or the [original repository](https://github.com/rubinius/rubinius). In order to understand the compilation front-end, you also need to look at a separate repository of supporting gems, also available at [our mirror](https://github.com/ruby-compiler-survey/rubinius-code) or the [original repository](https://github.com/rubinius/rubinius-code). We'll use the prefix `rbx/` or `rbx-code/` to differentiate when talking about code paths.  We have also archived the LLVM source code, available in [our mirror](https://github.com/ruby-compiler-survey/llvm), or an [original repository](https://github.com/llvm/llvm-project).
 
-We're discussing Rubinius 3.19, `1cc41ddc7c2d3f4a2a70cc39a49e45233f7bc4b3`, 28 February 2016, which is the last release with the JIT, as previously described.
+We're discussing Rubinius 3.19, `1cc41ddc7c2d3f4a2a70cc39a49e45233f7bc4b3`, 28 February 2016, which is the last release with the JIT, as previously described. Rubinius uses LLVM 3.5, `d355b771d6e0ff9638aed38b9289f70642857f5d`, Subversion `216954` (but we're using the build provided by Ubuntu which will possibly have patches applied.)
 
 The frontend in Rubinius is written as a set of gems using both C++ in `rbx-code/ext/rubinius/code/melbourne` and Ruby in `rbx-code/lib/rubinius/code`. The VM is implemented in C++ in `rbx/vm` and the JIT itself in `rbx/vm/llvm`. The Rubinius core library is in `rbx/core`.
 
@@ -743,8 +743,8 @@ push_add:
 
 We can look at the LLVM source code and see that this optimisation is implemented by recognising the pattern that Rubinius emits - two integer compares combined with an `and` - as a range test operation in [`FoldAndOfICmps`][rbx-fold-and-of-icmps], and then emitting the alternative code for it in [`InsertRangeTest`][rbx-insert-range-test].
 
-[rbx-fold-and-of-icmps]: https://github.com/ruby-compiler-survey/llvm/blob/a4cf325e41fca33c7ce7deef39a7bcf25fb38266/lib/Transforms/InstCombine/InstCombineAndOrXor.cpp#L790-L1022
-[rbx-insert-range-test]: https://github.com/ruby-compiler-survey/llvm/blob/a4cf325e41fca33c7ce7deef39a7bcf25fb38266/lib/Transforms/InstCombine/InstCombineAndOrXor.cpp#L263-L304
+[rbx-fold-and-of-icmps]: https://github.com/ruby-compiler-survey/llvm/blob/d355b771d6e0ff9638aed38b9289f70642857f5d/llvm/lib/Transforms/InstCombine/InstCombineAndOrXor.cpp#L790-L1022
+[rbx-insert-range-test]: https://github.com/ruby-compiler-survey/llvm/blob/d355b771d6e0ff9638aed38b9289f70642857f5d/llvm/lib/Transforms/InstCombine/InstCombineAndOrXor.cpp#L263-L304
 
 ## Compilation by LLVM
 
