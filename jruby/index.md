@@ -15,7 +15,7 @@ JRuby is likely the only Ruby JIT that has ever had significant use in productio
 
 The JRuby source code is available at [our archive](https://github.com/ruby-compiler-survey/jruby) or the [original repository](https://github.com/jruby/jruby).
 
-We're discussing JRuby 9.2.9.0, `458ad3ed9cdb18b3e69fb96b947b978a193afeb6`, 30 October 2019, which is the latest release as at 3 February 2020. JRuby by default will compile the entire entry-point script on load. This makes it hard to understand the compilation of individual methods, the effect of profiling, and things like compilation threshold. This feature cannot be disabled with an option, so we turn it off by patching the source code.
+We're discussing JRuby 9.2.9.0, `458ad3ed9cdb`, 30 October 2019, which is the latest release as at 3 February 2020. JRuby by default will compile the entire entry-point script on load. This makes it hard to understand the compilation of individual methods, the effect of profiling, and things like compilation threshold. This feature cannot be disabled with an option, so we turn it off by patching the source code.
 
 JRuby is usable on many different implementations of the JVM. In order for us to be able to talk in concrete terms, we're going to explain JRuby in the context of running on OpenJDK 8 (HotSpot). This JVM is the default in this version of JRuby's CI system and in practice is probably the platform that most people will be running JRuby on. We're also going to enable JRuby's invoke dynamic support, even though this is not the default, in order to show JRuby's compiler in its most sophisticated configuration.
 

@@ -22,7 +22,7 @@ The Rubinius JIT was originally written by Evan Phoenix, with contributions from
 
 The Rubinius source code is available at [our mirror](https://github.com/ruby-compiler-survey/rubinius) or the [original repository](https://github.com/rubinius/rubinius). In order to understand the compilation front-end, you also need to look at a separate repository of supporting gems, also available at [our mirror](https://github.com/ruby-compiler-survey/rubinius-code) or the [original repository](https://github.com/rubinius/rubinius-code). We'll use the prefix `rbx/` or `rbx-code/` to differentiate when talking about code paths.  We have also archived the LLVM source code, available in [our mirror](https://github.com/ruby-compiler-survey/llvm), or an [original repository](https://github.com/llvm/llvm-project).
 
-We're discussing Rubinius 3.19, `1cc41ddc7c2d3f4a2a70cc39a49e45233f7bc4b3`, 28 February 2016, which is the last release with the JIT, as previously described. Rubinius uses LLVM 3.5, `d355b771d6e0ff9638aed38b9289f70642857f5d`, Subversion `216954` (but we're using the build provided by Ubuntu which will possibly have patches applied.)
+We're discussing Rubinius 3.19, `1cc41ddc7c2`, 28 February 2016, which is the last release with the JIT, as previously described. Rubinius uses LLVM 3.5, `d355b771d6e0`, Subversion `216954` (but we're using the build provided by Ubuntu which will possibly have patches applied.)
 
 The frontend in Rubinius is written as a set of gems using both C++ in `rbx-code/ext/rubinius/code/melbourne` and Ruby in `rbx-code/lib/rubinius/code`. The VM is implemented in C++ in `rbx/vm` and the JIT itself in `rbx/vm/llvm`. The Rubinius core library is in `rbx/core`.
 
@@ -1251,7 +1251,7 @@ end
 
 A special C++ processor was developed to run inline Ruby to generate and include the C++ instruction code, so Rubinius has at one point had C inline in Ruby, and also at one point Ruby inline in C++.
 
-```cppX
+```cpp
 extern "C" {
 
   #ruby <<CODE
@@ -1269,7 +1269,7 @@ extern "C" {
 
 <p class="coderef"><a href="https://github.com/ruby-compiler-survey/rubinius/blob/f69d10f11e6bd74c97dc218022405ac797736cdf/vm/llvm/instructions.cpp#L28-L36">rbx/vm/llvm/instructions.cpp:28-36</a></p>
 
-A [second approach to implementing the JIT][rbx-second-jit], also in 2008, was to directly generate machine code from the bytecode, in C++, using a [native assembler library developed by Phoenix][rbx-native-assembler]. This is similar to what for example HotSpot or V8 does, and we believe it's the only time a Ruby JIT has been attempted without any separeate supporting compiler framework.
+A [second approach to implementing the JIT][rbx-second-jit], also in 2008, was to directly generate machine code from the bytecode, in C++, using a [native assembler library developed by Phoenix][rbx-native-assembler]. This is similar to what for example HotSpot or V8 does, and we believe it's the only time a Ruby JIT has been attempted without any separate supporting compiler framework.
 
 [rbx-second-jit]: https://github.com/ruby-compiler-survey/rubinius/commit/a2ef6b419fc46122938a086dcb8a556f64f86e1b
 [rbx-native-assembler]: https://github.com/ruby-compiler-survey/rubinius/commit/855846c8850bc22ac1b90e1c5bfbdb5c517efdae

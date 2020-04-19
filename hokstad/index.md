@@ -13,7 +13,7 @@ Compilation in Hokstad is pessimistic and static, all objects are heap-allocated
 
 The Hokstad compiler source code is available at [our mirror](https://github.com/ruby-compiler-survey/hokstad/) or the [original repository](https://github.com/vidarh/writing-a-compiler-in-ruby/).
 
-We're discussing Hokstad `052df9eee662be6b24f448706297bb179e501732`, 28 October 2019, which is the most recent commit as at 4 January 2020.
+We're discussing Hokstad `052df9eee662`, 28 October 2019, which is the most recent commit as at 4 January 2020.
 
 The entry-point to the compiler, `driver.rb` is a simple Ruby script and gives a good overview of the compilation pipeline. It loads a main file, creates the scanner and parser, parses to an AST `prog`, creates an assembly writer or `Emitter`, which it passes to a code generation visitor object or `Compiler`. The compiler runs in two phases - `preprocess`, which is a lowering phase, and `compile` which is a code generation phase. The assembly output is written directly to standard out in `compile`, so never exists complete in memory.
 
