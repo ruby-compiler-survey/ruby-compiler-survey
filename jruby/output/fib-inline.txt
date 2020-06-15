@@ -1,0 +1,691 @@
+   3076  760             Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0 (105 bytes)
+                            @ 9   java.lang.invoke.Invokers$Holder::linkToCallSite (21 bytes)   force inline by annotation
+                              @ 4   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                              @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801059840::invoke (54 bytes)   force inline by annotation
+                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                  @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                    @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801056040::invoke (19 bytes)   force inline by annotation
+                                      @ 15   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (14 bytes)   force inline by annotation
+                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                        @ 10   org.jruby.runtime.invokedynamic.MathLinker::fixnumTest (5 bytes)   inline (hot)
+               !                    @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                    @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                      @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801058440::invoke (31 bytes)   force inline by annotation
+                                        @ 27   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (20 bytes)   force inline by annotation
+                                          @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                          @ 16   org.jruby.runtime.invokedynamic.MathLinker::fixnum_op_le (10 bytes)   inline (hot)
+                                            @ 6   org.jruby.RubyFixnum::op_le (22 bytes)   inline (hot)
+                                              @ 18   org.jruby.RubyBoolean::newBoolean (16 bytes)   inline (hot)
+                                                @ 5   org.jruby.Ruby::getTrue (5 bytes)   accessor
+                                                @ 12   org.jruby.Ruby::getFalse (5 bytes)   accessor
+                            @ 18   org.jruby.RubyBasicObject::isTrue (17 bytes)   inline (hot)
+                            @ 18   org.jruby.RubyBasicObject::isTrue (17 bytes)   inline (hot)
+                             \-> TypeProfile (3839/7682 counts) = org/jruby/RubyBoolean$False
+                             \-> TypeProfile (3843/7682 counts) = org/jruby/RubyBoolean$True
+                            @ 28   java.lang.invoke.Invokers$Holder::linkToCallSite (17 bytes)   force inline by annotation
+                              @ 4   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                              @ 13   java.lang.invoke.LambdaForm$MH/0x0000000800bc0440::invoke (8 bytes)   force inline by annotation
+                            @ 47   java.lang.invoke.Invokers$Holder::linkToCallSite (21 bytes)   force inline by annotation
+                              @ 4   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                              @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801059840::invoke (54 bytes)   force inline by annotation
+                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                  @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                    @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801056040::invoke (19 bytes)   force inline by annotation
+                                      @ 15   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (14 bytes)   force inline by annotation
+                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                        @ 10   org.jruby.runtime.invokedynamic.MathLinker::fixnumTest (5 bytes)   inline (hot)
+               !                    @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                    @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                      @ 17   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (18 bytes)   force inline by annotation
+                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                        @ 14   org.jruby.runtime.invokedynamic.MathLinker::fixnum_op_minus_one (9 bytes)   inline (hot)
+               !                          @ 5   org.jruby.RubyFixnum::op_minus_one (24 bytes)   inline (hot)
+                                            @ 9   java.lang.Math::subtractExact (31 bytes)   (intrinsic)
+                                            @ 12   org.jruby.RubyFixnum::newFixnum (29 bytes)   inline (hot)
+                                              @ 7   org.jruby.RubyFixnum::isInCacheRange (27 bytes)   inline (hot)
+                                              @ 15   org.jruby.RubyFixnum::cachedFixnum (13 bytes)   inline (hot)
+                                              @ 25   org.jruby.RubyFixnum::<init> (26 bytes)   inline (hot)
+                                                @ 2   org.jruby.Ruby::getFixnum (5 bytes)   accessor
+                                                @ 5   org.jruby.RubyInteger::<init> (6 bytes)   inline (hot)
+                                                  @ 2   org.jruby.RubyNumeric::<init> (6 bytes)   inline (hot)
+                                                    @ 2   org.jruby.RubyObject::<init> (6 bytes)   inline (hot)
+                                                      @ 2   org.jruby.RubyBasicObject::<init> (10 bytes)   inline (hot)
+                                                        @ 1   java.lang.Object::<init> (1 bytes)   inline (hot)
+                                            @ 20   org.jruby.RubyFixnum::subtractAsBignum (20 bytes)   never executed
+                            @ 59   java.lang.invoke.Invokers$Holder::linkToCallSite (23 bytes)   force inline by annotation
+                              @ 5   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                              @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                @ 39   java.lang.invoke.LambdaForm$MH/0x0000000801060c40::invoke (54 bytes)   force inline by annotation
+                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                  @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                    @ 39   java.lang.invoke.LambdaForm$MH/0x000000080105fc40::invoke (29 bytes)   force inline by annotation
+                                      @ 25   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (15 bytes)   force inline by annotation
+                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                        @ 11   org.jruby.ir.targets.Bootstrap::testType (14 bytes)   inline (hot)
+                                          @ 2   org.jruby.RubyBasicObject::getMetaClass (8 bytes)   inline (hot)
+               !                    @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                    @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                      @ 19   java.lang.invoke.LambdaForm$MH/0x000000080105f040::invoke (56 bytes)   force inline by annotation
+                                        @ 52   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (26 bytes)   force inline by annotation
+                                          @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                          @ 22   Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0 (105 bytes)   inline (hot)
+                                            @ 9   java.lang.invoke.Invokers$Holder::linkToCallSite (21 bytes)   force inline by annotation
+                                              @ 4   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                              @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                                @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801059840::invoke (54 bytes)   force inline by annotation
+                                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                                @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                  @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                                    @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801056040::invoke (19 bytes)   force inline by annotation
+                                                      @ 15   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (14 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 10   org.jruby.runtime.invokedynamic.MathLinker::fixnumTest (5 bytes)   inline (hot)
+               !                                    @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                    @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                      @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801058440::invoke (31 bytes)   force inline by annotation
+                                                        @ 27   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (20 bytes)   force inline by annotation
+                                                          @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                          @ 16   org.jruby.runtime.invokedynamic.MathLinker::fixnum_op_le (10 bytes)   inline (hot)
+                                                            @ 6   org.jruby.RubyFixnum::op_le (22 bytes)   inline (hot)
+                                                              @ 18   org.jruby.RubyBoolean::newBoolean (16 bytes)   inline (hot)
+                                                                @ 5   org.jruby.Ruby::getTrue (5 bytes)   accessor
+                                                                @ 12   org.jruby.Ruby::getFalse (5 bytes)   accessor
+                                            @ 18   org.jruby.RubyBasicObject::isTrue (17 bytes)   inline (hot)
+                                            @ 18   org.jruby.RubyBasicObject::isTrue (17 bytes)   inline (hot)
+                                             \-> TypeProfile (3839/7682 counts) = org/jruby/RubyBoolean$False
+                                             \-> TypeProfile (3843/7682 counts) = org/jruby/RubyBoolean$True
+                                            @ 28   java.lang.invoke.Invokers$Holder::linkToCallSite (17 bytes)   force inline by annotation
+                                              @ 4   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                              @ 13   java.lang.invoke.LambdaForm$MH/0x0000000800bc0440::invoke (8 bytes)   force inline by annotation
+                                            @ 47   java.lang.invoke.Invokers$Holder::linkToCallSite (21 bytes)   force inline by annotation
+                                              @ 4   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                              @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                                @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801059840::invoke (54 bytes)   force inline by annotation
+                                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                                @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                  @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                                    @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801056040::invoke (19 bytes)   force inline by annotation
+                                                      @ 15   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (14 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 10   org.jruby.runtime.invokedynamic.MathLinker::fixnumTest (5 bytes)   inline (hot)
+               !                                    @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                    @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                      @ 17   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (18 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 14   org.jruby.runtime.invokedynamic.MathLinker::fixnum_op_minus_one (9 bytes)   inline (hot)
+               !                                          @ 5   org.jruby.RubyFixnum::op_minus_one (24 bytes)   inline (hot)
+                                                            @ 9   java.lang.Math::subtractExact (31 bytes)   (intrinsic)
+                                                            @ 12   org.jruby.RubyFixnum::newFixnum (29 bytes)   inline (hot)
+                                                              @ 7   org.jruby.RubyFixnum::isInCacheRange (27 bytes)   inline (hot)
+                                                              @ 15   org.jruby.RubyFixnum::cachedFixnum (13 bytes)   inline (hot)
+                                                              @ 25   org.jruby.RubyFixnum::<init> (26 bytes)   inline (hot)
+                                                                @ 2   org.jruby.Ruby::getFixnum (5 bytes)   accessor
+                                                                @ 5   org.jruby.RubyInteger::<init> (6 bytes)   inline (hot)
+                                                                  @ 2   org.jruby.RubyNumeric::<init> (6 bytes)   inline (hot)
+                                                                    @ 2   org.jruby.RubyObject::<init> (6 bytes)   inline (hot)
+                                                                      @ 2   org.jruby.RubyBasicObject::<init> (10 bytes)   inline (hot)
+                                                                        @ 1   java.lang.Object::<init> (1 bytes)   inline (hot)
+                                                            @ 20   org.jruby.RubyFixnum::subtractAsBignum (20 bytes)   never executed
+                                            @ 59   java.lang.invoke.Invokers$Holder::linkToCallSite (23 bytes)   force inline by annotation
+                                              @ 5   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                              @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                                @ 39   java.lang.invoke.LambdaForm$MH/0x0000000801060c40::invoke (54 bytes)   force inline by annotation
+                                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                                @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                  @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                                    @ 39   java.lang.invoke.LambdaForm$MH/0x000000080105fc40::invoke (29 bytes)   force inline by annotation
+                                                      @ 25   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (15 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 11   org.jruby.ir.targets.Bootstrap::testType (14 bytes)   inline (hot)
+                                                          @ 2   org.jruby.RubyBasicObject::getMetaClass (8 bytes)   inline (hot)
+               !                                    @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                    @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                      @ 19   java.lang.invoke.LambdaForm$MH/0x000000080105f040::invoke (56 bytes)   force inline by annotation
+                                                        @ 52   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (26 bytes)   force inline by annotation
+                                                          @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                          @ 22   Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0 (105 bytes)   recursive inlining is too deep
+                                            @ 70   java.lang.invoke.Invokers$Holder::linkToCallSite (21 bytes)   force inline by annotation
+                                              @ 4   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                              @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                                @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801059840::invoke (54 bytes)   force inline by annotation
+                                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                                @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                  @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                                    @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801056040::invoke (19 bytes)   force inline by annotation
+                                                      @ 15   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (14 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 10   org.jruby.runtime.invokedynamic.MathLinker::fixnumTest (5 bytes)   inline (hot)
+               !                                    @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                    @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                      @ 17   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (18 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 14   org.jruby.runtime.invokedynamic.MathLinker::fixnum_op_minus_two (9 bytes)   inline (hot)
+               !                                          @ 5   org.jruby.RubyFixnum::op_minus_two (28 bytes)   inline (hot)
+                                                            @ 11   java.lang.Math::subtractExact (31 bytes)   (intrinsic)
+                                                            @ 14   org.jruby.RubyFixnum::newFixnum (29 bytes)   inline (hot)
+                                                              @ 7   org.jruby.RubyFixnum::isInCacheRange (27 bytes)   inline (hot)
+                                                              @ 15   org.jruby.RubyFixnum::cachedFixnum (13 bytes)   inline (hot)
+                                                              @ 25   org.jruby.RubyFixnum::<init> (26 bytes)   inline (hot)
+                                                                @ 2   org.jruby.Ruby::getFixnum (5 bytes)   accessor
+                                                                @ 5   org.jruby.RubyInteger::<init> (6 bytes)   inline (hot)
+                                                                  @ 2   org.jruby.RubyNumeric::<init> (6 bytes)   inline (hot)
+                                                                    @ 2   org.jruby.RubyObject::<init> (6 bytes)   inline (hot)
+                                                                      @ 2   org.jruby.RubyBasicObject::<init> (10 bytes)   inline (hot)
+                                                                        @ 1   java.lang.Object::<init> (1 bytes)   inline (hot)
+                                                            @ 24   org.jruby.RubyFixnum::subtractAsBignum (20 bytes)   never executed
+                                            @ 82   java.lang.invoke.Invokers$Holder::linkToCallSite (23 bytes)   force inline by annotation
+                                              @ 5   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                              @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                                @ 39   java.lang.invoke.LambdaForm$MH/0x0000000801060c40::invoke (54 bytes)   force inline by annotation
+                                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                                @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                  @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                                    @ 39   java.lang.invoke.LambdaForm$MH/0x000000080105fc40::invoke (29 bytes)   force inline by annotation
+                                                      @ 25   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (15 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 11   org.jruby.ir.targets.Bootstrap::testType (14 bytes)   inline (hot)
+                                                          @ 2   org.jruby.RubyBasicObject::getMetaClass (8 bytes)   inline (hot)
+               !                                    @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                    @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                      @ 19   java.lang.invoke.LambdaForm$MH/0x000000080105f040::invoke (56 bytes)   force inline by annotation
+                                                        @ 52   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (26 bytes)   force inline by annotation
+                                                          @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                          @ 22   Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0 (105 bytes)   recursive inlining is too deep
+                                            @ 95   java.lang.invoke.Invokers$Holder::linkToCallSite (23 bytes)   force inline by annotation
+                                              @ 5   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                              @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                                @ 39   java.lang.invoke.LambdaForm$MH/0x0000000801060c40::invoke (54 bytes)   force inline by annotation
+                                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                                @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                  @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                                    @ 39   java.lang.invoke.LambdaForm$MH/0x0000000801067840::invoke (29 bytes)   force inline by annotation
+                                                      @ 25   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (15 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 11   org.jruby.ir.targets.InvokeSite::testClass (14 bytes)   inline (hot)
+                                                          @ 1   java.lang.Object::getClass (0 bytes)   (intrinsic)
+               !                                    @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                    @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                      @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801067040::invoke (42 bytes)   force inline by annotation
+                                                        @ 17   java.lang.invoke.LambdaForm$MH/0x0000000800f12040::invoke (25 bytes)   force inline by annotation
+                                                          @ 21   java.lang.invoke.DirectMethodHandle$Holder::invokeSpecial (15 bytes)   force inline by annotation
+                                                            @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                            @ 11   java.lang.Class::cast (27 bytes)   (intrinsic)
+                                                        @ 38   java.lang.invoke.LambdaForm$DMH/0x0000000801066840::invokeVirtual (18 bytes)   force inline by annotation
+                                                          @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                          @ 14   org.jruby.RubyFixnum::op_plus (24 bytes)   inline (hot)
+               !                                            @ 13   org.jruby.RubyFixnum::addFixnum (30 bytes)   inline (hot)
+                                                              @ 12   java.lang.Math::addExact (32 bytes)   (intrinsic)
+                                                              @ 15   org.jruby.RubyFixnum::newFixnum (29 bytes)   inline (hot)
+                                                                @ 7   org.jruby.RubyFixnum::isInCacheRange (27 bytes)   inline (hot)
+                                                                @ 15   org.jruby.RubyFixnum::cachedFixnum (13 bytes)   inline (hot)
+                                                                @ 25   org.jruby.RubyFixnum::<init> (26 bytes)   inline (hot)
+                                                                  @ 2   org.jruby.Ruby::getFixnum (5 bytes)   accessor
+                                                                  @ 5   org.jruby.RubyInteger::<init> (6 bytes)   inline (hot)
+                                                                    @ 2   org.jruby.RubyNumeric::<init> (6 bytes)   inline (hot)
+                                                                      @ 2   org.jruby.RubyObject::<init> (6 bytes)   inline (hot)
+                                                                        @ 2   org.jruby.RubyBasicObject::<init> (10 bytes)   inline (hot)
+                                                                          @ 1   java.lang.Object::<init> (1 bytes)   inline (hot)
+                                                              @ 26   org.jruby.RubyFixnum::addAsBignum (20 bytes)   never executed
+                            @ 70   java.lang.invoke.Invokers$Holder::linkToCallSite (21 bytes)   force inline by annotation
+                              @ 4   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                              @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801059840::invoke (54 bytes)   force inline by annotation
+                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                  @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                    @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801056040::invoke (19 bytes)   force inline by annotation
+                                      @ 15   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (14 bytes)   force inline by annotation
+                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                        @ 10   org.jruby.runtime.invokedynamic.MathLinker::fixnumTest (5 bytes)   inline (hot)
+               !                    @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                    @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                      @ 17   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (18 bytes)   force inline by annotation
+                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                        @ 14   org.jruby.runtime.invokedynamic.MathLinker::fixnum_op_minus_two (9 bytes)   inline (hot)
+               !                          @ 5   org.jruby.RubyFixnum::op_minus_two (28 bytes)   inline (hot)
+                                            @ 11   java.lang.Math::subtractExact (31 bytes)   (intrinsic)
+                                            @ 14   org.jruby.RubyFixnum::newFixnum (29 bytes)   inline (hot)
+                                              @ 7   org.jruby.RubyFixnum::isInCacheRange (27 bytes)   inline (hot)
+                                              @ 15   org.jruby.RubyFixnum::cachedFixnum (13 bytes)   inline (hot)
+                                              @ 25   org.jruby.RubyFixnum::<init> (26 bytes)   inline (hot)
+                                                @ 2   org.jruby.Ruby::getFixnum (5 bytes)   accessor
+                                                @ 5   org.jruby.RubyInteger::<init> (6 bytes)   inline (hot)
+                                                  @ 2   org.jruby.RubyNumeric::<init> (6 bytes)   inline (hot)
+                                                    @ 2   org.jruby.RubyObject::<init> (6 bytes)   inline (hot)
+                                                      @ 2   org.jruby.RubyBasicObject::<init> (10 bytes)   inline (hot)
+                                                        @ 1   java.lang.Object::<init> (1 bytes)   inline (hot)
+                                            @ 24   org.jruby.RubyFixnum::subtractAsBignum (20 bytes)   never executed
+                            @ 82   java.lang.invoke.Invokers$Holder::linkToCallSite (23 bytes)   force inline by annotation
+                              @ 5   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                              @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                @ 39   java.lang.invoke.LambdaForm$MH/0x0000000801060c40::invoke (54 bytes)   force inline by annotation
+                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                  @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                    @ 39   java.lang.invoke.LambdaForm$MH/0x000000080105fc40::invoke (29 bytes)   force inline by annotation
+                                      @ 25   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (15 bytes)   force inline by annotation
+                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                        @ 11   org.jruby.ir.targets.Bootstrap::testType (14 bytes)   inline (hot)
+                                          @ 2   org.jruby.RubyBasicObject::getMetaClass (8 bytes)   inline (hot)
+               !                    @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                    @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                      @ 19   java.lang.invoke.LambdaForm$MH/0x000000080105f040::invoke (56 bytes)   force inline by annotation
+                                        @ 52   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (26 bytes)   force inline by annotation
+                                          @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                          @ 22   Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0 (105 bytes)   inline (hot)
+                                            @ 9   java.lang.invoke.Invokers$Holder::linkToCallSite (21 bytes)   force inline by annotation
+                                              @ 4   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                              @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                                @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801059840::invoke (54 bytes)   force inline by annotation
+                                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                                @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                  @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                                    @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801056040::invoke (19 bytes)   force inline by annotation
+                                                      @ 15   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (14 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 10   org.jruby.runtime.invokedynamic.MathLinker::fixnumTest (5 bytes)   inline (hot)
+               !                                    @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                    @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                      @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801058440::invoke (31 bytes)   force inline by annotation
+                                                        @ 27   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (20 bytes)   force inline by annotation
+                                                          @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                          @ 16   org.jruby.runtime.invokedynamic.MathLinker::fixnum_op_le (10 bytes)   inline (hot)
+                                                            @ 6   org.jruby.RubyFixnum::op_le (22 bytes)   inline (hot)
+                                                              @ 18   org.jruby.RubyBoolean::newBoolean (16 bytes)   inline (hot)
+                                                                @ 5   org.jruby.Ruby::getTrue (5 bytes)   accessor
+                                                                @ 12   org.jruby.Ruby::getFalse (5 bytes)   accessor
+                                            @ 18   org.jruby.RubyBasicObject::isTrue (17 bytes)   inline (hot)
+                                            @ 18   org.jruby.RubyBasicObject::isTrue (17 bytes)   inline (hot)
+                                             \-> TypeProfile (3839/7682 counts) = org/jruby/RubyBoolean$False
+                                             \-> TypeProfile (3843/7682 counts) = org/jruby/RubyBoolean$True
+                                            @ 28   java.lang.invoke.Invokers$Holder::linkToCallSite (17 bytes)   force inline by annotation
+                                              @ 4   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                              @ 13   java.lang.invoke.LambdaForm$MH/0x0000000800bc0440::invoke (8 bytes)   force inline by annotation
+                                            @ 47   java.lang.invoke.Invokers$Holder::linkToCallSite (21 bytes)   force inline by annotation
+                                              @ 4   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                              @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                                @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801059840::invoke (54 bytes)   force inline by annotation
+                                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                                @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                  @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                                    @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801056040::invoke (19 bytes)   force inline by annotation
+                                                      @ 15   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (14 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 10   org.jruby.runtime.invokedynamic.MathLinker::fixnumTest (5 bytes)   inline (hot)
+               !                                    @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                    @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                      @ 17   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (18 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 14   org.jruby.runtime.invokedynamic.MathLinker::fixnum_op_minus_one (9 bytes)   inline (hot)
+               !                                          @ 5   org.jruby.RubyFixnum::op_minus_one (24 bytes)   inline (hot)
+                                                            @ 9   java.lang.Math::subtractExact (31 bytes)   (intrinsic)
+                                                            @ 12   org.jruby.RubyFixnum::newFixnum (29 bytes)   inline (hot)
+                                                              @ 7   org.jruby.RubyFixnum::isInCacheRange (27 bytes)   inline (hot)
+                                                              @ 15   org.jruby.RubyFixnum::cachedFixnum (13 bytes)   inline (hot)
+                                                              @ 25   org.jruby.RubyFixnum::<init> (26 bytes)   inline (hot)
+                                                                @ 2   org.jruby.Ruby::getFixnum (5 bytes)   accessor
+                                                                @ 5   org.jruby.RubyInteger::<init> (6 bytes)   inline (hot)
+                                                                  @ 2   org.jruby.RubyNumeric::<init> (6 bytes)   inline (hot)
+                                                                    @ 2   org.jruby.RubyObject::<init> (6 bytes)   inline (hot)
+                                                                      @ 2   org.jruby.RubyBasicObject::<init> (10 bytes)   inline (hot)
+                                                                        @ 1   java.lang.Object::<init> (1 bytes)   inline (hot)
+                                                            @ 20   org.jruby.RubyFixnum::subtractAsBignum (20 bytes)   never executed
+                                            @ 59   java.lang.invoke.Invokers$Holder::linkToCallSite (23 bytes)   force inline by annotation
+                                              @ 5   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                              @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                                @ 39   java.lang.invoke.LambdaForm$MH/0x0000000801060c40::invoke (54 bytes)   force inline by annotation
+                                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                                @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                  @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                                    @ 39   java.lang.invoke.LambdaForm$MH/0x000000080105fc40::invoke (29 bytes)   force inline by annotation
+                                                      @ 25   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (15 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 11   org.jruby.ir.targets.Bootstrap::testType (14 bytes)   inline (hot)
+                                                          @ 2   org.jruby.RubyBasicObject::getMetaClass (8 bytes)   inline (hot)
+               !                                    @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                    @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                      @ 19   java.lang.invoke.LambdaForm$MH/0x000000080105f040::invoke (56 bytes)   force inline by annotation
+                                                        @ 52   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (26 bytes)   force inline by annotation
+                                                          @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                          @ 22   Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0 (105 bytes)   recursive inlining is too deep
+                                            @ 70   java.lang.invoke.Invokers$Holder::linkToCallSite (21 bytes)   force inline by annotation
+                                              @ 4   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                              @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                                @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801059840::invoke (54 bytes)   force inline by annotation
+                                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                                @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                  @ 17   java.lang.invoke.LambdaForm$MH/0x0000000801059440::guard (103 bytes)   force inline by annotation
+                                                    @ 37   java.lang.invoke.LambdaForm$MH/0x0000000801056040::invoke (19 bytes)   force inline by annotation
+                                                      @ 15   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (14 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 10   org.jruby.runtime.invokedynamic.MathLinker::fixnumTest (5 bytes)   inline (hot)
+               !                                    @ 51   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                    @ 78   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (21 bytes)   force inline by annotation
+                                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                      @ 17   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (18 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 14   org.jruby.runtime.invokedynamic.MathLinker::fixnum_op_minus_two (9 bytes)   inline (hot)
+               !                                          @ 5   org.jruby.RubyFixnum::op_minus_two (28 bytes)   inline (hot)
+                                                            @ 11   java.lang.Math::subtractExact (31 bytes)   (intrinsic)
+                                                            @ 14   org.jruby.RubyFixnum::newFixnum (29 bytes)   inline (hot)
+                                                              @ 7   org.jruby.RubyFixnum::isInCacheRange (27 bytes)   inline (hot)
+                                                              @ 15   org.jruby.RubyFixnum::cachedFixnum (13 bytes)   inline (hot)
+                                                              @ 25   org.jruby.RubyFixnum::<init> (26 bytes)   inline (hot)
+                                                                @ 2   org.jruby.Ruby::getFixnum (5 bytes)   accessor
+                                                                @ 5   org.jruby.RubyInteger::<init> (6 bytes)   inline (hot)
+                                                                  @ 2   org.jruby.RubyNumeric::<init> (6 bytes)   inline (hot)
+                                                                    @ 2   org.jruby.RubyObject::<init> (6 bytes)   inline (hot)
+                                                                      @ 2   org.jruby.RubyBasicObject::<init> (10 bytes)   inline (hot)
+                                                                        @ 1   java.lang.Object::<init> (1 bytes)   inline (hot)
+                                                            @ 24   org.jruby.RubyFixnum::subtractAsBignum (20 bytes)   never executed
+                                            @ 82   java.lang.invoke.Invokers$Holder::linkToCallSite (23 bytes)   force inline by annotation
+                                              @ 5   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                              @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                                @ 39   java.lang.invoke.LambdaForm$MH/0x0000000801060c40::invoke (54 bytes)   force inline by annotation
+                                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                                @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                  @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                                    @ 39   java.lang.invoke.LambdaForm$MH/0x000000080105fc40::invoke (29 bytes)   force inline by annotation
+                                                      @ 25   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (15 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 11   org.jruby.ir.targets.Bootstrap::testType (14 bytes)   inline (hot)
+                                                          @ 2   org.jruby.RubyBasicObject::getMetaClass (8 bytes)   inline (hot)
+               !                                    @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                    @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                      @ 19   java.lang.invoke.LambdaForm$MH/0x000000080105f040::invoke (56 bytes)   force inline by annotation
+                                                        @ 52   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (26 bytes)   force inline by annotation
+                                                          @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                          @ 22   Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0 (105 bytes)   recursive inlining is too deep
+                                            @ 95   java.lang.invoke.Invokers$Holder::linkToCallSite (23 bytes)   force inline by annotation
+                                              @ 5   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                              @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                                @ 39   java.lang.invoke.LambdaForm$MH/0x0000000801060c40::invoke (54 bytes)   force inline by annotation
+                                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                                @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                  @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                                    @ 39   java.lang.invoke.LambdaForm$MH/0x0000000801067840::invoke (29 bytes)   force inline by annotation
+                                                      @ 25   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (15 bytes)   force inline by annotation
+                                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                        @ 11   org.jruby.ir.targets.InvokeSite::testClass (14 bytes)   inline (hot)
+                                                          @ 1   java.lang.Object::getClass (0 bytes)   (intrinsic)
+               !                                    @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                                    @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                                      @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801067040::invoke (42 bytes)   force inline by annotation
+                                                        @ 17   java.lang.invoke.LambdaForm$MH/0x0000000800f12040::invoke (25 bytes)   force inline by annotation
+                                                          @ 21   java.lang.invoke.DirectMethodHandle$Holder::invokeSpecial (15 bytes)   force inline by annotation
+                                                            @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                            @ 11   java.lang.Class::cast (27 bytes)   (intrinsic)
+                                                        @ 38   java.lang.invoke.LambdaForm$DMH/0x0000000801066840::invokeVirtual (18 bytes)   force inline by annotation
+                                                          @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                                          @ 14   org.jruby.RubyFixnum::op_plus (24 bytes)   inline (hot)
+               !                                            @ 13   org.jruby.RubyFixnum::addFixnum (30 bytes)   inline (hot)
+                                                              @ 12   java.lang.Math::addExact (32 bytes)   (intrinsic)
+                                                              @ 15   org.jruby.RubyFixnum::newFixnum (29 bytes)   inline (hot)
+                                                                @ 7   org.jruby.RubyFixnum::isInCacheRange (27 bytes)   inline (hot)
+                                                                @ 15   org.jruby.RubyFixnum::cachedFixnum (13 bytes)   inline (hot)
+                                                                @ 25   org.jruby.RubyFixnum::<init> (26 bytes)   inline (hot)
+                                                                  @ 2   org.jruby.Ruby::getFixnum (5 bytes)   accessor
+                                                                  @ 5   org.jruby.RubyInteger::<init> (6 bytes)   inline (hot)
+                                                                    @ 2   org.jruby.RubyNumeric::<init> (6 bytes)   inline (hot)
+                                                                      @ 2   org.jruby.RubyObject::<init> (6 bytes)   inline (hot)
+                                                                        @ 2   org.jruby.RubyBasicObject::<init> (10 bytes)   inline (hot)
+                                                                          @ 1   java.lang.Object::<init> (1 bytes)   inline (hot)
+                                                              @ 26   org.jruby.RubyFixnum::addAsBignum (20 bytes)   never executed
+                            @ 95   java.lang.invoke.Invokers$Holder::linkToCallSite (23 bytes)   force inline by annotation
+                              @ 5   java.lang.invoke.Invokers::getCallSiteTarget (5 bytes)   force inline by annotation
+                                @ 1   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                              @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                @ 39   java.lang.invoke.LambdaForm$MH/0x0000000801060c40::invoke (54 bytes)   force inline by annotation
+                                  @ 16   java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke (24 bytes)   force inline by annotation
+                                    @ 20   java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual (14 bytes)   force inline by annotation
+                                      @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                      @ 10   java.lang.invoke.MutableCallSite::getTarget (5 bytes)   accessor
+                                  @ 40   java.lang.invoke.Invokers::checkExactType (17 bytes)   force inline by annotation
+                                    @ 1   java.lang.invoke.MethodHandle::type (5 bytes)   accessor
+                                  @ 45   java.lang.invoke.Invokers::checkCustomized (23 bytes)   force inline by annotation
+                                    @ 1   java.lang.invoke.MethodHandleImpl::isCompileConstant (2 bytes)   (intrinsic)
+                                  @ 50   java.lang.invoke.LambdaForm$MH/0x0000000801067c40::invoke (14 bytes)   force inline by annotation
+               !                @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                  @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                  @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801060840::guard (109 bytes)   force inline by annotation
+                                    @ 39   java.lang.invoke.LambdaForm$MH/0x0000000801067840::invoke (29 bytes)   force inline by annotation
+                                      @ 25   java.lang.invoke.DirectMethodHandle$Holder::invokeStatic (15 bytes)   force inline by annotation
+                                        @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                        @ 11   org.jruby.ir.targets.InvokeSite::testClass (14 bytes)   inline (hot)
+                                          @ 1   java.lang.Object::getClass (0 bytes)   (intrinsic)
+               !                    @ 53   java.lang.invoke.MethodHandleImpl::profileBoolean (34 bytes)   (intrinsic)
+                                    @ 82   java.lang.invoke.DelegatingMethodHandle$Holder::delegate (23 bytes)   force inline by annotation
+                                      @ 4   java.lang.invoke.MethodHandleImpl$CountingWrapper::getTarget (5 bytes)   accessor
+                                      @ 19   java.lang.invoke.LambdaForm$MH/0x0000000801067040::invoke (42 bytes)   force inline by annotation
+                                        @ 17   java.lang.invoke.LambdaForm$MH/0x0000000800f12040::invoke (25 bytes)   force inline by annotation
+                                          @ 21   java.lang.invoke.DirectMethodHandle$Holder::invokeSpecial (15 bytes)   force inline by annotation
+                                            @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                            @ 11   java.lang.Class::cast (27 bytes)   (intrinsic)
+                                        @ 38   java.lang.invoke.LambdaForm$DMH/0x0000000801066840::invokeVirtual (18 bytes)   force inline by annotation
+                                          @ 1   java.lang.invoke.DirectMethodHandle::internalMemberName (8 bytes)   force inline by annotation
+                                          @ 14   org.jruby.RubyFixnum::op_plus (24 bytes)   inline (hot)
+               !                            @ 13   org.jruby.RubyFixnum::addFixnum (30 bytes)   inline (hot)
+                                              @ 12   java.lang.Math::addExact (32 bytes)   (intrinsic)
+                                              @ 15   org.jruby.RubyFixnum::newFixnum (29 bytes)   inline (hot)
+                                                @ 7   org.jruby.RubyFixnum::isInCacheRange (27 bytes)   inline (hot)
+                                                @ 15   org.jruby.RubyFixnum::cachedFixnum (13 bytes)   inline (hot)
+                                                @ 25   org.jruby.RubyFixnum::<init> (26 bytes)   inline (hot)
+                                                  @ 2   org.jruby.Ruby::getFixnum (5 bytes)   accessor
+                                                  @ 5   org.jruby.RubyInteger::<init> (6 bytes)   inline (hot)
+                                                    @ 2   org.jruby.RubyNumeric::<init> (6 bytes)   inline (hot)
+                                                      @ 2   org.jruby.RubyObject::<init> (6 bytes)   inline (hot)
+                                                        @ 2   org.jruby.RubyBasicObject::<init> (10 bytes)   inline (hot)
+                                                          @ 1   java.lang.Object::<init> (1 bytes)   inline (hot)
+                                              @ 26   org.jruby.RubyFixnum::addAsBignum (20 bytes)   never executed

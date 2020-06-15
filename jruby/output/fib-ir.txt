@@ -1,0 +1,63 @@
+2020-06-07T23:43:53.974Z [main] INFO MixedModeIRMethod : Printing simple IR for fib:
+begin INSTANCE_METHOD<fib>
+flags: [FLAGS_COMPUTED]
+signature(pre=1,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+declared variables:
+  n(0:0)
+
+  00:           %self := recv_self
+  01:            %v_0 := load_implicit_closure
+  02:  %current_scope := copy(scope<>)
+  03: %current_module := copy(mod<0>)
+  04:                    check_arity(required: 1, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  05:              *n := recv_pre_reqd_arg(argIndex: 0)
+  06:                    line_num(lineNumber: 1)
+  07:            %v_3 := call_1f(*n, fix<2>, fixNum: 2, callType: NORMAL, name: <=, potentiallyRefined: false)
+  08:                    b_false(ipc<LBL_0:13>, %v_3, jumpTarget: LBL_0:13, value: %v_3)
+  09:                    line_num(lineNumber: 2)
+  10:            %v_4 := copy(fix<1>)
+  11:                    jump(ipc<LBL_1:21>)
+  12:                    label(ipc<LBL_0:13>)
+  13:                    line_num(lineNumber: 4)
+  14:            %v_6 := call_1f(*n, fix<1>, fixNum: 1, callType: NORMAL, name: -, potentiallyRefined: false)
+  15:            %v_5 := call_1o(self<%self>, %v_6, callType: FUNCTIONAL, name: fib, potentiallyRefined: false)
+  16:            %v_9 := call_1f(*n, fix<2>, fixNum: 2, callType: NORMAL, name: -, potentiallyRefined: false)
+  17:            %v_8 := call_1o(self<%self>, %v_9, callType: FUNCTIONAL, name: fib, potentiallyRefined: false)
+  18:            %v_7 := call_1o(%v_5, %v_8, callType: NORMAL, name: +, potentiallyRefined: false)
+  19:            %v_4 := copy(%v_7)
+  20:                    label(ipc<LBL_1:21>)
+  21:                    return(%v_4)
+
+2020-06-08T01:37:52.342Z [Ruby-0-JIT-1] INFO JVMVisitor : Printing JIT IR for fib:
+begin INSTANCE_METHOD<fib>
+flags: [HAS_EXPLICIT_CALL_PROTOCOL, DYNSCOPE_ELIMINATED, FLAGS_COMPUTED]
+signature(pre=1,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+declared variables:
+  n(0:0)
+used variables:
+
+block #1 (out: 6,2): LBL_2:-1
+
+block #2 (out: 3,4): LBL_3:-1
+  0:   %self := recv_self
+  1:            check_arity(required: 1, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  2: %t_n_10 := recv_pre_reqd_arg(argIndex: 0)
+  3:            line_num(lineNumber: 1)
+  4:    %v_3 := call_1f(%t_n_10, fix<2>, fixNum: 2, callType: NORMAL, name: <=, potentiallyRefined: false)
+  5:            b_false(ipc<LBL_0:13>, %v_3, jumpTarget: LBL_0:13, value: %v_3)
+
+block #3 (out: 6): LBL_4:-1
+  0:            line_num(lineNumber: 2)
+  1:            return(fix<1>)
+
+block #6: LBL_5:-1
+  0:            return(nil<>)
+
+block #4 (out: 6): LBL_0:13
+  0:            line_num(lineNumber: 4)
+  1:    %v_6 := call_1f(%t_n_10, fix<1>, fixNum: 1, callType: NORMAL, name: -, potentiallyRefined: false)
+  2:    %v_5 := call_1o(self<%self>, %v_6, callType: FUNCTIONAL, name: fib, potentiallyRefined: false)
+  3:    %v_9 := call_1f(%t_n_10, fix<2>, fixNum: 2, callType: NORMAL, name: -, potentiallyRefined: false)
+  4:    %v_8 := call_1o(self<%self>, %v_9, callType: FUNCTIONAL, name: fib, potentiallyRefined: false)
+  5:    %v_7 := call_1o(%v_5, %v_8, callType: NORMAL, name: +, potentiallyRefined: false)
+  6:            return(%v_7)

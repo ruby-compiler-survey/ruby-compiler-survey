@@ -1,53 +1,162 @@
-diff --git a/core/src/main/java/org/jruby/ir/IRScope.java b/core/src/main/java/org/jruby/ir/IRScope.java
-index 98d962d3d1..cca144e4b4 100644
---- a/core/src/main/java/org/jruby/ir/IRScope.java
-+++ b/core/src/main/java/org/jruby/ir/IRScope.java
-@@ -14,6 +14,7 @@ import org.jruby.ir.interpreter.InterpreterContext;
- import org.jruby.ir.operands.*;
- import org.jruby.ir.operands.Float;
- import org.jruby.ir.passes.*;
-+import org.jruby.ir.persistence.IRDumper;
- import org.jruby.ir.persistence.IRWriterEncoder;
- import org.jruby.ir.representations.BasicBlock;
- import org.jruby.ir.representations.CFG;
-@@ -22,6 +23,7 @@ import org.jruby.ir.transformations.inlining.SimpleCloneInfo;
- import org.jruby.ir.util.IGVDumper;
- import org.jruby.parser.StaticScope;
+diff --git a/core/src/main/java/org/jruby/compiler/FullBuildTask.java b/core/src/main/java/org/jruby/compiler/FullBuildTask.java
+index b8abf28bbe..a6e9ec1ff3 100644
+--- a/core/src/main/java/org/jruby/compiler/FullBuildTask.java
++++ b/core/src/main/java/org/jruby/compiler/FullBuildTask.java
+@@ -1,12 +1,20 @@
+ package org.jruby.compiler;
  
++import org.jruby.internal.runtime.methods.InterpretedIRMethod;
+ import org.jruby.ir.IRScope;
+ import org.jruby.ir.interpreter.InterpreterContext;
++import org.jruby.ir.persistence.IRDumper;
++import org.jruby.ir.runtime.IRRuntimeHelpers;
++import org.jruby.util.log.Logger;
++import org.jruby.util.log.LoggerFactory;
++
 +import java.io.ByteArrayOutputStream;
- import java.util.*;
- import java.util.concurrent.Callable;
- import java.util.concurrent.atomic.AtomicInteger;
-@@ -29,6 +31,7 @@ import java.util.concurrent.atomic.AtomicInteger;
- import org.jruby.runtime.Helpers;
- import org.jruby.runtime.ThreadContext;
- import org.jruby.util.ByteList;
+ 
+ /**
+  * Created by headius on 12/8/16.
+  */
+ class FullBuildTask implements Runnable {
++    private static final Logger LOG = LoggerFactory.getLogger(FullBuildTask.class);
+ 
+     private final JITCompiler jitCompiler;
+     private final Compilable<InterpreterContext> method;
+@@ -26,6 +34,11 @@ class FullBuildTask implements Runnable {
+ 
+             method.completeBuild(method.getIRScope().prepareFullBuild());
+ 
++            if (IRRuntimeHelpers.shouldPrintIR(jitCompiler.runtime)) {
++                ByteArrayOutputStream baos = IRDumper.printIR(method.getIRScope(), true, true);
++                LOG.info("Printing full IR for " + method.getIRScope().getId() + ":\n" + new String(baos.toByteArray()));
++            }
++
+             if (jitCompiler.config.isJitLogging()) {
+                 JITCompiler.log(method, method.getName(), "done building");
+             }
+diff --git a/core/src/main/java/org/jruby/internal/runtime/methods/InterpretedIRMethod.java b/core/src/main/java/org/jruby/internal/runtime/methods/InterpretedIRMethod.java
+index ea3be03222..17eda56c4a 100644
+--- a/core/src/main/java/org/jruby/internal/runtime/methods/InterpretedIRMethod.java
++++ b/core/src/main/java/org/jruby/internal/runtime/methods/InterpretedIRMethod.java
+@@ -263,12 +263,6 @@ public class InterpretedIRMethod extends AbstractIRMethod implements Compilable<
+     // and replace interpreterContext asynchronously.
+     private void promoteToFullBuild(ThreadContext context) {
+         tryJit(context, this);
+-
+-        if (IRRuntimeHelpers.shouldPrintIR(context.runtime)) {
+-            ByteArrayOutputStream baos = IRDumper.printIR(method, true, true);
+-
+-            LOG.info("Printing full IR for " + method.getId() + ":\n" + new String(baos.toByteArray()));
+-        }
+     }
+ 
+     public String getClassName(ThreadContext context) {
+diff --git a/core/src/main/java/org/jruby/ir/passes/CompilerPass.java b/core/src/main/java/org/jruby/ir/passes/CompilerPass.java
+index bc8165cbb3..9437596aee 100644
+--- a/core/src/main/java/org/jruby/ir/passes/CompilerPass.java
++++ b/core/src/main/java/org/jruby/ir/passes/CompilerPass.java
+@@ -1,10 +1,14 @@
+ package org.jruby.ir.passes;
+ 
+ import org.jruby.ir.IRScope;
++import org.jruby.ir.persistence.IRDumper;
++import org.jruby.ir.runtime.IRRuntimeHelpers;
+ import org.jruby.util.StringSupport;
 +import org.jruby.util.cli.Options;
  import org.jruby.util.log.Logger;
  import org.jruby.util.log.LoggerFactory;
  
-@@ -481,6 +484,12 @@ public abstract class IRScope implements ParseResult {
-         CompilerPassScheduler scheduler = IRManager.schedulePasses(passes);
-         for (CompilerPass pass : scheduler) {
-             pass.run(this);
++import java.io.ByteArrayOutputStream;
+ import java.lang.reflect.InvocationTargetException;
+ import java.util.ArrayList;
+ import java.util.Collections;
+@@ -113,8 +117,16 @@ public abstract class CompilerPass {
+         // Record this pass
+         scope.getExecutedPasses().add(this);
+ 
++        if (Options.IR_PRINT_OPT.load()) {
++            LOG.info("Printing IR CFG before " + getLabel() + " for " + scope.getId() + ":\n" + scope.getFullInterpreterContext().toStringInstrs());
++        }
 +
-+            if (Options.IR_PRINT_OPT.load()) {
-+                ByteArrayOutputStream baos = IRDumper.printIR(this, false, true);
-+                LOG.info("IR after " + pass.getLabel() + " for " + getId() + ":\n" + new String(baos.toByteArray()));
+         Object passData = execute(scope, data);
+ 
++        if (Options.IR_PRINT_OPT.load()) {
++            LOG.info("Printing IR CFG after " + getLabel() + " for " + scope.getId() + ":\n" + scope.getFullInterpreterContext().toStringInstrs());
++        }
++
+         for (CompilerPassListener listener: scope.getManager().getListeners()) {
+             listener.endExecute(this, scope, passData, childScope);
+         }
+diff --git a/core/src/main/java/org/jruby/ir/persistence/IRDumper.java b/core/src/main/java/org/jruby/ir/persistence/IRDumper.java
+index f84800382c..3920b1a047 100644
+--- a/core/src/main/java/org/jruby/ir/persistence/IRDumper.java
++++ b/core/src/main/java/org/jruby/ir/persistence/IRDumper.java
+@@ -115,10 +115,9 @@ public class IRDumper extends IRVisitor {
+         FullInterpreterContext fullInterpreterContext = ic.getScope().getFullInterpreterContext();
+         if (fullInterpreterContext != null) {
+             Collection<LocalVariable> usedVariables = fullInterpreterContext.getUsedLocalVariables();
+-
+-            println("used variables:");
+-
++
+             if (usedVariables != null && !usedVariables.isEmpty()) {
++                println("used variables:");
+                 for (LocalVariable var : usedVariables) {
+                     println(ansiStr(VARIABLE_COLOR, "  " + var.toString()));
+                 }
+@@ -131,7 +130,7 @@ public class IRDumper extends IRVisitor {
+         int longest = 0;
+         int largestBlock = 0;
+ 
+-        if (instrs != null) {
++        if (instrs != null && instrs.length > 0) {
+             largestBlock = instrs.length;
+             for (Instr i : instrs) {
+                 if (i instanceof ResultInstr) {
+@@ -158,7 +157,7 @@ public class IRDumper extends IRVisitor {
+         String varSpaces = spaces(longest + " := ".length());
+         String ipcFormat = "  %0" + instrLog + "d: ";
+ 
+-        if (instrs != null) {
++        if (instrs != null && instrs.length > 0) {
+             println();
+ 
+             for (int i = 0; i < instrs.length; i++) {
+diff --git a/core/src/main/java/org/jruby/ir/representations/CFG.java b/core/src/main/java/org/jruby/ir/representations/CFG.java
+index 8c8644b10d..e0f7d7dfda 100644
+--- a/core/src/main/java/org/jruby/ir/representations/CFG.java
++++ b/core/src/main/java/org/jruby/ir/representations/CFG.java
+@@ -621,12 +621,15 @@ public class CFG {
+         for (BasicBlock b : getSortedBasicBlocks()) {
+             buf.append(b.toStringInstrs());
+         }
+-        buf.append("\n\n------ Rescue block map ------\n");
+-        List<BasicBlock> e = new ArrayList<>(rescuerMap.keySet());
+-        Collections.sort(e);
+ 
+-        for (BasicBlock bb : e) {
+-            buf.append("BB ").append(bb.getID()).append(" --> BB ").append(rescuerMap.get(bb).getID()).append("\n");
++        if (!rescuerMap.isEmpty()) {
++            buf.append("\n\n------ Rescue block map ------\n");
++            List<BasicBlock> e = new ArrayList<>(rescuerMap.keySet());
++            Collections.sort(e);
++
++            for (BasicBlock bb : e) {
++                buf.append("BB ").append(bb.getID()).append(" --> BB ").append(rescuerMap.get(bb).getID()).append("\n");
 +            }
-+
-             if (dumper != null) dumper.dump(getCFG(), pass.getShortLabel());
          }
  
+         /*
 diff --git a/core/src/main/java/org/jruby/util/cli/Options.java b/core/src/main/java/org/jruby/util/cli/Options.java
-index 3280b8906e..1bfab53552 100644
+index 3280b8906e..40f09313a9 100644
 --- a/core/src/main/java/org/jruby/util/cli/Options.java
 +++ b/core/src/main/java/org/jruby/util/cli/Options.java
-@@ -135,6 +135,7 @@ public class Options {
+@@ -134,6 +134,7 @@ public class Options {
+     public static final Option<Boolean> IR_INLINER_VERBOSE   = bool(IR, "ir.inliner.verbose", false, "Report inlining activity.");
      public static final Option<Boolean> IR_WRITING_DEBUG     = bool(IR, "ir.writing.debug", false, "Debug writing JRuby IR file.");
      public static final Option<String>  IR_INLINE_COMPILER_PASSES = string(IR, "ir.inline_passes", "Specify comma delimeted list of passes to run after inlining a method.");
++    public static final Option<Boolean>  IR_PRINT_OPT = bool(IR, "ir.print.opt", false, "Print the IR CFG before and after each optimization pass.");
      public static final Option<Boolean>  IR_PRINT_ALL = bool(IR, "ir.print.all", false, "Enable ir.print and include IR executed during JRuby's boot phase.");
-+    public static final Option<Boolean>  IR_PRINT_OPT = bool(IR, "ir.print.opt", false, "Print the IR after each compiler pass.");
      public static final Option<Boolean>  IR_PRINT = bool(IR, "ir.print", IR_PRINT_ALL.load(), "Print the final IR to be run before starting to execute each body of code.");
      public static final Option<Boolean>  IR_PRINT_COLOR = bool(IR, "ir.print.color", false, "Print the final IR with color highlighting.");
- 

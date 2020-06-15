@@ -1,0 +1,553 @@
+CompileCommand: print *.*foo*
+OpenJDK 64-Bit Server VM warning: printing of assembly code is enabled; turning on DebugNonSafepoints to gain additional output
+2020-06-14T00:01:47.603+01:00 [main] INFO Interpreter : Printing simple IR for inline.rb:
+begin SCRIPT_BODY<inline.rb>
+flags: [BINDING_HAS_ESCAPED, HAS_LOOPS, REQUIRES_DYNSCOPE, REQUIRES_VISIBILITY, REQUIRES_BLOCK, FLAGS_COMPUTED]
+signature(pre=0,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+declared variables:
+  bar(0:0)
+
+  00:           %self := recv_self
+  01:            %v_0 := load_frame_closure
+  02:  %current_scope := copy(scope<>)
+  03: %current_module := copy(mod<0>)
+  04:                    line_num(lineNumber: 0)
+  05:            %v_3 := def_class(mod<0>, undef<>, body: CLASS_BODY Bar[inline.rb:0]<startup>)
+  06:                    line_num(lineNumber: 6)
+  07:                    def_inst_meth(method: INSTANCE_METHOD foo[inline.rb:6]<startup>)
+  08:                    line_num(lineNumber: 10)
+  09:            %v_4 := search_const(scope<>, constantName: Bar, noPrivateConsts: false)
+  10:            *bar := call_0o(%v_4, callType: NORMAL, name: new, potentiallyRefined: false)
+  11:                    line_num(lineNumber: 12)
+  12:                    label(ipc<_LOOP_BEGIN_0:13>)
+  13:                    nop
+  14:                    label(ipc<_ITER_BEGIN_2:15>)
+  15:                    thread_poll(onBackEdge: true)
+  16:                    line_num(lineNumber: 13)
+  17:            %v_6 := call_1o(self<%self>, *bar, callType: FUNCTIONAL, name: foo, potentiallyRefined: false)
+  18:                    label(ipc<_ITER_END_3:19>)
+  19:                    jump(ipc<_LOOP_BEGIN_0:13>)
+  20:                    label(ipc<LBL_4:21>)
+  21:            %v_5 := copy(nil<>)
+  22:                    label(ipc<_LOOP_END_1:23>)
+  23:                    return(%v_5)
+
+2020-06-14T00:01:47.609+01:00 [main] INFO MixedModeIRMethod : Printing simple IR for bar:
+begin INSTANCE_METHOD<bar>
+flags: [FLAGS_COMPUTED]
+signature(pre=0,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+
+  0:           %self := recv_self
+  1:            %v_0 := load_implicit_closure
+  2:  %current_scope := copy(scope<>)
+  3: %current_module := copy(mod<0>)
+  4:                    check_arity(required: 0, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  5:                    line_num(lineNumber: 2)
+  6:                    return(fix<14>)
+
+2020-06-14T00:01:47.611+01:00 [main] INFO MixedModeIRMethod : Printing simple IR for foo:
+begin INSTANCE_METHOD<foo>
+flags: [FLAGS_COMPUTED]
+signature(pre=1,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+declared variables:
+  bar(0:0)
+
+  0:           %self := recv_self
+  1:            %v_0 := load_implicit_closure
+  2:  %current_scope := copy(scope<>)
+  3: %current_module := copy(mod<0>)
+  4:                    check_arity(required: 1, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  5:            *bar := recv_pre_reqd_arg(argIndex: 0)
+  6:                    line_num(lineNumber: 7)
+  7:            %v_3 := call_0o(*bar, callType: NORMAL, name: bar, potentiallyRefined: false)
+  8:                    return(%v_3)
+
+2020-06-14T00:01:47.635+01:00 [Ruby-0-JIT-1] INFO JVMVisitor : Printing JIT IR for foo:
+begin INSTANCE_METHOD<foo>
+flags: [HAS_EXPLICIT_CALL_PROTOCOL, DYNSCOPE_ELIMINATED, FLAGS_COMPUTED]
+signature(pre=1,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+declared variables:
+  bar(0:0)
+
+block #1 (out: 3,2): LBL_0:-1
+
+block #2 (out: 3): LBL_1:-1
+  0:             check_arity(required: 1, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  1: %t_bar_4 := recv_pre_reqd_arg(argIndex: 0)
+  2:             line_num(lineNumber: 7)
+  3:     %v_3 := call_0o(%t_bar_4, callType: NORMAL, name: bar, potentiallyRefined: false)
+  4:             return(%v_3)
+
+block #3: LBL_2:-1
+
+*** Dumping inline.invokeOther0:bar ***
+   L0
+    LINENUMBER 8 L0
+    INVOKEDYNAMIC callSite()Lorg/jruby/runtime/callsite/CachingCallSite; [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/Bootstrap.callSite(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;I)Ljava/lang/invoke/CallSite;
+      // arguments:
+      "bar", 
+      0
+    ]
+    ALOAD 0
+    ALOAD 1
+    ALOAD 2
+    INVOKEVIRTUAL org/jruby/runtime/callsite/CachingCallSite.call (Lorg/jruby/runtime/ThreadContext;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;)Lorg/jruby/runtime/builtin/IRubyObject;
+    ARETURN
+*** Dumping inline.RUBY$method$foo$0 ***
+   L0
+   L1
+    NOP
+   L2
+    NOP
+    ALOAD 3
+    ASTORE 8
+   L3
+    LINENUMBER 8 L3
+    ALOAD 0
+    ALOAD 2
+    ALOAD 8
+    INVOKESTATIC inline.invokeOther0:bar (Lorg/jruby/runtime/ThreadContext;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;)Lorg/jruby/runtime/builtin/IRubyObject;
+    ASTORE 9
+    ALOAD 9
+    ARETURN
+   L4
+    NOP
+*** Dumping inline.RUBY$method$foo$0$__VARARGS__ ***
+   L0
+    ALOAD 0
+    ALOAD 1
+    ALOAD 3
+    ACONST_NULL
+    INVOKEDYNAMIC checkArity(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;[Ljava/lang/Object;Lorg/jruby/runtime/Block;)V [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/Bootstrap.checkArity(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;IIIII)Ljava/lang/invoke/CallSite;
+      // arguments:
+      1, 
+      0, 
+      0, 
+      0, 
+      -1
+    ]
+    ALOAD 0
+    ALOAD 1
+    ALOAD 2
+    ALOAD 3
+    ICONST_0
+    AALOAD
+    ALOAD 4
+    ALOAD 5
+    ALOAD 6
+    INVOKESTATIC inline.RUBY$method$foo$0 (Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;
+    ARETURN
+2020-06-14T00:01:47.656+01:00 [Ruby-0-JIT-1] INFO JVMVisitor : Printing JIT IR for bar:
+begin INSTANCE_METHOD<bar>
+flags: [HAS_EXPLICIT_CALL_PROTOCOL, DYNSCOPE_ELIMINATED, FLAGS_COMPUTED]
+signature(pre=0,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+
+block #1 (out: 3,2): LBL_0:-1
+
+block #2 (out: 3): LBL_1:-1
+  0:     check_arity(required: 0, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  1:     line_num(lineNumber: 2)
+  2:     return(fix<14>)
+
+block #3: LBL_2:-1
+
+*** Dumping inline.RUBY$method$bar$0 ***
+   L0
+   L1
+    NOP
+   L2
+    NOP
+   L3
+    LINENUMBER 3 L3
+    ALOAD 0
+    INVOKEDYNAMIC fixnum(Lorg/jruby/runtime/ThreadContext;)Lorg/jruby/runtime/builtin/IRubyObject; [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/FixnumObjectSite.bootstrap(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;J)Ljava/lang/invoke/CallSite;
+      // arguments:
+      14
+    ]
+    ARETURN
+   L4
+    NOP
+*** Dumping inline.RUBY$method$bar$0$__VARARGS__ ***
+   L0
+    ALOAD 0
+    ALOAD 1
+    ALOAD 3
+    ACONST_NULL
+    INVOKEDYNAMIC checkArity(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;[Ljava/lang/Object;Lorg/jruby/runtime/Block;)V [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/Bootstrap.checkArity(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;IIIII)Ljava/lang/invoke/CallSite;
+      // arguments:
+      0, 
+      0, 
+      0, 
+      0, 
+      -1
+    ]
+    ALOAD 0
+    ALOAD 1
+    ALOAD 2
+    ALOAD 4
+    ALOAD 5
+    ALOAD 6
+    INVOKESTATIC inline.RUBY$method$bar$0 (Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;
+    ARETURN
+
+============================= C1-compiled nmethod ==============================
+----------------------------------- Assembly -----------------------------------
+
+Compiled method (c1)    1738 2943       2       inline::RUBY$method$foo$0 (18 bytes)
+ total in heap  [0x000000011775b010,0x000000011775b380] = 880
+ relocation     [0x000000011775b168,0x000000011775b198] = 48
+ main code      [0x000000011775b1a0,0x000000011775b260] = 192
+ stub code      [0x000000011775b260,0x000000011775b2a0] = 64
+ oops           [0x000000011775b2a0,0x000000011775b2a8] = 8
+ metadata       [0x000000011775b2a8,0x000000011775b2b8] = 16
+ scopes data    [0x000000011775b2b8,0x000000011775b318] = 96
+ scopes pcs     [0x000000011775b318,0x000000011775b378] = 96
+ dependencies   [0x000000011775b378,0x000000011775b380] = 8
+
+--------------------------------------------------------------------------------
+[Constant Pool (empty)]
+
+--------------------------------------------------------------------------------
+
+[Verified Entry Point]
+  # {method} {0x000000013ba2c440} 'RUBY$method$foo$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline'
+  # parm0:    rsi:rsi   = 'org/jruby/runtime/ThreadContext'
+  # parm1:    rdx:rdx   = 'org/jruby/parser/StaticScope'
+  # parm2:    rcx:rcx   = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm3:    r8:r8     = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm4:    r9:r9     = 'org/jruby/runtime/Block'
+  # parm5:    rdi:rdi   = 'org/jruby/RubyModule'
+  # parm6:    [sp+0x80]   = 'java/lang/String'  (sp of caller)
+  0x000000011775b1a0:   mov    %eax,-0x14000(%rsp)
+  0x000000011775b1a7:   push   %rbp
+  0x000000011775b1a8:   sub    $0x70,%rsp
+  0x000000011775b1ac:   movabs $0x13ba2c7a8,%rbx
+  0x000000011775b1b6:   mov    0x18(%rbx),%eax
+  0x000000011775b1b9:   add    $0x8,%eax
+  0x000000011775b1bc:   mov    %eax,0x18(%rbx)
+  0x000000011775b1bf:   and    $0x3ff8,%eax
+  0x000000011775b1c5:   cmp    $0x0,%eax
+  0x000000011775b1c8:   je     0x000000011775b1f4           ;*nop {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - inline::RUBY$method$foo$0@0
+  0x000000011775b1ce:   mov    %rsi,%rdx
+  0x000000011775b1d1:   movabs $0x61fd78d40,%rsi            ;*invokevirtual call {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {oop(a 'org/jruby/runtime/callsite/MonomorphicCallSite'{0x000000061fd78d40})}
+  0x000000011775b1db:   nopl   0x0(%rax)
+  0x000000011775b1df:   callq  0x0000000116b43a00           ; ImmutableOopMap {}
+                                                            ;*invokevirtual call {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {optimized virtual_call}
+  0x000000011775b1e4:   add    $0x70,%rsp
+  0x000000011775b1e8:   pop    %rbp
+  0x000000011775b1e9:   mov    0x110(%r15),%r10
+  0x000000011775b1f0:   test   %eax,(%r10)                  ;   {poll_return}
+  0x000000011775b1f3:   retq   
+  0x000000011775b1f4:   movabs $0x13ba2c440,%r10            ;   {metadata({method} {0x000000013ba2c440} 'RUBY$method$foo$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline')}
+  0x000000011775b1fe:   mov    %r10,0x8(%rsp)
+  0x000000011775b203:   movq   $0xffffffffffffffff,(%rsp)
+  0x000000011775b20b:   callq  0x0000000116bf4080           ; ImmutableOopMap {rsi=Oop rdx=Oop rcx=Oop r8=Oop r9=Oop rdi=Oop [128]=Oop }
+                                                            ;*synchronization entry
+                                                            ; - inline::RUBY$method$foo$0@-1
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000000011775b210:   jmp    0x000000011775b1ce
+  0x000000011775b212:   nop
+  0x000000011775b213:   nop
+  0x000000011775b214:   mov    0x3e8(%r15),%rax
+  0x000000011775b21b:   movabs $0x0,%r10
+  0x000000011775b225:   mov    %r10,0x3e8(%r15)
+  0x000000011775b22c:   movabs $0x0,%r10
+  0x000000011775b236:   mov    %r10,0x3f0(%r15)
+  0x000000011775b23d:   add    $0x70,%rsp
+  0x000000011775b241:   pop    %rbp
+  0x000000011775b242:   jmpq   0x0000000116b60a00           ;   {runtime_call unwind_exception Runtime1 stub}
+  0x000000011775b247:   hlt    
+  0x000000011775b248:   hlt    
+  0x000000011775b249:   hlt    
+  0x000000011775b24a:   hlt    
+  0x000000011775b24b:   hlt    
+  0x000000011775b24c:   hlt    
+  0x000000011775b24d:   hlt    
+  0x000000011775b24e:   hlt    
+  0x000000011775b24f:   hlt    
+  0x000000011775b250:   hlt    
+  0x000000011775b251:   hlt    
+  0x000000011775b252:   hlt    
+  0x000000011775b253:   hlt    
+  0x000000011775b254:   hlt    
+  0x000000011775b255:   hlt    
+  0x000000011775b256:   hlt    
+  0x000000011775b257:   hlt    
+  0x000000011775b258:   hlt    
+  0x000000011775b259:   hlt    
+  0x000000011775b25a:   hlt    
+  0x000000011775b25b:   hlt    
+  0x000000011775b25c:   hlt    
+  0x000000011775b25d:   hlt    
+  0x000000011775b25e:   hlt    
+  0x000000011775b25f:   hlt    
+[Stub Code]
+  0x000000011775b260:   nopl   0x0(%rax,%rax,1)             ;   {no_reloc}
+  0x000000011775b265:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000011775b26f:   jmpq   0x000000011775b26f           ;   {runtime_call}
+[Exception Handler]
+  0x000000011775b274:   callq  0x0000000116bf0780           ;   {runtime_call handle_exception_from_callee Runtime1 stub}
+  0x000000011775b279:   movabs $0x10b3e2d8a,%rdi            ;   {external_word}
+  0x000000011775b283:   and    $0xfffffffffffffff0,%rsp
+  0x000000011775b287:   callq  0x000000010b12b558           ;   {runtime_call MacroAssembler::debug64(char*, long long, long long*)}
+  0x000000011775b28c:   hlt    
+[Deopt Handler Code]
+  0x000000011775b28d:   movabs $0x11775b28d,%r10            ;   {section_word}
+  0x000000011775b297:   push   %r10
+  0x000000011775b299:   jmpq   0x0000000116b420a0           ;   {runtime_call DeoptimizationBlob}
+  0x000000011775b29e:   hlt    
+  0x000000011775b29f:   hlt    
+--------------------------------------------------------------------------------
+
+============================= C2-compiled nmethod ==============================
+----------------------------------- Assembly -----------------------------------
+
+Compiled method (c2)    1836 2968       4       inline::RUBY$method$foo$0 (18 bytes)
+ total in heap  [0x000000011e788410,0x000000011e788a58] = 1608
+ relocation     [0x000000011e788568,0x000000011e7885c0] = 88
+ main code      [0x000000011e7885c0,0x000000011e788740] = 384
+ stub code      [0x000000011e788740,0x000000011e788768] = 40
+ oops           [0x000000011e788768,0x000000011e788780] = 24
+ metadata       [0x000000011e788780,0x000000011e7887b0] = 48
+ scopes data    [0x000000011e7887b0,0x000000011e7888a0] = 240
+ scopes pcs     [0x000000011e7888a0,0x000000011e788a00] = 352
+ dependencies   [0x000000011e788a00,0x000000011e788a08] = 8
+ handler table  [0x000000011e788a08,0x000000011e788a38] = 48
+ nul chk table  [0x000000011e788a38,0x000000011e788a58] = 32
+
+--------------------------------------------------------------------------------
+[Constant Pool (empty)]
+
+--------------------------------------------------------------------------------
+
+[Verified Entry Point]
+  # {method} {0x000000013ba2c440} 'RUBY$method$foo$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline'
+  # parm0:    rsi:rsi   = 'org/jruby/runtime/ThreadContext'
+  # parm1:    rdx:rdx   = 'org/jruby/parser/StaticScope'
+  # parm2:    rcx:rcx   = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm3:    r8:r8     = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm4:    r9:r9     = 'org/jruby/runtime/Block'
+  # parm5:    rdi:rdi   = 'org/jruby/RubyModule'
+  # parm6:    [sp+0x30]   = 'java/lang/String'  (sp of caller)
+  0x000000011e7885c0:   mov    %eax,-0x14000(%rsp)
+  0x000000011e7885c7:   push   %rbp
+  0x000000011e7885c8:   sub    $0x20,%rsp                   ;*synchronization entry
+                                                            ; - inline::RUBY$method$foo$0@-1
+  0x000000011e7885cc:   mov    %rcx,%r11
+  0x000000011e7885cf:   mov    %rsi,%r10
+  0x000000011e7885d2:   mov    %r8,%rbx
+  0x000000011e7885d5:   mov    0x8(%r8),%r8d                ; implicit exception: dispatches to 0x000000011e7886a8
+  0x000000011e7885d9:   shl    $0x3,%r8
+  0x000000011e7885dd:   movabs $0x800000000,%r12
+  0x000000011e7885e7:   add    %r12,%r8
+  0x000000011e7885ea:   xor    %r12,%r12
+  0x000000011e7885ed:   mov    0x38(%r8),%r8
+  0x000000011e7885f1:   movabs $0x800b81a20,%r9             ;   {metadata('org/jruby/RubyBasicObject')}
+  0x000000011e7885fb:   cmp    %r9,%r8
+  0x000000011e7885fe:   jne    0x000000011e788686
+  0x000000011e788604:   mov    %rbx,%r8                     ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.RubyBasicObject::getMetaClass@1 (line 526)
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@1 (line 137)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011e788607:   mov    0x14(%r8),%ebp               ;*getfield metaClass {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.RubyBasicObject::getMetaClass@4 (line 526)
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@1 (line 137)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011e78860b:   movabs $0x61fd78d40,%rsi            ;   {oop(a 'org/jruby/runtime/callsite/MonomorphicCallSite'{0x000000061fd78d40})}
+  0x000000011e788615:   mov    0x14(%rsi),%r9d              ;*getfield cache {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@7 (line 139)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011e788619:   mov    0xc(%r12,%r9,8),%r8d         ; implicit exception: dispatches to 0x000000011e7886d4
+  0x000000011e78861e:   mov    0x20(%r12,%rbp,8),%ecx       ; implicit exception: dispatches to 0x000000011e7886f4
+  0x000000011e788623:   cmp    %ecx,%r8d
+  0x000000011e788626:   jne    0x000000011e788670           ;*if_icmpne {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.runtime.callsite.CacheEntry::typeOk@8 (line 27)
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@16 (line 140)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011e788628:   mov    0x10(%r12,%r9,8),%r8d
+  0x000000011e78862d:   mov    0xc(%rsi),%ecx
+  0x000000011e788630:   mov    0x14(%r12,%r9,8),%r11d
+  0x000000011e788635:   mov    %r8,%rsi
+  0x000000011e788638:   shl    $0x3,%rsi                    ;*getfield method {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@24 (line 141)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011e78863c:   mov    %r11,%r8
+  0x000000011e78863f:   shl    $0x3,%r8                     ;*getfield sourceModule {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@31 (line 141)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011e788643:   mov    %rcx,%r9
+  0x000000011e788646:   shl    $0x3,%r9                     ;*getfield methodName {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@35 (line 141)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011e78864a:   mov    %r10,%rdx
+  0x000000011e78864d:   mov    %rbx,%rcx
+  0x000000011e788650:   nop
+  0x000000011e788651:   movabs $0x800c31d80,%rax
+  0x000000011e78865b:   callq  0x000000011e77e680           ; ImmutableOopMap {}
+                                                            ;*invokevirtual call {reexecute=0 rethrow=0 return_oop=1}
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@38 (line 141)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {virtual_call}
+  0x000000011e788660:   add    $0x20,%rsp
+  0x000000011e788664:   pop    %rbp
+  0x000000011e788665:   mov    0x110(%r15),%r10
+  0x000000011e78866c:   test   %eax,(%r10)                  ;   {poll_return}
+  0x000000011e78866f:   retq   
+  0x000000011e788670:   lea    (%r12,%rbp,8),%rcx           ;*getfield metaClass {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.RubyBasicObject::getMetaClass@4 (line 526)
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@1 (line 137)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011e788674:   mov    %r11,%rdx
+  0x000000011e788677:   mov    %r10,%r8
+  0x000000011e78867a:   mov    %rbx,%r9
+  0x000000011e78867d:   xchg   %ax,%ax
+  0x000000011e78867f:   callq  0x0000000116b43a00           ; ImmutableOopMap {}
+                                                            ;*invokespecial cacheAndCall {reexecute=0 rethrow=0 return_oop=1}
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@48 (line 143)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {optimized virtual_call}
+  0x000000011e788684:   jmp    0x000000011e788660
+  0x000000011e788686:   mov    $0xffffffde,%esi
+  0x000000011e78868b:   mov    %rbx,%rbp
+  0x000000011e78868e:   nop
+  0x000000011e78868f:   callq  0x0000000116b41d80           ; ImmutableOopMap {rbp=Oop }
+                                                            ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.RubyBasicObject::getMetaClass@1 (line 526)
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@1 (line 137)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call UncommonTrapBlob}
+  0x000000011e788694:   movabs $0x10b3c0264,%rdi            ;   {external_word}
+  0x000000011e78869e:   and    $0xfffffffffffffff0,%rsp
+  0x000000011e7886a2:   callq  0x000000010b12b558           ;   {runtime_call MacroAssembler::debug64(char*, long long, long long*)}
+  0x000000011e7886a7:   hlt    
+  0x000000011e7886a8:   mov    $0xfffffff4,%esi
+  0x000000011e7886ad:   mov    %r10,%rbp
+  0x000000011e7886b0:   mov    %rcx,0x30(%rsp)
+  0x000000011e7886b5:   mov    %rbx,(%rsp)
+  0x000000011e7886b9:   xchg   %ax,%ax
+  0x000000011e7886bb:   callq  0x0000000116b41d80           ; ImmutableOopMap {rbp=Oop [48]=Oop [0]=Oop }
+                                                            ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.RubyBasicObject::getMetaClass@1 (line 526)
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@1 (line 137)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call UncommonTrapBlob}
+  0x000000011e7886c0:   movabs $0x10b3c0264,%rdi            ;   {external_word}
+  0x000000011e7886ca:   and    $0xfffffffffffffff0,%rsp
+  0x000000011e7886ce:   callq  0x000000010b12b558           ;   {runtime_call MacroAssembler::debug64(char*, long long, long long*)}
+  0x000000011e7886d3:   hlt                                 ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.RubyBasicObject::getMetaClass@1 (line 526)
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@1 (line 137)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011e7886d4:   mov    $0xfffffff6,%esi
+  0x000000011e7886d9:   xchg   %ax,%ax
+  0x000000011e7886db:   callq  0x0000000116b41d80           ; ImmutableOopMap {rbp=NarrowOop }
+                                                            ;*invokevirtual typeOk {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@16 (line 140)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call UncommonTrapBlob}
+  0x000000011e7886e0:   movabs $0x10b3c0264,%rdi            ;   {external_word}
+  0x000000011e7886ea:   and    $0xfffffffffffffff0,%rsp
+  0x000000011e7886ee:   callq  0x000000010b12b558           ;   {runtime_call MacroAssembler::debug64(char*, long long, long long*)}
+  0x000000011e7886f3:   hlt                                 ;*invokevirtual typeOk {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@16 (line 140)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011e7886f4:   mov    $0xfffffff6,%esi
+  0x000000011e7886f9:   xchg   %ax,%ax
+  0x000000011e7886fb:   callq  0x0000000116b41d80           ; ImmutableOopMap {}
+                                                            ;*invokevirtual getGeneration {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.runtime.callsite.CacheEntry::typeOk@5 (line 27)
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@16 (line 140)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call UncommonTrapBlob}
+  0x000000011e788700:   movabs $0x10b3c0264,%rdi            ;   {external_word}
+  0x000000011e78870a:   and    $0xfffffffffffffff0,%rsp
+  0x000000011e78870e:   callq  0x000000010b12b558           ;   {runtime_call MacroAssembler::debug64(char*, long long, long long*)}
+  0x000000011e788713:   hlt                                 ;*invokespecial cacheAndCall {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@48 (line 143)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011e788714:   mov    %rax,%rsi
+  0x000000011e788717:   jmp    0x000000011e78871c           ;*invokevirtual call {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@38 (line 141)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011e788719:   mov    %rax,%rsi                    ;*invokespecial cacheAndCall {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.runtime.callsite.CachingCallSite::call@48 (line 143)
+                                                            ; - inline::invokeOther0:bar@8 (line 8)
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011e78871c:   add    $0x20,%rsp
+  0x000000011e788720:   pop    %rbp
+  0x000000011e788721:   jmpq   0x0000000116bfca00           ;   {runtime_call _rethrow_Java}
+  0x000000011e788726:   hlt    
+  0x000000011e788727:   hlt    
+  0x000000011e788728:   hlt    
+  0x000000011e788729:   hlt    
+  0x000000011e78872a:   hlt    
+  0x000000011e78872b:   hlt    
+  0x000000011e78872c:   hlt    
+  0x000000011e78872d:   hlt    
+  0x000000011e78872e:   hlt    
+  0x000000011e78872f:   hlt    
+  0x000000011e788730:   hlt    
+  0x000000011e788731:   hlt    
+  0x000000011e788732:   hlt    
+  0x000000011e788733:   hlt    
+  0x000000011e788734:   hlt    
+  0x000000011e788735:   hlt    
+  0x000000011e788736:   hlt    
+  0x000000011e788737:   hlt    
+  0x000000011e788738:   hlt    
+  0x000000011e788739:   hlt    
+  0x000000011e78873a:   hlt    
+  0x000000011e78873b:   hlt    
+  0x000000011e78873c:   hlt    
+  0x000000011e78873d:   hlt    
+  0x000000011e78873e:   hlt    
+  0x000000011e78873f:   hlt    
+[Stub Code]
+  0x000000011e788740:   movabs $0x0,%rbx                    ;   {no_reloc}
+  0x000000011e78874a:   jmpq   0x000000011e78874a           ;   {runtime_call}
+[Exception Handler]
+  0x000000011e78874f:   jmpq   0x0000000116bedd80           ;   {runtime_call ExceptionBlob}
+[Deopt Handler Code]
+  0x000000011e788754:   callq  0x000000011e788759
+  0x000000011e788759:   subq   $0x5,(%rsp)
+  0x000000011e78875e:   jmpq   0x0000000116b420a0           ;   {runtime_call DeoptimizationBlob}
+  0x000000011e788763:   hlt    
+  0x000000011e788764:   hlt    
+  0x000000011e788765:   hlt    
+  0x000000011e788766:   hlt    
+  0x000000011e788767:   hlt    
+--------------------------------------------------------------------------------
+

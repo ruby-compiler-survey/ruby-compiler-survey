@@ -1,0 +1,72 @@
+2020-06-08T00:50:01.657Z [main] INFO Interpreter : Printing simple IR for /var/examples/nested-array-literals.rb:
+begin SCRIPT_BODY</var/examples/nested-array-literals.rb>
+flags: [BINDING_HAS_ESCAPED, HAS_LOOPS, REQUIRES_DYNSCOPE, REQUIRES_VISIBILITY, REQUIRES_BLOCK, FLAGS_COMPUTED]
+signature(pre=0,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+
+  00:           %self := recv_self
+  01:            %v_0 := load_frame_closure
+  02:  %current_scope := copy(scope<>)
+  03: %current_module := copy(mod<0>)
+  04:                    line_num(lineNumber: 0)
+  05:                    def_inst_meth(method: INSTANCE_METHOD nested[/var/examples/nested-array-literals.rb:0]<startup>)
+  06:                    line_num(lineNumber: 4)
+  07:                    label(ipc<_LOOP_BEGIN_0:8>)
+  08:                    nop
+  09:                    label(ipc<_ITER_BEGIN_2:10>)
+  10:                    thread_poll(onBackEdge: true)
+  11:                    line_num(lineNumber: 5)
+  12:            %v_4 := call(self<%self>, fix<14>, fix<2>, fix<8>, callType: FUNCTIONAL, name: nested, potentiallyRefined: false)
+  13:                    label(ipc<_ITER_END_3:14>)
+  14:                    jump(ipc<_LOOP_BEGIN_0:8>)
+  15:                    label(ipc<LBL_4:16>)
+  16:            %v_3 := copy(nil<>)
+  17:                    label(ipc<_LOOP_END_1:18>)
+  18:                    return(%v_3)
+
+2020-06-08T00:50:01.660Z [main] INFO MixedModeIRMethod : Printing simple IR for nested:
+begin INSTANCE_METHOD<nested>
+flags: [FLAGS_COMPUTED]
+signature(pre=3,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+declared variables:
+  a(0:0)
+  c(0:2)
+  b(0:1)
+
+  00:           %self := recv_self
+  01:            %v_0 := load_implicit_closure
+  02:  %current_scope := copy(scope<>)
+  03: %current_module := copy(mod<0>)
+  04:                    check_arity(required: 3, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  05:              *a := recv_pre_reqd_arg(argIndex: 0)
+  06:              *b := recv_pre_reqd_arg(argIndex: 1)
+  07:              *c := recv_pre_reqd_arg(argIndex: 2)
+  08:                    line_num(lineNumber: 1)
+  09:            %v_3 := copy(ary<*a, *b>)
+  10:            %v_4 := copy(ary<%v_3, *c>)
+  11:                    return(%v_4)
+
+2020-06-08T00:50:01.693Z [Ruby-0-JIT-1] INFO JVMVisitor : Printing JIT IR for nested:
+begin INSTANCE_METHOD<nested>
+flags: [HAS_EXPLICIT_CALL_PROTOCOL, DYNSCOPE_ELIMINATED, FLAGS_COMPUTED]
+signature(pre=3,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+declared variables:
+  a(0:0)
+  c(0:2)
+  b(0:1)
+used variables:
+
+block #1 (out: 3,2): LBL_0:-1
+
+block #2 (out: 3): LBL_1:-1
+  0:           check_arity(required: 3, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  1: %t_a_5 := recv_pre_reqd_arg(argIndex: 0)
+  2: %t_b_6 := recv_pre_reqd_arg(argIndex: 1)
+  3: %t_c_7 := recv_pre_reqd_arg(argIndex: 2)
+  4:           line_num(lineNumber: 1)
+  5:   %v_3 := copy(ary<%t_a_5, %t_b_6>)
+  6:   %v_4 := copy(ary<%v_3, %t_c_7>)
+  7:           return(%v_4)
+
+block #3: LBL_2:-1
+
+2020-06-08T00:50:01.698Z [Ruby-0-JIT-1] INFO JITCompiler : method done jitting: Object nested at /var/examples/nested-array-literals.rb:0

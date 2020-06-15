@@ -1,0 +1,2310 @@
+OpenJDK 64-Bit Server VM warning: printing of assembly code is enabled; turning on DebugNonSafepoints to gain additional output
+2020-06-14T00:02:14.345+01:00 [main] INFO Interpreter : Printing simple IR for inline.rb:
+begin SCRIPT_BODY<inline.rb>
+flags: [BINDING_HAS_ESCAPED, HAS_LOOPS, REQUIRES_DYNSCOPE, REQUIRES_VISIBILITY, REQUIRES_BLOCK, FLAGS_COMPUTED]
+signature(pre=0,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+declared variables:
+  bar(0:0)
+
+  00:           %self := recv_self
+  01:            %v_0 := load_frame_closure
+  02:  %current_scope := copy(scope<>)
+  03: %current_module := copy(mod<0>)
+  04:                    line_num(lineNumber: 0)
+  05:            %v_3 := def_class(mod<0>, undef<>, body: CLASS_BODY Bar[inline.rb:0]<startup>)
+  06:                    line_num(lineNumber: 6)
+  07:                    def_inst_meth(method: INSTANCE_METHOD foo[inline.rb:6]<startup>)
+  08:                    line_num(lineNumber: 10)
+  09:            %v_4 := search_const(scope<>, constantName: Bar, noPrivateConsts: false)
+  10:            *bar := call_0o(%v_4, callType: NORMAL, name: new, potentiallyRefined: false)
+  11:                    line_num(lineNumber: 12)
+  12:                    label(ipc<_LOOP_BEGIN_0:13>)
+  13:                    nop
+  14:                    label(ipc<_ITER_BEGIN_2:15>)
+  15:                    thread_poll(onBackEdge: true)
+  16:                    line_num(lineNumber: 13)
+  17:            %v_6 := call_1o(self<%self>, *bar, callType: FUNCTIONAL, name: foo, potentiallyRefined: false)
+  18:                    label(ipc<_ITER_END_3:19>)
+  19:                    jump(ipc<_LOOP_BEGIN_0:13>)
+  20:                    label(ipc<LBL_4:21>)
+  21:            %v_5 := copy(nil<>)
+  22:                    label(ipc<_LOOP_END_1:23>)
+  23:                    return(%v_5)
+
+2020-06-14T00:02:14.352+01:00 [main] INFO MixedModeIRMethod : Printing simple IR for bar:
+begin INSTANCE_METHOD<bar>
+flags: [FLAGS_COMPUTED]
+signature(pre=0,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+
+  0:           %self := recv_self
+  1:            %v_0 := load_implicit_closure
+  2:  %current_scope := copy(scope<>)
+  3: %current_module := copy(mod<0>)
+  4:                    check_arity(required: 0, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  5:                    line_num(lineNumber: 2)
+  6:                    return(fix<14>)
+
+2020-06-14T00:02:14.354+01:00 [main] INFO MixedModeIRMethod : Printing simple IR for foo:
+begin INSTANCE_METHOD<foo>
+flags: [FLAGS_COMPUTED]
+signature(pre=1,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+declared variables:
+  bar(0:0)
+
+  0:           %self := recv_self
+  1:            %v_0 := load_implicit_closure
+  2:  %current_scope := copy(scope<>)
+  3: %current_module := copy(mod<0>)
+  4:                    check_arity(required: 1, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  5:            *bar := recv_pre_reqd_arg(argIndex: 0)
+  6:                    line_num(lineNumber: 7)
+  7:            %v_3 := call_0o(*bar, callType: NORMAL, name: bar, potentiallyRefined: false)
+  8:                    return(%v_3)
+
+2020-06-14T00:02:14.374+01:00 [Ruby-0-JIT-1] INFO JVMVisitor : Printing JIT IR for foo:
+begin INSTANCE_METHOD<foo>
+flags: [HAS_EXPLICIT_CALL_PROTOCOL, DYNSCOPE_ELIMINATED, FLAGS_COMPUTED]
+signature(pre=1,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+declared variables:
+  bar(0:0)
+
+block #1 (out: 3,2): LBL_0:-1
+
+block #2 (out: 3): LBL_1:-1
+  0:             check_arity(required: 1, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  1: %t_bar_4 := recv_pre_reqd_arg(argIndex: 0)
+  2:             line_num(lineNumber: 7)
+  3:     %v_3 := call_0o(%t_bar_4, callType: NORMAL, name: bar, potentiallyRefined: false)
+  4:             return(%v_3)
+
+block #3: LBL_2:-1
+
+*** Dumping inline.RUBY$method$foo$0 ***
+   L0
+   L1
+    NOP
+   L2
+    NOP
+    ALOAD 3
+    ASTORE 8
+   L3
+    LINENUMBER 8 L3
+    ALOAD 0
+    ALOAD 2
+    ALOAD 8
+    INVOKEDYNAMIC invoke:bar(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;)Lorg/jruby/runtime/builtin/IRubyObject; [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/NormalInvokeSite.bootstrap(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;ILjava/lang/String;I)Ljava/lang/invoke/CallSite;
+      // arguments:
+      false, 
+      "inline.rb", 
+      8
+    ]
+    ASTORE 9
+    ALOAD 9
+    ARETURN
+   L4
+    NOP
+*** Dumping inline.RUBY$method$foo$0$__VARARGS__ ***
+   L0
+    ALOAD 0
+    ALOAD 1
+    ALOAD 3
+    ACONST_NULL
+    INVOKEDYNAMIC checkArity(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;[Ljava/lang/Object;Lorg/jruby/runtime/Block;)V [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/Bootstrap.checkArity(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;IIIII)Ljava/lang/invoke/CallSite;
+      // arguments:
+      1, 
+      0, 
+      0, 
+      0, 
+      -1
+    ]
+    ALOAD 0
+    ALOAD 1
+    ALOAD 2
+    ALOAD 3
+    ICONST_0
+    AALOAD
+    ALOAD 4
+    ALOAD 5
+    ALOAD 6
+    INVOKESTATIC inline.RUBY$method$foo$0 (Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;
+    ARETURN
+2020-06-14T00:02:14.405+01:00 [Ruby-0-JIT-1] INFO JVMVisitor : Printing JIT IR for bar:
+begin INSTANCE_METHOD<bar>
+flags: [HAS_EXPLICIT_CALL_PROTOCOL, DYNSCOPE_ELIMINATED, FLAGS_COMPUTED]
+signature(pre=0,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+
+block #1 (out: 3,2): LBL_0:-1
+
+block #2 (out: 3): LBL_1:-1
+  0:     check_arity(required: 0, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  1:     line_num(lineNumber: 2)
+  2:     return(fix<14>)
+
+block #3: LBL_2:-1
+
+*** Dumping inline.RUBY$method$bar$0 ***
+   L0
+   L1
+    NOP
+   L2
+    NOP
+   L3
+    LINENUMBER 3 L3
+    ALOAD 0
+    INVOKEDYNAMIC fixnum(Lorg/jruby/runtime/ThreadContext;)Lorg/jruby/runtime/builtin/IRubyObject; [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/FixnumObjectSite.bootstrap(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;J)Ljava/lang/invoke/CallSite;
+      // arguments:
+      14
+    ]
+    ARETURN
+   L4
+    NOP
+*** Dumping inline.RUBY$method$bar$0$__VARARGS__ ***
+   L0
+    ALOAD 0
+    ALOAD 1
+    ALOAD 3
+    ACONST_NULL
+    INVOKEDYNAMIC checkArity(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;[Ljava/lang/Object;Lorg/jruby/runtime/Block;)V [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/Bootstrap.checkArity(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;IIIII)Ljava/lang/invoke/CallSite;
+      // arguments:
+      0, 
+      0, 
+      0, 
+      0, 
+      -1
+    ]
+    ALOAD 0
+    ALOAD 1
+    ALOAD 2
+    ALOAD 4
+    ALOAD 5
+    ALOAD 6
+    INVOKESTATIC inline.RUBY$method$bar$0 (Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;
+    ARETURN
+
+============================= C1-compiled nmethod ==============================
+----------------------------------- Assembly -----------------------------------
+
+Compiled method (c1)    1770 3050       3       inline::RUBY$method$foo$0 (20 bytes)
+ total in heap  [0x0000000115f3d190,0x0000000115f40098] = 12040
+ relocation     [0x0000000115f3d2e8,0x0000000115f3d540] = 600
+ main code      [0x0000000115f3d540,0x0000000115f3f3c0] = 7808
+ stub code      [0x0000000115f3f3c0,0x0000000115f3f480] = 192
+ oops           [0x0000000115f3f480,0x0000000115f3f588] = 264
+ metadata       [0x0000000115f3f588,0x0000000115f3f650] = 200
+ scopes data    [0x0000000115f3f650,0x0000000115f3fbf0] = 1440
+ scopes pcs     [0x0000000115f3fbf0,0x0000000115f40060] = 1136
+ dependencies   [0x0000000115f40060,0x0000000115f40070] = 16
+ nul chk table  [0x0000000115f40070,0x0000000115f40098] = 40
+
+--------------------------------------------------------------------------------
+[Constant Pool (empty)]
+
+--------------------------------------------------------------------------------
+
+[Verified Entry Point]
+  # {method} {0x000000013469d410} 'RUBY$method$foo$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline'
+  # parm0:    rsi:rsi   = 'org/jruby/runtime/ThreadContext'
+  # parm1:    rdx:rdx   = 'org/jruby/parser/StaticScope'
+  # parm2:    rcx:rcx   = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm3:    r8:r8     = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm4:    r9:r9     = 'org/jruby/runtime/Block'
+  # parm5:    rdi:rdi   = 'org/jruby/RubyModule'
+  # parm6:    [sp+0x1f0]   = 'java/lang/String'  (sp of caller)
+  0x0000000115f3d540:   mov    %eax,-0x14000(%rsp)
+  0x0000000115f3d547:   push   %rbp
+  0x0000000115f3d548:   sub    $0x1e0,%rsp
+  0x0000000115f3d54f:   mov    %rsi,0x1b0(%rsp)
+  0x0000000115f3d557:   mov    %rcx,0x1c0(%rsp)
+  0x0000000115f3d55f:   mov    %r8,0x1b8(%rsp)
+  0x0000000115f3d567:   movabs $0x13469d6e8,%rbx            ;   {metadata(method data for {method} {0x000000013469d410} 'RUBY$method$foo$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline')}
+  0x0000000115f3d571:   mov    0xe4(%rbx),%eax
+  0x0000000115f3d577:   add    $0x8,%eax
+  0x0000000115f3d57a:   mov    %eax,0xe4(%rbx)
+  0x0000000115f3d580:   and    $0x1ff8,%eax
+  0x0000000115f3d586:   cmp    $0x0,%eax
+  0x0000000115f3d589:   je     0x0000000115f3effc           ;*nop {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - inline::RUBY$method$foo$0@0
+  0x0000000115f3d58f:   movabs $0x13469d6e8,%rdx            ;   {metadata(method data for {method} {0x000000013469d410} 'RUBY$method$foo$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline')}
+  0x0000000115f3d599:   lea    0x138(%rdx),%rdx
+  0x0000000115f3d5a0:   mov    %rsi,%rdi
+  0x0000000115f3d5a3:   test   %rdi,%rdi
+  0x0000000115f3d5a6:   jne    0x0000000115f3d5b0
+  0x0000000115f3d5a8:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3d5b0:   mov    %rcx,%rdi
+  0x0000000115f3d5b3:   test   %rdi,%rdi
+  0x0000000115f3d5b6:   jne    0x0000000115f3d5c2
+  0x0000000115f3d5b8:   orq    $0x1,0x18(%rdx)
+  0x0000000115f3d5c0:   jmp    0x0000000115f3d5f7
+  0x0000000115f3d5c2:   mov    0x8(%rdi),%edi
+  0x0000000115f3d5c5:   shl    $0x3,%rdi
+  0x0000000115f3d5c9:   movabs $0x800000000,%r12
+  0x0000000115f3d5d3:   add    %r12,%rdi
+  0x0000000115f3d5d6:   xor    %r12,%r12
+  0x0000000115f3d5d9:   xor    0x18(%rdx),%rdi
+  0x0000000115f3d5dd:   test   $0xfffffffffffffffc,%rdi
+  0x0000000115f3d5e4:   je     0x0000000115f3d5f7
+  0x0000000115f3d5e6:   test   $0x2,%rdi
+  0x0000000115f3d5ed:   jne    0x0000000115f3d5f7
+  0x0000000115f3d5ef:   orq    $0x2,0x18(%rdx)
+  0x0000000115f3d5f7:   movabs $0x10c6ef8f0,%rdx            ;   {metadata(method data for {method} {0x00000008001d6bb0} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3d601:   lea    0x2a0(%rdx),%rdx
+  0x0000000115f3d608:   mov    %rsi,%rdi
+  0x0000000115f3d60b:   test   %rdi,%rdi
+  0x0000000115f3d60e:   jne    0x0000000115f3d617
+  0x0000000115f3d610:   orq    $0x1,(%rdx)
+  0x0000000115f3d617:   mov    %rcx,%rdi
+  0x0000000115f3d61a:   test   %rdi,%rdi
+  0x0000000115f3d61d:   jne    0x0000000115f3d629
+  0x0000000115f3d61f:   orq    $0x1,0x10(%rdx)
+  0x0000000115f3d627:   jmp    0x0000000115f3d65e
+  0x0000000115f3d629:   mov    0x8(%rdi),%edi
+  0x0000000115f3d62c:   shl    $0x3,%rdi
+  0x0000000115f3d630:   movabs $0x800000000,%r12
+  0x0000000115f3d63a:   add    %r12,%rdi
+  0x0000000115f3d63d:   xor    %r12,%r12
+  0x0000000115f3d640:   xor    0x10(%rdx),%rdi
+  0x0000000115f3d644:   test   $0xfffffffffffffffc,%rdi
+  0x0000000115f3d64b:   je     0x0000000115f3d65e
+  0x0000000115f3d64d:   test   $0x2,%rdi
+  0x0000000115f3d654:   jne    0x0000000115f3d65e
+  0x0000000115f3d656:   orq    $0x2,0x10(%rdx)
+  0x0000000115f3d65e:   movabs $0x13469d6e8,%rdx            ;   {metadata(method data for {method} {0x000000013469d410} 'RUBY$method$foo$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline')}
+  0x0000000115f3d668:   addq   $0x1,0x128(%rdx)
+  0x0000000115f3d670:   movabs $0x10c6ef8f0,%rdx            ;   {metadata(method data for {method} {0x00000008001d6bb0} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3d67a:   mov    0xe4(%rdx),%edi
+  0x0000000115f3d680:   add    $0x8,%edi
+  0x0000000115f3d683:   mov    %edi,0xe4(%rdx)
+  0x0000000115f3d689:   and    $0x7ffff8,%edi
+  0x0000000115f3d68f:   cmp    $0x0,%edi
+  0x0000000115f3d692:   je     0x0000000115f3f01d
+  0x0000000115f3d698:   movabs $0x10c6ef8f0,%rdx            ;   {metadata(method data for {method} {0x00000008001d6bb0} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3d6a2:   lea    0x170(%rdx),%rdx
+  0x0000000115f3d6a9:   movabs $0x61fe96ed8,%rdi            ;   {oop(a 'org/jruby/ir/targets/NormalInvokeSite'{0x000000061fe96ed8})}
+  0x0000000115f3d6b3:   mov    %rdi,%rbx
+  0x0000000115f3d6b6:   test   %rbx,%rbx
+  0x0000000115f3d6b9:   jne    0x0000000115f3d6c3
+  0x0000000115f3d6bb:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3d6c3:   movabs $0x10c6ef8f0,%rdx            ;   {metadata(method data for {method} {0x00000008001d6bb0} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3d6cd:   addq   $0x1,0x160(%rdx)
+  0x0000000115f3d6d5:   movabs $0x10c6ef040,%rdx            ;   {metadata(method data for {method} {0x00000008001f6d18} 'getCallSiteTarget' '(Ljava/lang/invoke/CallSite;)Ljava/lang/invoke/MethodHandle;' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3d6df:   mov    0xe4(%rdx),%ebx
+  0x0000000115f3d6e5:   add    $0x8,%ebx
+  0x0000000115f3d6e8:   mov    %ebx,0xe4(%rdx)
+  0x0000000115f3d6ee:   and    $0x7ffff8,%ebx
+  0x0000000115f3d6f4:   cmp    $0x0,%ebx
+  0x0000000115f3d6f7:   je     0x0000000115f3f03e
+  0x0000000115f3d6fd:   movabs $0x10c6ef040,%rdx            ;   {metadata(method data for {method} {0x00000008001f6d18} 'getCallSiteTarget' '(Ljava/lang/invoke/CallSite;)Ljava/lang/invoke/MethodHandle;' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3d707:   addq   $0x1,0x128(%rdx)
+  0x0000000115f3d70f:   movabs $0x10c6ef8f0,%rdx            ;   {metadata(method data for {method} {0x00000008001d6bb0} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3d719:   lea    0x180(%rdx),%rdx
+  0x0000000115f3d720:   movabs $0x61fff6fd8,%rdi            ;   {oop(a 'java/lang/invoke/BoundMethodHandle$Species_LLLL'{0x000000061fff6fd8})}
+  0x0000000115f3d72a:   mov    %rdi,%rbx
+  0x0000000115f3d72d:   test   %rbx,%rbx
+  0x0000000115f3d730:   jne    0x0000000115f3d739
+  0x0000000115f3d732:   orq    $0x1,(%rdx)
+  0x0000000115f3d739:   movabs $0x10c6ef8f0,%rdx            ;   {metadata(method data for {method} {0x00000008001d6bb0} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3d743:   lea    0x200(%rdx),%rdx
+  0x0000000115f3d74a:   mov    %rsi,%rbx
+  0x0000000115f3d74d:   test   %rbx,%rbx
+  0x0000000115f3d750:   jne    0x0000000115f3d75a
+  0x0000000115f3d752:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3d75a:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3d764:   lea    0x4b0(%rdx),%rdx
+  0x0000000115f3d76b:   test   %rdi,%rdi
+  0x0000000115f3d76e:   jne    0x0000000115f3d777
+  0x0000000115f3d770:   orq    $0x1,(%rdx)
+  0x0000000115f3d777:   mov    %rsi,%rdi
+  0x0000000115f3d77a:   test   %rdi,%rdi
+  0x0000000115f3d77d:   jne    0x0000000115f3d787
+  0x0000000115f3d77f:   orq    $0x1,0x10(%rdx)
+  0x0000000115f3d787:   movabs $0x10c6ef8f0,%rdx            ;   {metadata(method data for {method} {0x00000008001d6bb0} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3d791:   addq   $0x1,0x1c8(%rdx)
+  0x0000000115f3d799:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3d7a3:   mov    0xe4(%rdx),%edi
+  0x0000000115f3d7a9:   add    $0x8,%edi
+  0x0000000115f3d7ac:   mov    %edi,0xe4(%rdx)
+  0x0000000115f3d7b2:   and    $0x7ffff8,%edi
+  0x0000000115f3d7b8:   cmp    $0x0,%edi
+  0x0000000115f3d7bb:   je     0x0000000115f3f05f
+  0x0000000115f3d7c1:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3d7cb:   lea    0x1d0(%rdx),%rdx
+  0x0000000115f3d7d2:   mov    %rsi,%rdi
+  0x0000000115f3d7d5:   test   %rdi,%rdi
+  0x0000000115f3d7d8:   jne    0x0000000115f3d7e2
+  0x0000000115f3d7da:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3d7e2:   movabs $0x10c8e0440,%rdx            ;   {metadata(method data for {method} {0x0000000134694708} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3d7ec:   lea    0x358(%rdx),%rdx
+  0x0000000115f3d7f3:   movabs $0x61fff4378,%rdi            ;   {oop(a 'java/lang/invoke/BoundMethodHandle$Species_LL'{0x000000061fff4378})}
+  0x0000000115f3d7fd:   test   %rdi,%rdi
+  0x0000000115f3d800:   jne    0x0000000115f3d809
+  0x0000000115f3d802:   orq    $0x1,(%rdx)
+  0x0000000115f3d809:   mov    %rsi,%rdi
+  0x0000000115f3d80c:   test   %rdi,%rdi
+  0x0000000115f3d80f:   jne    0x0000000115f3d819
+  0x0000000115f3d811:   orq    $0x1,0x10(%rdx)
+  0x0000000115f3d819:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3d823:   addq   $0x1,0x198(%rdx)
+  0x0000000115f3d82b:   movabs $0x10c8e0440,%rdx            ;   {metadata(method data for {method} {0x0000000134694708} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3d835:   mov    0xe4(%rdx),%edi
+  0x0000000115f3d83b:   add    $0x8,%edi
+  0x0000000115f3d83e:   mov    %edi,0xe4(%rdx)
+  0x0000000115f3d844:   and    $0x7ffff8,%edi
+  0x0000000115f3d84a:   cmp    $0x0,%edi
+  0x0000000115f3d84d:   je     0x0000000115f3f080
+  0x0000000115f3d853:   movabs $0x10c6ed040,%rdx            ;   {metadata(method data for {method} {0x0000000109fbf248} 'invoke' '(Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3d85d:   lea    0x248(%rdx),%rdx
+  0x0000000115f3d864:   movabs $0x61fec39d0,%rdi            ;   {oop(a 'java/lang/invoke/BoundMethodHandle$Species_LL'{0x000000061fec39d0})}
+  0x0000000115f3d86e:   test   %rdi,%rdi
+  0x0000000115f3d871:   jne    0x0000000115f3d87a
+  0x0000000115f3d873:   orq    $0x1,(%rdx)
+  0x0000000115f3d87a:   movabs $0x10c8e0440,%rdx            ;   {metadata(method data for {method} {0x0000000134694708} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3d884:   addq   $0x1,0x198(%rdx)
+  0x0000000115f3d88c:   movabs $0x10c6ed040,%rdx            ;   {metadata(method data for {method} {0x0000000109fbf248} 'invoke' '(Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3d896:   mov    0xe4(%rdx),%edi
+  0x0000000115f3d89c:   add    $0x8,%edi
+  0x0000000115f3d89f:   mov    %edi,0xe4(%rdx)
+  0x0000000115f3d8a5:   and    $0x7ffff8,%edi
+  0x0000000115f3d8ab:   cmp    $0x0,%edi
+  0x0000000115f3d8ae:   je     0x0000000115f3f0a1
+  0x0000000115f3d8b4:   movabs $0x10c6ed040,%rdx            ;   {metadata(method data for {method} {0x0000000109fbf248} 'invoke' '(Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3d8be:   lea    0x1d0(%rdx),%rdx
+  0x0000000115f3d8c5:   movabs $0x61fec38d8,%rdi            ;   {oop(a 'java/lang/invoke/MutableCallSite'{0x000000061fec38d8})}
+  0x0000000115f3d8cf:   mov    %rdi,%rbx
+  0x0000000115f3d8d2:   test   %rbx,%rbx
+  0x0000000115f3d8d5:   jne    0x0000000115f3d8df
+  0x0000000115f3d8d7:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3d8df:   movabs $0x10c6ec040,%rdx            ;   {metadata(method data for {method} {0x0000000800202038} 'invokeVirtual' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3d8e9:   lea    0x230(%rdx),%rdx
+  0x0000000115f3d8f0:   movabs $0x60014e5d8,%rbx            ;   {oop(a 'java/lang/invoke/DirectMethodHandle'{0x000000060014e5d8})}
+  0x0000000115f3d8fa:   mov    %rbx,%rax
+  0x0000000115f3d8fd:   test   %rax,%rax
+  0x0000000115f3d900:   jne    0x0000000115f3d909
+  0x0000000115f3d902:   orq    $0x1,(%rdx)
+  0x0000000115f3d909:   mov    %rdi,%rax
+  0x0000000115f3d90c:   test   %rax,%rax
+  0x0000000115f3d90f:   jne    0x0000000115f3d919
+  0x0000000115f3d911:   orq    $0x1,0x10(%rdx)
+  0x0000000115f3d919:   movabs $0x10c6ed040,%rdx            ;   {metadata(method data for {method} {0x0000000109fbf248} 'invoke' '(Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3d923:   addq   $0x1,0x198(%rdx)
+  0x0000000115f3d92b:   movabs $0x10c6ec040,%rdx            ;   {metadata(method data for {method} {0x0000000800202038} 'invokeVirtual' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3d935:   mov    0xe4(%rdx),%eax
+  0x0000000115f3d93b:   add    $0x8,%eax
+  0x0000000115f3d93e:   mov    %eax,0xe4(%rdx)
+  0x0000000115f3d944:   and    $0x7ffff8,%eax
+  0x0000000115f3d94a:   cmp    $0x0,%eax
+  0x0000000115f3d94d:   je     0x0000000115f3f0c2
+  0x0000000115f3d953:   movabs $0x10c6ec040,%rdx            ;   {metadata(method data for {method} {0x0000000800202038} 'invokeVirtual' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3d95d:   lea    0x138(%rdx),%rdx
+  0x0000000115f3d964:   test   %rbx,%rbx
+  0x0000000115f3d967:   jne    0x0000000115f3d971
+  0x0000000115f3d969:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3d971:   movabs $0x10c6ec040,%rdx            ;   {metadata(method data for {method} {0x0000000800202038} 'invokeVirtual' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3d97b:   addq   $0x1,0x128(%rdx)
+  0x0000000115f3d983:   movabs $0x109c2dd88,%rdx            ;   {metadata(method data for {method} {0x000000080009fb80} 'internalMemberName' '(Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle')}
+  0x0000000115f3d98d:   mov    0xe4(%rdx),%ebx
+  0x0000000115f3d993:   add    $0x8,%ebx
+  0x0000000115f3d996:   mov    %ebx,0xe4(%rdx)
+  0x0000000115f3d99c:   and    $0x7ffff8,%ebx
+  0x0000000115f3d9a2:   cmp    $0x0,%ebx
+  0x0000000115f3d9a5:   je     0x0000000115f3f0e3
+  0x0000000115f3d9ab:   movabs $0x10c6ec040,%rdx            ;   {metadata(method data for {method} {0x0000000800202038} 'invokeVirtual' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3d9b5:   lea    0x148(%rdx),%rdx
+  0x0000000115f3d9bc:   movabs $0x60014e638,%rbx            ;   {oop(a 'java/lang/invoke/MemberName'{0x000000060014e638} = {method} {0x00000008003576f0} 'getTarget' '()Ljava/lang/invoke/MethodHandle;' in 'java/lang/invoke/CallSite')}
+  0x0000000115f3d9c6:   mov    %rbx,%rax
+  0x0000000115f3d9c9:   test   %rax,%rax
+  0x0000000115f3d9cc:   jne    0x0000000115f3d9d5
+  0x0000000115f3d9ce:   orq    $0x1,(%rdx)
+  0x0000000115f3d9d5:   movabs $0x10c6ec040,%rdx            ;   {metadata(method data for {method} {0x0000000800202038} 'invokeVirtual' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3d9df:   lea    0x1a0(%rdx),%rdx
+  0x0000000115f3d9e6:   mov    %rdi,%rax
+  0x0000000115f3d9e9:   test   %rax,%rax
+  0x0000000115f3d9ec:   jne    0x0000000115f3d9f6
+  0x0000000115f3d9ee:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3d9f6:   mov    %rbx,%rax
+  0x0000000115f3d9f9:   test   %rax,%rax
+  0x0000000115f3d9fc:   jne    0x0000000115f3da06
+  0x0000000115f3d9fe:   orq    $0x1,0x18(%rdx)
+  0x0000000115f3da06:   movabs $0x10c6ec040,%rdx            ;   {metadata(method data for {method} {0x0000000800202038} 'invokeVirtual' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3da10:   addq   $0x1,0x190(%rdx)
+  0x0000000115f3da18:   mov    %rdi,%rsi
+  0x0000000115f3da1b:   mov    %rbx,%rdx                    ;*invokestatic linkToVirtual {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual@10
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke@20
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@16
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3da1e:   nop
+  0x0000000115f3da1f:   callq  0x000000011cd66380           ; ImmutableOopMap {[448]=Oop [432]=Oop [440]=Oop }
+                                                            ;*invokestatic linkToVirtual {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual@10
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke@20
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@16
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {static_call}
+  0x0000000115f3da24:   movabs $0x10c6ec040,%rsi            ;   {metadata(method data for {method} {0x0000000800202038} 'invokeVirtual' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3da2e:   lea    0x1c0(%rsi),%rsi
+  0x0000000115f3da35:   mov    %rax,%rdi
+  0x0000000115f3da38:   test   %rdi,%rdi
+  0x0000000115f3da3b:   jne    0x0000000115f3da46
+  0x0000000115f3da3d:   orq    $0x1,(%rsi)
+  0x0000000115f3da44:   jmp    0x0000000115f3da79
+  0x0000000115f3da46:   mov    0x8(%rdi),%edi
+  0x0000000115f3da49:   shl    $0x3,%rdi
+  0x0000000115f3da4d:   movabs $0x800000000,%r12
+  0x0000000115f3da57:   add    %r12,%rdi
+  0x0000000115f3da5a:   xor    %r12,%r12
+  0x0000000115f3da5d:   xor    (%rsi),%rdi
+  0x0000000115f3da60:   test   $0xfffffffffffffffc,%rdi
+  0x0000000115f3da67:   je     0x0000000115f3da79
+  0x0000000115f3da69:   test   $0x2,%rdi
+  0x0000000115f3da70:   jne    0x0000000115f3da79
+  0x0000000115f3da72:   orq    $0x2,(%rsi)
+  0x0000000115f3da79:   movabs $0x10c6ed040,%rsi            ;   {metadata(method data for {method} {0x0000000109fbf248} 'invoke' '(Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3da83:   lea    0x1e0(%rsi),%rsi
+  0x0000000115f3da8a:   mov    %rax,%rdi
+  0x0000000115f3da8d:   test   %rdi,%rdi
+  0x0000000115f3da90:   jne    0x0000000115f3da9b
+  0x0000000115f3da92:   orq    $0x1,(%rsi)
+  0x0000000115f3da99:   jmp    0x0000000115f3dace
+  0x0000000115f3da9b:   mov    0x8(%rdi),%edi
+  0x0000000115f3da9e:   shl    $0x3,%rdi
+  0x0000000115f3daa2:   movabs $0x800000000,%r12
+  0x0000000115f3daac:   add    %r12,%rdi
+  0x0000000115f3daaf:   xor    %r12,%r12
+  0x0000000115f3dab2:   xor    (%rsi),%rdi
+  0x0000000115f3dab5:   test   $0xfffffffffffffffc,%rdi
+  0x0000000115f3dabc:   je     0x0000000115f3dace
+  0x0000000115f3dabe:   test   $0x2,%rdi
+  0x0000000115f3dac5:   jne    0x0000000115f3dace
+  0x0000000115f3dac7:   orq    $0x2,(%rsi)
+  0x0000000115f3dace:   movabs $0x10c8e0440,%rsi            ;   {metadata(method data for {method} {0x0000000134694708} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3dad8:   lea    0x1d0(%rsi),%rsi
+  0x0000000115f3dadf:   mov    %rax,%rdi
+  0x0000000115f3dae2:   test   %rdi,%rdi
+  0x0000000115f3dae5:   jne    0x0000000115f3daf0
+  0x0000000115f3dae7:   orq    $0x1,(%rsi)
+  0x0000000115f3daee:   jmp    0x0000000115f3db23
+  0x0000000115f3daf0:   mov    0x8(%rdi),%edi
+  0x0000000115f3daf3:   shl    $0x3,%rdi
+  0x0000000115f3daf7:   movabs $0x800000000,%r12
+  0x0000000115f3db01:   add    %r12,%rdi
+  0x0000000115f3db04:   xor    %r12,%r12
+  0x0000000115f3db07:   xor    (%rsi),%rdi
+  0x0000000115f3db0a:   test   $0xfffffffffffffffc,%rdi
+  0x0000000115f3db11:   je     0x0000000115f3db23
+  0x0000000115f3db13:   test   $0x2,%rdi
+  0x0000000115f3db1a:   jne    0x0000000115f3db23
+  0x0000000115f3db1c:   orq    $0x2,(%rsi)
+  0x0000000115f3db23:   cmp    $0x0,%rax
+  0x0000000115f3db27:   jne    0x0000000115f3db3f
+  0x0000000115f3db29:   movabs $0x10c8e0440,%rdi            ;   {metadata(method data for {method} {0x0000000134694708} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3db33:   orb    $0x1,0x1d9(%rdi)
+  0x0000000115f3db3a:   jmpq   0x0000000115f3dc20
+  0x0000000115f3db3f:   movabs $0x80009dd28,%rbx            ;   {metadata('java/lang/invoke/MethodHandle')}
+  0x0000000115f3db49:   mov    0x8(%rax),%edi
+  0x0000000115f3db4c:   shl    $0x3,%rdi
+  0x0000000115f3db50:   movabs $0x800000000,%r12
+  0x0000000115f3db5a:   add    %r12,%rdi
+  0x0000000115f3db5d:   xor    %r12,%r12
+  0x0000000115f3db60:   cmp    0x38(%rdi),%rbx
+  0x0000000115f3db64:   jne    0x0000000115f3dc04
+  0x0000000115f3db6a:   movabs $0x10c8e0440,%rdi            ;   {metadata(method data for {method} {0x0000000134694708} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3db74:   mov    0x8(%rax),%ebx
+  0x0000000115f3db77:   shl    $0x3,%rbx
+  0x0000000115f3db7b:   movabs $0x800000000,%r12
+  0x0000000115f3db85:   add    %r12,%rbx
+  0x0000000115f3db88:   xor    %r12,%r12
+  0x0000000115f3db8b:   cmp    0x1f0(%rdi),%rbx
+  0x0000000115f3db92:   jne    0x0000000115f3dba1
+  0x0000000115f3db94:   addq   $0x1,0x1f8(%rdi)
+  0x0000000115f3db9c:   jmpq   0x0000000115f3dc20
+  0x0000000115f3dba1:   cmp    0x200(%rdi),%rbx
+  0x0000000115f3dba8:   jne    0x0000000115f3dbb7
+  0x0000000115f3dbaa:   addq   $0x1,0x208(%rdi)
+  0x0000000115f3dbb2:   jmpq   0x0000000115f3dc20
+  0x0000000115f3dbb7:   cmpq   $0x0,0x1f0(%rdi)
+  0x0000000115f3dbc2:   jne    0x0000000115f3dbdb
+  0x0000000115f3dbc4:   mov    %rbx,0x1f0(%rdi)
+  0x0000000115f3dbcb:   movq   $0x1,0x1f8(%rdi)
+  0x0000000115f3dbd6:   jmpq   0x0000000115f3dc20
+  0x0000000115f3dbdb:   cmpq   $0x0,0x200(%rdi)
+  0x0000000115f3dbe6:   jne    0x0000000115f3dbff
+  0x0000000115f3dbe8:   mov    %rbx,0x200(%rdi)
+  0x0000000115f3dbef:   movq   $0x1,0x208(%rdi)
+  0x0000000115f3dbfa:   jmpq   0x0000000115f3dc20
+  0x0000000115f3dbff:   jmpq   0x0000000115f3dc20
+  0x0000000115f3dc04:   movabs $0x10c8e0440,%rdi            ;   {metadata(method data for {method} {0x0000000134694708} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3dc0e:   subq   $0x1,0x1e0(%rdi)
+  0x0000000115f3dc16:   jmpq   0x0000000115f3f104
+  0x0000000115f3dc1b:   jmpq   0x0000000115f3dc20
+  0x0000000115f3dc20:   mov    %rax,%rdi                    ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@29
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3dc23:   mov    %rdi,0x1c8(%rsp)
+  0x0000000115f3dc2b:   movabs $0x10c8e0440,%rsi            ;   {metadata(method data for {method} {0x0000000134694708} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3dc35:   lea    0x260(%rsi),%rsi
+  0x0000000115f3dc3c:   mov    %rdi,%rbx
+  0x0000000115f3dc3f:   test   %rbx,%rbx
+  0x0000000115f3dc42:   jne    0x0000000115f3dc4e
+  0x0000000115f3dc44:   orq    $0x1,0x8(%rsi)
+  0x0000000115f3dc4c:   jmp    0x0000000115f3dc83
+  0x0000000115f3dc4e:   mov    0x8(%rbx),%ebx
+  0x0000000115f3dc51:   shl    $0x3,%rbx
+  0x0000000115f3dc55:   movabs $0x800000000,%r12
+  0x0000000115f3dc5f:   add    %r12,%rbx
+  0x0000000115f3dc62:   xor    %r12,%r12
+  0x0000000115f3dc65:   xor    0x8(%rsi),%rbx
+  0x0000000115f3dc69:   test   $0xfffffffffffffffc,%rbx
+  0x0000000115f3dc70:   je     0x0000000115f3dc83
+  0x0000000115f3dc72:   test   $0x2,%rbx
+  0x0000000115f3dc79:   jne    0x0000000115f3dc83
+  0x0000000115f3dc7b:   orq    $0x2,0x8(%rsi)
+  0x0000000115f3dc83:   movabs $0x600002988,%rbx            ;   {oop(a 'java/lang/invoke/MethodType'{0x0000000600002988} = ()Z)}
+  0x0000000115f3dc8d:   mov    %rbx,%rax
+  0x0000000115f3dc90:   test   %rax,%rax
+  0x0000000115f3dc93:   jne    0x0000000115f3dc9d
+  0x0000000115f3dc95:   orq    $0x1,0x18(%rsi)
+  0x0000000115f3dc9d:   movabs $0x10c8e0440,%rsi            ;   {metadata(method data for {method} {0x0000000134694708} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3dca7:   addq   $0x1,0x250(%rsi)
+  0x0000000115f3dcaf:   movabs $0x109cb86b0,%rsi            ;   {metadata(method data for {method} {0x00000008001f6c68} 'checkExactType' '(Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)V' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3dcb9:   mov    0xe4(%rsi),%eax
+  0x0000000115f3dcbf:   add    $0x8,%eax
+  0x0000000115f3dcc2:   mov    %eax,0xe4(%rsi)
+  0x0000000115f3dcc8:   and    $0x7ffff8,%eax
+  0x0000000115f3dcce:   cmp    $0x0,%eax
+  0x0000000115f3dcd1:   je     0x0000000115f3f10d
+  0x0000000115f3dcd7:   cmp    (%rdi),%rax                  ; implicit exception: dispatches to 0x0000000115f3f12e
+                                                            ;*invokevirtual type {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkExactType@1 (line 491)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@40
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3dcda:   mov    %rdi,%rsi
+  0x0000000115f3dcdd:   movabs $0x109cb86b0,%rax            ;   {metadata(method data for {method} {0x00000008001f6c68} 'checkExactType' '(Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)V' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3dce7:   mov    0x8(%rsi),%esi
+  0x0000000115f3dcea:   shl    $0x3,%rsi
+  0x0000000115f3dcee:   movabs $0x800000000,%r12
+  0x0000000115f3dcf8:   add    %r12,%rsi
+  0x0000000115f3dcfb:   xor    %r12,%r12
+  0x0000000115f3dcfe:   cmp    0x138(%rax),%rsi
+  0x0000000115f3dd05:   jne    0x0000000115f3dd14
+  0x0000000115f3dd07:   addq   $0x1,0x140(%rax)
+  0x0000000115f3dd0f:   jmpq   0x0000000115f3dd7a
+  0x0000000115f3dd14:   cmp    0x148(%rax),%rsi
+  0x0000000115f3dd1b:   jne    0x0000000115f3dd2a
+  0x0000000115f3dd1d:   addq   $0x1,0x150(%rax)
+  0x0000000115f3dd25:   jmpq   0x0000000115f3dd7a
+  0x0000000115f3dd2a:   cmpq   $0x0,0x138(%rax)
+  0x0000000115f3dd35:   jne    0x0000000115f3dd4e
+  0x0000000115f3dd37:   mov    %rsi,0x138(%rax)
+  0x0000000115f3dd3e:   movq   $0x1,0x140(%rax)
+  0x0000000115f3dd49:   jmpq   0x0000000115f3dd7a
+  0x0000000115f3dd4e:   cmpq   $0x0,0x148(%rax)
+  0x0000000115f3dd59:   jne    0x0000000115f3dd72
+  0x0000000115f3dd5b:   mov    %rsi,0x148(%rax)
+  0x0000000115f3dd62:   movq   $0x1,0x150(%rax)
+  0x0000000115f3dd6d:   jmpq   0x0000000115f3dd7a
+  0x0000000115f3dd72:   addq   $0x1,0x128(%rax)
+  0x0000000115f3dd7a:   mov    0x10(%rdi),%eax
+  0x0000000115f3dd7d:   shl    $0x3,%rax                    ;*getfield type {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.MethodHandle::type@1 (line 467)
+                                                            ; - java.lang.invoke.Invokers::checkExactType@1 (line 491)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@40
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3dd81:   cmp    %rbx,%rax
+  0x0000000115f3dd84:   movabs $0x109cb86b0,%rsi            ;   {metadata(method data for {method} {0x00000008001f6c68} 'checkExactType' '(Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)V' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3dd8e:   movabs $0x170,%rbx
+  0x0000000115f3dd98:   jne    0x0000000115f3dda8
+  0x0000000115f3dd9e:   movabs $0x160,%rbx
+  0x0000000115f3dda8:   mov    (%rsi,%rbx,1),%rdx
+  0x0000000115f3ddac:   lea    0x1(%rdx),%rdx
+  0x0000000115f3ddb0:   mov    %rdx,(%rsi,%rbx,1)
+  0x0000000115f3ddb4:   jne    0x0000000115f3efc7           ;*if_acmpeq {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkExactType@7 (line 492)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@40
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3ddba:   movabs $0x10c8e0440,%rsi            ;   {metadata(method data for {method} {0x0000000134694708} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3ddc4:   lea    0x298(%rsi),%rsi
+  0x0000000115f3ddcb:   mov    %rdi,%rbx
+  0x0000000115f3ddce:   mov    0x8(%rbx),%ebx
+  0x0000000115f3ddd1:   shl    $0x3,%rbx
+  0x0000000115f3ddd5:   movabs $0x800000000,%r12
+  0x0000000115f3dddf:   add    %r12,%rbx
+  0x0000000115f3dde2:   xor    %r12,%r12
+  0x0000000115f3dde5:   xor    0x8(%rsi),%rbx
+  0x0000000115f3dde9:   test   $0xfffffffffffffffc,%rbx
+  0x0000000115f3ddf0:   je     0x0000000115f3de03
+  0x0000000115f3ddf2:   test   $0x2,%rbx
+  0x0000000115f3ddf9:   jne    0x0000000115f3de03
+  0x0000000115f3ddfb:   orq    $0x2,0x8(%rsi)
+  0x0000000115f3de03:   movabs $0x10c8e0440,%rsi            ;   {metadata(method data for {method} {0x0000000134694708} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3de0d:   addq   $0x1,0x288(%rsi)
+  0x0000000115f3de15:   movabs $0x109cb80f8,%rsi            ;   {metadata(method data for {method} {0x00000008001f6d70} 'checkCustomized' '(Ljava/lang/invoke/MethodHandle;)V' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3de1f:   mov    0xe4(%rsi),%ebx
+  0x0000000115f3de25:   add    $0x8,%ebx
+  0x0000000115f3de28:   mov    %ebx,0xe4(%rsi)
+  0x0000000115f3de2e:   and    $0x7ffff8,%ebx
+  0x0000000115f3de34:   cmp    $0x0,%ebx
+  0x0000000115f3de37:   je     0x0000000115f3f133
+  0x0000000115f3de3d:   movabs $0x109cb80f8,%rsi            ;   {metadata(method data for {method} {0x00000008001f6d70} 'checkCustomized' '(Ljava/lang/invoke/MethodHandle;)V' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3de47:   addq   $0x1,0x128(%rsi)
+  0x0000000115f3de4f:   movabs $0x109cb82c0,%rsi            ;   {metadata(method data for {method} {0x00000008001f9988} 'isCompileConstant' '(Ljava/lang/Object;)Z' in 'java/lang/invoke/MethodHandleImpl')}
+  0x0000000115f3de59:   mov    0xe4(%rsi),%ebx
+  0x0000000115f3de5f:   add    $0x8,%ebx
+  0x0000000115f3de62:   mov    %ebx,0xe4(%rsi)
+  0x0000000115f3de68:   and    $0x7ffff8,%ebx
+  0x0000000115f3de6e:   cmp    $0x0,%ebx
+  0x0000000115f3de71:   je     0x0000000115f3f154
+  0x0000000115f3de77:   movabs $0x109cb80f8,%rsi            ;   {metadata(method data for {method} {0x00000008001f6d70} 'checkCustomized' '(Ljava/lang/invoke/MethodHandle;)V' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3de81:   incl   0x138(%rsi)                  ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkCustomized@4 (line 579)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@45
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3de87:   mov    0x14(%rdi),%esi
+  0x0000000115f3de8a:   shl    $0x3,%rsi                    ;*getfield form {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkCustomized@9 (line 580)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@45
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3de8e:   mov    0x1c(%rsi),%esi              ; implicit exception: dispatches to 0x0000000115f3f175
+  0x0000000115f3de91:   shl    $0x3,%rsi                    ;*getfield customized {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkCustomized@12 (line 580)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@45
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3de95:   cmp    $0x0,%rsi
+  0x0000000115f3de99:   movabs $0x109cb80f8,%rsi            ;   {metadata(method data for {method} {0x00000008001f6d70} 'checkCustomized' '(Ljava/lang/invoke/MethodHandle;)V' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3dea3:   movabs $0x158,%rbx
+  0x0000000115f3dead:   jne    0x0000000115f3debd
+  0x0000000115f3deb3:   movabs $0x168,%rbx
+  0x0000000115f3debd:   mov    (%rsi,%rbx,1),%rax
+  0x0000000115f3dec1:   lea    0x1(%rax),%rax
+  0x0000000115f3dec5:   mov    %rax,(%rsi,%rbx,1)
+  0x0000000115f3dec9:   jne    0x0000000115f3deec           ;*ifnonnull {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkCustomized@15 (line 580)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@45
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3decf:   movabs $0x109cb80f8,%rsi            ;   {metadata(method data for {method} {0x00000008001f6d70} 'checkCustomized' '(Ljava/lang/invoke/MethodHandle;)V' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3ded9:   addq   $0x1,0x178(%rsi)
+  0x0000000115f3dee1:   mov    %rdi,%rsi                    ;*invokestatic maybeCustomize {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkCustomized@19 (line 581)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@45
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3dee4:   data32 xchg %ax,%ax
+  0x0000000115f3dee7:   callq  0x00000001152e3400           ; ImmutableOopMap {[448]=Oop [432]=Oop [440]=Oop [456]=Oop }
+                                                            ;*invokestatic maybeCustomize {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkCustomized@19 (line 581)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@45
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {static_call}
+  0x0000000115f3deec:   mov    0x1c8(%rsp),%rdi
+  0x0000000115f3def4:   movabs $0x10c8e0440,%rsi            ;   {metadata(method data for {method} {0x0000000134694708} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3defe:   addq   $0x1,0x2b0(%rsi)
+  0x0000000115f3df06:   mov    0x1c8(%rsp),%rsi             ;*invokevirtual invokeBasic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@50
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3df0e:   nop
+  0x0000000115f3df0f:   callq  0x000000011cdb0b00           ; ImmutableOopMap {[448]=Oop [432]=Oop [440]=Oop }
+                                                            ;*invokevirtual invokeBasic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@50
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {optimized virtual_call}
+  0x0000000115f3df14:   movabs $0x10c6ee040,%rsi            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3df1e:   lea    0x240(%rsi),%rsi
+  0x0000000115f3df25:   movabs $0x61fff6f50,%rdx            ;   {oop([I{0x000000061fff6f50})}
+  0x0000000115f3df2f:   mov    %rdx,%rdi
+  0x0000000115f3df32:   test   %rdi,%rdi
+  0x0000000115f3df35:   jne    0x0000000115f3df3f
+  0x0000000115f3df37:   orq    $0x1,0x8(%rsi)
+  0x0000000115f3df3f:   movabs $0x10c6ee040,%rsi            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3df49:   addq   $0x1,0x230(%rsi)
+  0x0000000115f3df51:   and    $0x1,%eax
+  0x0000000115f3df54:   mov    %rax,%rsi                    ;*invokestatic profileBoolean {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@51
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3df57:   callq  0x0000000115f38660           ; ImmutableOopMap {[448]=Oop [432]=Oop [440]=Oop }
+                                                            ;*invokestatic profileBoolean {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@51
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {static_call}
+  0x0000000115f3df5c:   and    $0x1,%eax
+  0x0000000115f3df5f:   cmp    $0x0,%eax
+  0x0000000115f3df62:   movabs $0x10c6ee040,%rsi            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3df6c:   movabs $0x258,%rdx
+  0x0000000115f3df76:   je     0x0000000115f3df86
+  0x0000000115f3df7c:   movabs $0x268,%rdx
+  0x0000000115f3df86:   mov    (%rsi,%rdx,1),%rdi
+  0x0000000115f3df8a:   lea    0x1(%rdi),%rdi
+  0x0000000115f3df8e:   mov    %rdi,(%rsi,%rdx,1)
+  0x0000000115f3df92:   je     0x0000000115f3ed68           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@60
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3df98:   mov    0x1b8(%rsp),%r8
+  0x0000000115f3dfa0:   mov    0x1b0(%rsp),%rsi
+  0x0000000115f3dfa8:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3dfb2:   lea    0x320(%rdx),%rdx
+  0x0000000115f3dfb9:   mov    %rsi,%rdi
+  0x0000000115f3dfbc:   test   %rdi,%rdi
+  0x0000000115f3dfbf:   jne    0x0000000115f3dfc9
+  0x0000000115f3dfc1:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3dfc9:   movabs $0x10c6ef3b0,%rdx            ;   {metadata(method data for {method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3dfd3:   lea    0x2b8(%rdx),%rdx
+  0x0000000115f3dfda:   movabs $0x61fff6f68,%rdi            ;   {oop(a 'java/lang/invoke/MethodHandleImpl$CountingWrapper'{0x000000061fff6f68})}
+  0x0000000115f3dfe4:   mov    %rdi,%rbx
+  0x0000000115f3dfe7:   test   %rbx,%rbx
+  0x0000000115f3dfea:   jne    0x0000000115f3dff3
+  0x0000000115f3dfec:   orq    $0x1,(%rdx)
+  0x0000000115f3dff3:   mov    %rsi,%rbx
+  0x0000000115f3dff6:   test   %rbx,%rbx
+  0x0000000115f3dff9:   jne    0x0000000115f3e003
+  0x0000000115f3dffb:   orq    $0x1,0x10(%rdx)
+  0x0000000115f3e003:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e00d:   addq   $0x1,0x2e8(%rdx)
+  0x0000000115f3e015:   movabs $0x10c6ef3b0,%rdx            ;   {metadata(method data for {method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3e01f:   mov    0xe4(%rdx),%ebx
+  0x0000000115f3e025:   add    $0x8,%ebx
+  0x0000000115f3e028:   mov    %ebx,0xe4(%rdx)
+  0x0000000115f3e02e:   and    $0x7ffff8,%ebx
+  0x0000000115f3e034:   cmp    $0x0,%ebx
+  0x0000000115f3e037:   je     0x0000000115f3f17a
+  0x0000000115f3e03d:   movabs $0x10c6ef3b0,%rdx            ;   {metadata(method data for {method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3e047:   addq   $0x1,0x178(%rdx)
+  0x0000000115f3e04f:   movabs $0x10c6ef3b0,%rdx            ;   {metadata(method data for {method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3e059:   lea    0x198(%rdx),%rdx
+  0x0000000115f3e060:   movabs $0x61ff00280,%rdi            ;   {oop(a 'java/lang/invoke/BoundMethodHandle$Species_LLLL'{0x000000061ff00280})}
+  0x0000000115f3e06a:   mov    %rdi,%rbx
+  0x0000000115f3e06d:   test   %rbx,%rbx
+  0x0000000115f3e070:   jne    0x0000000115f3e079
+  0x0000000115f3e072:   orq    $0x1,(%rdx)
+  0x0000000115f3e079:   movabs $0x10c6ef3b0,%rdx            ;   {metadata(method data for {method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3e083:   lea    0x218(%rdx),%rdx
+  0x0000000115f3e08a:   mov    %rsi,%rbx
+  0x0000000115f3e08d:   test   %rbx,%rbx
+  0x0000000115f3e090:   jne    0x0000000115f3e09a
+  0x0000000115f3e092:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3e09a:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e0a4:   lea    0x4b0(%rdx),%rdx
+  0x0000000115f3e0ab:   test   %rdi,%rdi
+  0x0000000115f3e0ae:   jne    0x0000000115f3e0b7
+  0x0000000115f3e0b0:   orq    $0x1,(%rdx)
+  0x0000000115f3e0b7:   mov    %rsi,%rdi
+  0x0000000115f3e0ba:   test   %rdi,%rdi
+  0x0000000115f3e0bd:   jne    0x0000000115f3e0c7
+  0x0000000115f3e0bf:   orq    $0x1,0x10(%rdx)
+  0x0000000115f3e0c7:   movabs $0x10c6ef3b0,%rdx            ;   {metadata(method data for {method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3e0d1:   addq   $0x1,0x1e0(%rdx)
+  0x0000000115f3e0d9:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e0e3:   mov    0xe4(%rdx),%edi
+  0x0000000115f3e0e9:   add    $0x8,%edi
+  0x0000000115f3e0ec:   mov    %edi,0xe4(%rdx)
+  0x0000000115f3e0f2:   and    $0x7ffff8,%edi
+  0x0000000115f3e0f8:   cmp    $0x0,%edi
+  0x0000000115f3e0fb:   je     0x0000000115f3f19b
+  0x0000000115f3e101:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e10b:   lea    0x1d0(%rdx),%rdx
+  0x0000000115f3e112:   mov    %rsi,%rdi
+  0x0000000115f3e115:   test   %rdi,%rdi
+  0x0000000115f3e118:   jne    0x0000000115f3e122
+  0x0000000115f3e11a:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3e122:   movabs $0x10c6edc40,%rdx            ;   {metadata(method data for {method} {0x0000000134695e58} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e12c:   lea    0x268(%rdx),%rdx
+  0x0000000115f3e133:   movabs $0x61fef33f0,%rdi            ;   {oop(a 'java/lang/invoke/BoundMethodHandle$Species_LL'{0x000000061fef33f0})}
+  0x0000000115f3e13d:   test   %rdi,%rdi
+  0x0000000115f3e140:   jne    0x0000000115f3e149
+  0x0000000115f3e142:   orq    $0x1,(%rdx)
+  0x0000000115f3e149:   mov    %rsi,%rdi
+  0x0000000115f3e14c:   test   %rdi,%rdi
+  0x0000000115f3e14f:   jne    0x0000000115f3e159
+  0x0000000115f3e151:   orq    $0x1,0x10(%rdx)
+  0x0000000115f3e159:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e163:   addq   $0x1,0x198(%rdx)
+  0x0000000115f3e16b:   movabs $0x10c6edc40,%rdx            ;   {metadata(method data for {method} {0x0000000134695e58} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e175:   mov    0xe4(%rdx),%edi
+  0x0000000115f3e17b:   add    $0x8,%edi
+  0x0000000115f3e17e:   mov    %edi,0xe4(%rdx)
+  0x0000000115f3e184:   and    $0x7ffff8,%edi
+  0x0000000115f3e18a:   cmp    $0x0,%edi
+  0x0000000115f3e18d:   je     0x0000000115f3f1bc
+  0x0000000115f3e193:   movabs $0x10c6edc40,%rdx            ;   {metadata(method data for {method} {0x0000000134695e58} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e19d:   lea    0x1d0(%rdx),%rdx
+  0x0000000115f3e1a4:   movabs $0x601401e48,%rdi            ;   {oop(a 'org/jruby/RubyClass'{0x0000000601401e48})}
+  0x0000000115f3e1ae:   mov    %rdi,%rbx
+  0x0000000115f3e1b1:   test   %rbx,%rbx
+  0x0000000115f3e1b4:   jne    0x0000000115f3e1be
+  0x0000000115f3e1b6:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3e1be:   movabs $0x10c6ec288,%rdx            ;   {metadata(method data for {method} {0x00000008002026c0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3e1c8:   lea    0x230(%rdx),%rdx
+  0x0000000115f3e1cf:   movabs $0x61feed048,%rbx            ;   {oop(a 'java/lang/invoke/DirectMethodHandle'{0x000000061feed048})}
+  0x0000000115f3e1d9:   mov    %rbx,%rax
+  0x0000000115f3e1dc:   test   %rax,%rax
+  0x0000000115f3e1df:   jne    0x0000000115f3e1e8
+  0x0000000115f3e1e1:   orq    $0x1,(%rdx)
+  0x0000000115f3e1e8:   mov    %rdi,%rax
+  0x0000000115f3e1eb:   test   %rax,%rax
+  0x0000000115f3e1ee:   jne    0x0000000115f3e1f8
+  0x0000000115f3e1f0:   orq    $0x1,0x10(%rdx)
+  0x0000000115f3e1f8:   movabs $0x10c6edc40,%rdx            ;   {metadata(method data for {method} {0x0000000134695e58} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e202:   addq   $0x1,0x198(%rdx)
+  0x0000000115f3e20a:   movabs $0x10c6ec288,%rdx            ;   {metadata(method data for {method} {0x00000008002026c0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3e214:   mov    0xe4(%rdx),%eax
+  0x0000000115f3e21a:   add    $0x8,%eax
+  0x0000000115f3e21d:   mov    %eax,0xe4(%rdx)
+  0x0000000115f3e223:   and    $0x7ffff8,%eax
+  0x0000000115f3e229:   cmp    $0x0,%eax
+  0x0000000115f3e22c:   je     0x0000000115f3f1dd
+  0x0000000115f3e232:   movabs $0x10c6ec288,%rdx            ;   {metadata(method data for {method} {0x00000008002026c0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3e23c:   lea    0x138(%rdx),%rdx
+  0x0000000115f3e243:   test   %rbx,%rbx
+  0x0000000115f3e246:   jne    0x0000000115f3e250
+  0x0000000115f3e248:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3e250:   movabs $0x10c6ec288,%rdx            ;   {metadata(method data for {method} {0x00000008002026c0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3e25a:   addq   $0x1,0x128(%rdx)
+  0x0000000115f3e262:   movabs $0x109c2dd88,%rdx            ;   {metadata(method data for {method} {0x000000080009fb80} 'internalMemberName' '(Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle')}
+  0x0000000115f3e26c:   mov    0xe4(%rdx),%ebx
+  0x0000000115f3e272:   add    $0x8,%ebx
+  0x0000000115f3e275:   mov    %ebx,0xe4(%rdx)
+  0x0000000115f3e27b:   and    $0x7ffff8,%ebx
+  0x0000000115f3e281:   cmp    $0x0,%ebx
+  0x0000000115f3e284:   je     0x0000000115f3f1fe
+  0x0000000115f3e28a:   movabs $0x10c6ec288,%rdx            ;   {metadata(method data for {method} {0x00000008002026c0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3e294:   lea    0x148(%rdx),%rdx
+  0x0000000115f3e29b:   movabs $0x61feed000,%rbx            ;   {oop(a 'java/lang/invoke/MemberName'{0x000000061feed000} = {method} {0x000000010bf641b8} 'testType' '(Lorg/jruby/RubyClass;Lorg/jruby/runtime/builtin/IRubyObject;)Z' in 'org/jruby/ir/targets/Bootstrap')}
+  0x0000000115f3e2a5:   test   %rbx,%rbx
+  0x0000000115f3e2a8:   jne    0x0000000115f3e2b1
+  0x0000000115f3e2aa:   orq    $0x1,(%rdx)
+  0x0000000115f3e2b1:   movabs $0x10c6ec288,%rdx            ;   {metadata(method data for {method} {0x00000008002026c0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3e2bb:   lea    0x1a0(%rdx),%rdx
+  0x0000000115f3e2c2:   mov    %rdi,%rbx
+  0x0000000115f3e2c5:   test   %rbx,%rbx
+  0x0000000115f3e2c8:   jne    0x0000000115f3e2d2
+  0x0000000115f3e2ca:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3e2d2:   mov    %r8,%rbx
+  0x0000000115f3e2d5:   test   %rbx,%rbx
+  0x0000000115f3e2d8:   jne    0x0000000115f3e2e4
+  0x0000000115f3e2da:   orq    $0x1,0x18(%rdx)
+  0x0000000115f3e2e2:   jmp    0x0000000115f3e319
+  0x0000000115f3e2e4:   mov    0x8(%rbx),%ebx
+  0x0000000115f3e2e7:   shl    $0x3,%rbx
+  0x0000000115f3e2eb:   movabs $0x800000000,%r12
+  0x0000000115f3e2f5:   add    %r12,%rbx
+  0x0000000115f3e2f8:   xor    %r12,%r12
+  0x0000000115f3e2fb:   xor    0x18(%rdx),%rbx
+  0x0000000115f3e2ff:   test   $0xfffffffffffffffc,%rbx
+  0x0000000115f3e306:   je     0x0000000115f3e319
+  0x0000000115f3e308:   test   $0x2,%rbx
+  0x0000000115f3e30f:   jne    0x0000000115f3e319
+  0x0000000115f3e311:   orq    $0x2,0x18(%rdx)
+  0x0000000115f3e319:   movabs $0x10c6ec288,%rdx            ;   {metadata(method data for {method} {0x00000008002026c0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3e323:   addq   $0x1,0x190(%rdx)
+  0x0000000115f3e32b:   movabs $0x13473eb00,%rdx            ;   {metadata(method data for {method} {0x000000010bf641b8} 'testType' '(Lorg/jruby/RubyClass;Lorg/jruby/runtime/builtin/IRubyObject;)Z' in 'org/jruby/ir/targets/Bootstrap')}
+  0x0000000115f3e335:   mov    0xe4(%rdx),%ebx
+  0x0000000115f3e33b:   add    $0x8,%ebx
+  0x0000000115f3e33e:   mov    %ebx,0xe4(%rdx)
+  0x0000000115f3e344:   and    $0x7ffff8,%ebx
+  0x0000000115f3e34a:   cmp    $0x0,%ebx
+  0x0000000115f3e34d:   je     0x0000000115f3f21f
+  0x0000000115f3e353:   movabs $0x13473eb00,%rdx            ;   {metadata(method data for {method} {0x000000010bf641b8} 'testType' '(Lorg/jruby/RubyClass;Lorg/jruby/runtime/builtin/IRubyObject;)Z' in 'org/jruby/ir/targets/Bootstrap')}
+  0x0000000115f3e35d:   addq   $0x1,0x128(%rdx)
+  0x0000000115f3e365:   movabs $0x1345dad28,%rdx            ;   {metadata(method data for {method} {0x0000000109e3f7e8} 'getMetaClass' '(Lorg/jruby/runtime/builtin/IRubyObject;)Lorg/jruby/RubyClass;' in 'org/jruby/RubyBasicObject')}
+  0x0000000115f3e36f:   mov    0xe4(%rdx),%ebx
+  0x0000000115f3e375:   add    $0x8,%ebx
+  0x0000000115f3e378:   mov    %ebx,0xe4(%rdx)
+  0x0000000115f3e37e:   and    $0x7ffff8,%ebx
+  0x0000000115f3e384:   cmp    $0x0,%ebx
+  0x0000000115f3e387:   je     0x0000000115f3f240
+  0x0000000115f3e38d:   cmp    $0x0,%r8
+  0x0000000115f3e391:   jne    0x0000000115f3e3a9
+  0x0000000115f3e393:   movabs $0x1345dad28,%rcx            ;   {metadata(method data for {method} {0x0000000109e3f7e8} 'getMetaClass' '(Lorg/jruby/runtime/builtin/IRubyObject;)Lorg/jruby/RubyClass;' in 'org/jruby/RubyBasicObject')}
+  0x0000000115f3e39d:   orb    $0x1,0x121(%rcx)
+  0x0000000115f3e3a4:   jmpq   0x0000000115f3e48c
+  0x0000000115f3e3a9:   movabs $0x800b81a20,%rax            ;   {metadata('org/jruby/RubyBasicObject')}
+  0x0000000115f3e3b3:   mov    0x8(%r8),%ecx
+  0x0000000115f3e3b7:   shl    $0x3,%rcx
+  0x0000000115f3e3bb:   movabs $0x800000000,%r12
+  0x0000000115f3e3c5:   add    %r12,%rcx
+  0x0000000115f3e3c8:   xor    %r12,%r12
+  0x0000000115f3e3cb:   cmp    0x38(%rcx),%rax
+  0x0000000115f3e3cf:   jne    0x0000000115f3e470
+  0x0000000115f3e3d5:   movabs $0x1345dad28,%rcx            ;   {metadata(method data for {method} {0x0000000109e3f7e8} 'getMetaClass' '(Lorg/jruby/runtime/builtin/IRubyObject;)Lorg/jruby/RubyClass;' in 'org/jruby/RubyBasicObject')}
+  0x0000000115f3e3df:   mov    0x8(%r8),%eax
+  0x0000000115f3e3e3:   shl    $0x3,%rax
+  0x0000000115f3e3e7:   movabs $0x800000000,%r12
+  0x0000000115f3e3f1:   add    %r12,%rax
+  0x0000000115f3e3f4:   xor    %r12,%r12
+  0x0000000115f3e3f7:   cmp    0x138(%rcx),%rax
+  0x0000000115f3e3fe:   jne    0x0000000115f3e40d
+  0x0000000115f3e400:   addq   $0x1,0x140(%rcx)
+  0x0000000115f3e408:   jmpq   0x0000000115f3e48c
+  0x0000000115f3e40d:   cmp    0x148(%rcx),%rax
+  0x0000000115f3e414:   jne    0x0000000115f3e423
+  0x0000000115f3e416:   addq   $0x1,0x150(%rcx)
+  0x0000000115f3e41e:   jmpq   0x0000000115f3e48c
+  0x0000000115f3e423:   cmpq   $0x0,0x138(%rcx)
+  0x0000000115f3e42e:   jne    0x0000000115f3e447
+  0x0000000115f3e430:   mov    %rax,0x138(%rcx)
+  0x0000000115f3e437:   movq   $0x1,0x140(%rcx)
+  0x0000000115f3e442:   jmpq   0x0000000115f3e48c
+  0x0000000115f3e447:   cmpq   $0x0,0x148(%rcx)
+  0x0000000115f3e452:   jne    0x0000000115f3e46b
+  0x0000000115f3e454:   mov    %rax,0x148(%rcx)
+  0x0000000115f3e45b:   movq   $0x1,0x150(%rcx)
+  0x0000000115f3e466:   jmpq   0x0000000115f3e48c
+  0x0000000115f3e46b:   jmpq   0x0000000115f3e48c
+  0x0000000115f3e470:   movabs $0x1345dad28,%rcx            ;   {metadata(method data for {method} {0x0000000109e3f7e8} 'getMetaClass' '(Lorg/jruby/runtime/builtin/IRubyObject;)Lorg/jruby/RubyClass;' in 'org/jruby/RubyBasicObject')}
+  0x0000000115f3e47a:   subq   $0x1,0x128(%rcx)
+  0x0000000115f3e482:   jmpq   0x0000000115f3f261
+  0x0000000115f3e487:   jmpq   0x0000000115f3e48c
+  0x0000000115f3e48c:   mov    %r8,%rdx                     ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.RubyBasicObject::getMetaClass@1 (line 526)
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@2 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3e48f:   mov    0x14(%rdx),%edx              ; implicit exception: dispatches to 0x0000000115f3f26a
+  0x0000000115f3e492:   shl    $0x3,%rdx                    ;*getfield metaClass {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.RubyBasicObject::getMetaClass@4 (line 526)
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@2 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3e496:   cmp    %rdi,%rdx
+  0x0000000115f3e499:   movabs $0x13473eb00,%rdx            ;   {metadata(method data for {method} {0x000000010bf641b8} 'testType' '(Lorg/jruby/RubyClass;Lorg/jruby/runtime/builtin/IRubyObject;)Z' in 'org/jruby/ir/targets/Bootstrap')}
+  0x0000000115f3e4a3:   movabs $0x138,%rdi
+  0x0000000115f3e4ad:   jne    0x0000000115f3e4bd
+  0x0000000115f3e4b3:   movabs $0x148,%rdi
+  0x0000000115f3e4bd:   mov    (%rdx,%rdi,1),%rbx
+  0x0000000115f3e4c1:   lea    0x1(%rbx),%rbx
+  0x0000000115f3e4c5:   mov    %rbx,(%rdx,%rdi,1)
+  0x0000000115f3e4c9:   jne    0x0000000115f3e4e9           ;*if_acmpne {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@5 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3e4cf:   movabs $0x13473eb00,%rdx            ;   {metadata(method data for {method} {0x000000010bf641b8} 'testType' '(Lorg/jruby/RubyClass;Lorg/jruby/runtime/builtin/IRubyObject;)Z' in 'org/jruby/ir/targets/Bootstrap')}
+  0x0000000115f3e4d9:   incl   0x158(%rdx)
+  0x0000000115f3e4df:   mov    $0x1,%edx
+  0x0000000115f3e4e4:   jmpq   0x0000000115f3e4ee           ;*goto {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@9 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3e4e9:   mov    $0x0,%edx                    ;*ireturn {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@13 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3e4ee:   and    $0x1,%edx
+  0x0000000115f3e4f1:   movabs $0x10c6ee040,%rdi            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e4fb:   lea    0x240(%rdi),%rdi
+  0x0000000115f3e502:   movabs $0x61fefcf78,%rbx            ;   {oop([I{0x000000061fefcf78})}
+  0x0000000115f3e50c:   mov    %rbx,%rax
+  0x0000000115f3e50f:   test   %rax,%rax
+  0x0000000115f3e512:   jne    0x0000000115f3e51c
+  0x0000000115f3e514:   orq    $0x1,0x8(%rdi)
+  0x0000000115f3e51c:   movabs $0x10c6ee040,%rdi            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e526:   addq   $0x1,0x230(%rdi)
+  0x0000000115f3e52e:   and    $0x1,%edx
+  0x0000000115f3e531:   mov    %rdx,%rsi
+  0x0000000115f3e534:   mov    %rbx,%rdx                    ;*invokestatic profileBoolean {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@51
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3e537:   callq  0x0000000115f38660           ; ImmutableOopMap {[448]=Oop [432]=Oop [440]=Oop }
+                                                            ;*invokestatic profileBoolean {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@51
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {static_call}
+  0x0000000115f3e53c:   and    $0x1,%eax
+  0x0000000115f3e53f:   cmp    $0x0,%eax
+  0x0000000115f3e542:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e54c:   movabs $0x258,%rcx
+  0x0000000115f3e556:   je     0x0000000115f3e566
+  0x0000000115f3e55c:   movabs $0x268,%rcx
+  0x0000000115f3e566:   mov    (%rdx,%rcx,1),%r8
+  0x0000000115f3e56a:   lea    0x1(%r8),%r8
+  0x0000000115f3e56e:   mov    %r8,(%rdx,%rcx,1)
+  0x0000000115f3e572:   je     0x0000000115f3eb06           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@60
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3e578:   mov    0x1b0(%rsp),%rsi
+  0x0000000115f3e580:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e58a:   lea    0x320(%rdx),%rdx
+  0x0000000115f3e591:   mov    %rsi,%rcx
+  0x0000000115f3e594:   test   %rcx,%rcx
+  0x0000000115f3e597:   jne    0x0000000115f3e5a1
+  0x0000000115f3e599:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3e5a1:   movabs $0x10c6ef3b0,%rdx            ;   {metadata(method data for {method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3e5ab:   lea    0x2b8(%rdx),%rdx
+  0x0000000115f3e5b2:   movabs $0x61fefda50,%rcx            ;   {oop(a 'java/lang/invoke/MethodHandleImpl$CountingWrapper'{0x000000061fefda50})}
+  0x0000000115f3e5bc:   mov    %rcx,%r8
+  0x0000000115f3e5bf:   test   %r8,%r8
+  0x0000000115f3e5c2:   jne    0x0000000115f3e5cb
+  0x0000000115f3e5c4:   orq    $0x1,(%rdx)
+  0x0000000115f3e5cb:   mov    %rsi,%r8
+  0x0000000115f3e5ce:   test   %r8,%r8
+  0x0000000115f3e5d1:   jne    0x0000000115f3e5db
+  0x0000000115f3e5d3:   orq    $0x1,0x10(%rdx)
+  0x0000000115f3e5db:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e5e5:   addq   $0x1,0x2e8(%rdx)
+  0x0000000115f3e5ed:   movabs $0x10c6ef3b0,%rdx            ;   {metadata(method data for {method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3e5f7:   mov    0xe4(%rdx),%r8d
+  0x0000000115f3e5fe:   add    $0x8,%r8d
+  0x0000000115f3e602:   mov    %r8d,0xe4(%rdx)
+  0x0000000115f3e609:   and    $0x7ffff8,%r8d
+  0x0000000115f3e610:   cmp    $0x0,%r8d
+  0x0000000115f3e614:   je     0x0000000115f3f26f
+  0x0000000115f3e61a:   movabs $0x10c6ef3b0,%rdx            ;   {metadata(method data for {method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3e624:   addq   $0x1,0x178(%rdx)
+  0x0000000115f3e62c:   movabs $0x10c6ef3b0,%rdx            ;   {metadata(method data for {method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3e636:   lea    0x198(%rdx),%rdx
+  0x0000000115f3e63d:   movabs $0x61fee2e88,%rcx            ;   {oop(a 'java/lang/invoke/BoundMethodHandle$Species_LLLLL'{0x000000061fee2e88})}
+  0x0000000115f3e647:   mov    %rcx,%r8
+  0x0000000115f3e64a:   test   %r8,%r8
+  0x0000000115f3e64d:   jne    0x0000000115f3e656
+  0x0000000115f3e64f:   orq    $0x1,(%rdx)
+  0x0000000115f3e656:   movabs $0x10c6ef3b0,%rdx            ;   {metadata(method data for {method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3e660:   lea    0x218(%rdx),%rdx
+  0x0000000115f3e667:   mov    %rsi,%r8
+  0x0000000115f3e66a:   test   %r8,%r8
+  0x0000000115f3e66d:   jne    0x0000000115f3e677
+  0x0000000115f3e66f:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3e677:   movabs $0x10c6ed840,%rdx            ;   {metadata(method data for {method} {0x0000000134696ec0} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e681:   lea    0x270(%rdx),%rdx
+  0x0000000115f3e688:   test   %rcx,%rcx
+  0x0000000115f3e68b:   jne    0x0000000115f3e694
+  0x0000000115f3e68d:   orq    $0x1,(%rdx)
+  0x0000000115f3e694:   mov    %rsi,%rcx
+  0x0000000115f3e697:   test   %rcx,%rcx
+  0x0000000115f3e69a:   jne    0x0000000115f3e6a4
+  0x0000000115f3e69c:   orq    $0x1,0x10(%rdx)
+  0x0000000115f3e6a4:   movabs $0x10c6ef3b0,%rdx            ;   {metadata(method data for {method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3e6ae:   addq   $0x1,0x1e0(%rdx)
+  0x0000000115f3e6b6:   movabs $0x10c6ed840,%rdx            ;   {metadata(method data for {method} {0x0000000134696ec0} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e6c0:   mov    0xe4(%rdx),%ecx
+  0x0000000115f3e6c6:   add    $0x8,%ecx
+  0x0000000115f3e6c9:   mov    %ecx,0xe4(%rdx)
+  0x0000000115f3e6cf:   and    $0x7ffff8,%ecx
+  0x0000000115f3e6d5:   cmp    $0x0,%ecx
+  0x0000000115f3e6d8:   je     0x0000000115f3f290
+  0x0000000115f3e6de:   movabs $0x10c6ed840,%rdx            ;   {metadata(method data for {method} {0x0000000134696ec0} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e6e8:   lea    0x1d0(%rdx),%rdx
+  0x0000000115f3e6ef:   mov    %rsi,%rcx
+  0x0000000115f3e6f2:   test   %rcx,%rcx
+  0x0000000115f3e6f5:   jne    0x0000000115f3e6ff
+  0x0000000115f3e6f7:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3e6ff:   movabs $0x10c6ef680,%rdx            ;   {metadata(method data for {method} {0x0000000800202fb0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3e709:   lea    0x258(%rdx),%rdx
+  0x0000000115f3e710:   movabs $0x61ffa6678,%rcx            ;   {oop(a 'java/lang/invoke/DirectMethodHandle'{0x000000061ffa6678})}
+  0x0000000115f3e71a:   mov    %rcx,%r8
+  0x0000000115f3e71d:   test   %r8,%r8
+  0x0000000115f3e720:   jne    0x0000000115f3e729
+  0x0000000115f3e722:   orq    $0x1,(%rdx)
+  0x0000000115f3e729:   mov    %rsi,%r8
+  0x0000000115f3e72c:   test   %r8,%r8
+  0x0000000115f3e72f:   jne    0x0000000115f3e739
+  0x0000000115f3e731:   orq    $0x1,0x10(%rdx)
+  0x0000000115f3e739:   movabs $0x10c6ed840,%rdx            ;   {metadata(method data for {method} {0x0000000134696ec0} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e743:   addq   $0x1,0x198(%rdx)
+  0x0000000115f3e74b:   movabs $0x10c6ef680,%rdx            ;   {metadata(method data for {method} {0x0000000800202fb0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3e755:   mov    0xe4(%rdx),%r8d
+  0x0000000115f3e75c:   add    $0x8,%r8d
+  0x0000000115f3e760:   mov    %r8d,0xe4(%rdx)
+  0x0000000115f3e767:   and    $0x7ffff8,%r8d
+  0x0000000115f3e76e:   cmp    $0x0,%r8d
+  0x0000000115f3e772:   je     0x0000000115f3f2b1
+  0x0000000115f3e778:   movabs $0x10c6ef680,%rdx            ;   {metadata(method data for {method} {0x0000000800202fb0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3e782:   lea    0x138(%rdx),%rdx
+  0x0000000115f3e789:   test   %rcx,%rcx
+  0x0000000115f3e78c:   jne    0x0000000115f3e796
+  0x0000000115f3e78e:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3e796:   movabs $0x10c6ef680,%rdx            ;   {metadata(method data for {method} {0x0000000800202fb0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3e7a0:   addq   $0x1,0x128(%rdx)
+  0x0000000115f3e7a8:   movabs $0x109c2dd88,%rdx            ;   {metadata(method data for {method} {0x000000080009fb80} 'internalMemberName' '(Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle')}
+  0x0000000115f3e7b2:   mov    0xe4(%rdx),%ecx
+  0x0000000115f3e7b8:   add    $0x8,%ecx
+  0x0000000115f3e7bb:   mov    %ecx,0xe4(%rdx)
+  0x0000000115f3e7c1:   and    $0x7ffff8,%ecx
+  0x0000000115f3e7c7:   cmp    $0x0,%ecx
+  0x0000000115f3e7ca:   je     0x0000000115f3f2d2
+  0x0000000115f3e7d0:   movabs $0x10c6ef680,%rdx            ;   {metadata(method data for {method} {0x0000000800202fb0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3e7da:   lea    0x148(%rdx),%rdx
+  0x0000000115f3e7e1:   movabs $0x61ffa65a0,%rcx            ;   {oop(a 'java/lang/invoke/MemberName'{0x000000061ffa65a0} = {method} {0x00000001346993b8} 'RUBY$method$bar$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline')}
+  0x0000000115f3e7eb:   test   %rcx,%rcx
+  0x0000000115f3e7ee:   jne    0x0000000115f3e7f7
+  0x0000000115f3e7f0:   orq    $0x1,(%rdx)
+  0x0000000115f3e7f7:   movabs $0x10c6ef680,%rdx            ;   {metadata(method data for {method} {0x0000000800202fb0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3e801:   lea    0x1a0(%rdx),%rdx
+  0x0000000115f3e808:   mov    %rsi,%rcx
+  0x0000000115f3e80b:   test   %rcx,%rcx
+  0x0000000115f3e80e:   jne    0x0000000115f3e818
+  0x0000000115f3e810:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3e818:   movabs $0x601402318,%rcx            ;   {oop(a 'org/jruby/parser/StaticScope'{0x0000000601402318})}
+  0x0000000115f3e822:   test   %rcx,%rcx
+  0x0000000115f3e825:   jne    0x0000000115f3e82f
+  0x0000000115f3e827:   orq    $0x1,0x18(%rdx)
+  0x0000000115f3e82f:   movabs $0x10c6ef680,%rdx            ;   {metadata(method data for {method} {0x0000000800202fb0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3e839:   addq   $0x1,0x190(%rdx)
+  0x0000000115f3e841:   movabs $0x1346996d8,%rdx            ;   {metadata(method data for {method} {0x00000001346993b8} 'RUBY$method$bar$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline')}
+  0x0000000115f3e84b:   mov    0xe4(%rdx),%ecx
+  0x0000000115f3e851:   add    $0x8,%ecx
+  0x0000000115f3e854:   mov    %ecx,0xe4(%rdx)
+  0x0000000115f3e85a:   and    $0x7ffff8,%ecx
+  0x0000000115f3e860:   cmp    $0x0,%ecx
+  0x0000000115f3e863:   je     0x0000000115f3f2f3
+  0x0000000115f3e869:   movabs $0x1346996d8,%rdx            ;   {metadata(method data for {method} {0x00000001346993b8} 'RUBY$method$bar$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline')}
+  0x0000000115f3e873:   lea    0x138(%rdx),%rdx
+  0x0000000115f3e87a:   mov    %rsi,%rcx
+  0x0000000115f3e87d:   test   %rcx,%rcx
+  0x0000000115f3e880:   jne    0x0000000115f3e88a
+  0x0000000115f3e882:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3e88a:   movabs $0x10c6efba8,%rdx            ;   {metadata(method data for {method} {0x00000008001d69f8} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3e894:   lea    0x280(%rdx),%rdx
+  0x0000000115f3e89b:   mov    %rsi,%rcx
+  0x0000000115f3e89e:   test   %rcx,%rcx
+  0x0000000115f3e8a1:   jne    0x0000000115f3e8aa
+  0x0000000115f3e8a3:   orq    $0x1,(%rdx)
+  0x0000000115f3e8aa:   movabs $0x61fc7c840,%rcx            ;   {oop(a 'org/jruby/ir/targets/FixnumObjectSite'{0x000000061fc7c840})}
+  0x0000000115f3e8b4:   mov    %rcx,%r8
+  0x0000000115f3e8b7:   test   %r8,%r8
+  0x0000000115f3e8ba:   jne    0x0000000115f3e8c4
+  0x0000000115f3e8bc:   orq    $0x1,0x10(%rdx)
+  0x0000000115f3e8c4:   movabs $0x1346996d8,%rdx            ;   {metadata(method data for {method} {0x00000001346993b8} 'RUBY$method$bar$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline')}
+  0x0000000115f3e8ce:   addq   $0x1,0x128(%rdx)
+  0x0000000115f3e8d6:   movabs $0x10c6efba8,%rdx            ;   {metadata(method data for {method} {0x00000008001d69f8} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3e8e0:   mov    0xe4(%rdx),%r8d
+  0x0000000115f3e8e7:   add    $0x8,%r8d
+  0x0000000115f3e8eb:   mov    %r8d,0xe4(%rdx)
+  0x0000000115f3e8f2:   and    $0x7ffff8,%r8d
+  0x0000000115f3e8f9:   cmp    $0x0,%r8d
+  0x0000000115f3e8fd:   je     0x0000000115f3f314
+  0x0000000115f3e903:   movabs $0x10c6efba8,%rdx            ;   {metadata(method data for {method} {0x00000008001d69f8} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3e90d:   lea    0x170(%rdx),%rdx
+  0x0000000115f3e914:   mov    %rcx,%r8
+  0x0000000115f3e917:   test   %r8,%r8
+  0x0000000115f3e91a:   jne    0x0000000115f3e924
+  0x0000000115f3e91c:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3e924:   movabs $0x10c6efba8,%rdx            ;   {metadata(method data for {method} {0x00000008001d69f8} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3e92e:   addq   $0x1,0x160(%rdx)
+  0x0000000115f3e936:   movabs $0x10c6ef040,%rdx            ;   {metadata(method data for {method} {0x00000008001f6d18} 'getCallSiteTarget' '(Ljava/lang/invoke/CallSite;)Ljava/lang/invoke/MethodHandle;' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3e940:   mov    0xe4(%rdx),%r8d
+  0x0000000115f3e947:   add    $0x8,%r8d
+  0x0000000115f3e94b:   mov    %r8d,0xe4(%rdx)
+  0x0000000115f3e952:   and    $0x7ffff8,%r8d
+  0x0000000115f3e959:   cmp    $0x0,%r8d
+  0x0000000115f3e95d:   je     0x0000000115f3f335
+  0x0000000115f3e963:   movabs $0x10c6ef040,%rdx            ;   {metadata(method data for {method} {0x00000008001f6d18} 'getCallSiteTarget' '(Ljava/lang/invoke/CallSite;)Ljava/lang/invoke/MethodHandle;' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3e96d:   addq   $0x1,0x128(%rdx)
+  0x0000000115f3e975:   movabs $0x10c6efba8,%rdx            ;   {metadata(method data for {method} {0x00000008001d69f8} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3e97f:   lea    0x180(%rdx),%rdx
+  0x0000000115f3e986:   movabs $0x61fc82800,%rcx            ;   {oop(a 'java/lang/invoke/BoundMethodHandle$Species_L'{0x000000061fc82800})}
+  0x0000000115f3e990:   mov    %rcx,%r8
+  0x0000000115f3e993:   test   %r8,%r8
+  0x0000000115f3e996:   jne    0x0000000115f3e99f
+  0x0000000115f3e998:   orq    $0x1,(%rdx)
+  0x0000000115f3e99f:   movabs $0x10c6efba8,%rdx            ;   {metadata(method data for {method} {0x00000008001d69f8} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3e9a9:   lea    0x200(%rdx),%rdx
+  0x0000000115f3e9b0:   mov    %rsi,%r8
+  0x0000000115f3e9b3:   test   %r8,%r8
+  0x0000000115f3e9b6:   jne    0x0000000115f3e9c0
+  0x0000000115f3e9b8:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3e9c0:   movabs $0x10c6ed440,%rdx            ;   {metadata(method data for {method} {0x0000000109fbe1e8} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3e9ca:   lea    0x1c0(%rdx),%rdx
+  0x0000000115f3e9d1:   test   %rcx,%rcx
+  0x0000000115f3e9d4:   jne    0x0000000115f3e9dd
+  0x0000000115f3e9d6:   orq    $0x1,(%rdx)
+  0x0000000115f3e9dd:   mov    %rsi,%rcx
+  0x0000000115f3e9e0:   test   %rcx,%rcx
+  0x0000000115f3e9e3:   jne    0x0000000115f3e9ed
+  0x0000000115f3e9e5:   orq    $0x1,0x10(%rdx)
+  0x0000000115f3e9ed:   movabs $0x10c6efba8,%rdx            ;   {metadata(method data for {method} {0x00000008001d69f8} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3e9f7:   addq   $0x1,0x1c8(%rdx)
+  0x0000000115f3e9ff:   movabs $0x10c6ed440,%rdx            ;   {metadata(method data for {method} {0x0000000109fbe1e8} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3ea09:   mov    0xe4(%rdx),%ecx
+  0x0000000115f3ea0f:   add    $0x8,%ecx
+  0x0000000115f3ea12:   mov    %ecx,0xe4(%rdx)
+  0x0000000115f3ea18:   and    $0x7ffff8,%ecx
+  0x0000000115f3ea1e:   cmp    $0x0,%ecx
+  0x0000000115f3ea21:   je     0x0000000115f3f356
+  0x0000000115f3ea27:   movabs $0x10c6efba8,%rdx            ;   {metadata(method data for {method} {0x00000008001d69f8} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3ea31:   lea    0x210(%rdx),%rdx
+  0x0000000115f3ea38:   movabs $0x6003fc8a0,%rcx            ;   {oop(a 'org/jruby/RubyFixnum'{0x00000006003fc8a0})}
+  0x0000000115f3ea42:   mov    %rcx,%r8
+  0x0000000115f3ea45:   test   %r8,%r8
+  0x0000000115f3ea48:   jne    0x0000000115f3ea51
+  0x0000000115f3ea4a:   orq    $0x1,(%rdx)
+  0x0000000115f3ea51:   movabs $0x1346996d8,%rdx            ;   {metadata(method data for {method} {0x00000001346993b8} 'RUBY$method$bar$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline')}
+  0x0000000115f3ea5b:   lea    0x148(%rdx),%rdx
+  0x0000000115f3ea62:   mov    %rcx,%r8
+  0x0000000115f3ea65:   test   %r8,%r8
+  0x0000000115f3ea68:   jne    0x0000000115f3ea71
+  0x0000000115f3ea6a:   orq    $0x1,(%rdx)
+  0x0000000115f3ea71:   movabs $0x10c6ef680,%rdx            ;   {metadata(method data for {method} {0x0000000800202fb0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3ea7b:   lea    0x1c0(%rdx),%rdx
+  0x0000000115f3ea82:   mov    %rcx,%r8
+  0x0000000115f3ea85:   test   %r8,%r8
+  0x0000000115f3ea88:   jne    0x0000000115f3ea91
+  0x0000000115f3ea8a:   orq    $0x1,(%rdx)
+  0x0000000115f3ea91:   movabs $0x10c6ed840,%rdx            ;   {metadata(method data for {method} {0x0000000134696ec0} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3ea9b:   lea    0x1f0(%rdx),%rdx
+  0x0000000115f3eaa2:   mov    %rcx,%r8
+  0x0000000115f3eaa5:   test   %r8,%r8
+  0x0000000115f3eaa8:   jne    0x0000000115f3eab1
+  0x0000000115f3eaaa:   orq    $0x1,(%rdx)
+  0x0000000115f3eab1:   movabs $0x10c6ef3b0,%rdx            ;   {metadata(method data for {method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3eabb:   lea    0x238(%rdx),%rdx
+  0x0000000115f3eac2:   mov    %rcx,%r8
+  0x0000000115f3eac5:   test   %r8,%r8
+  0x0000000115f3eac8:   jne    0x0000000115f3ead1
+  0x0000000115f3eaca:   orq    $0x1,(%rdx)
+  0x0000000115f3ead1:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3eadb:   lea    0x340(%rdx),%rdx
+  0x0000000115f3eae2:   mov    %rcx,%r8
+  0x0000000115f3eae5:   test   %r8,%r8
+  0x0000000115f3eae8:   jne    0x0000000115f3eaf1
+  0x0000000115f3eaea:   orq    $0x1,(%rdx)
+  0x0000000115f3eaf1:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3eafb:   incl   0x350(%rdx)
+  0x0000000115f3eb01:   jmpq   0x0000000115f3eca7           ;*goto {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@81
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3eb06:   mov    0x1c0(%rsp),%rcx
+  0x0000000115f3eb0e:   mov    0x1b0(%rsp),%rsi
+  0x0000000115f3eb16:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3eb20:   lea    0x410(%rdx),%rdx
+  0x0000000115f3eb27:   mov    %rsi,%r8
+  0x0000000115f3eb2a:   test   %r8,%r8
+  0x0000000115f3eb2d:   jne    0x0000000115f3eb39
+  0x0000000115f3eb2f:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3eb37:   jmp    0x0000000115f3eb88
+  0x0000000115f3eb39:   movabs $0x800b992d8,%r8             ;   {metadata('org/jruby/runtime/ThreadContext')}
+  0x0000000115f3eb43:   xor    0x8(%rdx),%r8
+  0x0000000115f3eb47:   test   $0xfffffffffffffffc,%r8
+  0x0000000115f3eb4e:   je     0x0000000115f3eb88
+  0x0000000115f3eb50:   test   $0x2,%r8
+  0x0000000115f3eb57:   jne    0x0000000115f3eb88
+  0x0000000115f3eb59:   cmpq   $0x0,0x8(%rdx)
+  0x0000000115f3eb61:   je     0x0000000115f3eb84
+  0x0000000115f3eb63:   cmpq   $0x1,0x8(%rdx)
+  0x0000000115f3eb6b:   je     0x0000000115f3eb84
+  0x0000000115f3eb6d:   xor    0x8(%rdx),%r8
+  0x0000000115f3eb71:   test   $0xfffffffffffffffc,%r8
+  0x0000000115f3eb78:   je     0x0000000115f3eb88
+  0x0000000115f3eb7a:   orq    $0x2,0x8(%rdx)
+  0x0000000115f3eb82:   jmp    0x0000000115f3eb88
+  0x0000000115f3eb84:   mov    %r8,0x8(%rdx)
+  0x0000000115f3eb88:   mov    %rcx,%r8
+  0x0000000115f3eb8b:   test   %r8,%r8
+  0x0000000115f3eb8e:   jne    0x0000000115f3eb9a
+  0x0000000115f3eb90:   orq    $0x1,0x18(%rdx)
+  0x0000000115f3eb98:   jmp    0x0000000115f3ebf7
+  0x0000000115f3eb9a:   mov    0x8(%r8),%r8d
+  0x0000000115f3eb9e:   shl    $0x3,%r8
+  0x0000000115f3eba2:   movabs $0x800000000,%r12
+  0x0000000115f3ebac:   add    %r12,%r8
+  0x0000000115f3ebaf:   xor    %r12,%r12
+  0x0000000115f3ebb2:   xor    0x18(%rdx),%r8
+  0x0000000115f3ebb6:   test   $0xfffffffffffffffc,%r8
+  0x0000000115f3ebbd:   je     0x0000000115f3ebf7
+  0x0000000115f3ebbf:   test   $0x2,%r8
+  0x0000000115f3ebc6:   jne    0x0000000115f3ebf7
+  0x0000000115f3ebc8:   cmpq   $0x0,0x18(%rdx)
+  0x0000000115f3ebd0:   je     0x0000000115f3ebf3
+  0x0000000115f3ebd2:   cmpq   $0x1,0x18(%rdx)
+  0x0000000115f3ebda:   je     0x0000000115f3ebf3
+  0x0000000115f3ebdc:   xor    0x18(%rdx),%r8
+  0x0000000115f3ebe0:   test   $0xfffffffffffffffc,%r8
+  0x0000000115f3ebe7:   je     0x0000000115f3ebf7
+  0x0000000115f3ebe9:   orq    $0x2,0x18(%rdx)
+  0x0000000115f3ebf1:   jmp    0x0000000115f3ebf7
+  0x0000000115f3ebf3:   mov    %r8,0x18(%rdx)
+  0x0000000115f3ebf7:   movabs $0x61ff00248,%rdi            ;   {oop(a 'java/lang/invoke/MethodHandleImpl$CountingWrapper'{0x000000061ff00248})}
+  0x0000000115f3ec01:   mov    %rdi,%rdx
+  0x0000000115f3ec04:   movabs $0x10c6ee040,%r8             ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3ec0e:   addq   $0x1,0x3d8(%r8)
+  0x0000000115f3ec16:   mov    %rsi,%rdx
+  0x0000000115f3ec19:   mov    0x1b8(%rsp),%r8
+  0x0000000115f3ec21:   mov    %rdi,%rsi                    ;*invokevirtual invokeBasic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@99
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3ec24:   data32 xchg %ax,%ax
+  0x0000000115f3ec27:   callq  0x00000001152e3a00           ; ImmutableOopMap {}
+                                                            ;*invokevirtual invokeBasic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@99
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {optimized virtual_call}
+  0x0000000115f3ec2c:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3ec36:   lea    0x430(%rdx),%rdx
+  0x0000000115f3ec3d:   mov    %rax,%rcx
+  0x0000000115f3ec40:   test   %rcx,%rcx
+  0x0000000115f3ec43:   jne    0x0000000115f3ec4e
+  0x0000000115f3ec45:   orq    $0x1,(%rdx)
+  0x0000000115f3ec4c:   jmp    0x0000000115f3eca4
+  0x0000000115f3ec4e:   mov    0x8(%rcx),%ecx
+  0x0000000115f3ec51:   shl    $0x3,%rcx
+  0x0000000115f3ec55:   movabs $0x800000000,%r12
+  0x0000000115f3ec5f:   add    %r12,%rcx
+  0x0000000115f3ec62:   xor    %r12,%r12
+  0x0000000115f3ec65:   xor    (%rdx),%rcx
+  0x0000000115f3ec68:   test   $0xfffffffffffffffc,%rcx
+  0x0000000115f3ec6f:   je     0x0000000115f3eca4
+  0x0000000115f3ec71:   test   $0x2,%rcx
+  0x0000000115f3ec78:   jne    0x0000000115f3eca4
+  0x0000000115f3ec7a:   cmpq   $0x0,(%rdx)
+  0x0000000115f3ec81:   je     0x0000000115f3eca1
+  0x0000000115f3ec83:   cmpq   $0x1,(%rdx)
+  0x0000000115f3ec8a:   je     0x0000000115f3eca1
+  0x0000000115f3ec8c:   xor    (%rdx),%rcx
+  0x0000000115f3ec8f:   test   $0xfffffffffffffffc,%rcx
+  0x0000000115f3ec96:   je     0x0000000115f3eca4
+  0x0000000115f3ec98:   orq    $0x2,(%rdx)
+  0x0000000115f3ec9f:   jmp    0x0000000115f3eca4
+  0x0000000115f3eca1:   mov    %rcx,(%rdx)
+  0x0000000115f3eca4:   mov    %rax,%rcx                    ;*areturn {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@102
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3eca7:   movabs $0x10c6ef3b0,%rdx            ;   {metadata(method data for {method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3ecb1:   lea    0x238(%rdx),%rdx
+  0x0000000115f3ecb8:   mov    %rcx,%r8
+  0x0000000115f3ecbb:   test   %r8,%r8
+  0x0000000115f3ecbe:   jne    0x0000000115f3ecc9
+  0x0000000115f3ecc0:   orq    $0x1,(%rdx)
+  0x0000000115f3ecc7:   jmp    0x0000000115f3ecfd
+  0x0000000115f3ecc9:   mov    0x8(%r8),%r8d
+  0x0000000115f3eccd:   shl    $0x3,%r8
+  0x0000000115f3ecd1:   movabs $0x800000000,%r12
+  0x0000000115f3ecdb:   add    %r12,%r8
+  0x0000000115f3ecde:   xor    %r12,%r12
+  0x0000000115f3ece1:   xor    (%rdx),%r8
+  0x0000000115f3ece4:   test   $0xfffffffffffffffc,%r8
+  0x0000000115f3eceb:   je     0x0000000115f3ecfd
+  0x0000000115f3eced:   test   $0x2,%r8
+  0x0000000115f3ecf4:   jne    0x0000000115f3ecfd
+  0x0000000115f3ecf6:   orq    $0x2,(%rdx)
+  0x0000000115f3ecfd:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3ed07:   lea    0x340(%rdx),%rdx
+  0x0000000115f3ed0e:   mov    %rcx,%r8
+  0x0000000115f3ed11:   test   %r8,%r8
+  0x0000000115f3ed14:   jne    0x0000000115f3ed1f
+  0x0000000115f3ed16:   orq    $0x1,(%rdx)
+  0x0000000115f3ed1d:   jmp    0x0000000115f3ed53
+  0x0000000115f3ed1f:   mov    0x8(%r8),%r8d
+  0x0000000115f3ed23:   shl    $0x3,%r8
+  0x0000000115f3ed27:   movabs $0x800000000,%r12
+  0x0000000115f3ed31:   add    %r12,%r8
+  0x0000000115f3ed34:   xor    %r12,%r12
+  0x0000000115f3ed37:   xor    (%rdx),%r8
+  0x0000000115f3ed3a:   test   $0xfffffffffffffffc,%r8
+  0x0000000115f3ed41:   je     0x0000000115f3ed53
+  0x0000000115f3ed43:   test   $0x2,%r8
+  0x0000000115f3ed4a:   jne    0x0000000115f3ed53
+  0x0000000115f3ed4c:   orq    $0x2,(%rdx)
+  0x0000000115f3ed53:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3ed5d:   incl   0x350(%rdx)
+  0x0000000115f3ed63:   jmpq   0x0000000115f3ef07           ;*goto {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@81
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3ed68:   mov    0x1c0(%rsp),%rcx
+  0x0000000115f3ed70:   mov    0x1b0(%rsp),%rsi
+  0x0000000115f3ed78:   movabs $0x10c6ee040,%rdx            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3ed82:   lea    0x410(%rdx),%rdx
+  0x0000000115f3ed89:   mov    %rsi,%r8
+  0x0000000115f3ed8c:   test   %r8,%r8
+  0x0000000115f3ed8f:   jne    0x0000000115f3ed9b
+  0x0000000115f3ed91:   orq    $0x1,0x8(%rdx)
+  0x0000000115f3ed99:   jmp    0x0000000115f3edea
+  0x0000000115f3ed9b:   movabs $0x800b992d8,%r8             ;   {metadata('org/jruby/runtime/ThreadContext')}
+  0x0000000115f3eda5:   xor    0x8(%rdx),%r8
+  0x0000000115f3eda9:   test   $0xfffffffffffffffc,%r8
+  0x0000000115f3edb0:   je     0x0000000115f3edea
+  0x0000000115f3edb2:   test   $0x2,%r8
+  0x0000000115f3edb9:   jne    0x0000000115f3edea
+  0x0000000115f3edbb:   cmpq   $0x0,0x8(%rdx)
+  0x0000000115f3edc3:   je     0x0000000115f3ede6
+  0x0000000115f3edc5:   cmpq   $0x1,0x8(%rdx)
+  0x0000000115f3edcd:   je     0x0000000115f3ede6
+  0x0000000115f3edcf:   xor    0x8(%rdx),%r8
+  0x0000000115f3edd3:   test   $0xfffffffffffffffc,%r8
+  0x0000000115f3edda:   je     0x0000000115f3edea
+  0x0000000115f3eddc:   orq    $0x2,0x8(%rdx)
+  0x0000000115f3ede4:   jmp    0x0000000115f3edea
+  0x0000000115f3ede6:   mov    %r8,0x8(%rdx)
+  0x0000000115f3edea:   mov    %rcx,%r8
+  0x0000000115f3eded:   test   %r8,%r8
+  0x0000000115f3edf0:   jne    0x0000000115f3edfc
+  0x0000000115f3edf2:   orq    $0x1,0x18(%rdx)
+  0x0000000115f3edfa:   jmp    0x0000000115f3ee59
+  0x0000000115f3edfc:   mov    0x8(%r8),%r8d
+  0x0000000115f3ee00:   shl    $0x3,%r8
+  0x0000000115f3ee04:   movabs $0x800000000,%r12
+  0x0000000115f3ee0e:   add    %r12,%r8
+  0x0000000115f3ee11:   xor    %r12,%r12
+  0x0000000115f3ee14:   xor    0x18(%rdx),%r8
+  0x0000000115f3ee18:   test   $0xfffffffffffffffc,%r8
+  0x0000000115f3ee1f:   je     0x0000000115f3ee59
+  0x0000000115f3ee21:   test   $0x2,%r8
+  0x0000000115f3ee28:   jne    0x0000000115f3ee59
+  0x0000000115f3ee2a:   cmpq   $0x0,0x18(%rdx)
+  0x0000000115f3ee32:   je     0x0000000115f3ee55
+  0x0000000115f3ee34:   cmpq   $0x1,0x18(%rdx)
+  0x0000000115f3ee3c:   je     0x0000000115f3ee55
+  0x0000000115f3ee3e:   xor    0x18(%rdx),%r8
+  0x0000000115f3ee42:   test   $0xfffffffffffffffc,%r8
+  0x0000000115f3ee49:   je     0x0000000115f3ee59
+  0x0000000115f3ee4b:   orq    $0x2,0x18(%rdx)
+  0x0000000115f3ee53:   jmp    0x0000000115f3ee59
+  0x0000000115f3ee55:   mov    %r8,0x18(%rdx)
+  0x0000000115f3ee59:   movabs $0x61fff6fa0,%rdi            ;   {oop(a 'java/lang/invoke/MethodHandleImpl$CountingWrapper'{0x000000061fff6fa0})}
+  0x0000000115f3ee63:   mov    %rdi,%rdx
+  0x0000000115f3ee66:   movabs $0x10c6ee040,%r8             ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3ee70:   addq   $0x1,0x3d8(%r8)
+  0x0000000115f3ee78:   mov    %rsi,%rdx
+  0x0000000115f3ee7b:   mov    0x1b8(%rsp),%r8
+  0x0000000115f3ee83:   mov    %rdi,%rsi                    ;*invokevirtual invokeBasic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@99
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3ee86:   nop
+  0x0000000115f3ee87:   callq  0x00000001152e3a00           ; ImmutableOopMap {}
+                                                            ;*invokevirtual invokeBasic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@99
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {optimized virtual_call}
+  0x0000000115f3ee8c:   movabs $0x10c6ee040,%rsi            ;   {metadata(method data for {method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3ee96:   lea    0x430(%rsi),%rsi
+  0x0000000115f3ee9d:   mov    %rax,%rdx
+  0x0000000115f3eea0:   test   %rdx,%rdx
+  0x0000000115f3eea3:   jne    0x0000000115f3eeae
+  0x0000000115f3eea5:   orq    $0x1,(%rsi)
+  0x0000000115f3eeac:   jmp    0x0000000115f3ef04
+  0x0000000115f3eeae:   mov    0x8(%rdx),%edx
+  0x0000000115f3eeb1:   shl    $0x3,%rdx
+  0x0000000115f3eeb5:   movabs $0x800000000,%r12
+  0x0000000115f3eebf:   add    %r12,%rdx
+  0x0000000115f3eec2:   xor    %r12,%r12
+  0x0000000115f3eec5:   xor    (%rsi),%rdx
+  0x0000000115f3eec8:   test   $0xfffffffffffffffc,%rdx
+  0x0000000115f3eecf:   je     0x0000000115f3ef04
+  0x0000000115f3eed1:   test   $0x2,%rdx
+  0x0000000115f3eed8:   jne    0x0000000115f3ef04
+  0x0000000115f3eeda:   cmpq   $0x0,(%rsi)
+  0x0000000115f3eee1:   je     0x0000000115f3ef01
+  0x0000000115f3eee3:   cmpq   $0x1,(%rsi)
+  0x0000000115f3eeea:   je     0x0000000115f3ef01
+  0x0000000115f3eeec:   xor    (%rsi),%rdx
+  0x0000000115f3eeef:   test   $0xfffffffffffffffc,%rdx
+  0x0000000115f3eef6:   je     0x0000000115f3ef04
+  0x0000000115f3eef8:   orq    $0x2,(%rsi)
+  0x0000000115f3eeff:   jmp    0x0000000115f3ef04
+  0x0000000115f3ef01:   mov    %rdx,(%rsi)
+  0x0000000115f3ef04:   mov    %rax,%rcx                    ;*areturn {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@102
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3ef07:   movabs $0x10c6ef8f0,%rax            ;   {metadata(method data for {method} {0x00000008001d6bb0} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3ef11:   lea    0x220(%rax),%rax
+  0x0000000115f3ef18:   mov    %rcx,%rsi
+  0x0000000115f3ef1b:   test   %rsi,%rsi
+  0x0000000115f3ef1e:   jne    0x0000000115f3ef29
+  0x0000000115f3ef20:   orq    $0x1,(%rax)
+  0x0000000115f3ef27:   jmp    0x0000000115f3ef5c
+  0x0000000115f3ef29:   mov    0x8(%rsi),%esi
+  0x0000000115f3ef2c:   shl    $0x3,%rsi
+  0x0000000115f3ef30:   movabs $0x800000000,%r12
+  0x0000000115f3ef3a:   add    %r12,%rsi
+  0x0000000115f3ef3d:   xor    %r12,%r12
+  0x0000000115f3ef40:   xor    (%rax),%rsi
+  0x0000000115f3ef43:   test   $0xfffffffffffffffc,%rsi
+  0x0000000115f3ef4a:   je     0x0000000115f3ef5c
+  0x0000000115f3ef4c:   test   $0x2,%rsi
+  0x0000000115f3ef53:   jne    0x0000000115f3ef5c
+  0x0000000115f3ef55:   orq    $0x2,(%rax)
+  0x0000000115f3ef5c:   movabs $0x13469d6e8,%rax            ;   {metadata(method data for {method} {0x000000013469d410} 'RUBY$method$foo$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline')}
+  0x0000000115f3ef66:   lea    0x158(%rax),%rax
+  0x0000000115f3ef6d:   mov    %rcx,%rsi
+  0x0000000115f3ef70:   test   %rsi,%rsi
+  0x0000000115f3ef73:   jne    0x0000000115f3ef7e
+  0x0000000115f3ef75:   orq    $0x1,(%rax)
+  0x0000000115f3ef7c:   jmp    0x0000000115f3efb1
+  0x0000000115f3ef7e:   mov    0x8(%rsi),%esi
+  0x0000000115f3ef81:   shl    $0x3,%rsi
+  0x0000000115f3ef85:   movabs $0x800000000,%r12
+  0x0000000115f3ef8f:   add    %r12,%rsi
+  0x0000000115f3ef92:   xor    %r12,%r12
+  0x0000000115f3ef95:   xor    (%rax),%rsi
+  0x0000000115f3ef98:   test   $0xfffffffffffffffc,%rsi
+  0x0000000115f3ef9f:   je     0x0000000115f3efb1
+  0x0000000115f3efa1:   test   $0x2,%rsi
+  0x0000000115f3efa8:   jne    0x0000000115f3efb1
+  0x0000000115f3efaa:   orq    $0x2,(%rax)
+  0x0000000115f3efb1:   mov    %rcx,%rax
+  0x0000000115f3efb4:   add    $0x1e0,%rsp
+  0x0000000115f3efbb:   pop    %rbp
+  0x0000000115f3efbc:   mov    0x110(%r15),%r10
+  0x0000000115f3efc3:   test   %eax,(%r10)                  ;   {poll_return}
+  0x0000000115f3efc6:   retq                                ;*areturn {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - inline::RUBY$method$foo$0@18 (line 8)
+  0x0000000115f3efc7:   movabs $0x109cb86b0,%rdx            ;   {metadata(method data for {method} {0x00000008001f6c68} 'checkExactType' '(Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)V' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3efd1:   addq   $0x1,0x180(%rdx)
+  0x0000000115f3efd9:   movabs $0x600002988,%rdx            ;   {oop(a 'java/lang/invoke/MethodType'{0x0000000600002988} = ()Z)}
+  0x0000000115f3efe3:   mov    %rdx,%rsi
+  0x0000000115f3efe6:   mov    %rax,%rdx                    ;*invokestatic newWrongMethodTypeException {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkExactType@12 (line 493)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@40
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x0000000115f3efe9:   nopw   0x0(%rax,%rax,1)
+  0x0000000115f3efef:   callq  0x00000001152e3400           ; ImmutableOopMap {[432]=Oop [456]=Oop [440]=Oop [448]=Oop }
+                                                            ;*invokestatic newWrongMethodTypeException {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkExactType@12 (line 493)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@40
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {static_call}
+  0x0000000115f3eff4:   cmp    (%rax),%rax                  ; implicit exception: dispatches to 0x0000000115f3f377
+  0x0000000115f3eff7:   jmpq   0x0000000115f3f3a8
+  0x0000000115f3effc:   movabs $0x13469d410,%r10            ;   {metadata({method} {0x000000013469d410} 'RUBY$method$foo$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline')}
+  0x0000000115f3f006:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f00b:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f013:   callq  0x0000000115394080           ; ImmutableOopMap {rsi=Oop [432]=Oop rdx=Oop rcx=Oop [448]=Oop r8=Oop [440]=Oop r9=Oop rdi=Oop [496]=Oop }
+                                                            ;*synchronization entry
+                                                            ; - inline::RUBY$method$foo$0@-1
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f018:   jmpq   0x0000000115f3d58f
+  0x0000000115f3f01d:   movabs $0x8001d6bb0,%r10            ;   {metadata({method} {0x00000008001d6bb0} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3f027:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f02c:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f034:   callq  0x0000000115394080           ; ImmutableOopMap {rsi=Oop [432]=Oop rcx=Oop [448]=Oop [440]=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@-1
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f039:   jmpq   0x0000000115f3d698
+  0x0000000115f3f03e:   movabs $0x8001f6d18,%r10            ;   {metadata({method} {0x00000008001f6d18} 'getCallSiteTarget' '(Ljava/lang/invoke/CallSite;)Ljava/lang/invoke/MethodHandle;' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3f048:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f04d:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f055:   callq  0x0000000115394080           ; ImmutableOopMap {rsi=Oop [432]=Oop rcx=Oop [448]=Oop [440]=Oop rdi=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.Invokers::getCallSiteTarget@-1 (line 573)
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@4
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f05a:   jmpq   0x0000000115f3d6fd
+  0x0000000115f3f05f:   movabs $0x134694f60,%r10            ;   {metadata({method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3f069:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f06e:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f076:   callq  0x0000000115394080           ; ImmutableOopMap {rsi=Oop [432]=Oop rcx=Oop [448]=Oop [440]=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@-1
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f07b:   jmpq   0x0000000115f3d7c1
+  0x0000000115f3f080:   movabs $0x134694708,%r10            ;   {metadata({method} {0x0000000134694708} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3f08a:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f08f:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f097:   callq  0x0000000115394080           ; ImmutableOopMap {rsi=Oop [432]=Oop rcx=Oop [448]=Oop [440]=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@-1
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f09c:   jmpq   0x0000000115f3d853
+  0x0000000115f3f0a1:   movabs $0x109fbf248,%r10            ;   {metadata({method} {0x0000000109fbf248} 'invoke' '(Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3f0ab:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f0b0:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f0b8:   callq  0x0000000115394080           ; ImmutableOopMap {rsi=Oop [432]=Oop rcx=Oop [448]=Oop [440]=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke@-1
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@16
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f0bd:   jmpq   0x0000000115f3d8b4
+  0x0000000115f3f0c2:   movabs $0x800202038,%r10            ;   {metadata({method} {0x0000000800202038} 'invokeVirtual' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3f0cc:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f0d1:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f0d9:   callq  0x0000000115394080           ; ImmutableOopMap {rsi=Oop [432]=Oop rcx=Oop [448]=Oop [440]=Oop rdi=Oop rbx=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual@-1
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke@20
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@16
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f0de:   jmpq   0x0000000115f3d953
+  0x0000000115f3f0e3:   movabs $0x80009fb80,%r10            ;   {metadata({method} {0x000000080009fb80} 'internalMemberName' '(Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle')}
+  0x0000000115f3f0ed:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f0f2:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f0fa:   callq  0x0000000115394080           ; ImmutableOopMap {rsi=Oop [432]=Oop rcx=Oop [448]=Oop [440]=Oop rdi=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.DirectMethodHandle::internalMemberName@-1 (line 311)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeVirtual@1
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x0000000800b72840::invoke@20
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@16
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f0ff:   jmpq   0x0000000115f3d9ab
+  0x0000000115f3f104:   mov    %rax,(%rsp)
+  0x0000000115f3f108:   callq  0x0000000115390da0           ; ImmutableOopMap {[448]=Oop [432]=Oop [440]=Oop }
+                                                            ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@29
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call throw_class_cast_exception Runtime1 stub}
+  0x0000000115f3f10d:   movabs $0x8001f6c68,%r10            ;   {metadata({method} {0x00000008001f6c68} 'checkExactType' '(Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)V' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3f117:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f11c:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f124:   callq  0x0000000115394080           ; ImmutableOopMap {[448]=Oop [432]=Oop [440]=Oop rdi=Oop [456]=Oop rbx=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.Invokers::checkExactType@-1 (line 491)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@40
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f129:   jmpq   0x0000000115f3dcd7
+  0x0000000115f3f12e:   callq  0x000000011538e9a0           ; ImmutableOopMap {[448]=Oop [432]=Oop [440]=Oop rdi=Oop [456]=Oop rbx=Oop }
+                                                            ;*invokevirtual type {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.Invokers::checkExactType@1 (line 491)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@40
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x0000000115f3f133:   movabs $0x8001f6d70,%r10            ;   {metadata({method} {0x00000008001f6d70} 'checkCustomized' '(Ljava/lang/invoke/MethodHandle;)V' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3f13d:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f142:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f14a:   callq  0x0000000115394080           ; ImmutableOopMap {[448]=Oop [432]=Oop [440]=Oop rdi=Oop [456]=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.Invokers::checkCustomized@-1 (line 579)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@45
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f14f:   jmpq   0x0000000115f3de3d
+  0x0000000115f3f154:   movabs $0x8001f9988,%r10            ;   {metadata({method} {0x00000008001f9988} 'isCompileConstant' '(Ljava/lang/Object;)Z' in 'java/lang/invoke/MethodHandleImpl')}
+  0x0000000115f3f15e:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f163:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f16b:   callq  0x0000000115394080           ; ImmutableOopMap {[448]=Oop [432]=Oop [440]=Oop rdi=Oop [456]=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.MethodHandleImpl::isCompileConstant@-1 (line 715)
+                                                            ; - java.lang.invoke.Invokers::checkCustomized@1 (line 579)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@45
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f170:   jmpq   0x0000000115f3de77
+  0x0000000115f3f175:   callq  0x000000011538e9a0           ; ImmutableOopMap {[448]=Oop [432]=Oop [440]=Oop rdi=Oop [456]=Oop }
+                                                            ;*getfield customized {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) java.lang.invoke.Invokers::checkCustomized@12 (line 580)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@45
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x0000000115f3f17a:   movabs $0x8001bfa58,%r10            ;   {metadata({method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3f184:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f189:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f191:   callq  0x0000000115394080           ; ImmutableOopMap {[448]=Oop r8=Oop [440]=Oop rsi=Oop [432]=Oop rdi=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@-1
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f196:   jmpq   0x0000000115f3e03d
+  0x0000000115f3f19b:   movabs $0x134694f60,%r10            ;   {metadata({method} {0x0000000134694f60} 'guard' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3f1a5:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f1aa:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f1b2:   callq  0x0000000115394080           ; ImmutableOopMap {[448]=Oop r8=Oop [440]=Oop rsi=Oop [432]=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@-1
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f1b7:   jmpq   0x0000000115f3e101
+  0x0000000115f3f1bc:   movabs $0x134695e58,%r10            ;   {metadata({method} {0x0000000134695e58} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3f1c6:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f1cb:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f1d3:   callq  0x0000000115394080           ; ImmutableOopMap {[448]=Oop r8=Oop [440]=Oop rsi=Oop [432]=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@-1
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f1d8:   jmpq   0x0000000115f3e193
+  0x0000000115f3f1dd:   movabs $0x8002026c0,%r10            ;   {metadata({method} {0x00000008002026c0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)I' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3f1e7:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f1ec:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f1f4:   callq  0x0000000115394080           ; ImmutableOopMap {[448]=Oop r8=Oop [440]=Oop rsi=Oop [432]=Oop rdi=Oop rbx=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@-1
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f1f9:   jmpq   0x0000000115f3e232
+  0x0000000115f3f1fe:   movabs $0x80009fb80,%r10            ;   {metadata({method} {0x000000080009fb80} 'internalMemberName' '(Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle')}
+  0x0000000115f3f208:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f20d:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f215:   callq  0x0000000115394080           ; ImmutableOopMap {[448]=Oop r8=Oop [440]=Oop rsi=Oop [432]=Oop rdi=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.DirectMethodHandle::internalMemberName@-1 (line 311)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@1
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f21a:   jmpq   0x0000000115f3e28a
+  0x0000000115f3f21f:   movabs $0x10bf641b8,%r10            ;   {metadata({method} {0x000000010bf641b8} 'testType' '(Lorg/jruby/RubyClass;Lorg/jruby/runtime/builtin/IRubyObject;)Z' in 'org/jruby/ir/targets/Bootstrap')}
+  0x0000000115f3f229:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f22e:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f236:   callq  0x0000000115394080           ; ImmutableOopMap {[448]=Oop r8=Oop [440]=Oop rsi=Oop [432]=Oop rdi=Oop }
+                                                            ;*synchronization entry
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@-1 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f23b:   jmpq   0x0000000115f3e353
+  0x0000000115f3f240:   movabs $0x109e3f7e8,%r10            ;   {metadata({method} {0x0000000109e3f7e8} 'getMetaClass' '(Lorg/jruby/runtime/builtin/IRubyObject;)Lorg/jruby/RubyClass;' in 'org/jruby/RubyBasicObject')}
+  0x0000000115f3f24a:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f24f:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f257:   callq  0x0000000115394080           ; ImmutableOopMap {[448]=Oop r8=Oop [440]=Oop rsi=Oop [432]=Oop rdi=Oop }
+                                                            ;*synchronization entry
+                                                            ; - org.jruby.RubyBasicObject::getMetaClass@-1 (line 526)
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@2 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f25c:   jmpq   0x0000000115f3e38d
+  0x0000000115f3f261:   mov    %r8,(%rsp)
+  0x0000000115f3f265:   callq  0x0000000115390da0           ; ImmutableOopMap {[448]=Oop r8=Oop [440]=Oop rsi=Oop [432]=Oop rdi=Oop }
+                                                            ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.RubyBasicObject::getMetaClass@1 (line 526)
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@2 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call throw_class_cast_exception Runtime1 stub}
+  0x0000000115f3f26a:   callq  0x000000011538e9a0           ; ImmutableOopMap {[448]=Oop r8=Oop [440]=Oop rsi=Oop [432]=Oop rdi=Oop }
+                                                            ;*getfield metaClass {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) org.jruby.RubyBasicObject::getMetaClass@4 (line 526)
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@2 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x0000000115f3f26f:   movabs $0x8001bfa58,%r10            ;   {metadata({method} {0x00000008001bfa58} 'delegate' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DelegatingMethodHandle$Holder')}
+  0x0000000115f3f279:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f27e:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f286:   callq  0x0000000115394080           ; ImmutableOopMap {[448]=Oop [440]=Oop rsi=Oop [432]=Oop rcx=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@-1
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f28b:   jmpq   0x0000000115f3e61a
+  0x0000000115f3f290:   movabs $0x134696ec0,%r10            ;   {metadata({method} {0x0000000134696ec0} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3f29a:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f29f:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f2a7:   callq  0x0000000115394080           ; ImmutableOopMap {[440]=Oop rsi=Oop [432]=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104c840::invoke@-1
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f2ac:   jmpq   0x0000000115f3e6de
+  0x0000000115f3f2b1:   movabs $0x800202fb0,%r10            ;   {metadata({method} {0x0000000800202fb0} 'invokeStatic' '(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle$Holder')}
+  0x0000000115f3f2bb:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f2c0:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f2c8:   callq  0x0000000115394080           ; ImmutableOopMap {[440]=Oop rsi=Oop [432]=Oop rcx=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@-1
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104c840::invoke@50
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f2cd:   jmpq   0x0000000115f3e778
+  0x0000000115f3f2d2:   movabs $0x80009fb80,%r10            ;   {metadata({method} {0x000000080009fb80} 'internalMemberName' '(Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/DirectMethodHandle')}
+  0x0000000115f3f2dc:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f2e1:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f2e9:   callq  0x0000000115394080           ; ImmutableOopMap {[440]=Oop rsi=Oop [432]=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.DirectMethodHandle::internalMemberName@-1 (line 311)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@1
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104c840::invoke@50
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f2ee:   jmpq   0x0000000115f3e7d0
+  0x0000000115f3f2f3:   movabs $0x1346993b8,%r10            ;   {metadata({method} {0x00000001346993b8} 'RUBY$method$bar$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline')}
+  0x0000000115f3f2fd:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f302:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f30a:   callq  0x0000000115394080           ; ImmutableOopMap {rsi=Oop [432]=Oop }
+                                                            ;*synchronization entry
+                                                            ; - inline::RUBY$method$bar$0@-1
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@20
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104c840::invoke@50
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f30f:   jmpq   0x0000000115f3e869
+  0x0000000115f3f314:   movabs $0x8001d69f8,%r10            ;   {metadata({method} {0x00000008001d69f8} 'linkToCallSite' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/Invokers$Holder')}
+  0x0000000115f3f31e:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f323:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f32b:   callq  0x0000000115394080           ; ImmutableOopMap {rsi=Oop [432]=Oop rcx=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@-1
+                                                            ; - inline::RUBY$method$bar$0@3 (line 3)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@20
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104c840::invoke@50
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f330:   jmpq   0x0000000115f3e903
+  0x0000000115f3f335:   movabs $0x8001f6d18,%r10            ;   {metadata({method} {0x00000008001f6d18} 'getCallSiteTarget' '(Ljava/lang/invoke/CallSite;)Ljava/lang/invoke/MethodHandle;' in 'java/lang/invoke/Invokers')}
+  0x0000000115f3f33f:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f344:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f34c:   callq  0x0000000115394080           ; ImmutableOopMap {rsi=Oop [432]=Oop rcx=Oop }
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.Invokers::getCallSiteTarget@-1 (line 573)
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@4
+                                                            ; - inline::RUBY$method$bar$0@3 (line 3)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@20
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104c840::invoke@50
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f351:   jmpq   0x0000000115f3e963
+  0x0000000115f3f356:   movabs $0x109fbe1e8,%r10            ;   {metadata({method} {0x0000000109fbe1e8} 'invoke' '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;' in 'java/lang/invoke/LambdaForm$MH')}
+  0x0000000115f3f360:   mov    %r10,0x8(%rsp)
+  0x0000000115f3f365:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000115f3f36d:   callq  0x0000000115394080           ; ImmutableOopMap {}
+                                                            ;*synchronization entry
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x0000000800bc0440::invoke@-1
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@13
+                                                            ; - inline::RUBY$method$bar$0@3 (line 3)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@20
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104c840::invoke@50
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000115f3f372:   jmpq   0x0000000115f3ea27
+  0x0000000115f3f377:   callq  0x000000011538e9a0           ; ImmutableOopMap {[432]=Oop [456]=Oop [440]=Oop [448]=Oop rax=Oop }
+                                                            ;*athrow {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) java.lang.invoke.Invokers::checkExactType@15 (line 493)
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e840::invoke@40
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x0000000115f3f37c:   nop
+  0x0000000115f3f37d:   nop
+  0x0000000115f3f37e:   nop
+  0x0000000115f3f37f:   mov    0x3e8(%r15),%rax
+  0x0000000115f3f386:   movabs $0x0,%r10
+  0x0000000115f3f390:   mov    %r10,0x3e8(%r15)
+  0x0000000115f3f397:   movabs $0x0,%r10
+  0x0000000115f3f3a1:   mov    %r10,0x3f0(%r15)
+  0x0000000115f3f3a8:   add    $0x1e0,%rsp
+  0x0000000115f3f3af:   pop    %rbp
+  0x0000000115f3f3b0:   jmpq   0x000000011538d780           ;   {runtime_call unwind_exception Runtime1 stub}
+  0x0000000115f3f3b5:   hlt    
+  0x0000000115f3f3b6:   hlt    
+  0x0000000115f3f3b7:   hlt    
+  0x0000000115f3f3b8:   hlt    
+  0x0000000115f3f3b9:   hlt    
+  0x0000000115f3f3ba:   hlt    
+  0x0000000115f3f3bb:   hlt    
+  0x0000000115f3f3bc:   hlt    
+  0x0000000115f3f3bd:   hlt    
+  0x0000000115f3f3be:   hlt    
+  0x0000000115f3f3bf:   hlt    
+[Stub Code]
+  0x0000000115f3f3c0:   nopl   0x0(%rax,%rax,1)             ;   {no_reloc}
+  0x0000000115f3f3c5:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x0000000115f3f3cf:   jmpq   0x0000000115f3f3cf           ;   {runtime_call}
+  0x0000000115f3f3d4:   nop
+  0x0000000115f3f3d5:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x0000000115f3f3df:   jmpq   0x0000000115f3f3df           ;   {runtime_call}
+  0x0000000115f3f3e4:   nop
+  0x0000000115f3f3e5:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x0000000115f3f3ef:   jmpq   0x0000000115f3f3ef           ;   {runtime_call}
+  0x0000000115f3f3f4:   nop
+  0x0000000115f3f3f5:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x0000000115f3f3ff:   jmpq   0x0000000115f3f3ff           ;   {runtime_call}
+  0x0000000115f3f404:   nop
+  0x0000000115f3f405:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x0000000115f3f40f:   jmpq   0x0000000115f3f40f           ;   {runtime_call}
+  0x0000000115f3f414:   nop
+  0x0000000115f3f415:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x0000000115f3f41f:   jmpq   0x0000000115f3f41f           ;   {runtime_call}
+  0x0000000115f3f424:   nop
+  0x0000000115f3f425:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x0000000115f3f42f:   jmpq   0x0000000115f3f42f           ;   {runtime_call}
+  0x0000000115f3f434:   nop
+  0x0000000115f3f435:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x0000000115f3f43f:   jmpq   0x0000000115f3f43f           ;   {runtime_call}
+[Exception Handler]
+  0x0000000115f3f444:   callq  0x0000000115390780           ;   {runtime_call handle_exception_from_callee Runtime1 stub}
+  0x0000000115f3f449:   movabs $0x1041e2d8a,%rdi            ;   {external_word}
+  0x0000000115f3f453:   and    $0xfffffffffffffff0,%rsp
+  0x0000000115f3f457:   callq  0x0000000103f2b558           ;   {runtime_call MacroAssembler::debug64(char*, long long, long long*)}
+  0x0000000115f3f45c:   hlt    
+[Deopt Handler Code]
+  0x0000000115f3f45d:   movabs $0x115f3f45d,%r10            ;   {section_word}
+  0x0000000115f3f467:   push   %r10
+  0x0000000115f3f469:   jmpq   0x00000001152e20a0           ;   {runtime_call DeoptimizationBlob}
+[Deopt MH Handler Code]
+  0x0000000115f3f46e:   movabs $0x115f3f46e,%r10            ;   {section_word}
+  0x0000000115f3f478:   push   %r10
+  0x0000000115f3f47a:   jmpq   0x00000001152e20a0           ;   {runtime_call DeoptimizationBlob}
+  0x0000000115f3f47f:   hlt    
+--------------------------------------------------------------------------------
+
+============================= C2-compiled nmethod ==============================
+----------------------------------- Assembly -----------------------------------
+
+Compiled method (c2)    1808 3073       4       inline::RUBY$method$foo$0 (20 bytes)
+ total in heap  [0x000000011cf2c010,0x000000011cf2c6c8] = 1720
+ relocation     [0x000000011cf2c168,0x000000011cf2c1c0] = 88
+ main code      [0x000000011cf2c1c0,0x000000011cf2c2c0] = 256
+ stub code      [0x000000011cf2c2c0,0x000000011cf2c2e8] = 40
+ oops           [0x000000011cf2c2e8,0x000000011cf2c360] = 120
+ metadata       [0x000000011cf2c360,0x000000011cf2c3e8] = 136
+ scopes data    [0x000000011cf2c3e8,0x000000011cf2c5c0] = 472
+ scopes pcs     [0x000000011cf2c5c0,0x000000011cf2c690] = 208
+ dependencies   [0x000000011cf2c690,0x000000011cf2c6a0] = 16
+ handler table  [0x000000011cf2c6a0,0x000000011cf2c6b8] = 24
+ nul chk table  [0x000000011cf2c6b8,0x000000011cf2c6c8] = 16
+
+--------------------------------------------------------------------------------
+[Constant Pool (empty)]
+
+--------------------------------------------------------------------------------
+
+[Verified Entry Point]
+  # {method} {0x000000013469d410} 'RUBY$method$foo$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'inline'
+  # parm0:    rsi:rsi   = 'org/jruby/runtime/ThreadContext'
+  # parm1:    rdx:rdx   = 'org/jruby/parser/StaticScope'
+  # parm2:    rcx:rcx   = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm3:    r8:r8     = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm4:    r9:r9     = 'org/jruby/runtime/Block'
+  # parm5:    rdi:rdi   = 'org/jruby/RubyModule'
+  # parm6:    [sp+0x30]   = 'java/lang/String'  (sp of caller)
+  0x000000011cf2c1c0:   mov    %eax,-0x14000(%rsp)
+  0x000000011cf2c1c7:   push   %rbp
+  0x000000011cf2c1c8:   sub    $0x20,%rsp                   ;*synchronization entry
+                                                            ; - inline::RUBY$method$foo$0@-1
+  0x000000011cf2c1cc:   mov    %rsi,%r11
+  0x000000011cf2c1cf:   mov    %rcx,%r10
+  0x000000011cf2c1d2:   mov    0x8(%r8),%ecx                ; implicit exception: dispatches to 0x000000011cf2c291
+  0x000000011cf2c1d6:   cmp    $0x2004d0,%ecx               ;   {metadata('org/jruby/gen/RubyObject0')}
+  0x000000011cf2c1dc:   jne    0x000000011cf2c258
+  0x000000011cf2c1de:   mov    %r8,%rcx                     ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.RubyBasicObject::getMetaClass@1 (line 526)
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@2 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011cf2c1e1:   mov    0x14(%rcx),%ebp              ;*getfield metaClass {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.RubyBasicObject::getMetaClass@4 (line 526)
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@2 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011cf2c1e4:   cmp    $0xc02803c9,%ebp             ;   {oop(a 'org/jruby/RubyClass'{0x0000000601401e48})}
+  0x000000011cf2c1ea:   jne    0x000000011cf2c22c           ;*if_acmpne {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@5 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011cf2c1ec:   movabs $0x601402318,%rdx            ;   {oop(a 'org/jruby/parser/StaticScope'{0x0000000601402318})}
+  0x000000011cf2c1f6:   movabs $0x61fe96ea8,%rdi            ;   {oop("bar"{0x000000061fe96ea8})}
+  0x000000011cf2c200:   movabs $0x601401e48,%r9             ;   {oop(a 'org/jruby/RubyClass'{0x0000000601401e48})}
+  0x000000011cf2c20a:   movabs $0x600008008,%r8             ;   {oop(a 'org/jruby/runtime/Block'{0x0000000600008008})}
+  0x000000011cf2c214:   data32 xchg %ax,%ax
+  0x000000011cf2c217:   callq  0x00000001152e3400           ; ImmutableOopMap {}
+                                                            ;*invokestatic linkToStatic {reexecute=0 rethrow=0 return_oop=1}
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@20
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104c840::invoke@50
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {static_call inline::RUBY$method$bar$0}
+  0x000000011cf2c21c:   add    $0x20,%rsp
+  0x000000011cf2c220:   pop    %rbp
+  0x000000011cf2c221:   mov    0x110(%r15),%r10
+  0x000000011cf2c228:   test   %eax,(%r10)                  ;   {poll_return}
+  0x000000011cf2c22b:   retq   
+  0x000000011cf2c22c:   mov    $0xffffff45,%esi
+  0x000000011cf2c231:   mov    %r11,0x30(%rsp)
+  0x000000011cf2c236:   mov    %r10,(%rsp)
+  0x000000011cf2c23a:   mov    %r8,0x8(%rsp)
+  0x000000011cf2c23f:   callq  0x00000001152e1d80           ; ImmutableOopMap {rbp=NarrowOop [48]=Oop [0]=Oop [8]=Oop }
+                                                            ;*if_acmpne {reexecute=1 rethrow=0 return_oop=0}
+                                                            ; - (reexecute) org.jruby.ir.targets.Bootstrap::testType@5 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call UncommonTrapBlob}
+  0x000000011cf2c244:   movabs $0x1041c0264,%rdi            ;   {external_word}
+  0x000000011cf2c24e:   and    $0xfffffffffffffff0,%rsp
+  0x000000011cf2c252:   callq  0x0000000103f2b558           ;   {runtime_call MacroAssembler::debug64(char*, long long, long long*)}
+  0x000000011cf2c257:   hlt                                 ;*if_acmpne {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@5 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011cf2c258:   mov    $0xffffff66,%esi
+  0x000000011cf2c25d:   mov    %r11,%rbp
+  0x000000011cf2c260:   mov    %r10,0x30(%rsp)
+  0x000000011cf2c265:   mov    %r8,0x8(%rsp)
+  0x000000011cf2c26a:   nop
+  0x000000011cf2c26b:   callq  0x00000001152e1d80           ; ImmutableOopMap {rbp=Oop [48]=Oop [8]=Oop }
+                                                            ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.RubyBasicObject::getMetaClass@1 (line 526)
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@2 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call UncommonTrapBlob}
+  0x000000011cf2c270:   movabs $0x1041c0264,%rdi            ;   {external_word}
+  0x000000011cf2c27a:   and    $0xfffffffffffffff0,%rsp
+  0x000000011cf2c27e:   callq  0x0000000103f2b558           ;   {runtime_call MacroAssembler::debug64(char*, long long, long long*)}
+  0x000000011cf2c283:   hlt                                 ;*invokestatic linkToStatic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@20
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104c840::invoke@50
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011cf2c284:   mov    %rax,%rsi
+  0x000000011cf2c287:   add    $0x20,%rsp
+  0x000000011cf2c28b:   pop    %rbp
+  0x000000011cf2c28c:   jmpq   0x000000011539ca00           ;   {runtime_call _rethrow_Java}
+  0x000000011cf2c291:   mov    $0xffffff5c,%esi
+  0x000000011cf2c296:   mov    %r11,%rbp
+  0x000000011cf2c299:   mov    %r10,0x30(%rsp)
+  0x000000011cf2c29e:   mov    %r8,(%rsp)
+  0x000000011cf2c2a2:   nop
+  0x000000011cf2c2a3:   callq  0x00000001152e1d80           ; ImmutableOopMap {rbp=Oop [48]=Oop [0]=Oop }
+                                                            ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.RubyBasicObject::getMetaClass@1 (line 526)
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@2 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+                                                            ;   {runtime_call UncommonTrapBlob}
+  0x000000011cf2c2a8:   movabs $0x1041c0264,%rdi            ;   {external_word}
+  0x000000011cf2c2b2:   and    $0xfffffffffffffff0,%rsp
+  0x000000011cf2c2b6:   callq  0x0000000103f2b558           ;   {runtime_call MacroAssembler::debug64(char*, long long, long long*)}
+  0x000000011cf2c2bb:   hlt                                 ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - org.jruby.RubyBasicObject::getMetaClass@1 (line 526)
+                                                            ; - org.jruby.ir.targets.Bootstrap::testType@2 (line 933)
+                                                            ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104d440::invoke@25
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@37
+                                                            ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@17
+                                                            ; - java.lang.invoke.LambdaForm$MH/0x000000080104e440::guard@78
+                                                            ; - java.lang.invoke.Invokers$Holder::linkToCallSite@17
+                                                            ; - inline::RUBY$method$foo$0@9 (line 8)
+  0x000000011cf2c2bc:   hlt    
+  0x000000011cf2c2bd:   hlt    
+  0x000000011cf2c2be:   hlt    
+  0x000000011cf2c2bf:   hlt    
+[Stub Code]
+  0x000000011cf2c2c0:   movabs $0x0,%rbx                    ;   {no_reloc}
+  0x000000011cf2c2ca:   jmpq   0x000000011cf2c2ca           ;   {runtime_call}
+[Exception Handler]
+  0x000000011cf2c2cf:   jmpq   0x000000011538dd80           ;   {runtime_call ExceptionBlob}
+[Deopt Handler Code]
+  0x000000011cf2c2d4:   callq  0x000000011cf2c2d9
+  0x000000011cf2c2d9:   subq   $0x5,(%rsp)
+  0x000000011cf2c2de:   jmpq   0x00000001152e20a0           ;   {runtime_call DeoptimizationBlob}
+  0x000000011cf2c2e3:   hlt    
+  0x000000011cf2c2e4:   hlt    
+  0x000000011cf2c2e5:   hlt    
+  0x000000011cf2c2e6:   hlt    
+  0x000000011cf2c2e7:   hlt    
+--------------------------------------------------------------------------------

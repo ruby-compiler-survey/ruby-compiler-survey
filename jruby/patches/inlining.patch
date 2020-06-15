@@ -1,0 +1,47 @@
+diff --git a/core/src/main/java/org/jruby/ir/instructions/CallBase.java b/core/src/main/java/org/jruby/ir/instructions/CallBase.java
+index fafd77ec5b..39f6939fdb 100644
+--- a/core/src/main/java/org/jruby/ir/instructions/CallBase.java
++++ b/core/src/main/java/org/jruby/ir/instructions/CallBase.java
+@@ -184,7 +184,7 @@ public abstract class CallBase extends NOperandInstr implements ClosureAccepting
+ 
+         switch (callType) {
+             case NORMAL:
+-                if (IRManager.IR_INLINER && hasLiteralClosure) {
++                if (IRManager.IR_INLINER /* && hasLiteralClosure */) {
+                     return MethodIndex.getProfilingCallSite(name, scope, callsiteId);
+                 } else {
+                     return MethodIndex.getCallSite(name);
+diff --git a/core/src/main/java/org/jruby/ir/persistence/IRDumper.java b/core/src/main/java/org/jruby/ir/persistence/IRDumper.java
+index f84800382c..5da828afa0 100644
+--- a/core/src/main/java/org/jruby/ir/persistence/IRDumper.java
++++ b/core/src/main/java/org/jruby/ir/persistence/IRDumper.java
+@@ -92,7 +92,17 @@ public class IRDumper extends IRVisitor {
+     public void visit(IRScope scope, boolean full, boolean recurse) {
+         println("begin " + scope.getScopeType().name() + "<" + scope.getId() + ">");
+ 
+-        InterpreterContext ic = full ? scope.getFullInterpreterContext() : scope.getInterpreterContext();
++        InterpreterContext ic;
++
++        if (full) {
++            if (scope.getOptimizedInterpreterContext() != null) {
++                ic = scope.getOptimizedInterpreterContext();
++            } else {
++                ic = scope.getFullInterpreterContext();
++            }
++        } else {
++            ic = scope.getInterpreterContext();
++        }
+ 
+         println("flags: " + ic.getFlags());
+ 
+@@ -281,6 +290,10 @@ public class IRDumper extends IRVisitor {
+         }
+     }
+ 
++
++    @Override
++    public void Scope(Scope scope) { print(scope.toString()); }
++
+     public void Array(Array array) {
+         final boolean[] comma = {false};
+         for (Operand o : Arrays.asList(array.getElts())) {

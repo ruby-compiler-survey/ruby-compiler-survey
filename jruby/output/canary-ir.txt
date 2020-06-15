@@ -1,0 +1,20 @@
+2020-06-07T23:59:59.219Z [main] INFO MixedModeIRMethod : Printing simple IR for canary:
+begin INSTANCE_METHOD<canary>
+flags: [FLAGS_COMPUTED]
+signature(pre=2,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+declared variables:
+  b(0:1)
+  a(0:0)
+
+  00:           %self := recv_self
+  01:            %v_0 := load_implicit_closure
+  02:  %current_scope := copy(scope<>)
+  03: %current_module := copy(mod<0>)
+  04:                    check_arity(required: 2, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  05:              *a := recv_pre_reqd_arg(argIndex: 0)
+  06:              *b := recv_pre_reqd_arg(argIndex: 1)
+  07:                    line_num(lineNumber: 1)
+  08:            %v_3 := copy(ary<*a, *b>)
+  09:            %v_4 := call_0o(%v_3, callType: NORMAL, name: min, potentiallyRefined: false)
+  10:                    return(%v_4)
+  

@@ -1,0 +1,1032 @@
+CompileCommand: print *.*fib*
+CompileCommand: dontinline *.*
+OpenJDK 64-Bit Server VM warning: printing of assembly code is enabled; turning on DebugNonSafepoints to gain additional output
+2020-06-13T23:49:02.360+01:00 [main] INFO Interpreter : Printing simple IR for /Users/chrisseaton/Documents/ruby-compiler-survey/examples/fib.rb:
+begin SCRIPT_BODY</Users/chrisseaton/Documents/ruby-compiler-survey/examples/fib.rb>
+flags: [BINDING_HAS_ESCAPED, HAS_LOOPS, REQUIRES_DYNSCOPE, REQUIRES_VISIBILITY, REQUIRES_BLOCK, FLAGS_COMPUTED]
+signature(pre=0,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+
+  00:           %self := recv_self
+  01:            %v_0 := load_frame_closure
+  02:  %current_scope := copy(scope<>)
+  03: %current_module := copy(mod<0>)
+  04:                    line_num(lineNumber: 0)
+  05:                    def_inst_meth(method: INSTANCE_METHOD fib[/Users/chrisseaton/Documents/ruby-compiler-survey/examples/fib.rb:0]<startup>)
+  06:                    line_num(lineNumber: 8)
+  07:                    label(ipc<_LOOP_BEGIN_0:8>)
+  08:                    nop
+  09:                    label(ipc<_ITER_BEGIN_2:10>)
+  10:                    thread_poll(onBackEdge: true)
+  11:                    line_num(lineNumber: 9)
+  12:            %v_4 := call_1f(self<%self>, fix<30>, fixNum: 30, callType: FUNCTIONAL, name: fib, potentiallyRefined: false)
+  13:                    label(ipc<_ITER_END_3:14>)
+  14:                    jump(ipc<_LOOP_BEGIN_0:8>)
+  15:                    label(ipc<LBL_4:16>)
+  16:            %v_3 := copy(nil<>)
+  17:                    label(ipc<_LOOP_END_1:18>)
+  18:                    return(%v_3)
+
+2020-06-13T23:49:02.372+01:00 [main] INFO MixedModeIRMethod : Printing simple IR for fib:
+begin INSTANCE_METHOD<fib>
+flags: [FLAGS_COMPUTED]
+signature(pre=1,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+declared variables:
+  n(0:0)
+
+  00:           %self := recv_self
+  01:            %v_0 := load_implicit_closure
+  02:  %current_scope := copy(scope<>)
+  03: %current_module := copy(mod<0>)
+  04:                    check_arity(required: 1, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  05:              *n := recv_pre_reqd_arg(argIndex: 0)
+  06:                    line_num(lineNumber: 1)
+  07:            %v_3 := call_1f(*n, fix<2>, fixNum: 2, callType: NORMAL, name: <=, potentiallyRefined: false)
+  08:                    b_false(ipc<LBL_0:13>, %v_3, jumpTarget: LBL_0:13, value: %v_3)
+  09:                    line_num(lineNumber: 2)
+  10:            %v_4 := copy(fix<1>)
+  11:                    jump(ipc<LBL_1:21>)
+  12:                    label(ipc<LBL_0:13>)
+  13:                    line_num(lineNumber: 4)
+  14:            %v_6 := call_1f(*n, fix<1>, fixNum: 1, callType: NORMAL, name: -, potentiallyRefined: false)
+  15:            %v_5 := call_1o(self<%self>, %v_6, callType: FUNCTIONAL, name: fib, potentiallyRefined: false)
+  16:            %v_9 := call_1f(*n, fix<2>, fixNum: 2, callType: NORMAL, name: -, potentiallyRefined: false)
+  17:            %v_8 := call_1o(self<%self>, %v_9, callType: FUNCTIONAL, name: fib, potentiallyRefined: false)
+  18:            %v_7 := call_1o(%v_5, %v_8, callType: NORMAL, name: +, potentiallyRefined: false)
+  19:            %v_4 := copy(%v_7)
+  20:                    label(ipc<LBL_1:21>)
+  21:                    return(%v_4)
+
+2020-06-13T23:49:02.396+01:00 [Ruby-0-JIT-1] INFO JVMVisitor : Printing JIT IR for fib:
+begin INSTANCE_METHOD<fib>
+flags: [HAS_EXPLICIT_CALL_PROTOCOL, DYNSCOPE_ELIMINATED, FLAGS_COMPUTED]
+signature(pre=1,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+declared variables:
+  n(0:0)
+
+block #1 (out: 6,2): LBL_2:-1
+
+block #2 (out: 3,4): LBL_3:-1
+  0:   %self := recv_self
+  1:            check_arity(required: 1, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  2: %t_n_10 := recv_pre_reqd_arg(argIndex: 0)
+  3:            line_num(lineNumber: 1)
+  4:    %v_3 := call_1f(%t_n_10, fix<2>, fixNum: 2, callType: NORMAL, name: <=, potentiallyRefined: false)
+  5:            b_false(ipc<LBL_0:13>, %v_3, jumpTarget: LBL_0:13, value: %v_3)
+
+block #3 (out: 6): LBL_4:-1
+  0:            line_num(lineNumber: 2)
+  1:            return(fix<1>)
+
+block #6: LBL_5:-1
+  0:            return(nil<>)
+
+block #4 (out: 6): LBL_0:13
+  0:            line_num(lineNumber: 4)
+  1:    %v_6 := call_1f(%t_n_10, fix<1>, fixNum: 1, callType: NORMAL, name: -, potentiallyRefined: false)
+  2:    %v_5 := call_1o(self<%self>, %v_6, callType: FUNCTIONAL, name: fib, potentiallyRefined: false)
+  3:    %v_9 := call_1f(%t_n_10, fix<2>, fixNum: 2, callType: NORMAL, name: -, potentiallyRefined: false)
+  4:    %v_8 := call_1o(self<%self>, %v_9, callType: FUNCTIONAL, name: fib, potentiallyRefined: false)
+  5:    %v_7 := call_1o(%v_5, %v_8, callType: NORMAL, name: +, potentiallyRefined: false)
+  6:            return(%v_7)
+
+*** Dumping Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib.RUBY$method$fib$0 ***
+   L0
+   L1
+    NOP
+   L2
+    NOP
+    ALOAD 3
+    ASTORE 8
+   L3
+    LINENUMBER 2 L3
+    ALOAD 0
+    ALOAD 2
+    ALOAD 8
+    INVOKEDYNAMIC fixnumOperator:\=\^=(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;)Lorg/jruby/runtime/builtin/IRubyObject; [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/runtime/invokedynamic/MathLinker.fixnumOperatorBootstrap(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;JILjava/lang/String;I)Ljava/lang/invoke/CallSite;
+      // arguments:
+      2, 
+      0, 
+      "/Users/chrisseaton/Documents/ruby-compiler-survey/examples/fib.rb", 
+      2
+    ]
+    ASTORE 9
+    ALOAD 9
+    INVOKEINTERFACE org/jruby/runtime/builtin/IRubyObject.isTrue ()Z (itf)
+    IFEQ L4
+   L5
+    NOP
+   L6
+    LINENUMBER 3 L6
+    ALOAD 0
+    INVOKEDYNAMIC fixnum(Lorg/jruby/runtime/ThreadContext;)Lorg/jruby/runtime/builtin/IRubyObject; [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/FixnumObjectSite.bootstrap(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;J)Ljava/lang/invoke/CallSite;
+      // arguments:
+      1
+    ]
+    ARETURN
+   L7
+    NOP
+    ALOAD 0
+    INVOKEDYNAMIC nil(Lorg/jruby/runtime/ThreadContext;)Lorg/jruby/runtime/builtin/IRubyObject; [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/Bootstrap.contextValue(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+      // arguments: none
+    ]
+    ARETURN
+   L4
+    NOP
+   L8
+    LINENUMBER 5 L8
+    ALOAD 0
+    ALOAD 2
+    ALOAD 8
+    INVOKEDYNAMIC fixnumOperator:-(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;)Lorg/jruby/runtime/builtin/IRubyObject; [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/runtime/invokedynamic/MathLinker.fixnumOperatorBootstrap(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;JILjava/lang/String;I)Ljava/lang/invoke/CallSite;
+      // arguments:
+      1, 
+      0, 
+      "/Users/chrisseaton/Documents/ruby-compiler-survey/examples/fib.rb", 
+      5
+    ]
+    ASTORE 10
+    ALOAD 0
+    ALOAD 2
+    ALOAD 2
+    ALOAD 10
+    INVOKEDYNAMIC callFunctional:fib(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;)Lorg/jruby/runtime/builtin/IRubyObject; [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/SelfInvokeSite.bootstrap(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;ILjava/lang/String;I)Ljava/lang/invoke/CallSite;
+      // arguments:
+      false, 
+      "/Users/chrisseaton/Documents/ruby-compiler-survey/examples/fib.rb", 
+      5
+    ]
+    ASTORE 11
+    ALOAD 0
+    ALOAD 2
+    ALOAD 8
+    INVOKEDYNAMIC fixnumOperator:-(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;)Lorg/jruby/runtime/builtin/IRubyObject; [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/runtime/invokedynamic/MathLinker.fixnumOperatorBootstrap(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;JILjava/lang/String;I)Ljava/lang/invoke/CallSite;
+      // arguments:
+      2, 
+      0, 
+      "/Users/chrisseaton/Documents/ruby-compiler-survey/examples/fib.rb", 
+      5
+    ]
+    ASTORE 12
+    ALOAD 0
+    ALOAD 2
+    ALOAD 2
+    ALOAD 12
+    INVOKEDYNAMIC callFunctional:fib(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;)Lorg/jruby/runtime/builtin/IRubyObject; [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/SelfInvokeSite.bootstrap(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;ILjava/lang/String;I)Ljava/lang/invoke/CallSite;
+      // arguments:
+      false, 
+      "/Users/chrisseaton/Documents/ruby-compiler-survey/examples/fib.rb", 
+      5
+    ]
+    ASTORE 13
+    ALOAD 0
+    ALOAD 2
+    ALOAD 11
+    ALOAD 13
+    INVOKEDYNAMIC invoke:+(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;)Lorg/jruby/runtime/builtin/IRubyObject; [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/NormalInvokeSite.bootstrap(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;ILjava/lang/String;I)Ljava/lang/invoke/CallSite;
+      // arguments:
+      false, 
+      "/Users/chrisseaton/Documents/ruby-compiler-survey/examples/fib.rb", 
+      5
+    ]
+    ASTORE 14
+    ALOAD 14
+    ARETURN
+*** Dumping Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib.RUBY$method$fib$0$__VARARGS__ ***
+   L0
+    ALOAD 0
+    ALOAD 1
+    ALOAD 3
+    ACONST_NULL
+    INVOKEDYNAMIC checkArity(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;[Ljava/lang/Object;Lorg/jruby/runtime/Block;)V [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/Bootstrap.checkArity(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;IIIII)Ljava/lang/invoke/CallSite;
+      // arguments:
+      1, 
+      0, 
+      0, 
+      0, 
+      -1
+    ]
+    ALOAD 0
+    ALOAD 1
+    ALOAD 2
+    ALOAD 3
+    ICONST_0
+    AALOAD
+    ALOAD 4
+    ALOAD 5
+    ALOAD 6
+    INVOKESTATIC Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib.RUBY$method$fib$0 (Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;
+    ARETURN
+
+============================= C1-compiled nmethod ==============================
+----------------------------------- Assembly -----------------------------------
+
+Compiled method (c1)    1753 3856       3       Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0 (105 bytes)
+ total in heap  [0x000000011a09bb10,0x000000011a09c8a0] = 3472
+ relocation     [0x000000011a09bc68,0x000000011a09bd38] = 208
+ main code      [0x000000011a09bd40,0x000000011a09c540] = 2048
+ stub code      [0x000000011a09c540,0x000000011a09c600] = 192
+ oops           [0x000000011a09c600,0x000000011a09c608] = 8
+ metadata       [0x000000011a09c608,0x000000011a09c610] = 8
+ scopes data    [0x000000011a09c610,0x000000011a09c718] = 264
+ scopes pcs     [0x000000011a09c718,0x000000011a09c888] = 368
+ dependencies   [0x000000011a09c888,0x000000011a09c890] = 8
+ nul chk table  [0x000000011a09c890,0x000000011a09c8a0] = 16
+
+--------------------------------------------------------------------------------
+[Constant Pool (empty)]
+
+--------------------------------------------------------------------------------
+
+[Verified Entry Point]
+  # {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib'
+  # parm0:    rsi:rsi   = 'org/jruby/runtime/ThreadContext'
+  # parm1:    rdx:rdx   = 'org/jruby/parser/StaticScope'
+  # parm2:    rcx:rcx   = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm3:    r8:r8     = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm4:    r9:r9     = 'org/jruby/runtime/Block'
+  # parm5:    rdi:rdi   = 'org/jruby/RubyModule'
+  # parm6:    [sp+0x60]   = 'java/lang/String'  (sp of caller)
+  0x000000011a09bd40:   mov    %eax,-0x14000(%rsp)
+  0x000000011a09bd47:   push   %rbp
+  0x000000011a09bd48:   sub    $0x50,%rsp
+  0x000000011a09bd4c:   mov    %rsi,0x28(%rsp)
+  0x000000011a09bd51:   mov    %rcx,0x30(%rsp)
+  0x000000011a09bd56:   mov    %r8,0x38(%rsp)
+  0x000000011a09bd5b:   movabs $0x13f86cc30,%rbx            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09bd65:   mov    0xe4(%rbx),%eax
+  0x000000011a09bd6b:   add    $0x8,%eax
+  0x000000011a09bd6e:   mov    %eax,0xe4(%rbx)
+  0x000000011a09bd74:   and    $0x1ff8,%eax
+  0x000000011a09bd7a:   cmp    $0x0,%eax
+  0x000000011a09bd7d:   je     0x000000011a09c4c9           ;*nop {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@0
+  0x000000011a09bd83:   movabs $0x13f86cc30,%rdx            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09bd8d:   lea    0x138(%rdx),%rdx
+  0x000000011a09bd94:   mov    %rsi,%rdi
+  0x000000011a09bd97:   test   %rdi,%rdi
+  0x000000011a09bd9a:   jne    0x000000011a09bda4
+  0x000000011a09bd9c:   orq    $0x1,0x8(%rdx)
+  0x000000011a09bda4:   mov    %rcx,%rdi
+  0x000000011a09bda7:   test   %rdi,%rdi
+  0x000000011a09bdaa:   jne    0x000000011a09bdb6
+  0x000000011a09bdac:   orq    $0x1,0x18(%rdx)
+  0x000000011a09bdb4:   jmp    0x000000011a09bdeb
+  0x000000011a09bdb6:   mov    0x8(%rdi),%edi
+  0x000000011a09bdb9:   shl    $0x3,%rdi
+  0x000000011a09bdbd:   movabs $0x800000000,%r12
+  0x000000011a09bdc7:   add    %r12,%rdi
+  0x000000011a09bdca:   xor    %r12,%r12
+  0x000000011a09bdcd:   xor    0x18(%rdx),%rdi
+  0x000000011a09bdd1:   test   $0xfffffffffffffffc,%rdi
+  0x000000011a09bdd8:   je     0x000000011a09bdeb
+  0x000000011a09bdda:   test   $0x2,%rdi
+  0x000000011a09bde1:   jne    0x000000011a09bdeb
+  0x000000011a09bde3:   orq    $0x2,0x18(%rdx)
+  0x000000011a09bdeb:   movabs $0x13f86cc30,%rdx            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09bdf5:   addq   $0x1,0x128(%rdx)
+  0x000000011a09bdfd:   mov    %rsi,%rdi
+  0x000000011a09be00:   mov    %rdi,%rsi
+  0x000000011a09be03:   mov    %rcx,%rdx
+  0x000000011a09be06:   mov    %r8,%rcx
+  0x000000011a09be09:   movabs $0x61c276460,%r8             ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@9 (line 2)
+                                                            ;   {oop(a 'org/jruby/runtime/invokedynamic/JRubyCallSite'{0x000000061c276460})}
+  0x000000011a09be13:   nopl   0x0(%rax)
+  0x000000011a09be17:   callq  0x000000011a095ae0           ; ImmutableOopMap {[56]=Oop [48]=Oop [40]=Oop }
+                                                            ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@9 (line 2)
+                                                            ;   {static_call}
+  0x000000011a09be1c:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09be26:   lea    0x158(%rsi),%rsi
+  0x000000011a09be2d:   mov    %rax,%rdi
+  0x000000011a09be30:   test   %rdi,%rdi
+  0x000000011a09be33:   jne    0x000000011a09be3c
+  0x000000011a09be35:   orq    $0x1,(%rsi)
+  0x000000011a09be3c:   cmp    (%rax),%rax                  ; implicit exception: dispatches to 0x000000011a09c4ea
+  0x000000011a09be3f:   mov    %rax,%rsi
+  0x000000011a09be42:   movabs $0x13f86cc30,%rdi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09be4c:   mov    0x8(%rsi),%esi
+  0x000000011a09be4f:   shl    $0x3,%rsi
+  0x000000011a09be53:   movabs $0x800000000,%r12
+  0x000000011a09be5d:   add    %r12,%rsi
+  0x000000011a09be60:   xor    %r12,%r12
+  0x000000011a09be63:   cmp    0x178(%rdi),%rsi
+  0x000000011a09be6a:   jne    0x000000011a09be79
+  0x000000011a09be6c:   addq   $0x1,0x180(%rdi)
+  0x000000011a09be74:   jmpq   0x000000011a09bedf
+  0x000000011a09be79:   cmp    0x188(%rdi),%rsi
+  0x000000011a09be80:   jne    0x000000011a09be8f
+  0x000000011a09be82:   addq   $0x1,0x190(%rdi)
+  0x000000011a09be8a:   jmpq   0x000000011a09bedf
+  0x000000011a09be8f:   cmpq   $0x0,0x178(%rdi)
+  0x000000011a09be9a:   jne    0x000000011a09beb3
+  0x000000011a09be9c:   mov    %rsi,0x178(%rdi)
+  0x000000011a09bea3:   movq   $0x1,0x180(%rdi)
+  0x000000011a09beae:   jmpq   0x000000011a09bedf
+  0x000000011a09beb3:   cmpq   $0x0,0x188(%rdi)
+  0x000000011a09bebe:   jne    0x000000011a09bed7
+  0x000000011a09bec0:   mov    %rsi,0x188(%rdi)
+  0x000000011a09bec7:   movq   $0x1,0x190(%rdi)
+  0x000000011a09bed2:   jmpq   0x000000011a09bedf
+  0x000000011a09bed7:   addq   $0x1,0x168(%rdi)
+  0x000000011a09bedf:   mov    %rax,%rsi                    ;*invokeinterface isTrue {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@18 (line 2)
+  0x000000011a09bee2:   data32 xchg %ax,%ax
+  0x000000011a09bee5:   movabs $0x800b91538,%rax
+  0x000000011a09beef:   callq  0x00000001195615a0           ; ImmutableOopMap {[56]=Oop [48]=Oop [40]=Oop }
+                                                            ;*invokeinterface isTrue {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@18 (line 2)
+                                                            ;   {virtual_call}
+  0x000000011a09bef4:   cmp    $0x0,%eax
+  0x000000011a09bef7:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09bf01:   movabs $0x1a0,%rdx
+  0x000000011a09bf0b:   je     0x000000011a09bf1b
+  0x000000011a09bf11:   movabs $0x1b0,%rdx
+  0x000000011a09bf1b:   mov    (%rsi,%rdx,1),%rdi
+  0x000000011a09bf1f:   lea    0x1(%rdi),%rdi
+  0x000000011a09bf23:   mov    %rdi,(%rsi,%rdx,1)
+  0x000000011a09bf27:   je     0x000000011a09bfd9           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@23 (line 2)
+  0x000000011a09bf2d:   mov    0x28(%rsp),%rsi
+  0x000000011a09bf32:   movabs $0x13f86cc30,%rdx            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09bf3c:   lea    0x1d0(%rdx),%rdx
+  0x000000011a09bf43:   mov    %rsi,%rdi
+  0x000000011a09bf46:   test   %rdi,%rdi
+  0x000000011a09bf49:   jne    0x000000011a09bf53
+  0x000000011a09bf4b:   orq    $0x1,0x8(%rdx)
+  0x000000011a09bf53:   movabs $0x13f86cc30,%rdx            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09bf5d:   addq   $0x1,0x1c0(%rdx)
+  0x000000011a09bf65:   movabs $0x61c2d2840,%rdx            ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@28 (line 3)
+                                                            ;   {oop(a 'org/jruby/ir/targets/FixnumObjectSite'{0x000000061c2d2840})}
+  0x000000011a09bf6f:   callq  0x000000011a09c565           ; ImmutableOopMap {}
+                                                            ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@28 (line 3)
+                                                            ;   {static_call}
+  0x000000011a09bf74:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09bf7e:   lea    0x1e0(%rsi),%rsi
+  0x000000011a09bf85:   mov    %rax,%rdx
+  0x000000011a09bf88:   test   %rdx,%rdx
+  0x000000011a09bf8b:   jne    0x000000011a09bf96
+  0x000000011a09bf8d:   orq    $0x1,(%rsi)
+  0x000000011a09bf94:   jmp    0x000000011a09bfc9
+  0x000000011a09bf96:   mov    0x8(%rdx),%edx
+  0x000000011a09bf99:   shl    $0x3,%rdx
+  0x000000011a09bf9d:   movabs $0x800000000,%r12
+  0x000000011a09bfa7:   add    %r12,%rdx
+  0x000000011a09bfaa:   xor    %r12,%r12
+  0x000000011a09bfad:   xor    (%rsi),%rdx
+  0x000000011a09bfb0:   test   $0xfffffffffffffffc,%rdx
+  0x000000011a09bfb7:   je     0x000000011a09bfc9
+  0x000000011a09bfb9:   test   $0x2,%rdx
+  0x000000011a09bfc0:   jne    0x000000011a09bfc9
+  0x000000011a09bfc2:   orq    $0x2,(%rsi)
+  0x000000011a09bfc9:   add    $0x50,%rsp
+  0x000000011a09bfcd:   pop    %rbp
+  0x000000011a09bfce:   mov    0x110(%r15),%r10
+  0x000000011a09bfd5:   test   %eax,(%r10)                  ;   {poll_return}
+  0x000000011a09bfd8:   retq                                ;*areturn {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@33 (line 3)
+  0x000000011a09bfd9:   mov    0x38(%rsp),%r8
+  0x000000011a09bfde:   mov    0x30(%rsp),%rcx
+  0x000000011a09bfe3:   mov    0x28(%rsp),%rsi
+  0x000000011a09bfe8:   movabs $0x13f86cc30,%rdx            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09bff2:   lea    0x200(%rdx),%rdx
+  0x000000011a09bff9:   mov    %rsi,%rdi
+  0x000000011a09bffc:   test   %rdi,%rdi
+  0x000000011a09bfff:   jne    0x000000011a09c009
+  0x000000011a09c001:   orq    $0x1,0x8(%rdx)
+  0x000000011a09c009:   mov    %rcx,%rdi
+  0x000000011a09c00c:   test   %rdi,%rdi
+  0x000000011a09c00f:   jne    0x000000011a09c01b
+  0x000000011a09c011:   orq    $0x1,0x18(%rdx)
+  0x000000011a09c019:   jmp    0x000000011a09c050
+  0x000000011a09c01b:   mov    0x8(%rdi),%edi
+  0x000000011a09c01e:   shl    $0x3,%rdi
+  0x000000011a09c022:   movabs $0x800000000,%r12
+  0x000000011a09c02c:   add    %r12,%rdi
+  0x000000011a09c02f:   xor    %r12,%r12
+  0x000000011a09c032:   xor    0x18(%rdx),%rdi
+  0x000000011a09c036:   test   $0xfffffffffffffffc,%rdi
+  0x000000011a09c03d:   je     0x000000011a09c050
+  0x000000011a09c03f:   test   $0x2,%rdi
+  0x000000011a09c046:   jne    0x000000011a09c050
+  0x000000011a09c048:   orq    $0x2,0x18(%rdx)
+  0x000000011a09c050:   movabs $0x13f86cc30,%rdx            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09c05a:   addq   $0x1,0x1f0(%rdx)
+  0x000000011a09c062:   mov    %rsi,%rdi
+  0x000000011a09c065:   mov    %rdi,%rsi
+  0x000000011a09c068:   mov    %rcx,%rdx
+  0x000000011a09c06b:   mov    %r8,%rcx
+  0x000000011a09c06e:   movabs $0x61c2d8a80,%r8             ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@47 (line 5)
+                                                            ;   {oop(a 'org/jruby/runtime/invokedynamic/JRubyCallSite'{0x000000061c2d8a80})}
+  0x000000011a09c078:   nopl   0x0(%rax)
+  0x000000011a09c07f:   callq  0x000000011a095ae0           ; ImmutableOopMap {[56]=Oop [48]=Oop [40]=Oop }
+                                                            ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@47 (line 5)
+                                                            ;   {static_call}
+  0x000000011a09c084:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09c08e:   lea    0x220(%rsi),%rsi
+  0x000000011a09c095:   mov    %rax,%rdx
+  0x000000011a09c098:   test   %rdx,%rdx
+  0x000000011a09c09b:   jne    0x000000011a09c0a6
+  0x000000011a09c09d:   orq    $0x1,(%rsi)
+  0x000000011a09c0a4:   jmp    0x000000011a09c0d9
+  0x000000011a09c0a6:   mov    0x8(%rdx),%edx
+  0x000000011a09c0a9:   shl    $0x3,%rdx
+  0x000000011a09c0ad:   movabs $0x800000000,%r12
+  0x000000011a09c0b7:   add    %r12,%rdx
+  0x000000011a09c0ba:   xor    %r12,%r12
+  0x000000011a09c0bd:   xor    (%rsi),%rdx
+  0x000000011a09c0c0:   test   $0xfffffffffffffffc,%rdx
+  0x000000011a09c0c7:   je     0x000000011a09c0d9
+  0x000000011a09c0c9:   test   $0x2,%rdx
+  0x000000011a09c0d0:   jne    0x000000011a09c0d9
+  0x000000011a09c0d2:   orq    $0x2,(%rsi)
+  0x000000011a09c0d9:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09c0e3:   lea    0x240(%rsi),%rsi
+  0x000000011a09c0ea:   mov    0x28(%rsp),%rdi
+  0x000000011a09c0ef:   mov    %rdi,%rdx
+  0x000000011a09c0f2:   test   %rdx,%rdx
+  0x000000011a09c0f5:   jne    0x000000011a09c0ff
+  0x000000011a09c0f7:   orq    $0x1,0x8(%rsi)
+  0x000000011a09c0ff:   mov    0x30(%rsp),%rcx
+  0x000000011a09c104:   mov    %rcx,%rdx
+  0x000000011a09c107:   test   %rdx,%rdx
+  0x000000011a09c10a:   jne    0x000000011a09c116
+  0x000000011a09c10c:   orq    $0x1,0x18(%rsi)
+  0x000000011a09c114:   jmp    0x000000011a09c14b
+  0x000000011a09c116:   mov    0x8(%rdx),%edx
+  0x000000011a09c119:   shl    $0x3,%rdx
+  0x000000011a09c11d:   movabs $0x800000000,%r12
+  0x000000011a09c127:   add    %r12,%rdx
+  0x000000011a09c12a:   xor    %r12,%r12
+  0x000000011a09c12d:   xor    0x18(%rsi),%rdx
+  0x000000011a09c131:   test   $0xfffffffffffffffc,%rdx
+  0x000000011a09c138:   je     0x000000011a09c14b
+  0x000000011a09c13a:   test   $0x2,%rdx
+  0x000000011a09c141:   jne    0x000000011a09c14b
+  0x000000011a09c143:   orq    $0x2,0x18(%rsi)
+  0x000000011a09c14b:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09c155:   addq   $0x1,0x230(%rsi)
+  0x000000011a09c15d:   mov    %rdi,%rsi
+  0x000000011a09c160:   mov    %rcx,%rdx
+  0x000000011a09c163:   mov    %rcx,%rbx
+  0x000000011a09c166:   mov    %rbx,%rcx
+  0x000000011a09c169:   mov    %rax,%r8
+  0x000000011a09c16c:   movabs $0x61c2e80d8,%r9             ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@59 (line 5)
+                                                            ;   {oop(a 'org/jruby/ir/targets/SelfInvokeSite'{0x000000061c2e80d8})}
+  0x000000011a09c176:   nop
+  0x000000011a09c177:   callq  0x000000011a098ae0           ; ImmutableOopMap {[56]=Oop [48]=Oop [40]=Oop }
+                                                            ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@59 (line 5)
+                                                            ;   {static_call}
+  0x000000011a09c17c:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09c186:   lea    0x260(%rsi),%rsi
+  0x000000011a09c18d:   mov    %rax,%rdx
+  0x000000011a09c190:   test   %rdx,%rdx
+  0x000000011a09c193:   jne    0x000000011a09c19e
+  0x000000011a09c195:   orq    $0x1,(%rsi)
+  0x000000011a09c19c:   jmp    0x000000011a09c1d1
+  0x000000011a09c19e:   mov    0x8(%rdx),%edx
+  0x000000011a09c1a1:   shl    $0x3,%rdx
+  0x000000011a09c1a5:   movabs $0x800000000,%r12
+  0x000000011a09c1af:   add    %r12,%rdx
+  0x000000011a09c1b2:   xor    %r12,%r12
+  0x000000011a09c1b5:   xor    (%rsi),%rdx
+  0x000000011a09c1b8:   test   $0xfffffffffffffffc,%rdx
+  0x000000011a09c1bf:   je     0x000000011a09c1d1
+  0x000000011a09c1c1:   test   $0x2,%rdx
+  0x000000011a09c1c8:   jne    0x000000011a09c1d1
+  0x000000011a09c1ca:   orq    $0x2,(%rsi)
+  0x000000011a09c1d1:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09c1db:   lea    0x280(%rsi),%rsi
+  0x000000011a09c1e2:   mov    0x28(%rsp),%rdi
+  0x000000011a09c1e7:   mov    %rdi,%rdx
+  0x000000011a09c1ea:   test   %rdx,%rdx
+  0x000000011a09c1ed:   jne    0x000000011a09c1f7
+  0x000000011a09c1ef:   orq    $0x1,0x8(%rsi)
+  0x000000011a09c1f7:   mov    0x30(%rsp),%rcx
+  0x000000011a09c1fc:   mov    %rcx,%rdx
+  0x000000011a09c1ff:   test   %rdx,%rdx
+  0x000000011a09c202:   jne    0x000000011a09c20e
+  0x000000011a09c204:   orq    $0x1,0x18(%rsi)
+  0x000000011a09c20c:   jmp    0x000000011a09c243
+  0x000000011a09c20e:   mov    0x8(%rdx),%edx
+  0x000000011a09c211:   shl    $0x3,%rdx
+  0x000000011a09c215:   movabs $0x800000000,%r12
+  0x000000011a09c21f:   add    %r12,%rdx
+  0x000000011a09c222:   xor    %r12,%r12
+  0x000000011a09c225:   xor    0x18(%rsi),%rdx
+  0x000000011a09c229:   test   $0xfffffffffffffffc,%rdx
+  0x000000011a09c230:   je     0x000000011a09c243
+  0x000000011a09c232:   test   $0x2,%rdx
+  0x000000011a09c239:   jne    0x000000011a09c243
+  0x000000011a09c23b:   orq    $0x2,0x18(%rsi)
+  0x000000011a09c243:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09c24d:   addq   $0x1,0x270(%rsi)
+  0x000000011a09c255:   mov    %rdi,%rsi
+  0x000000011a09c258:   mov    %rcx,%rdx
+  0x000000011a09c25b:   mov    0x38(%rsp),%rcx
+  0x000000011a09c260:   movabs $0x61c3cf280,%r8             ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@70 (line 5)
+                                                            ;   {oop(a 'org/jruby/runtime/invokedynamic/JRubyCallSite'{0x000000061c3cf280})}
+  0x000000011a09c26a:   mov    %rax,0x40(%rsp)
+  0x000000011a09c26f:   callq  0x0000000121196840           ; ImmutableOopMap {[48]=Oop [40]=Oop [64]=Oop }
+                                                            ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@70 (line 5)
+                                                            ;   {static_call}
+  0x000000011a09c274:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09c27e:   lea    0x2a0(%rsi),%rsi
+  0x000000011a09c285:   mov    %rax,%rdx
+  0x000000011a09c288:   test   %rdx,%rdx
+  0x000000011a09c28b:   jne    0x000000011a09c296
+  0x000000011a09c28d:   orq    $0x1,(%rsi)
+  0x000000011a09c294:   jmp    0x000000011a09c2c9
+  0x000000011a09c296:   mov    0x8(%rdx),%edx
+  0x000000011a09c299:   shl    $0x3,%rdx
+  0x000000011a09c29d:   movabs $0x800000000,%r12
+  0x000000011a09c2a7:   add    %r12,%rdx
+  0x000000011a09c2aa:   xor    %r12,%r12
+  0x000000011a09c2ad:   xor    (%rsi),%rdx
+  0x000000011a09c2b0:   test   $0xfffffffffffffffc,%rdx
+  0x000000011a09c2b7:   je     0x000000011a09c2c9
+  0x000000011a09c2b9:   test   $0x2,%rdx
+  0x000000011a09c2c0:   jne    0x000000011a09c2c9
+  0x000000011a09c2c2:   orq    $0x2,(%rsi)
+  0x000000011a09c2c9:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09c2d3:   lea    0x2c0(%rsi),%rsi
+  0x000000011a09c2da:   mov    0x28(%rsp),%rdi
+  0x000000011a09c2df:   mov    %rdi,%rdx
+  0x000000011a09c2e2:   test   %rdx,%rdx
+  0x000000011a09c2e5:   jne    0x000000011a09c2ef
+  0x000000011a09c2e7:   orq    $0x1,0x8(%rsi)
+  0x000000011a09c2ef:   mov    0x30(%rsp),%rcx
+  0x000000011a09c2f4:   mov    %rcx,%rdx
+  0x000000011a09c2f7:   test   %rdx,%rdx
+  0x000000011a09c2fa:   jne    0x000000011a09c306
+  0x000000011a09c2fc:   orq    $0x1,0x18(%rsi)
+  0x000000011a09c304:   jmp    0x000000011a09c33b
+  0x000000011a09c306:   mov    0x8(%rdx),%edx
+  0x000000011a09c309:   shl    $0x3,%rdx
+  0x000000011a09c30d:   movabs $0x800000000,%r12
+  0x000000011a09c317:   add    %r12,%rdx
+  0x000000011a09c31a:   xor    %r12,%r12
+  0x000000011a09c31d:   xor    0x18(%rsi),%rdx
+  0x000000011a09c321:   test   $0xfffffffffffffffc,%rdx
+  0x000000011a09c328:   je     0x000000011a09c33b
+  0x000000011a09c32a:   test   $0x2,%rdx
+  0x000000011a09c331:   jne    0x000000011a09c33b
+  0x000000011a09c333:   orq    $0x2,0x18(%rsi)
+  0x000000011a09c33b:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09c345:   addq   $0x1,0x2b0(%rsi)
+  0x000000011a09c34d:   mov    %rdi,%rsi
+  0x000000011a09c350:   mov    %rcx,%rdx
+  0x000000011a09c353:   mov    %rcx,%rbx
+  0x000000011a09c356:   mov    %rbx,%rcx
+  0x000000011a09c359:   mov    %rax,%r8
+  0x000000011a09c35c:   movabs $0x61c3d06e8,%r9             ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@82 (line 5)
+                                                            ;   {oop(a 'org/jruby/ir/targets/SelfInvokeSite'{0x000000061c3d06e8})}
+  0x000000011a09c366:   nop
+  0x000000011a09c367:   callq  0x000000011a098ae0           ; ImmutableOopMap {[64]=Oop [48]=Oop [40]=Oop }
+                                                            ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@82 (line 5)
+                                                            ;   {static_call}
+  0x000000011a09c36c:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09c376:   lea    0x2e0(%rsi),%rsi
+  0x000000011a09c37d:   mov    %rax,%rdx
+  0x000000011a09c380:   test   %rdx,%rdx
+  0x000000011a09c383:   jne    0x000000011a09c38e
+  0x000000011a09c385:   orq    $0x1,(%rsi)
+  0x000000011a09c38c:   jmp    0x000000011a09c3c1
+  0x000000011a09c38e:   mov    0x8(%rdx),%edx
+  0x000000011a09c391:   shl    $0x3,%rdx
+  0x000000011a09c395:   movabs $0x800000000,%r12
+  0x000000011a09c39f:   add    %r12,%rdx
+  0x000000011a09c3a2:   xor    %r12,%r12
+  0x000000011a09c3a5:   xor    (%rsi),%rdx
+  0x000000011a09c3a8:   test   $0xfffffffffffffffc,%rdx
+  0x000000011a09c3af:   je     0x000000011a09c3c1
+  0x000000011a09c3b1:   test   $0x2,%rdx
+  0x000000011a09c3b8:   jne    0x000000011a09c3c1
+  0x000000011a09c3ba:   orq    $0x2,(%rsi)
+  0x000000011a09c3c1:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09c3cb:   lea    0x300(%rsi),%rsi
+  0x000000011a09c3d2:   mov    0x28(%rsp),%rdx
+  0x000000011a09c3d7:   mov    %rdx,%rcx
+  0x000000011a09c3da:   test   %rcx,%rcx
+  0x000000011a09c3dd:   jne    0x000000011a09c3e7
+  0x000000011a09c3df:   orq    $0x1,0x8(%rsi)
+  0x000000011a09c3e7:   mov    0x30(%rsp),%rcx
+  0x000000011a09c3ec:   mov    %rcx,%r8
+  0x000000011a09c3ef:   test   %r8,%r8
+  0x000000011a09c3f2:   jne    0x000000011a09c3fe
+  0x000000011a09c3f4:   orq    $0x1,0x18(%rsi)
+  0x000000011a09c3fc:   jmp    0x000000011a09c434
+  0x000000011a09c3fe:   mov    0x8(%r8),%r8d
+  0x000000011a09c402:   shl    $0x3,%r8
+  0x000000011a09c406:   movabs $0x800000000,%r12
+  0x000000011a09c410:   add    %r12,%r8
+  0x000000011a09c413:   xor    %r12,%r12
+  0x000000011a09c416:   xor    0x18(%rsi),%r8
+  0x000000011a09c41a:   test   $0xfffffffffffffffc,%r8
+  0x000000011a09c421:   je     0x000000011a09c434
+  0x000000011a09c423:   test   $0x2,%r8
+  0x000000011a09c42a:   jne    0x000000011a09c434
+  0x000000011a09c42c:   orq    $0x2,0x18(%rsi)
+  0x000000011a09c434:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09c43e:   addq   $0x1,0x2f0(%rsi)
+  0x000000011a09c446:   mov    %rdx,%rsi
+  0x000000011a09c449:   mov    %rcx,%rdx
+  0x000000011a09c44c:   mov    0x40(%rsp),%rcx
+  0x000000011a09c451:   mov    %rax,%r8
+  0x000000011a09c454:   movabs $0x61c3d84d8,%r9             ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@95 (line 5)
+                                                            ;   {oop(a 'org/jruby/ir/targets/NormalInvokeSite'{0x000000061c3d84d8})}
+  0x000000011a09c45e:   nop
+  0x000000011a09c45f:   callq  0x0000000121197d40           ; ImmutableOopMap {}
+                                                            ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@95 (line 5)
+                                                            ;   {static_call}
+  0x000000011a09c464:   movabs $0x13f86cc30,%rsi            ;   {metadata(method data for {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09c46e:   lea    0x320(%rsi),%rsi
+  0x000000011a09c475:   mov    %rax,%rdi
+  0x000000011a09c478:   test   %rdi,%rdi
+  0x000000011a09c47b:   jne    0x000000011a09c486
+  0x000000011a09c47d:   orq    $0x1,(%rsi)
+  0x000000011a09c484:   jmp    0x000000011a09c4b9
+  0x000000011a09c486:   mov    0x8(%rdi),%edi
+  0x000000011a09c489:   shl    $0x3,%rdi
+  0x000000011a09c48d:   movabs $0x800000000,%r12
+  0x000000011a09c497:   add    %r12,%rdi
+  0x000000011a09c49a:   xor    %r12,%r12
+  0x000000011a09c49d:   xor    (%rsi),%rdi
+  0x000000011a09c4a0:   test   $0xfffffffffffffffc,%rdi
+  0x000000011a09c4a7:   je     0x000000011a09c4b9
+  0x000000011a09c4a9:   test   $0x2,%rdi
+  0x000000011a09c4b0:   jne    0x000000011a09c4b9
+  0x000000011a09c4b2:   orq    $0x2,(%rsi)
+  0x000000011a09c4b9:   add    $0x50,%rsp
+  0x000000011a09c4bd:   pop    %rbp
+  0x000000011a09c4be:   mov    0x110(%r15),%r10
+  0x000000011a09c4c5:   test   %eax,(%r10)                  ;   {poll_return}
+  0x000000011a09c4c8:   retq   
+  0x000000011a09c4c9:   movabs $0x13f86c738,%r10            ;   {metadata({method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib')}
+  0x000000011a09c4d3:   mov    %r10,0x8(%rsp)
+  0x000000011a09c4d8:   movq   $0xffffffffffffffff,(%rsp)
+  0x000000011a09c4e0:   callq  0x000000011962ed80           ; ImmutableOopMap {rsi=Oop [40]=Oop rdx=Oop rcx=Oop [48]=Oop r8=Oop [56]=Oop r9=Oop rdi=Oop [96]=Oop }
+                                                            ;*synchronization entry
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@-1
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x000000011a09c4e5:   jmpq   0x000000011a09bd83
+  0x000000011a09c4ea:   callq  0x00000001196299a0           ; ImmutableOopMap {[56]=Oop [48]=Oop [40]=Oop rax=Oop }
+                                                            ;*invokeinterface isTrue {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@18 (line 2)
+                                                            ;   {runtime_call throw_null_pointer_exception Runtime1 stub}
+  0x000000011a09c4ef:   nop
+  0x000000011a09c4f0:   nop
+  0x000000011a09c4f1:   nop
+  0x000000011a09c4f2:   mov    0x3e8(%r15),%rax
+  0x000000011a09c4f9:   movabs $0x0,%r10
+  0x000000011a09c503:   mov    %r10,0x3e8(%r15)
+  0x000000011a09c50a:   movabs $0x0,%r10
+  0x000000011a09c514:   mov    %r10,0x3f0(%r15)
+  0x000000011a09c51b:   add    $0x50,%rsp
+  0x000000011a09c51f:   pop    %rbp
+  0x000000011a09c520:   jmpq   0x0000000119628780           ;   {runtime_call unwind_exception Runtime1 stub}
+  0x000000011a09c525:   hlt    
+  0x000000011a09c526:   hlt    
+  0x000000011a09c527:   hlt    
+  0x000000011a09c528:   hlt    
+  0x000000011a09c529:   hlt    
+  0x000000011a09c52a:   hlt    
+  0x000000011a09c52b:   hlt    
+  0x000000011a09c52c:   hlt    
+  0x000000011a09c52d:   hlt    
+  0x000000011a09c52e:   hlt    
+  0x000000011a09c52f:   hlt    
+  0x000000011a09c530:   hlt    
+  0x000000011a09c531:   hlt    
+  0x000000011a09c532:   hlt    
+  0x000000011a09c533:   hlt    
+  0x000000011a09c534:   hlt    
+  0x000000011a09c535:   hlt    
+  0x000000011a09c536:   hlt    
+  0x000000011a09c537:   hlt    
+  0x000000011a09c538:   hlt    
+  0x000000011a09c539:   hlt    
+  0x000000011a09c53a:   hlt    
+  0x000000011a09c53b:   hlt    
+  0x000000011a09c53c:   hlt    
+  0x000000011a09c53d:   hlt    
+  0x000000011a09c53e:   hlt    
+  0x000000011a09c53f:   hlt    
+[Stub Code]
+  0x000000011a09c540:   nopl   0x0(%rax,%rax,1)             ;   {no_reloc}
+  0x000000011a09c545:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000011a09c54f:   jmpq   0x000000011a09c54f           ;   {runtime_call}
+  0x000000011a09c554:   nop
+  0x000000011a09c555:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000011a09c55f:   jmpq   0x000000011a09c55f           ;   {runtime_call}
+  0x000000011a09c564:   nop
+  0x000000011a09c565:   movabs $0x8001d69f8,%rbx            ;   {static_stub}
+  0x000000011a09c56f:   jmpq   0x0000000119578a64           ;   {runtime_call I2C/C2I adapters}
+  0x000000011a09c574:   nop
+  0x000000011a09c575:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000011a09c57f:   jmpq   0x000000011a09c57f           ;   {runtime_call}
+  0x000000011a09c584:   nop
+  0x000000011a09c585:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000011a09c58f:   jmpq   0x000000011a09c58f           ;   {runtime_call}
+  0x000000011a09c594:   nop
+  0x000000011a09c595:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000011a09c59f:   jmpq   0x000000011a09c59f           ;   {runtime_call}
+  0x000000011a09c5a4:   nop
+  0x000000011a09c5a5:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000011a09c5af:   jmpq   0x000000011a09c5af           ;   {runtime_call}
+  0x000000011a09c5b4:   nop
+  0x000000011a09c5b5:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000011a09c5bf:   jmpq   0x000000011a09c5bf           ;   {runtime_call}
+[Exception Handler]
+  0x000000011a09c5c4:   callq  0x000000011962b780           ;   {runtime_call handle_exception_from_callee Runtime1 stub}
+  0x000000011a09c5c9:   movabs $0x10f1e2d8a,%rdi            ;   {external_word}
+  0x000000011a09c5d3:   and    $0xfffffffffffffff0,%rsp
+  0x000000011a09c5d7:   callq  0x000000010ef2b558           ;   {runtime_call MacroAssembler::debug64(char*, long long, long long*)}
+  0x000000011a09c5dc:   hlt    
+[Deopt Handler Code]
+  0x000000011a09c5dd:   movabs $0x11a09c5dd,%r10            ;   {section_word}
+  0x000000011a09c5e7:   push   %r10
+  0x000000011a09c5e9:   jmpq   0x000000011957d0a0           ;   {runtime_call DeoptimizationBlob}
+[Deopt MH Handler Code]
+  0x000000011a09c5ee:   movabs $0x11a09c5ee,%r10            ;   {section_word}
+  0x000000011a09c5f8:   push   %r10
+  0x000000011a09c5fa:   jmpq   0x000000011957d0a0           ;   {runtime_call DeoptimizationBlob}
+  0x000000011a09c5ff:   hlt    
+--------------------------------------------------------------------------------
+
+============================= C2-compiled nmethod ==============================
+----------------------------------- Assembly -----------------------------------
+
+Compiled method (c2)    1767 3896       4       Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0 (105 bytes)
+ total in heap  [0x000000012119b010,0x000000012119b890] = 2176
+ relocation     [0x000000012119b168,0x000000012119b210] = 168
+ main code      [0x000000012119b220,0x000000012119b400] = 480
+ stub code      [0x000000012119b400,0x000000012119b4a0] = 160
+ oops           [0x000000012119b4a0,0x000000012119b4b0] = 16
+ metadata       [0x000000012119b4b0,0x000000012119b4c8] = 24
+ scopes data    [0x000000012119b4c8,0x000000012119b5d0] = 264
+ scopes pcs     [0x000000012119b5d0,0x000000012119b7a0] = 464
+ dependencies   [0x000000012119b7a0,0x000000012119b7a8] = 8
+ handler table  [0x000000012119b7a8,0x000000012119b880] = 216
+ nul chk table  [0x000000012119b880,0x000000012119b890] = 16
+
+--------------------------------------------------------------------------------
+[Constant Pool (empty)]
+
+--------------------------------------------------------------------------------
+
+[Verified Entry Point]
+  # {method} {0x000000013f86c738} 'RUBY$method$fib$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/fib'
+  # parm0:    rsi:rsi   = 'org/jruby/runtime/ThreadContext'
+  # parm1:    rdx:rdx   = 'org/jruby/parser/StaticScope'
+  # parm2:    rcx:rcx   = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm3:    r8:r8     = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm4:    r9:r9     = 'org/jruby/runtime/Block'
+  # parm5:    rdi:rdi   = 'org/jruby/RubyModule'
+  # parm6:    [sp+0x30]   = 'java/lang/String'  (sp of caller)
+  0x000000012119b220:   mov    %eax,-0x14000(%rsp)
+  0x000000012119b227:   push   %rbp
+  0x000000012119b228:   sub    $0x20,%rsp                   ;*synchronization entry
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@-1
+  0x000000012119b22c:   mov    %r8,0x8(%rsp)
+  0x000000012119b231:   mov    %rcx,(%rsp)
+  0x000000012119b235:   mov    %rsi,0x30(%rsp)
+  0x000000012119b23a:   movabs $0x61c276460,%r8             ;   {oop(a 'org/jruby/runtime/invokedynamic/JRubyCallSite'{0x000000061c276460})}
+  0x000000012119b244:   mov    %rcx,%rdx
+  0x000000012119b247:   mov    0x8(%rsp),%rcx
+  0x000000012119b24c:   data32 xchg %ax,%ax
+  0x000000012119b24f:   callq  0x0000000121196840           ; ImmutableOopMap {[48]=Oop [0]=Oop [8]=Oop }
+                                                            ;*invokedynamic {reexecute=0 rethrow=0 return_oop=1}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@9 (line 2)
+                                                            ;   {static_call}
+  0x000000012119b254:   mov    0x8(%rax),%r11d              ; implicit exception: dispatches to 0x000000012119b3c5
+  0x000000012119b258:   cmp    $0x172400,%r11d              ;   {metadata('org/jruby/RubyBoolean$True')}
+  0x000000012119b25f:   je     0x000000012119b27a
+  0x000000012119b261:   cmp    $0x1722a7,%r11d              ;   {metadata('org/jruby/RubyBoolean$False')}
+  0x000000012119b268:   jne    0x000000012119b354
+  0x000000012119b26e:   mov    %rax,%rsi
+  0x000000012119b271:   xchg   %ax,%ax
+  0x000000012119b273:   callq  0x000000012116deb0           ; ImmutableOopMap {[48]=Oop [0]=Oop [8]=Oop }
+                                                            ;*invokeinterface isTrue {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@18 (line 2)
+                                                            ;   {optimized virtual_call}
+  0x000000012119b278:   jmp    0x000000012119b284
+  0x000000012119b27a:   mov    %rax,%rsi
+  0x000000012119b27d:   xchg   %ax,%ax
+  0x000000012119b27f:   callq  0x000000012116deb0           ; ImmutableOopMap {[48]=Oop [0]=Oop [8]=Oop }
+                                                            ;*invokeinterface isTrue {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@18 (line 2)
+                                                            ;   {optimized virtual_call}
+  0x000000012119b284:   test   %eax,%eax
+  0x000000012119b286:   jne    0x000000012119b32e           ;*ifeq {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@23 (line 2)
+  0x000000012119b28c:   movabs $0x61c2d8a80,%r8             ;   {oop(a 'org/jruby/runtime/invokedynamic/JRubyCallSite'{0x000000061c2d8a80})}
+  0x000000012119b296:   mov    0x30(%rsp),%rsi
+  0x000000012119b29b:   mov    (%rsp),%rdx
+  0x000000012119b29f:   mov    0x8(%rsp),%rcx
+  0x000000012119b2a4:   data32 xchg %ax,%ax
+  0x000000012119b2a7:   callq  0x0000000121196840           ; ImmutableOopMap {[48]=Oop [0]=Oop [8]=Oop }
+                                                            ;*invokedynamic {reexecute=0 rethrow=0 return_oop=1}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@47 (line 5)
+                                                            ;   {static_call}
+  0x000000012119b2ac:   mov    %rax,%r8                     ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@47 (line 5)
+  0x000000012119b2af:   movabs $0x61c2e80d8,%r9             ;   {oop(a 'org/jruby/ir/targets/SelfInvokeSite'{0x000000061c2e80d8})}
+  0x000000012119b2b9:   mov    0x30(%rsp),%rsi
+  0x000000012119b2be:   mov    (%rsp),%rdx
+  0x000000012119b2c2:   mov    %rdx,%rcx
+  0x000000012119b2c5:   xchg   %ax,%ax
+  0x000000012119b2c7:   callq  0x0000000121197d40           ; ImmutableOopMap {[48]=Oop [0]=Oop [8]=Oop }
+                                                            ;*invokedynamic {reexecute=0 rethrow=0 return_oop=1}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@59 (line 5)
+                                                            ;   {static_call}
+  0x000000012119b2cc:   mov    %rax,%rbp                    ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@59 (line 5)
+  0x000000012119b2cf:   movabs $0x61c3cf280,%r8             ;   {oop(a 'org/jruby/runtime/invokedynamic/JRubyCallSite'{0x000000061c3cf280})}
+  0x000000012119b2d9:   mov    0x30(%rsp),%rsi
+  0x000000012119b2de:   mov    (%rsp),%rdx
+  0x000000012119b2e2:   mov    0x8(%rsp),%rcx
+  0x000000012119b2e7:   callq  0x0000000121196840           ; ImmutableOopMap {rbp=Oop [48]=Oop [0]=Oop }
+                                                            ;*invokedynamic {reexecute=0 rethrow=0 return_oop=1}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@70 (line 5)
+                                                            ;   {static_call}
+  0x000000012119b2ec:   mov    %rax,%r8                     ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@70 (line 5)
+  0x000000012119b2ef:   movabs $0x61c3d06e8,%r9             ;   {oop(a 'org/jruby/ir/targets/SelfInvokeSite'{0x000000061c3d06e8})}
+  0x000000012119b2f9:   mov    0x30(%rsp),%rsi
+  0x000000012119b2fe:   mov    (%rsp),%rdx
+  0x000000012119b302:   mov    %rdx,%rcx
+  0x000000012119b305:   xchg   %ax,%ax
+  0x000000012119b307:   callq  0x0000000121197d40           ; ImmutableOopMap {rbp=Oop [48]=Oop [0]=Oop }
+                                                            ;*invokedynamic {reexecute=0 rethrow=0 return_oop=1}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@82 (line 5)
+                                                            ;   {static_call}
+  0x000000012119b30c:   mov    %rax,%r8                     ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@82 (line 5)
+  0x000000012119b30f:   movabs $0x61c3d84d8,%r9             ;   {oop(a 'org/jruby/ir/targets/NormalInvokeSite'{0x000000061c3d84d8})}
+  0x000000012119b319:   mov    0x30(%rsp),%rsi
+  0x000000012119b31e:   mov    (%rsp),%rdx
+  0x000000012119b322:   mov    %rbp,%rcx
+  0x000000012119b325:   xchg   %ax,%ax
+  0x000000012119b327:   callq  0x0000000121197d40           ; ImmutableOopMap {}
+                                                            ;*invokedynamic {reexecute=0 rethrow=0 return_oop=1}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@95 (line 5)
+                                                            ;   {static_call}
+  0x000000012119b32c:   jmp    0x000000012119b344
+  0x000000012119b32e:   movabs $0x61c2d2840,%rdx            ;   {oop(a 'org/jruby/ir/targets/FixnumObjectSite'{0x000000061c2d2840})}
+  0x000000012119b338:   mov    0x30(%rsp),%rsi
+  0x000000012119b33d:   xchg   %ax,%ax
+  0x000000012119b33f:   callq  0x000000011a0a0ee0           ; ImmutableOopMap {}
+                                                            ;*invokedynamic {reexecute=0 rethrow=0 return_oop=1}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@28 (line 3)
+                                                            ;   {static_call}
+  0x000000012119b344:   add    $0x20,%rsp
+  0x000000012119b348:   pop    %rbp
+  0x000000012119b349:   mov    0x110(%r15),%r10
+  0x000000012119b350:   test   %eax,(%r10)                  ;   {poll_return}
+  0x000000012119b353:   retq   
+  0x000000012119b354:   mov    $0xffffffc6,%esi
+  0x000000012119b359:   mov    0x30(%rsp),%rbp
+  0x000000012119b35e:   rex.W pushq (%rsp)
+  0x000000012119b362:   rex.W popq 0x30(%rsp)
+  0x000000012119b367:   rex.W pushq 0x8(%rsp)
+  0x000000012119b36c:   rex.W popq (%rsp)
+  0x000000012119b370:   mov    %rax,0x8(%rsp)
+  0x000000012119b375:   xchg   %ax,%ax
+  0x000000012119b377:   callq  0x000000011957cd80           ; ImmutableOopMap {rbp=Oop [48]=Oop [0]=Oop [8]=Oop }
+                                                            ;*invokeinterface isTrue {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@18 (line 2)
+                                                            ;   {runtime_call UncommonTrapBlob}
+  0x000000012119b37c:   movabs $0x10f1c0264,%rdi            ;   {external_word}
+  0x000000012119b386:   and    $0xfffffffffffffff0,%rsp
+  0x000000012119b38a:   callq  0x000000010ef2b558           ;   {runtime_call MacroAssembler::debug64(char*, long long, long long*)}
+  0x000000012119b38f:   hlt                                 ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@95 (line 5)
+  0x000000012119b390:   mov    %rax,%rsi
+  0x000000012119b393:   jmp    0x000000012119b3bb           ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@82 (line 5)
+  0x000000012119b395:   mov    %rax,%rsi
+  0x000000012119b398:   jmp    0x000000012119b3bb           ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@70 (line 5)
+  0x000000012119b39a:   mov    %rax,%rsi
+  0x000000012119b39d:   jmp    0x000000012119b3bb           ;*invokeinterface isTrue {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@18 (line 2)
+  0x000000012119b39f:   mov    %rax,%rsi
+  0x000000012119b3a2:   jmp    0x000000012119b3bb           ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@59 (line 5)
+  0x000000012119b3a4:   mov    %rax,%rsi
+  0x000000012119b3a7:   jmp    0x000000012119b3bb           ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@47 (line 5)
+  0x000000012119b3a9:   mov    %rax,%rsi
+  0x000000012119b3ac:   jmp    0x000000012119b3bb           ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@28 (line 3)
+  0x000000012119b3ae:   mov    %rax,%rsi
+  0x000000012119b3b1:   jmp    0x000000012119b3bb           ;*invokeinterface isTrue {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@18 (line 2)
+  0x000000012119b3b3:   mov    %rax,%rsi
+  0x000000012119b3b6:   jmp    0x000000012119b3bb           ;*invokedynamic {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@9 (line 2)
+  0x000000012119b3b8:   mov    %rax,%rsi
+  0x000000012119b3bb:   add    $0x20,%rsp
+  0x000000012119b3bf:   pop    %rbp
+  0x000000012119b3c0:   jmpq   0x0000000119637600           ;   {runtime_call _rethrow_Java}
+  0x000000012119b3c5:   mov    $0xffffff5e,%esi
+  0x000000012119b3ca:   nop
+  0x000000012119b3cb:   callq  0x000000011957cd80           ; ImmutableOopMap {}
+                                                            ;*invokeinterface isTrue {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@18 (line 2)
+                                                            ;   {runtime_call UncommonTrapBlob}
+  0x000000012119b3d0:   movabs $0x10f1c0264,%rdi            ;   {external_word}
+  0x000000012119b3da:   and    $0xfffffffffffffff0,%rsp
+  0x000000012119b3de:   callq  0x000000010ef2b558           ;   {runtime_call MacroAssembler::debug64(char*, long long, long long*)}
+  0x000000012119b3e3:   hlt                                 ;*invokeinterface isTrue {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.fib::RUBY$method$fib$0@18 (line 2)
+  0x000000012119b3e4:   hlt    
+  0x000000012119b3e5:   hlt    
+  0x000000012119b3e6:   hlt    
+  0x000000012119b3e7:   hlt    
+  0x000000012119b3e8:   hlt    
+  0x000000012119b3e9:   hlt    
+  0x000000012119b3ea:   hlt    
+  0x000000012119b3eb:   hlt    
+  0x000000012119b3ec:   hlt    
+  0x000000012119b3ed:   hlt    
+  0x000000012119b3ee:   hlt    
+  0x000000012119b3ef:   hlt    
+  0x000000012119b3f0:   hlt    
+  0x000000012119b3f1:   hlt    
+  0x000000012119b3f2:   hlt    
+  0x000000012119b3f3:   hlt    
+  0x000000012119b3f4:   hlt    
+  0x000000012119b3f5:   hlt    
+  0x000000012119b3f6:   hlt    
+  0x000000012119b3f7:   hlt    
+  0x000000012119b3f8:   hlt    
+  0x000000012119b3f9:   hlt    
+  0x000000012119b3fa:   hlt    
+  0x000000012119b3fb:   hlt    
+  0x000000012119b3fc:   hlt    
+  0x000000012119b3fd:   hlt    
+  0x000000012119b3fe:   hlt    
+  0x000000012119b3ff:   hlt    
+[Stub Code]
+  0x000000012119b400:   movabs $0x0,%rbx                    ;   {no_reloc}
+  0x000000012119b40a:   jmpq   0x000000012119b40a           ;   {runtime_call}
+  0x000000012119b40f:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000012119b419:   jmpq   0x000000012119b419           ;   {runtime_call}
+  0x000000012119b41e:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000012119b428:   jmpq   0x000000012119b428           ;   {runtime_call}
+  0x000000012119b42d:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000012119b437:   jmpq   0x000000012119b437           ;   {runtime_call}
+  0x000000012119b43c:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000012119b446:   jmpq   0x000000012119b446           ;   {runtime_call}
+  0x000000012119b44b:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000012119b455:   jmpq   0x000000012119b455           ;   {runtime_call}
+  0x000000012119b45a:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000012119b464:   jmpq   0x000000012119b464           ;   {runtime_call}
+  0x000000012119b469:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000012119b473:   jmpq   0x000000012119b473           ;   {runtime_call}
+  0x000000012119b478:   movabs $0x0,%rbx                    ;   {static_stub}
+  0x000000012119b482:   jmpq   0x000000012119b482           ;   {runtime_call}
+[Exception Handler]
+  0x000000012119b487:   jmpq   0x0000000119628d80           ;   {runtime_call ExceptionBlob}
+[Deopt Handler Code]
+  0x000000012119b48c:   callq  0x000000012119b491
+  0x000000012119b491:   subq   $0x5,(%rsp)
+  0x000000012119b496:   jmpq   0x000000011957d0a0           ;   {runtime_call DeoptimizationBlob}
+  0x000000012119b49b:   hlt    
+  0x000000012119b49c:   hlt    
+  0x000000012119b49d:   hlt    
+  0x000000012119b49e:   hlt    
+  0x000000012119b49f:   hlt    
+--------------------------------------------------------------------------------

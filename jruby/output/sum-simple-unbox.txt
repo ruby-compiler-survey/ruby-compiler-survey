@@ -1,0 +1,109 @@
+2020-06-13T01:07:54.093+01:00 [Ruby-0-JIT-1] INFO CompilerPass : Printing IR CFG before Unboxing Pass for sum:
+
+CFG:
+BB [1:LBL_5:-1]:>[2,8]
+BB [2:LBL_6:-1]:>[3,9], <[1]
+BB [3:_LOOP_BEGIN_0:14]:>[4,6,9], <[2,4]
+BB [4:_ITER_BEGIN_2:17]:>[3,9], <[3]
+BB [6:LBL_4:26]:>[8,9], <[3]
+BB [8:LBL_7:-1]:>[9], <[1,6,9]
+BB [9:_GLOBAL_ENSURE_BLOCK__0:-1]:>[8], <[2,3,4,6,8]
+
+Instructions:
+BB [1:LBL_5:-1] -EXIT->8 -FALL_THROUGH->2
+	push_backref_frame()
+BB [2:LBL_6:-1] -FALL_THROUGH->3 -EXCEPTION->9
+	check_arity(;req: 1, opt: 0, *r: false, kw: false)
+	%t_array_6 = recv_pre_reqd_arg(;i:0)
+	line_num(;n: 1)
+	%t_sum_7 = copy(Fixnum:0)
+	line_num(;n: 2)
+	%t_n_8 = copy(Fixnum:0)
+	line_num(;n: 3)
+	%t_size_9 = call_0o(%t_array_6 ;n:size, t:NO, cl:false)
+	line_num(;n: 4)
+BB [3:_LOOP_BEGIN_0:14] -FALL_THROUGH->4 -REGULAR->6 -EXCEPTION->9
+	%v_4 = call_1o(%t_n_8, %t_size_9 ;n:<, t:NO, cl:false)
+	b_false(LBL_4:26, %v_4)
+BB [4:_ITER_BEGIN_2:17] -REGULAR->3 -EXCEPTION->9
+	thread_poll()
+	line_num(;n: 5)
+	%v_5 = call_1o(%t_array_6, %t_n_8 ;n:[], t:NO, cl:false)
+	%t_sum_7 = call_1o(%t_sum_7, %v_5 ;n:+, t:NO, cl:false)
+	line_num(;n: 6)
+	%t_n_8 = call_1f(%t_n_8, Fixnum:1 ;n:+, t:NO, cl:false)
+	jump(_LOOP_BEGIN_0:14)
+BB [6:LBL_4:26] -EXIT->8 -EXCEPTION->9
+	line_num(;n: 8)
+	pop_backref_frame()
+	return(%t_sum_7)
+BB [8:LBL_7:-1] -EXCEPTION->9
+BB [9:_GLOBAL_ENSURE_BLOCK__0:-1] -EXIT->8
+	%v_10 = recv_jruby_exc()
+	pop_backref_frame()
+	throw(%v_10)
+
+
+------ Rescue block map ------
+BB 2 --> BB 9
+BB 3 --> BB 9
+BB 4 --> BB 9
+BB 6 --> BB 9
+BB 8 --> BB 9
+
+2020-06-13T01:07:54.097+01:00 [Ruby-0-JIT-1] INFO CompilerPass : Printing IR CFG after Unboxing Pass for sum:
+
+CFG:
+BB [1:LBL_5:-1]:>[2,8]
+BB [2:LBL_6:-1]:>[3,9], <[1]
+BB [3:_LOOP_BEGIN_0:14]:>[4,6,9], <[2,4]
+BB [4:_ITER_BEGIN_2:17]:>[3,9], <[3]
+BB [6:LBL_4:26]:>[8,9], <[3]
+BB [8:LBL_7:-1]:>[9], <[1,6,9]
+BB [9:_GLOBAL_ENSURE_BLOCK__0:-1]:>[8], <[2,3,4,6,8]
+
+Instructions:
+BB [1:LBL_5:-1] -EXIT->8 -FALL_THROUGH->2
+	push_backref_frame()
+BB [2:LBL_6:-1] -FALL_THROUGH->3 -EXCEPTION->9
+	check_arity(;req: 1, opt: 0, *r: false, kw: false)
+	%t_array_6 = recv_pre_reqd_arg(;i:0)
+	line_num(;n: 1)
+	%i_0 = copy(Fixnum:0)
+	line_num(;n: 2)
+	%i_1 = copy(Fixnum:0)
+	line_num(;n: 3)
+	%t_sum_7 = box_fixnum(%i_0)
+	%t_n_8 = box_fixnum(%i_1)
+	%t_size_9 = call_0o(%t_array_6 ;n:size, t:NO, cl:false)
+	line_num(;n: 4)
+BB [3:_LOOP_BEGIN_0:14] -FALL_THROUGH->4 -REGULAR->6 -EXCEPTION->9
+	%t_n_8 = box_fixnum(%i_1)
+	%v_4 = call_1o(%t_n_8, %t_size_9 ;n:<, t:NO, cl:false)
+	b_false(LBL_4:26, %v_4)
+BB [4:_ITER_BEGIN_2:17] -REGULAR->3 -EXCEPTION->9
+	thread_poll()
+	line_num(;n: 5)
+	%v_5 = call_1o(%t_array_6, %t_n_8 ;n:[], t:NO, cl:false)
+	%t_sum_7 = call_1o(%t_sum_7, %v_5 ;n:+, t:NO, cl:false)
+	line_num(;n: 6)
+	%i_1 = iadd(%i_1, UnboxedFixnum:1)
+	%i_0 = unbox_fixnum(%t_sum_7)
+	jump(_LOOP_BEGIN_0:14)
+BB [6:LBL_4:26] -EXIT->8 -EXCEPTION->9
+	line_num(;n: 8)
+	pop_backref_frame()
+	return(%t_sum_7)
+BB [8:LBL_7:-1] -EXCEPTION->9
+BB [9:_GLOBAL_ENSURE_BLOCK__0:-1] -EXIT->8
+	%v_10 = recv_jruby_exc()
+	pop_backref_frame()
+	throw(%v_10)
+
+
+------ Rescue block map ------
+BB 2 --> BB 9
+BB 3 --> BB 9
+BB 4 --> BB 9
+BB 6 --> BB 9
+BB 8 --> BB 9

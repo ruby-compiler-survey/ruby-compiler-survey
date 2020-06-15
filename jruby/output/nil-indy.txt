@@ -1,0 +1,257 @@
+CompileCommand: print *.*foo*
+OpenJDK 64-Bit Server VM warning: printing of assembly code is enabled; turning on DebugNonSafepoints to gain additional output
+jruby: warning: unknown property jruby.jit.dump
+2020-06-13T20:52:01.724+01:00 [main] INFO Interpreter : Printing simple IR for test.rb:
+begin SCRIPT_BODY<test.rb>
+flags: [BINDING_HAS_ESCAPED, HAS_LOOPS, REQUIRES_DYNSCOPE, REQUIRES_VISIBILITY, REQUIRES_BLOCK, FLAGS_COMPUTED]
+signature(pre=0,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+
+  00:           %self := recv_self
+  01:            %v_0 := load_frame_closure
+  02:  %current_scope := copy(scope<>)
+  03: %current_module := copy(mod<0>)
+  04:                    line_num(lineNumber: 0)
+  05:                    def_inst_meth(method: INSTANCE_METHOD foo[test.rb:0]<startup>)
+  06:                    line_num(lineNumber: 4)
+  07:                    label(ipc<_LOOP_BEGIN_0:8>)
+  08:                    nop
+  09:                    label(ipc<_ITER_BEGIN_2:10>)
+  10:                    thread_poll(onBackEdge: true)
+  11:                    line_num(lineNumber: 5)
+  12:            %v_4 := call_0o(self<%self>, callType: VARIABLE, name: foo, potentiallyRefined: false)
+  13:                    label(ipc<_ITER_END_3:14>)
+  14:                    jump(ipc<_LOOP_BEGIN_0:8>)
+  15:                    label(ipc<LBL_4:16>)
+  16:            %v_3 := copy(nil<>)
+  17:                    label(ipc<_LOOP_END_1:18>)
+  18:                    return(%v_3)
+
+2020-06-13T20:52:01.730+01:00 [main] INFO MixedModeIRMethod : Printing simple IR for foo:
+begin INSTANCE_METHOD<foo>
+flags: [FLAGS_COMPUTED]
+signature(pre=0,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+
+  0:           %self := recv_self
+  1:            %v_0 := load_implicit_closure
+  2:  %current_scope := copy(scope<>)
+  3: %current_module := copy(mod<0>)
+  4:                    check_arity(required: 0, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  5:                    line_num(lineNumber: 1)
+  6:                    return(nil<>)
+
+2020-06-13T20:52:01.751+01:00 [Ruby-0-JIT-1] INFO JVMVisitor : Printing JIT IR for foo:
+begin INSTANCE_METHOD<foo>
+flags: [HAS_EXPLICIT_CALL_PROTOCOL, DYNSCOPE_ELIMINATED, FLAGS_COMPUTED]
+signature(pre=0,opt=0,post=0,rest=NONE,kwargs=0,kwreq=0,kwrest=-1)
+
+block #1 (out: 3,2): LBL_0:-1
+
+block #2 (out: 3): LBL_1:-1
+  0:     check_arity(required: 0, opt: 0, rest: false, receivesKeywords: false, restKey: -1)
+  1:     line_num(lineNumber: 1)
+  2:     return(nil<>)
+
+block #3: LBL_2:-1
+
+*** Dumping test.RUBY$method$foo$0 ***
+   L0
+   L1
+    NOP
+   L2
+    NOP
+   L3
+    LINENUMBER 2 L3
+    ALOAD 0
+    INVOKEDYNAMIC nil(Lorg/jruby/runtime/ThreadContext;)Lorg/jruby/runtime/builtin/IRubyObject; [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/Bootstrap.contextValue(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+      // arguments: none
+    ]
+    ARETURN
+   L4
+    NOP
+*** Dumping test.RUBY$method$foo$0$__VARARGS__ ***
+   L0
+    ALOAD 0
+    ALOAD 1
+    ALOAD 3
+    ACONST_NULL
+    INVOKEDYNAMIC checkArity(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;[Ljava/lang/Object;Lorg/jruby/runtime/Block;)V [
+      // handle kind 0x6 : INVOKESTATIC
+      org/jruby/ir/targets/Bootstrap.checkArity(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;IIIII)Ljava/lang/invoke/CallSite;
+      // arguments:
+      0, 
+      0, 
+      0, 
+      0, 
+      -1
+    ]
+    ALOAD 0
+    ALOAD 1
+    ALOAD 2
+    ALOAD 4
+    ALOAD 5
+    ALOAD 6
+    INVOKESTATIC test.RUBY$method$foo$0 (Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;
+    ARETURN
+
+============================= C1-compiled nmethod ==============================
+----------------------------------- Assembly -----------------------------------
+
+Compiled method (c1)    1686 2924       2       test::RUBY$method$foo$0 (10 bytes)
+ total in heap  [0x0000000119d6b310,0x0000000119d6b5f8] = 744
+ relocation     [0x0000000119d6b468,0x0000000119d6b490] = 40
+ main code      [0x0000000119d6b4a0,0x0000000119d6b540] = 160
+ stub code      [0x0000000119d6b540,0x0000000119d6b570] = 48
+ oops           [0x0000000119d6b570,0x0000000119d6b588] = 24
+ metadata       [0x0000000119d6b588,0x0000000119d6b590] = 8
+ scopes data    [0x0000000119d6b590,0x0000000119d6b5b0] = 32
+ scopes pcs     [0x0000000119d6b5b0,0x0000000119d6b5f0] = 64
+ dependencies   [0x0000000119d6b5f0,0x0000000119d6b5f8] = 8
+
+--------------------------------------------------------------------------------
+[Constant Pool (empty)]
+
+--------------------------------------------------------------------------------
+
+[Verified Entry Point]
+  # {method} {0x000000013fc5d390} 'RUBY$method$foo$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'test'
+  # parm0:    rsi:rsi   = 'org/jruby/runtime/ThreadContext'
+  # parm1:    rdx:rdx   = 'org/jruby/parser/StaticScope'
+  # parm2:    rcx:rcx   = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm3:    r8:r8     = 'org/jruby/runtime/Block'
+  # parm4:    r9:r9     = 'org/jruby/RubyModule'
+  # parm5:    rdi:rdi   = 'java/lang/String'
+  #           [sp+0x60]  (sp of caller)
+  0x0000000119d6b4a0:   mov    %eax,-0x14000(%rsp)
+  0x0000000119d6b4a7:   push   %rbp
+  0x0000000119d6b4a8:   sub    $0x50,%rsp
+  0x0000000119d6b4ac:   movabs $0x13fc5d608,%rax
+  0x0000000119d6b4b6:   mov    0x18(%rax),%ebx
+  0x0000000119d6b4b9:   add    $0x8,%ebx
+  0x0000000119d6b4bc:   mov    %ebx,0x18(%rax)
+  0x0000000119d6b4bf:   and    $0x3ff8,%ebx
+  0x0000000119d6b4c5:   cmp    $0x0,%ebx
+  0x0000000119d6b4c8:   je     0x0000000119d6b4e8           ;*nop {reexecute=0 rethrow=0 return_oop=0}
+                                                            ; - test::RUBY$method$foo$0@0
+  0x0000000119d6b4ce:   movabs $0x6000221f0,%rax            ;   {oop(a 'org/jruby/RubyNil'{0x00000006000221f0})}
+  0x0000000119d6b4d8:   add    $0x50,%rsp
+  0x0000000119d6b4dc:   pop    %rbp
+  0x0000000119d6b4dd:   mov    0x110(%r15),%r10
+  0x0000000119d6b4e4:   test   %eax,(%r10)                  ;   {poll_return}
+  0x0000000119d6b4e7:   retq   
+  0x0000000119d6b4e8:   movabs $0x13fc5d390,%r10            ;   {metadata({method} {0x000000013fc5d390} 'RUBY$method$foo$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'test')}
+  0x0000000119d6b4f2:   mov    %r10,0x8(%rsp)
+  0x0000000119d6b4f7:   movq   $0xffffffffffffffff,(%rsp)
+  0x0000000119d6b4ff:   callq  0x000000011921f080           ; ImmutableOopMap {rsi=Oop rdx=Oop rcx=Oop r8=Oop r9=Oop rdi=Oop }
+                                                            ;*synchronization entry
+                                                            ; - test::RUBY$method$foo$0@-1
+                                                            ;   {runtime_call counter_overflow Runtime1 stub}
+  0x0000000119d6b504:   jmp    0x0000000119d6b4ce
+  0x0000000119d6b506:   nop
+  0x0000000119d6b507:   nop
+  0x0000000119d6b508:   mov    0x3e8(%r15),%rax
+  0x0000000119d6b50f:   movabs $0x0,%r10
+  0x0000000119d6b519:   mov    %r10,0x3e8(%r15)
+  0x0000000119d6b520:   movabs $0x0,%r10
+  0x0000000119d6b52a:   mov    %r10,0x3f0(%r15)
+  0x0000000119d6b531:   add    $0x50,%rsp
+  0x0000000119d6b535:   pop    %rbp
+  0x0000000119d6b536:   jmpq   0x0000000119219380           ;   {runtime_call unwind_exception Runtime1 stub}
+  0x0000000119d6b53b:   hlt    
+  0x0000000119d6b53c:   hlt    
+  0x0000000119d6b53d:   hlt    
+  0x0000000119d6b53e:   hlt    
+  0x0000000119d6b53f:   hlt    
+[Exception Handler]
+  0x0000000119d6b540:   callq  0x000000011921b780           ;   {no_reloc}
+  0x0000000119d6b545:   movabs $0x1103e2d8a,%rdi            ;   {external_word}
+  0x0000000119d6b54f:   and    $0xfffffffffffffff0,%rsp
+  0x0000000119d6b553:   callq  0x000000011012b558           ;   {runtime_call MacroAssembler::debug64(char*, long long, long long*)}
+  0x0000000119d6b558:   hlt    
+[Deopt Handler Code]
+  0x0000000119d6b559:   movabs $0x119d6b559,%r10            ;   {section_word}
+  0x0000000119d6b563:   push   %r10
+  0x0000000119d6b565:   jmpq   0x000000011916d0a0           ;   {runtime_call DeoptimizationBlob}
+  0x0000000119d6b56a:   hlt    
+  0x0000000119d6b56b:   hlt    
+  0x0000000119d6b56c:   hlt    
+  0x0000000119d6b56d:   hlt    
+  0x0000000119d6b56e:   hlt    
+  0x0000000119d6b56f:   hlt    
+--------------------------------------------------------------------------------
+
+============================= C2-compiled nmethod ==============================
+----------------------------------- Assembly -----------------------------------
+
+Compiled method (c2)    1820 2938       4       test::RUBY$method$foo$0 (10 bytes)
+ total in heap  [0x0000000120d86410,0x0000000120d86638] = 552
+ relocation     [0x0000000120d86568,0x0000000120d86578] = 16
+ main code      [0x0000000120d86580,0x0000000120d865c0] = 64
+ stub code      [0x0000000120d865c0,0x0000000120d865d8] = 24
+ oops           [0x0000000120d865d8,0x0000000120d865f0] = 24
+ metadata       [0x0000000120d865f0,0x0000000120d865f8] = 8
+ scopes data    [0x0000000120d865f8,0x0000000120d86600] = 8
+ scopes pcs     [0x0000000120d86600,0x0000000120d86630] = 48
+ dependencies   [0x0000000120d86630,0x0000000120d86638] = 8
+
+--------------------------------------------------------------------------------
+[Constant Pool (empty)]
+
+--------------------------------------------------------------------------------
+
+[Verified Entry Point]
+  # {method} {0x000000013fc5d390} 'RUBY$method$foo$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'test'
+  # parm0:    rsi:rsi   = 'org/jruby/runtime/ThreadContext'
+  # parm1:    rdx:rdx   = 'org/jruby/parser/StaticScope'
+  # parm2:    rcx:rcx   = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm3:    r8:r8     = 'org/jruby/runtime/Block'
+  # parm4:    r9:r9     = 'org/jruby/RubyModule'
+  # parm5:    rdi:rdi   = 'java/lang/String'
+  #           [sp+0x20]  (sp of caller)
+  0x0000000120d86580:   sub    $0x18,%rsp
+  0x0000000120d86587:   mov    %rbp,0x10(%rsp)              ;*synchronization entry
+                                                            ; - test::RUBY$method$foo$0@-1
+  0x0000000120d8658c:   movabs $0x6000221f0,%rax            ;   {oop(a 'org/jruby/RubyNil'{0x00000006000221f0})}
+  0x0000000120d86596:   add    $0x10,%rsp
+  0x0000000120d8659a:   pop    %rbp
+  0x0000000120d8659b:   mov    0x110(%r15),%r10
+  0x0000000120d865a2:   test   %eax,(%r10)                  ;   {poll_return}
+  0x0000000120d865a5:   retq   
+  0x0000000120d865a6:   hlt    
+  0x0000000120d865a7:   hlt    
+  0x0000000120d865a8:   hlt    
+  0x0000000120d865a9:   hlt    
+  0x0000000120d865aa:   hlt    
+  0x0000000120d865ab:   hlt    
+  0x0000000120d865ac:   hlt    
+  0x0000000120d865ad:   hlt    
+  0x0000000120d865ae:   hlt    
+  0x0000000120d865af:   hlt    
+  0x0000000120d865b0:   hlt    
+  0x0000000120d865b1:   hlt    
+  0x0000000120d865b2:   hlt    
+  0x0000000120d865b3:   hlt    
+  0x0000000120d865b4:   hlt    
+  0x0000000120d865b5:   hlt    
+  0x0000000120d865b6:   hlt    
+  0x0000000120d865b7:   hlt    
+  0x0000000120d865b8:   hlt    
+  0x0000000120d865b9:   hlt    
+  0x0000000120d865ba:   hlt    
+  0x0000000120d865bb:   hlt    
+  0x0000000120d865bc:   hlt    
+  0x0000000120d865bd:   hlt    
+  0x0000000120d865be:   hlt    
+  0x0000000120d865bf:   hlt    
+[Exception Handler]
+  0x0000000120d865c0:   jmpq   0x0000000119218d80           ;   {no_reloc}
+[Deopt Handler Code]
+  0x0000000120d865c5:   callq  0x0000000120d865ca
+  0x0000000120d865ca:   subq   $0x5,(%rsp)
+  0x0000000120d865cf:   jmpq   0x000000011916d0a0           ;   {runtime_call DeoptimizationBlob}
+  0x0000000120d865d4:   hlt    
+  0x0000000120d865d5:   hlt    
+  0x0000000120d865d6:   hlt    
+  0x0000000120d865d7:   hlt    
+--------------------------------------------------------------------------------

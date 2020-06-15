@@ -1,0 +1,86 @@
+  # {method} {0x000000013a7da4e0} 'RUBY$method$create_point$0' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/parser/StaticScope;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/builtin/IRubyObject;Lorg/jruby/runtime/Block;Lorg/jruby/RubyModule;Ljava/lang/String;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'Users/chrisseaton/Documents/ruby_minus_compiler_minus_survey/examples/point'
+  # parm0:    rsi:rsi   = 'org/jruby/runtime/ThreadContext'
+  # parm1:    rdx:rdx   = 'org/jruby/parser/StaticScope'
+  # parm2:    rcx:rcx   = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm3:    r8:r8     = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm4:    r9:r9     = 'org/jruby/runtime/builtin/IRubyObject'
+  # parm5:    rdi:rdi   = 'org/jruby/runtime/Block'
+  # parm6:    [sp+0x20]   = 'org/jruby/RubyModule'  (sp of caller)
+  # parm7:    [sp+0x28]   = 'java/lang/String'
+  0x000000010e1da5a0: mov    %eax,-0x14000(%rsp)
+  0x000000010e1da5a7: sub    $0x18,%rsp
+  0x000000010e1da5ab: mov    %rbp,0x10(%rsp)
+  0x000000010e1da5b0: mov    %rsi,%r10
+  0x000000010e1da5b3: movabs $0x60035e0b8,%rax  ;   {oop(a 'org/jruby/RubyClass'{0x000000060035e0b8})}
+  0x000000010e1da5bd: mov    0x14(%rax),%eax
+  0x000000010e1da5c0: cmp    $0xc0093c1f,%eax   ;   {oop(a 'org/jruby/MetaClass'{0x000000060049e0f8})}
+  0x000000010e1da5c6: jne    0x000000010e1da670  ;*if_acmpne {reexecute=0 rethrow=0 return_oop=0}
+                                                ; - org.jruby.ir.targets.Bootstrap::testType@5 (line 933)
+                                                ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                ; - java.lang.invoke.LambdaForm$MH/0x0000000840597c40::invoke@25
+                                                ; - java.lang.invoke.LambdaForm$MH/0x0000000840598840::guard@41
+                                                ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@21
+                                                ; - java.lang.invoke.LambdaForm$MH/0x0000000840598840::guard@86
+                                                ; - java.lang.invoke.LambdaForm$MH/0x0000000840595c40::linkToCallSite@21
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.point::RUBY$method$create_point$0@26 (line 13)
+
+  0x000000010e1da5cc: mov    0x118(%r15),%rax
+  0x000000010e1da5d3: lea    0x28(%rax),%rsi
+  0x000000010e1da5d7: movabs $0x84053c0c8,%r11  ;   {metadata('org/jruby/gen/RubyObject3')}
+  0x000000010e1da5e1: cmp    0x128(%r15),%rsi
+  0x000000010e1da5e8: ja     0x000000010e1da659
+  0x000000010e1da5ee: mov    %rsi,0x118(%r15)
+  0x000000010e1da5f5: prefetchw 0xe8(%rax)
+  0x000000010e1da5fc: mov    0xb8(%r11),%rsi
+  0x000000010e1da603: mov    %rsi,(%rax)
+  0x000000010e1da606: movl   $0x80a7819,0x8(%rax)  ;   {metadata('org/jruby/gen/RubyObject3')}
+  0x000000010e1da60d: movl   $0x0,0xc(%rax)
+  0x000000010e1da614: movq   $0x0,0x10(%rax)
+  0x000000010e1da61c: movq   $0x0,0x18(%rax)
+  0x000000010e1da624: movq   $0x0,0x20(%rax)
+  0x000000010e1da62c: shr    $0x3,%r9
+  0x000000010e1da630: mov    %r9d,0x20(%rax)
+  0x000000010e1da634: shr    $0x3,%r8
+  0x000000010e1da638: mov    %r8d,0x1c(%rax)
+  0x000000010e1da63c: movl   $0xc006bc17,0x14(%rax)  ;   {oop(a 'org/jruby/RubyClass'{0x000000060035e0b8})}
+  0x000000010e1da643: mov    0x10(%rsp),%rbp
+  0x000000010e1da648: add    $0x18,%rsp
+  0x000000010e1da64c: mov    0x108(%r15),%rcx
+  0x000000010e1da653: test   %eax,(%rcx)        ;   {poll_return}
+  0x000000010e1da655: vzeroupper 
+  0x000000010e1da658: retq   
+  0x000000010e1da659: mov    %r11,%rsi
+  0x000000010e1da65c: nopl   0x0(%rax)
+  0x000000010e1da660: callq  0x000000010e04b100 ; ImmutableOopMap{rcx=Oop rdx=Oop r8=Oop r9=Oop r10=Oop }
+                                                ;*nop {reexecute=1 rethrow=0 return_oop=0}
+                                                ; - (reexecute) Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.point::RUBY$method$create_point$0@0
+                                                ;   {runtime_call Stub<new_instance_or_null(KlassPointer)Object>}
+  0x000000010e1da665: nop
+  0x000000010e1da666: test   %rax,%rax
+  0x000000010e1da669: jne    0x000000010e1da62c
+  0x000000010e1da66b: jmpq   0x000000010e1da68c  ;*areturn {reexecute=0 rethrow=0 return_oop=0}
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.point::RUBY$method$create_point$0@35 (line 13)
+
+  0x000000010e1da670: movl   $0xffff3ced,0x3e4(%r15)  ;*if_acmpne {reexecute=0 rethrow=0 return_oop=0}
+                                                ; - org.jruby.ir.targets.Bootstrap::testType@5 (line 933)
+                                                ; - java.lang.invoke.DirectMethodHandle$Holder::invokeStatic@11
+                                                ; - java.lang.invoke.LambdaForm$MH/0x0000000840597c40::invoke@25
+                                                ; - java.lang.invoke.LambdaForm$MH/0x0000000840598840::guard@41
+                                                ; - java.lang.invoke.DelegatingMethodHandle$Holder::delegate@21
+                                                ; - java.lang.invoke.LambdaForm$MH/0x0000000840598840::guard@86
+                                                ; - java.lang.invoke.LambdaForm$MH/0x0000000840595c40::linkToCallSite@21
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.point::RUBY$method$create_point$0@26 (line 13)
+
+  0x000000010e1da67b: movq   $0x0,0x3f0(%r15)
+  0x000000010e1da686: callq  0x000000010dfe37a4 ; ImmutableOopMap{rcx=Oop rdx=Oop r8=Oop r9=Oop r10=Oop }
+                                                ;*nop {reexecute=1 rethrow=0 return_oop=0}
+                                                ; - (reexecute) Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.point::RUBY$method$create_point$0@0
+                                                ;   {runtime_call DeoptimizationBlob}
+  0x000000010e1da68b: nop
+  0x000000010e1da68c: movl   $0xffff0f97,0x3e4(%r15)
+  0x000000010e1da697: movq   $0x0,0x3f0(%r15)
+  0x000000010e1da6a2: callq  0x000000010dfe37a4 ; ImmutableOopMap{rcx=Oop rdx=Oop r8=Oop r9=Oop r10=Oop }
+                                                ;*nop {reexecute=1 rethrow=0 return_oop=0}
+                                                ; - (reexecute) Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.point::RUBY$method$create_point$0@0
+                                                ;   {runtime_call DeoptimizationBlob}
+  0x000000010e1da6a7: nop

@@ -26,7 +26,7 @@ We're discussing Rubinius 3.19, `1cc41ddc7c2`, 28 February 2016, which is the la
 
 The frontend in Rubinius is written as a set of gems using both C++ in `rbx-code/ext/rubinius/code/melbourne` and Ruby in `rbx-code/lib/rubinius/code`. The VM is implemented in C++ in `rbx/vm` and the JIT itself in `rbx/vm/llvm`. The Rubinius core library is in `rbx/core`.
 
-Code in Rubinius is parsed by a modified version of the MRI parser as a C++ extension gem, into a C++ AST data structure. This is then read by a visitor into a Ruby structure and transformed into an internal bytecode format. When this meets compilation thresholds, it is translated using a template compiler into LLVM IR. Standard and custom LLVM optimisation passes are run, and machine code is generated and installed. Rubinus can deoptimise back to the interpreter if needed.
+Ruby code is parsed by a modified version of the MRI parser as a C++ extension gem, into a C++ AST data structure. This is then read by a visitor into a Ruby structure and transformed into an internal bytecode format. When this meets compilation thresholds, it is translated using a template compiler into LLVM IR. Standard and custom LLVM optimisation passes are run, and machine code is generated and installed. Rubinus can deoptimise back to the interpreter if needed.
 
 <figure>
 <img src="rubinius-pipeline.png">
@@ -235,7 +235,7 @@ if(entry) {
 
 Rubinius does not profile branches or values, and it does not duplicate, or split, `CallSite` profiles when code is inlined. This means that there is only one copy of a call site profile for each call site that appears in the source code. For example method such as `puts` that calls `to_s` on many different objects will use a single profile for all `to_s` calls and will quickly megamorphise the cache.
 
-Rubinius will compile to machine code up to `3` versions of a method for different receiver classes, called *specializations*, which allow operations such as instance variable lookup to be specialised for the class layout. However inline caches are not split when doing this, and the interpreter is not run again to generate independent profiling results.
+Rubinius will compile to machine code up to 3 versions of a method for different receiver classes, called *specializations*, which allow operations such as instance variable lookup to be specialised for the class layout. However inline caches are not split when doing this, and the interpreter is not run again to generate independent profiling results.
 
 As well as gathering profiling data for compilation, call site caches are also making the interpreter faster until compilation can run.
 
@@ -255,7 +255,7 @@ if(mcode->call_count >= state->shared().config.jit_threshold_compile) {
 
 <p class="coderef"><a href="https://github.com/ruby-compiler-survey/rubinius/blob/1cc41ddc7c2d3f4a2a70cc39a49e45233f7bc4b3/vm/machine_code.cpp#L769-L777">rbx/vm/machine_code.cpp:769-777</a></p>
 
-When a method meets the compilation threshold, a search starts to find which method in the current call stack to compile. This search uses a number of heuristics, and will stop moving up the call stack when it finds a method that has unusual arguments, that hasn't been called enough, that has too many call sites, or so on. We believe that the intention is that the search finds the outermost method that when compiled will inline the method which originally met the compilation threshold, but we aren't sure how it is ensured that it always does so.
+When a method meets the compilation threshold (BUT WHAT IS IT?), a search starts to find which method in the current call stack to compile. This search uses a number of heuristics, and will stop moving up the call stack when it finds a method that has unusual arguments, that hasn't been called enough, that has too many call sites, or so on. We believe that the intention is that the search finds the outermost method that when compiled will inline the method which originally met the compilation threshold, but we aren't sure how it is ensured that it always does so.
 
 ```cpp
 // Now start looking at callers.

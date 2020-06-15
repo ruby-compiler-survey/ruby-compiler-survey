@@ -1,0 +1,36 @@
+2020-06-13T00:30:09.881+01:00 [Ruby-0-JIT-1] INFO CompilerPass : Printing IR CFG before Unboxing Pass for unbox:
+
+CFG:
+BB [1:LBL_0:-1]:>[2,3]
+BB [2:LBL_1:-1]:>[3], <[1]
+BB [3:LBL_2:-1]:<[1,2]
+
+Instructions:
+BB [1:LBL_0:-1] -EXIT->3 -FALL_THROUGH->2
+BB [2:LBL_1:-1] -EXIT->3
+	check_arity(;req: 1, opt: 0, *r: false, kw: false)
+	%t_a_5 = recv_pre_reqd_arg(;i:0)
+	line_num(;n: 1)
+	%v_3 = call_1f(Fixnum:1, Fixnum:2 ;n:+, t:NO, cl:false)
+	%v_4 = call_1o(%v_3, %t_a_5 ;n:+, t:NO, cl:false)
+	return(%v_4)
+BB [3:LBL_2:-1]
+
+2020-06-13T00:30:09.884+01:00 [Ruby-0-JIT-1] INFO CompilerPass : Printing IR CFG after Unboxing Pass for unbox:
+
+CFG:
+BB [1:LBL_0:-1]:>[2,3]
+BB [2:LBL_1:-1]:>[3], <[1]
+BB [3:LBL_2:-1]:<[1,2]
+
+Instructions:
+BB [1:LBL_0:-1] -EXIT->3 -FALL_THROUGH->2
+BB [2:LBL_1:-1] -EXIT->3
+	check_arity(;req: 1, opt: 0, *r: false, kw: false)
+	%t_a_5 = recv_pre_reqd_arg(;i:0)
+	line_num(;n: 1)
+	%i_0 = iadd(UnboxedFixnum:1, UnboxedFixnum:2)
+	%v_3 = box_fixnum(%i_0)
+	%v_4 = call_1o(%v_3, %t_a_5 ;n:+, t:NO, cl:false)
+	return(%v_4)
+BB [3:LBL_2:-1]

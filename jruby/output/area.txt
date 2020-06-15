@@ -1,0 +1,841 @@
+  0x0000000104544120: mov    %eax,-0x14000(%rsp)
+  0x0000000104544127: push   %rbp
+  0x0000000104544128: sub    $0x40,%rsp
+  0x000000010454412c: mov    %rcx,(%rsp)
+  0x0000000104544130: mov    %rsi,0x8(%rsp)
+  0x0000000104544135: movabs $0x5c01d2a00,%r10  ;*synchronization entry
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@-1
+                                                ;   {oop(a 'org/jruby/RubyModule')}
+  0x000000010454413f: mov    0x8(%r10),%r9d
+  0x0000000104544143: cmp    $0xf800cdfd,%r9d   ;   {metadata('org/jruby/RubyModule')}
+  0x000000010454414a: jne    0x00000001045443e1
+  0x0000000104544150: mov    %r10,%r11          ;*instanceof
+                                                ; - org.jruby.ir.targets.Bootstrap::testModuleMatch@1 (line 1181)
+                                                ; - java.lang.invoke.LambdaForm$DMH/917142466::invokeStatic_LLI_I@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1373810119::reinvoke@24
+                                                ; - java.lang.invoke.LambdaForm$MH/813656972::guard@34
+                                                ; - java.lang.invoke.LambdaForm$MH/168423058::delegate@11
+                                                ; - java.lang.invoke.LambdaForm$MH/813656972::guard@74
+                                                ; - java.lang.invoke.LambdaForm$MH/1039949752::linkToCallSite@11
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@17 (line 2)
+
+  0x0000000104544153: mov    0x1c(%r11),%r11d   ;*getfield id
+                                                ; - org.jruby.ir.targets.Bootstrap::testModuleMatch@11 (line 1181)
+                                                ; - java.lang.invoke.LambdaForm$DMH/917142466::invokeStatic_LLI_I@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1373810119::reinvoke@24
+                                                ; - java.lang.invoke.LambdaForm$MH/813656972::guard@34
+                                                ; - java.lang.invoke.LambdaForm$MH/168423058::delegate@11
+                                                ; - java.lang.invoke.LambdaForm$MH/813656972::guard@74
+                                                ; - java.lang.invoke.LambdaForm$MH/1039949752::linkToCallSite@11
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@17 (line 2)
+
+  0x0000000104544157: cmp    $0x48,%r11d
+  0x000000010454415b: jne    0x0000000104544379  ;*if_icmpne
+                                                ; - org.jruby.ir.targets.Bootstrap::testModuleMatch@15 (line 1181)
+                                                ; - java.lang.invoke.LambdaForm$DMH/917142466::invokeStatic_LLI_I@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1373810119::reinvoke@24
+                                                ; - java.lang.invoke.LambdaForm$MH/813656972::guard@34
+                                                ; - java.lang.invoke.LambdaForm$MH/168423058::delegate@11
+                                                ; - java.lang.invoke.LambdaForm$MH/813656972::guard@74
+                                                ; - java.lang.invoke.LambdaForm$MH/1039949752::linkToCallSite@11
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@17 (line 2)
+
+  0x0000000104544161: mov    0x8(%r8),%r10d     ;*invokevirtual getClass
+                                                ; - org.jruby.ir.targets.InvokeSite::testClass@1 (line 757)
+                                                ; - java.lang.invoke.LambdaForm$DMH/537548559::invokeStatic_LL_I@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/1166151249::reinvoke@25
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@39
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@34 (line 2)
+                                                ; implicit exception: dispatches to 0x0000000104544431
+  0x0000000104544165: movabs $0x0,%r11
+  0x000000010454416f: lea    (%r11,%r10,8),%r11
+  0x0000000104544173: movabs $0x5c01d4e08,%r9   ;   {oop(a 'org/jruby/RubyFloat')}
+  0x000000010454417d: mov    %r9,0x20(%rsp)
+  0x0000000104544182: movabs $0x5c011cc60,%rcx  ;*synchronization entry
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@-1
+                                                ;   {oop(a 'org/jruby/RubyFixnum')}
+  0x000000010454418c: cmp    $0xf8013a85,%r10d  ;   {metadata('org/jruby/RubyFixnum')}
+  0x0000000104544193: jne    0x00000001045443a1  ;*if_acmpne
+                                                ; - org.jruby.ir.targets.InvokeSite::testClass@5 (line 757)
+                                                ; - java.lang.invoke.LambdaForm$DMH/537548559::invokeStatic_LL_I@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/1166151249::reinvoke@25
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@39
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@34 (line 2)
+
+  0x0000000104544199: mov    0x48(%r11),%r10
+  0x000000010454419d: movabs $0x7c0099dc8,%r11  ;   {metadata('org/jruby/RubyInteger')}
+  0x00000001045441a7: cmp    %r11,%r10
+  0x00000001045441aa: jne    0x000000010454431c
+  0x00000001045441b0: mov    $0x1,%ebp          ;*invokevirtual isInstance
+                                                ; - java.lang.invoke.MethodHandleImpl::castReference@6 (line 355)
+                                                ; - java.lang.invoke.LambdaForm$DMH/644117698::invokeStatic_LL_L@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/2003749087::reinvoke@21
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@17
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@34 (line 2)
+
+  0x00000001045441b5: cmp    %r11,%r10
+  0x00000001045441b8: jne    0x00000001045443c1  ;*ifne
+                                                ; - java.lang.invoke.MethodHandleImpl::castReference@9 (line 355)
+                                                ; - java.lang.invoke.LambdaForm$DMH/644117698::invokeStatic_LL_L@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/2003749087::reinvoke@21
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@17
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@34 (line 2)
+
+  0x00000001045441be: mov    %r8,%rsi
+  0x00000001045441c1: movabs $0x7176ecd40,%r8   ;   {oop(a 'java/lang/invoke/MemberName' = {method} {0x000000010a384c50} 'op_pow' '(Lorg/jruby/runtime/ThreadContext;Lorg/jruby/runtime/builtin/IRubyObject;)Lorg/jruby/runtime/builtin/IRubyObject;' in 'org/jruby/RubyInteger')}
+  0x00000001045441cb: mov    0x8(%rsp),%rdx
+  0x00000001045441d0: data32 xchg %ax,%ax
+  0x00000001045441d3: callq  0x0000000104354260  ; OopMap{[0]=Oop [8]=Oop [32]=Oop off=184}
+                                                ;*invokestatic linkToVirtual
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@34 (line 2)
+                                                ;   {static_call}
+  0x00000001045441d8: mov    0x20(%rsp),%r10
+  0x00000001045441dd: mov    0x8(%r10),%r10d    ;*invokevirtual getClass
+                                                ; - org.jruby.ir.targets.InvokeSite::testClass@1 (line 757)
+                                                ; - java.lang.invoke.LambdaForm$DMH/537548559::invokeStatic_LL_I@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/1166151249::reinvoke@25
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@39
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x00000001045441e1: cmp    $0xf8019956,%r10d  ;   {metadata('org/jruby/RubyFloat')}
+  0x00000001045441e8: jne    0x0000000104544409
+  0x00000001045441ee: mov    0x8(%rax),%r10d    ; implicit exception: dispatches to 0x0000000104544441
+  0x00000001045441f2: mov    0x20(%rsp),%r11    ;*if_acmpne
+                                                ; - org.jruby.ir.targets.InvokeSite::testClass@5 (line 757)
+                                                ; - java.lang.invoke.LambdaForm$DMH/537548559::invokeStatic_LL_I@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/1166151249::reinvoke@25
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@39
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x00000001045441f7: mov    %r11,0x10(%rsp)
+  0x00000001045441fc: cmp    $0xf8013a85,%r10d  ;   {metadata('org/jruby/RubyFixnum')}
+  0x0000000104544203: jne    0x000000010454435d  ;*invokeinterface getMetaClass
+                                                ; - org.jruby.RubyFloat::op_mul@4 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x0000000104544209: mov    %rax,(%rsp)
+  0x000000010454420d: mov    0x14(%rax),%r10d   ;*getfield metaClass
+                                                ; - org.jruby.RubyBasicObject::getMetaClass@1 (line 522)
+                                                ; - org.jruby.RubyFloat::op_mul@4 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x0000000104544211: mov    0x6c(%r12,%r10,8),%r11d  ;*getfield classIndex
+                                                ; - org.jruby.RubyModule::getClassIndex@1 (line 193)
+                                                ; - org.jruby.RubyFloat::op_mul@9 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ; implicit exception: dispatches to 0x0000000104544451
+  0x0000000104544216: mov    0xc(%r12,%r11,8),%ebp  ;*getfield ordinal
+                                                ; - java.lang.Enum::ordinal@1 (line 103)
+                                                ; - org.jruby.RubyFloat::op_mul@12 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ; implicit exception: dispatches to 0x0000000104544461
+  0x000000010454421b: cmp    $0x29,%ebp
+  0x000000010454421e: jae    0x0000000104544343  ;*iaload
+                                                ; - org.jruby.RubyFloat::op_mul@15 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x0000000104544224: movabs $0x717339fc8,%r10  ;   {oop([I)}
+  0x000000010454422e: mov    0x10(%r10,%rbp,4),%r11d
+  0x0000000104544233: dec    %r11d
+  0x0000000104544236: cmp    $0x2,%r11d
+  0x000000010454423a: jb     0x000000010454426d  ;*lookupswitch
+                                                ; - org.jruby.RubyFloat::op_mul@16 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x000000010454423c: mov    0x8(%rsp),%rsi
+  0x0000000104544241: xchg   %ax,%ax
+  0x0000000104544243: callq  0x0000000104354260  ; OopMap{[0]=Oop [8]=Oop [16]=Oop off=296}
+                                                ;*invokestatic sites
+                                                ; - org.jruby.RubyFloat::op_mul@67 (line 353)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {static_call}
+  0x0000000104544248: mov    0x1c(%rax),%r10d   ; implicit exception: dispatches to 0x0000000104544491
+  0x000000010454424c: mov    %r10,%rcx
+  0x000000010454424f: shl    $0x3,%rcx          ;*getfield op_times
+                                                ; - org.jruby.RubyFloat::op_mul@70 (line 353)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x0000000104544253: mov    0x10(%rsp),%rsi
+  0x0000000104544258: mov    0x8(%rsp),%rdx
+  0x000000010454425d: mov    (%rsp),%r8
+  0x0000000104544261: xchg   %ax,%ax
+  0x0000000104544263: callq  0x0000000104353de0  ; OopMap{off=328}
+                                                ;*invokevirtual coerceBin
+                                                ; - org.jruby.RubyFloat::op_mul@74 (line 353)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {optimized virtual_call}
+  0x0000000104544268: jmpq   0x0000000104544310
+  0x000000010454426d: mov    0x8(%rsp),%r10
+  0x0000000104544272: mov    0x28(%r10),%ebp    ;*getfield runtime
+                                                ; - org.jruby.RubyFloat::op_mul@45 (line 351)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ; implicit exception: dispatches to 0x0000000104544471
+  0x0000000104544276: vcvtsi2sdq 0x20(%rax),%xmm0,%xmm0
+  0x000000010454427c: mov    0x10(%rsp),%r10
+  0x0000000104544281: vmulsd 0x20(%r10),%xmm0,%xmm0  ;*dmul
+                                                ; - org.jruby.RubyFloat::op_mul@59 (line 351)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x0000000104544287: mov    0x60(%r15),%r8
+  0x000000010454428b: mov    %r8,%r10
+  0x000000010454428e: add    $0x28,%r10
+  0x0000000104544292: cmp    0x70(%r15),%r10
+  0x0000000104544296: jae    0x0000000104544323
+  0x000000010454429c: mov    %r10,0x60(%r15)
+  0x00000001045442a0: prefetchw 0xc0(%r10)
+  0x00000001045442a8: mov    $0xf8019956,%r11d  ;   {metadata('org/jruby/RubyFloat')}
+  0x00000001045442ae: movabs $0x0,%r10
+  0x00000001045442b8: lea    (%r10,%r11,8),%r10
+  0x00000001045442bc: mov    0xa8(%r10),%r10
+  0x00000001045442c3: mov    %r10,(%r8)
+  0x00000001045442c6: movl   $0xf8019956,0x8(%r8)  ;   {metadata('org/jruby/RubyFloat')}
+  0x00000001045442ce: mov    %r12d,0xc(%r8)
+  0x00000001045442d2: mov    %r12,0x10(%r8)
+  0x00000001045442d6: mov    %r12,0x18(%r8)
+  0x00000001045442da: mov    %r12,0x20(%r8)     ;*new  ; - org.jruby.RubyFloat::newFloat@0 (line 221)
+                                                ; - org.jruby.RubyFloat::op_mul@60 (line 351)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x00000001045442de: mov    0xc0(%r12,%rbp,8),%r11d  ;*getfield floatClass
+                                                ; - org.jruby.Ruby::getFloat@1 (line 1945)
+                                                ; - org.jruby.RubyFloat::<init>@2 (line 137)
+                                                ; - org.jruby.RubyFloat::newFloat@6 (line 221)
+                                                ; - org.jruby.RubyFloat::op_mul@60 (line 351)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ; implicit exception: dispatches to 0x0000000104544481
+  0x00000001045442e6: mov    %r8,%rax           ;*areturn
+                                                ; - org.jruby.RubyFloat::op_mul@63 (line 351)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x00000001045442e9: mov    %r11d,0x14(%r8)    ;*putfield metaClass
+                                                ; - org.jruby.RubyBasicObject::<init>@6 (line 256)
+                                                ; - org.jruby.RubyObject::<init>@2 (line 104)
+                                                ; - org.jruby.RubyNumeric::<init>@2 (line 110)
+                                                ; - org.jruby.RubyFloat::<init>@5 (line 137)
+                                                ; - org.jruby.RubyFloat::newFloat@6 (line 221)
+                                                ; - org.jruby.RubyFloat::op_mul@60 (line 351)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x00000001045442ed: vmovsd %xmm0,0x20(%r8)    ;*putfield value
+                                                ; - org.jruby.RubyFloat::<init>@10 (line 138)
+                                                ; - org.jruby.RubyFloat::newFloat@6 (line 221)
+                                                ; - org.jruby.RubyFloat::op_mul@60 (line 351)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x00000001045442f3: movl   $0x4,0xc(%r8)      ;*putfield flags
+                                                ; - org.jruby.RubyFloat::<init>@22 (line 139)
+                                                ; - org.jruby.RubyFloat::newFloat@6 (line 221)
+                                                ; - org.jruby.RubyFloat::op_mul@60 (line 351)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x00000001045442fb: mov    %r8,%r10
+  0x00000001045442fe: shr    $0x9,%r10
+  0x0000000104544302: movabs $0x10450e000,%r11
+  0x000000010454430c: mov    %r12b,(%r11,%r10,1)  ;*invokestatic linkToVirtual
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x0000000104544310: add    $0x40,%rsp
+  0x0000000104544314: pop    %rbp
+  0x0000000104544315: test   %eax,-0x265831b(%rip)        # 0x0000000101eec000
+                                                ;   {poll_return}
+  0x000000010454431b: retq   
+  0x000000010454431c: xor    %ebp,%ebp
+  0x000000010454431e: jmpq   0x00000001045441b5
+  0x0000000104544323: vmovsd %xmm0,0x50(%rsp)
+  0x0000000104544329: movabs $0x7c00ccab0,%rsi  ;   {metadata('org/jruby/RubyFloat')}
+  0x0000000104544333: callq  0x000000010437e0e0  ; OopMap{rbp=NarrowOop off=536}
+                                                ;*new  ; - org.jruby.RubyFloat::newFloat@0 (line 221)
+                                                ; - org.jruby.RubyFloat::op_mul@60 (line 351)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x0000000104544338: vmovsd 0x50(%rsp),%xmm0
+  0x000000010454433e: mov    %rax,%r8
+  0x0000000104544341: jmp    0x00000001045442de
+  0x0000000104544343: mov    $0xffffffe4,%esi
+  0x0000000104544348: mov    0x8(%rsp),%r10
+  0x000000010454434d: mov    %r10,0x50(%rsp)
+  0x0000000104544352: nop
+  0x0000000104544353: callq  0x00000001043533e0  ; OopMap{[80]=Oop [0]=Oop [16]=Oop off=568}
+                                                ;*iaload
+                                                ; - org.jruby.RubyFloat::op_mul@15 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x0000000104544358: callq  0x0000000103c606cc  ;*iaload
+                                                ; - org.jruby.RubyFloat::op_mul@15 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x000000010454435d: mov    $0xffffff76,%esi
+  0x0000000104544362: mov    0x8(%rsp),%rbp
+  0x0000000104544367: mov    %rax,0x8(%rsp)
+  0x000000010454436c: data32 xchg %ax,%ax
+  0x000000010454436f: callq  0x00000001043533e0  ; OopMap{rbp=Oop [8]=Oop [16]=Oop off=596}
+                                                ;*invokeinterface getMetaClass
+                                                ; - org.jruby.RubyFloat::op_mul@4 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x0000000104544374: callq  0x0000000103c606cc  ;*invokeinterface getMetaClass
+                                                ; - org.jruby.RubyFloat::op_mul@4 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x0000000104544379: mov    $0xffffff65,%esi
+  0x000000010454437e: mov    0x8(%rsp),%rbp
+  0x0000000104544383: mov    %rcx,0x50(%rsp)
+  0x0000000104544388: mov    %r8,(%rsp)
+  0x000000010454438c: mov    %r10,0x10(%rsp)
+  0x0000000104544391: mov    %r11d,0x18(%rsp)
+  0x0000000104544396: nop
+  0x0000000104544397: callq  0x00000001043533e0  ; OopMap{rbp=Oop [80]=Oop [0]=Oop [16]=Oop off=636}
+                                                ;*if_icmpne
+                                                ; - org.jruby.ir.targets.Bootstrap::testModuleMatch@15 (line 1181)
+                                                ; - java.lang.invoke.LambdaForm$DMH/917142466::invokeStatic_LLI_I@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1373810119::reinvoke@24
+                                                ; - java.lang.invoke.LambdaForm$MH/813656972::guard@34
+                                                ; - java.lang.invoke.LambdaForm$MH/168423058::delegate@11
+                                                ; - java.lang.invoke.LambdaForm$MH/813656972::guard@74
+                                                ; - java.lang.invoke.LambdaForm$MH/1039949752::linkToCallSite@11
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@17 (line 2)
+                                                ;   {runtime_call}
+  0x000000010454439c: callq  0x0000000103c606cc  ;*if_icmpne
+                                                ; - org.jruby.ir.targets.Bootstrap::testModuleMatch@15 (line 1181)
+                                                ; - java.lang.invoke.LambdaForm$DMH/917142466::invokeStatic_LLI_I@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1373810119::reinvoke@24
+                                                ; - java.lang.invoke.LambdaForm$MH/813656972::guard@34
+                                                ; - java.lang.invoke.LambdaForm$MH/168423058::delegate@11
+                                                ; - java.lang.invoke.LambdaForm$MH/813656972::guard@74
+                                                ; - java.lang.invoke.LambdaForm$MH/1039949752::linkToCallSite@11
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@17 (line 2)
+                                                ;   {runtime_call}
+  0x00000001045443a1: mov    0x68(%r11),%rbp    ;*invokevirtual getClass
+                                                ; - org.jruby.ir.targets.InvokeSite::testClass@1 (line 757)
+                                                ; - java.lang.invoke.LambdaForm$DMH/537548559::invokeStatic_LL_I@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/1166151249::reinvoke@25
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@39
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@34 (line 2)
+
+  0x00000001045443a5: mov    $0xffffff65,%esi
+  0x00000001045443aa: mov    %r8,0x18(%rsp)
+  0x00000001045443af: mov    %rcx,0x28(%rsp)
+  0x00000001045443b4: data32 xchg %ax,%ax
+  0x00000001045443b7: callq  0x00000001043533e0  ; OopMap{rbp=Oop [0]=Oop [8]=Oop [24]=Oop [32]=Oop [40]=Oop off=668}
+                                                ;*if_acmpne
+                                                ; - org.jruby.ir.targets.InvokeSite::testClass@5 (line 757)
+                                                ; - java.lang.invoke.LambdaForm$DMH/537548559::invokeStatic_LL_I@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/1166151249::reinvoke@25
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@39
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@34 (line 2)
+                                                ;   {runtime_call}
+  0x00000001045443bc: callq  0x0000000103c606cc  ;*if_acmpne
+                                                ; - org.jruby.ir.targets.InvokeSite::testClass@5 (line 757)
+                                                ; - java.lang.invoke.LambdaForm$DMH/537548559::invokeStatic_LL_I@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/1166151249::reinvoke@25
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@39
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@34 (line 2)
+                                                ;   {runtime_call}
+  0x00000001045443c1: mov    $0xffffff65,%esi
+  0x00000001045443c6: mov    %r8,0x10(%rsp)
+  0x00000001045443cb: mov    %r9,0x18(%rsp)
+  0x00000001045443d0: mov    %rcx,0x20(%rsp)
+  0x00000001045443d5: xchg   %ax,%ax
+  0x00000001045443d7: callq  0x00000001043533e0  ; OopMap{[0]=Oop [8]=Oop [16]=Oop [24]=Oop [32]=Oop off=700}
+                                                ;*ifne
+                                                ; - java.lang.invoke.MethodHandleImpl::castReference@9 (line 355)
+                                                ; - java.lang.invoke.LambdaForm$DMH/644117698::invokeStatic_LL_L@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/2003749087::reinvoke@21
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@17
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@34 (line 2)
+                                                ;   {runtime_call}
+  0x00000001045443dc: callq  0x0000000103c606cc  ;*ifne
+                                                ; - java.lang.invoke.MethodHandleImpl::castReference@9 (line 355)
+                                                ; - java.lang.invoke.LambdaForm$DMH/644117698::invokeStatic_LL_L@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/2003749087::reinvoke@21
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@17
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@34 (line 2)
+                                                ;   {runtime_call}
+  0x00000001045443e1: mov    $0xffffff76,%esi
+  0x00000001045443e6: mov    0x8(%rsp),%rbp
+  0x00000001045443eb: mov    %rcx,0x50(%rsp)
+  0x00000001045443f0: mov    %r8,(%rsp)
+  0x00000001045443f4: mov    %r10,0x18(%rsp)
+  0x00000001045443f9: mov    %r10,0x20(%rsp)
+  0x00000001045443fe: nop
+  0x00000001045443ff: callq  0x00000001043533e0  ; OopMap{rbp=Oop [80]=Oop [0]=Oop [24]=Oop [32]=Oop off=740}
+                                                ;*instanceof
+                                                ; - org.jruby.ir.targets.Bootstrap::testModuleMatch@1 (line 1181)
+                                                ; - java.lang.invoke.LambdaForm$DMH/917142466::invokeStatic_LLI_I@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1373810119::reinvoke@24
+                                                ; - java.lang.invoke.LambdaForm$MH/813656972::guard@34
+                                                ; - java.lang.invoke.LambdaForm$MH/168423058::delegate@11
+                                                ; - java.lang.invoke.LambdaForm$MH/813656972::guard@74
+                                                ; - java.lang.invoke.LambdaForm$MH/1039949752::linkToCallSite@11
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@17 (line 2)
+                                                ;   {runtime_call}
+  0x0000000104544404: callq  0x0000000103c606cc  ;*instanceof
+                                                ; - org.jruby.ir.targets.Bootstrap::testModuleMatch@1 (line 1181)
+                                                ; - java.lang.invoke.LambdaForm$DMH/917142466::invokeStatic_LLI_I@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1373810119::reinvoke@24
+                                                ; - java.lang.invoke.LambdaForm$MH/813656972::guard@34
+                                                ; - java.lang.invoke.LambdaForm$MH/168423058::delegate@11
+                                                ; - java.lang.invoke.LambdaForm$MH/813656972::guard@74
+                                                ; - java.lang.invoke.LambdaForm$MH/1039949752::linkToCallSite@11
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@17 (line 2)
+                                                ;   {runtime_call}
+  0x0000000104544409: shl    $0x3,%r10
+  0x000000010454440d: mov    0x68(%r10),%rbp    ;*invokevirtual getClass
+                                                ; - org.jruby.ir.targets.InvokeSite::testClass@1 (line 757)
+                                                ; - java.lang.invoke.LambdaForm$DMH/537548559::invokeStatic_LL_I@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/1166151249::reinvoke@25
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@39
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x0000000104544411: mov    $0xffffff76,%esi
+  0x0000000104544416: mov    0x8(%rsp),%r10
+  0x000000010454441b: mov    %r10,0x50(%rsp)
+  0x0000000104544420: mov    %rax,0x10(%rsp)
+  0x0000000104544425: xchg   %ax,%ax
+  0x0000000104544427: callq  0x00000001043533e0  ; OopMap{rbp=Oop [80]=Oop [0]=Oop [16]=Oop [32]=Oop off=780}
+                                                ;*if_acmpne
+                                                ; - org.jruby.ir.targets.InvokeSite::testClass@5 (line 757)
+                                                ; - java.lang.invoke.LambdaForm$DMH/537548559::invokeStatic_LL_I@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/1166151249::reinvoke@25
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@39
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x000000010454442c: callq  0x0000000103c606cc  ;*if_acmpne
+                                                ; - org.jruby.ir.targets.InvokeSite::testClass@5 (line 757)
+                                                ; - java.lang.invoke.LambdaForm$DMH/537548559::invokeStatic_LL_I@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/1166151249::reinvoke@25
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@39
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x0000000104544431: mov    $0xfffffff6,%esi
+  0x0000000104544436: nop
+  0x0000000104544437: callq  0x00000001043533e0  ; OopMap{off=796}
+                                                ;*invokevirtual getClass
+                                                ; - org.jruby.ir.targets.InvokeSite::testClass@1 (line 757)
+                                                ; - java.lang.invoke.LambdaForm$DMH/537548559::invokeStatic_LL_I@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/1166151249::reinvoke@25
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@39
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@34 (line 2)
+                                                ;   {runtime_call}
+  0x000000010454443c: callq  0x0000000103c606cc  ;*invokevirtual getClass
+                                                ; - org.jruby.ir.targets.InvokeSite::testClass@1 (line 757)
+                                                ; - java.lang.invoke.LambdaForm$DMH/537548559::invokeStatic_LL_I@11
+                                                ; - java.lang.invoke.LambdaForm$BMH/1166151249::reinvoke@25
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@39
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@34 (line 2)
+                                                ;   {runtime_call}
+  0x0000000104544441: mov    $0xfffffff6,%esi
+  0x0000000104544446: nop
+  0x0000000104544447: callq  0x00000001043533e0  ; OopMap{off=812}
+                                                ;*invokeinterface getMetaClass
+                                                ; - org.jruby.RubyFloat::op_mul@4 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x000000010454444c: callq  0x0000000103c606cc  ;*invokeinterface getMetaClass
+                                                ; - org.jruby.RubyFloat::op_mul@4 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x0000000104544451: mov    $0xfffffff6,%esi
+  0x0000000104544456: nop
+  0x0000000104544457: callq  0x00000001043533e0  ; OopMap{off=828}
+                                                ;*invokevirtual getClassIndex
+                                                ; - org.jruby.RubyFloat::op_mul@9 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x000000010454445c: callq  0x0000000103c606cc  ;*invokevirtual getClassIndex
+                                                ; - org.jruby.RubyFloat::op_mul@9 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x0000000104544461: mov    $0xfffffff6,%esi
+  0x0000000104544466: nop
+  0x0000000104544467: callq  0x00000001043533e0  ; OopMap{off=844}
+                                                ;*invokevirtual ordinal
+                                                ; - org.jruby.RubyFloat::op_mul@12 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x000000010454446c: callq  0x0000000103c606cc  ;*invokevirtual ordinal
+                                                ; - org.jruby.RubyFloat::op_mul@12 (line 348)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x0000000104544471: mov    $0xfffffff6,%esi
+  0x0000000104544476: nop
+  0x0000000104544477: callq  0x00000001043533e0  ; OopMap{off=860}
+                                                ;*getfield runtime
+                                                ; - org.jruby.RubyFloat::op_mul@45 (line 351)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x000000010454447c: callq  0x0000000103c606cc  ;   {runtime_call}
+  0x0000000104544481: mov    $0xfffffff6,%esi
+  0x0000000104544486: nop
+  0x0000000104544487: callq  0x00000001043533e0  ; OopMap{off=876}
+                                                ;*invokevirtual getFloat
+                                                ; - org.jruby.RubyFloat::<init>@2 (line 137)
+                                                ; - org.jruby.RubyFloat::newFloat@6 (line 221)
+                                                ; - org.jruby.RubyFloat::op_mul@60 (line 351)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x000000010454448c: callq  0x0000000103c606cc  ;*invokevirtual getFloat
+                                                ; - org.jruby.RubyFloat::<init>@2 (line 137)
+                                                ; - org.jruby.RubyFloat::newFloat@6 (line 221)
+                                                ; - org.jruby.RubyFloat::op_mul@60 (line 351)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x0000000104544491: mov    $0xfffffff6,%esi
+  0x0000000104544496: nop
+  0x0000000104544497: callq  0x00000001043533e0  ; OopMap{off=892}
+                                                ;*getfield op_times
+                                                ; - org.jruby.RubyFloat::op_mul@70 (line 353)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x000000010454449c: callq  0x0000000103c606cc  ;*new
+                                                ; - org.jruby.RubyFloat::newFloat@0 (line 221)
+                                                ; - org.jruby.RubyFloat::op_mul@60 (line 351)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+                                                ;   {runtime_call}
+  0x00000001045444a1: jmp    0x00000001045444a5  ;*invokestatic sites
+                                                ; - org.jruby.RubyFloat::op_mul@67 (line 353)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x00000001045444a3: jmp    0x00000001045444a5  ;*invokevirtual coerceBin
+                                                ; - org.jruby.RubyFloat::op_mul@74 (line 353)
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@47 (line 2)
+
+  0x00000001045444a5: mov    %rax,%rsi
+  0x00000001045444a8: jmp    0x00000001045444ad
+  0x00000001045444aa: mov    %rax,%rsi          ;*invokestatic linkToVirtual
+                                                ; - java.lang.invoke.LambdaForm$DMH/2104545713::invokeVirtual_L3_L@14
+                                                ; - java.lang.invoke.LambdaForm$BMH/1613255205::reinvoke@38
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/603742814::delegate@16
+                                                ; - java.lang.invoke.LambdaForm$MH/213193302::guard@82
+                                                ; - java.lang.invoke.LambdaForm$MH/352359770::linkToCallSite@16
+                                                ; - Users.chrisseaton.Documents.ruby_minus_compiler_minus_survey.examples.area::RUBY$method$area$0@34 (line 2)
+
+  0x00000001045444ad: add    $0x40,%rsp
+  0x00000001045444b1: pop    %rbp
+  0x00000001045444b2: jmpq   0x000000010437be60  ;   {runtime_call}
+  0x00000001045444b7: hlt    
+  0x00000001045444b8: hlt    
+  0x00000001045444b9: hlt    
+  0x00000001045444ba: hlt    
+  0x00000001045444bb: hlt    
+  0x00000001045444bc: hlt    
+  0x00000001045444bd: hlt    
+  0x00000001045444be: hlt    
+  0x00000001045444bf: hlt    

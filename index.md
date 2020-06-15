@@ -60,7 +60,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Generation of JVM bytecode</td>
       <td>Parser to AST, to internal IR</td>
       <td>Internal IR interpreter</td>
-      <td>CFG of linear RTL instructions in SSA</td>
+      <td>CFG of linear RTL instructions</td>
       <td>Nutter, Enebo, Sastry</td>
     </tr>
     <tr>
