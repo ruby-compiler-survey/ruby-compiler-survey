@@ -15,7 +15,7 @@ We're building LLRB `a717bf612fec971ddc9446a777dd11cdad372e6f` and the matching 
 % git clone https://github.com/ruby-compiler-survey/llrb.git
 % pushd llrb
 % git checkout a717bf612fec971ddc9446a777dd11cdad372e6f
-% patch -p1 < debug.patch
+% patch -p1 < dump.patch
 
 % rm -rf ext/llrb/cruby
 % git clone https://github.com/ruby-compiler-survey/llrb-ruby.git ext/llrb/cruby
@@ -36,21 +36,31 @@ We're building LLRB `a717bf612fec971ddc9446a777dd11cdad372e6f` and the matching 
 % echo PATH=$PATH >> .bashrc
 ```
 
-We patch LLRB to enable debug output.
+We patch LLRB to print some more debug information.
 
-LLRB is a research prototype so we have to manually annotate the benchmarks to say which methods to compile.
-
-We can now run LLRB.
+We can now run LLRB. We need to use `-rllrb` to load LLRB, and `-rllrb/start` to enable the profiling.
 
 ```
-% ruby fib-llrb.rb
-== disasm: #<ISeq:fib@/var/examples/fib-llrb.rb>========================
-...
-832040
-832040
+% ruby -rllrb -rllrb/start fib.rb
 832040
 832040
 ...
+[llrb_exec installed to 0x7fb2336d3000]
+195: [size= 47] ISEQ_TYPE_METHOD: Object#fib => success!
+832040
+832040
+...
+```
+
+LLRB does not include any kind of disassembler. To get a disassembly, we use `gcore` to dump the core and then open it in a disassembler. You can use the address printed to find the function you want to disassemble.
+
+```
+...
+[llrb_exec installed to 0x7fb2336d3000]
+...
+(control-z to pause the process)
+% ps
+% sudo gcore -o xxxx nnnnn
 ```
 
 ## With Vagrant
@@ -64,11 +74,12 @@ Use the [`ruby-compiler-survey` repository](https://github.com/ruby-compiler-sur
 ```
 
 ```
-% ruby /var/examples/fib-llrb.rb
-== disasm: #<ISeq:fib@/var/examples/fib-llrb.rb>========================
+% ruby -rllrb -rllrb/start /var/examples/fib.rb
+832040
+832040
 ...
-832040
-832040
+[llrb_exec installed to 0x7fb2336d3000]
+195: [size= 47] ISEQ_TYPE_METHOD: Object#fib => success!
 832040
 832040
 ...

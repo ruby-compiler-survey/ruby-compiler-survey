@@ -1,11 +1,11 @@
 set -Eeuo pipefail
 
 sudo apt-get update
-sudo apt-get install -y autoconf bison build-essential clang git libssl-dev llvm ruby
+sudo apt-get install -y autoconf bison build-essential clang gdb git libssl-dev llvm ruby
 git clone https://github.com/ruby-compiler-survey/llrb.git
 pushd llrb
 git checkout a717bf612fec971ddc9446a777dd11cdad372e6f
-patch -p1 < /var/patches/debug.patch
+patch -p1 < /var/patches/dump.patch
 
 rm -rf ext/llrb/cruby
 git clone https://github.com/ruby-compiler-survey/llrb-ruby.git ext/llrb/cruby
