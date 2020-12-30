@@ -53,6 +53,8 @@ We'll use these flags to help us understand what the JRuby JIT is doing:
 
 We'll use the separate `ast` command to print JRuby's AST.
 
+More details on [building and running Rubinius](building) are available in the appendix.
+
 ## Frontend
 
 JRuby uses a modified parser from MRI, with the lexer translated to Java, and the parser itself compiled using a port of Berkeley Yacc to Java. The parser directly creates Java objects representing the AST. Here we show the simplified AST for `fib.rb`.

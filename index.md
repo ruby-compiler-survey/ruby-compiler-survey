@@ -54,7 +54,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr class="odd">
       <td><a href="jruby">JRuby</a></td>
-      <td>XXXX&#x2011;present</td>
+      <td>2006&#x2011;present</td>
       <td>Custom Java</td>
       <td>JIT</td>
       <td>Generation of JVM bytecode</td>
