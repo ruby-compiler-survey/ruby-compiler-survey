@@ -266,7 +266,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>2008&#x2011;2010</td>
       <td>MRI</td>
       <td>JIT</td>
-      <td></td>
+      <td>Generation of LLVM IR</td>
       <td></td>
       <td></td>
       <td></td>
