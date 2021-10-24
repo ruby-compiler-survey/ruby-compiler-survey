@@ -251,6 +251,17 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Seaton, Daloze, Menard, Chalupa, MacGregor</td>
     </tr>
     <tr class="odd">
+      <td>XRuby</td>
+      <td>2006&#x2011;2008</td>
+      <td>Custom Java</td>
+      <td>AOT</td>
+      <td>Template compilation to Java bytecode</td>
+      <td>Parser to AST</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Zhi</td>
+    </tr>
+    <tr>
       <td>yarv2llvm</td>
       <td>2008&#x2011;2010</td>
       <td>MRI</td>
@@ -261,7 +272,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td></td>
       <td>Hideki</td>
     </tr>
-    <tr>
+    <tr class="odd">
       <td><a href="yarv-mjit">YARV MJIT</a></td>
       <td>2018&#x2011;present</td>
       <td>MRI</td>
@@ -272,7 +283,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td></td>
       <td>Kokubun</td>
     </tr>
-    <tr class="odd">
+    <tr>
       <td>YJIT</td>
       <td>2020&#x2011;present</td>
       <td>MRI</td>
