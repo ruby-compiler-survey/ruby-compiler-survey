@@ -218,6 +218,17 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Uchio</td>
     </tr>
     <tr>
+      <td>Sorbet</td>
+      <td>2019&#x2011;present</td>
+      <td>MRI</td>
+      <td>AOT</td>
+      <td>Generation of MRI LLVM IR 'C' extension</td>
+      <td>Parser to AST</td>
+      <td>None</td>
+      <td>Sorbet's typechecking IR</td>
+      <td>Tarjan, Petrashko, Froyd</td>
+    </tr>
+    <tr class="odd">
       <td>TenderJIT</td>
       <td>2021</td>
       <td>MRI</td>
@@ -228,7 +239,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>None</td>
       <td>Patterson</td>
     </tr>
-    <tr class="odd">
+    <tr>
       <td>Topaz</td>
       <td>2012&#x2011;2014</td>
       <td>Custom RPython and Ruby</td>
@@ -239,7 +250,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td></td>
       <td>Gaynor, Felgentreff</td>
     </tr>
-    <tr>
+    <tr class="odd">
       <td><a href="truffleruby">TruffleRuby</a></td>
       <td>2013&#x2011;present</td>
       <td>Custom Java and Ruby</td>
@@ -250,7 +261,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Graphical sea-of-nodes</td>
       <td>Seaton, Daloze, Menard, Chalupa, MacGregor</td>
     </tr>
-    <tr class="odd">
+    <tr>
       <td>XRuby</td>
       <td>2006&#x2011;2008</td>
       <td>Custom Java</td>
@@ -261,7 +272,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>None</td>
       <td>Zhi</td>
     </tr>
-    <tr>
+    <tr class="odd">
       <td>yarv2llvm</td>
       <td>2008&#x2011;2010</td>
       <td>MRI</td>
@@ -272,7 +283,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td></td>
       <td>Hideki</td>
     </tr>
-    <tr class="odd">
+    <tr>
       <td><a href="yarv-mjit">YARV MJIT</a></td>
       <td>2018&#x2011;present</td>
       <td>MRI</td>
@@ -283,7 +294,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td></td>
       <td>Kokubun</td>
     </tr>
-    <tr>
+    <tr class="odd">
       <td>YJIT</td>
       <td>2020&#x2011;present</td>
       <td>MRI</td>
