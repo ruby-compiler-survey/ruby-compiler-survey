@@ -46,10 +46,10 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>2019&#x2011;2020</td>
       <td>MRI</td>
       <td>JIT</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>Tracing of YARV instructions then template compilation to Cranelift</td>
+      <td>Tracing YARV interpreter</td>
+      <td>Instrumented base interpreter</td>
+      <td>None</td>
       <td>Matthews</td>
     </tr>
     <tr class="odd">
@@ -57,7 +57,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>2007&#x2011;2011</td>
       <td>Custom C#</td>
       <td>JIT</td>
-      <td></td>
+      <td>Generation of CIL</td>
       <td></td>
       <td></td>
       <td></td>
@@ -67,7 +67,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td><a href="jruby">JRuby</a></td>
       <td>2006&#x2011;present</td>
       <td>Custom Java</td>
-      <td>JIT</td>
+      <td>JIT&nbsp;<sup><a href="#jruby-aot">1</a></sup></td>
       <td>Generation of JVM bytecode</td>
       <td>Parser to AST, to internal IR</td>
       <td>Internal IR interpreter</td>
@@ -79,7 +79,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>2017</td>
       <td>MRI</td>
       <td>JIT</td>
-      <td></td>
+      <td>Generation of LLVM IR</td>
       <td></td>
       <td></td>
       <td></td>
@@ -90,7 +90,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>2008&#x2011;2009</td>
       <td>MRI</td>
       <td>JIT</td>
-      <td>DotGNU LibJIT</td>
+      <td>Template compilation through DotGNU LibJIT</td>
       <td></td>
       <td></td>
       <td></td>
@@ -100,8 +100,8 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>MacRuby</td>
       <td>2008&#x2011;2013</td>
       <td>MRI</td>
-      <td>AOT</td>
-      <td></td>
+      <td>AOT/JIT</td>
+      <td>Generation of LLVM IR</td>
       <td></td>
       <td></td>
       <td></td>
@@ -123,10 +123,10 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>2019&#x2011;present</td>
       <td>Custom C++</td>
       <td>AOT</td>
+      <td>AST incrementally lowered to C++</td>
       <td></td>
       <td></td>
-      <td></td>
-      <td></td>
+      <td>Enhanced AST</td>
       <td>Morgan</td>
     </tr>
     <tr>
@@ -134,7 +134,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>2016&#x2011;2017</td>
       <td>MRI</td>
       <td>JIT</td>
-      <td></td>
+      <td>Generation of J9 IR</td>
       <td></td>
       <td></td>
       <td></td>
@@ -156,7 +156,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>2008&#x2011;2016</td>
       <td>Custom C++ and Ruby</td>
       <td>JIT</td>
-      <td>Generation of LLVM bitcode</td>
+      <td>Generation of LLVM IR</td>
       <td>Parser to AST, to custom stack bytecode</td>
       <td>Stack bytecode</td>
       <td>None</td>
@@ -167,7 +167,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>2017</td>
       <td>MRI, JRuby, Rubinius</td>
       <td>JIT</td>
-      <td>Conventional speculative compiler</td>
+      <td>Conventional speculative compiler with in-process assembler</td>
       <td>Base bytecode or IR to custom bytecode</td>
       <td>Stack bytecode</td>
       <td>Graphical sea-of-nodes</td>
@@ -189,18 +189,18 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>2014&#x2011;2020</td>
       <td></td>
       <td>AOT</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>Conventional compiler with in-process assembler</td>
+      <td>Parser to AST</td>
+      <td>None</td>
+      <td>Multiple IRs gradually removing abstraction and lowering from AST to linear</td>
       <td>Rüger</td>
     </tr>
     <tr>
       <td>Ruby.NET</td>
       <td>2008</td>
+      <td>Custom C#</td>
       <td></td>
-      <td></td>
-      <td></td>
+      <td>Generation of CIL</td>
       <td></td>
       <td></td>
       <td></td>
@@ -211,7 +211,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>2021</td>
       <td></td>
       <td>AOT</td>
-      <td></td>
+      <td>Template compilation to eBPF</td>
       <td></td>
       <td></td>
       <td></td>
@@ -222,10 +222,10 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>2021</td>
       <td>MRI</td>
       <td>JIT</td>
-      <td>Lazy Basic Block Versioning</td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>Lazy Basic Block Versioning with in-process assembler</td>
+      <td>Template compiler of YARV bytecode</td>
+      <td>Base interpreter</td>
+      <td>None</td>
       <td>Patterson</td>
     </tr>
     <tr class="odd">
@@ -277,7 +277,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>2020&#x2011;present</td>
       <td>MRI</td>
       <td>JIT</td>
-      <td>Lazy Basic-Block Versioning</td>
+      <td>Lazy Basic-Block Versioning with in-process assembler</td>
       <td>Template compiler of YARV bytecode</td>
       <td>Base interpreter</td>
       <td>None</td>
@@ -285,6 +285,10 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
   </tbody>
 </table>
+
+<ol>
+  <li><a name="jruby-aot"></a>JRuby also includes an AOT mode, but this just embeds the interpreter and IR</li>
+</ol>
 
 </section>
 
