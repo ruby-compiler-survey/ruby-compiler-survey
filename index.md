@@ -3,13 +3,13 @@ title: The Ruby Compiler Survey
 layout: page
 ---
 
-The *Ruby Compiler Survey* is a project cataloging, preserving, and dissecting compilers for the [Ruby programming language](https://www.ruby-lang.org/). In this context, a compiler is something that eventually produces machine code from Ruby code, whether that's ahead-of-time or just-in-time. There are a surprisingly large number of attempts to write compilers for Ruby, using very varied approaches, so a comparative study is interesting. Some of these compilers were being lost to time and action was needed now to preserve and document them.
+The *Ruby Compiler Survey* is a project cataloguing, preserving, and dissecting compilers for the [Ruby programming language](https://www.ruby-lang.org/). In this context, a compiler is something that eventually produces machine code from Ruby code, whether that's ahead-of-time or just-in-time. There are a surprisingly large number of attempts to write compilers for Ruby, using very varied approaches, so a comparative study is interesting. Some of these compilers were being lost to time and action was needed now to preserve and document them.
 
-We're interested in how these compilers are designed and implemented, their history, and the output they produce. We're focusing on compilation in order to keep the project in some kind of scope, but we'll describe other parts of the implementation, such as the garbage collector or interpreter, where they're relevant. We apply some judgement for how much we consider to be part of the Ruby implementation. For example where components are shared between multiple language implementations, we consider them to be part of the Ruby compiler when they are co-developed.
+We're interested in how these compilers are designed and implemented, their history, and the output they produce. We're focusing on compilation in order to keep the project in some kind of scope, but we'll describe other parts of the implementation, such as the garbage collector or interpreter, where they're relevant. We apply some judgement for how much we consider to be part of the Ruby implementation. For example where components are shared between multiple language implementations, we consider them to be part of the Ruby compiler when they are co-developed. Some of these compilers are much more serious than others - several of them are learning exercises, demos, or toys.
 
-This isn't a benchmarking game and this isn't a competition. The compilers target a variety of architectures and have diverse goals beyond simple performance so comparing quantitively would not make sense. We aim to be objective but we do offer informed commentary on the techniques employed and how successful they are in producing efficient machine code from Ruby. The [author](https://chrisseaton.com/) is the founder of the TruffleRuby compiler but is trying to neutral.
+This isn't a benchmarking game and this isn't a competition. The compilers target a variety of architectures and have diverse goals beyond simple performance so comparing quantitatively would not make sense. We aim to be objective but we do offer informed commentary on the techniques employed and how successful they are in producing efficient machine code from Ruby. The [author](https://chrisseaton.com/) is the founder of the TruffleRuby compiler but is trying to neutral.
 
-There's a page describing each compiler implementation, and an appendix describing how to build and use it. We assume medium-to-expert knowledge of compilers. If you have less experience we have a page with more simple descriptions of basic [concepts](concepts) to give you some context.
+There's a page describing each compiler implementation, and an appendix describing how to build and use it. We assume medium-to-expert knowledge of compilers. If you have less experience we have a page with more simple descriptions of basic [concepts](concepts) to give you some context. Much of the information in this site is archaeological, so we apologies for any omissions or errors.
 
 <section id="overview">
 
@@ -20,7 +20,7 @@ There's a page describing each compiler implementation, and an appendix describi
     <tr>
       <th>Compiler</th>
       <th>Years active</th>
-      <th>Base</th>
+      <th>Base VM</th>
       <th>Stage</th>
       <th>General approach</th>
       <th>Frontend</th>
@@ -42,17 +42,28 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Hokstad</td>
     </tr>
     <tr>
-      <td>IronRuby</td>
-      <td></td>
-      <td></td>
+      <td>Hyperdrive</td>
+      <td>2019&#x2011;2020</td>
+      <td>MRI</td>
       <td>JIT</td>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
+      <td>Matthews</td>
     </tr>
     <tr class="odd">
+      <td>IronRuby</td>
+      <td>2007&#x2011;2011</td>
+      <td>Custom C#</td>
+      <td>JIT</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Lam</td>
+    </tr>
+    <tr>
       <td><a href="jruby">JRuby</a></td>
       <td>2006&#x2011;present</td>
       <td>Custom Java</td>
@@ -63,7 +74,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>CFG of linear RTL instructions</td>
       <td>Nutter, Enebo, Sastry</td>
     </tr>
-    <tr>
+    <tr class="odd">
       <td>LLRB</td>
       <td>2017</td>
       <td>MRI</td>
@@ -74,42 +85,64 @@ There's a page describing each compiler implementation, and an appendix describi
       <td></td>
       <td>Kokubun</td>
     </tr>
+    <tr>
+      <td>Ludicrous</td>
+      <td>2008&#x2011;2009</td>
+      <td>MRI</td>
+      <td>JIT</td>
+      <td>DotGNU LibJIT</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Brannan</td>
+    </tr>
     <tr class="odd">
       <td>MacRuby</td>
-      <td></td>
-      <td></td>
+      <td>2008&#x2011;2013</td>
+      <td>MRI</td>
       <td>AOT</td>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
+      <td>Sansonetti</td>
     </tr>
     <tr>
       <td>MagLev</td>
-      <td></td>
-      <td></td>
+      <td>2008&#x2011;2016</td>
+      <td>Custom Gemstone Smalltalk</td>
       <td>JIT</td>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
-      <td></td>
+      <td>McLain, Felgentreff</td>
     </tr>
     <tr class="odd">
+      <td>Natalie</td>
+      <td>2019&#x2011;present</td>
+      <td>Custom C++</td>
+      <td>AOT</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Morgan</td>
+    </tr>
+    <tr>
       <td>Ruby+OMR</td>
       <td>2016&#x2011;2017</td>
-      <td></td>
+      <td>MRI</td>
       <td>JIT</td>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
-      <td>Gaudet, </td>
+      <td>Gaudet, Stoodley</td>
     </tr>
-    <tr>
+    <tr class="odd">
       <td>RTL MJIT</td>
-      <td></td>
+      <td>2017</td>
       <td>MRI</td>
       <td>JIT</td>
       <td>Generation of C</td>
@@ -118,20 +151,42 @@ There's a page describing each compiler implementation, and an appendix describi
       <td></td>
       <td>Makarov</td>
     </tr>
-    <tr class="odd">
+    <tr>
       <td><a href="rubinius">Rubinius</a></td>
       <td>2008&#x2011;2016</td>
       <td>Custom C++ and Ruby</td>
       <td>JIT</td>
       <td>Generation of LLVM bitcode</td>
       <td>Parser to AST, to custom stack bytecode</td>
-      <td>Stack bytecode interpreter</td>
+      <td>Stack bytecode</td>
       <td>None</td>
       <td>Phoenix, Bussink, Shirai</td>
     </tr>
     <tr class="odd">
+      <td>Rhizome</td>
+      <td>2017</td>
+      <td>MRI, JRuby, Rubinius</td>
+      <td>JIT</td>
+      <td>Conventional speculative compiler</td>
+      <td>Base bytecode or IR to custom bytecode</td>
+      <td>Stack bytecode</td>
+      <td>Graphical sea-of-nodes</td>
+      <td>Seaton</td>
+    </tr>
+    <tr>
+      <td>RubyComp</td>
+      <td>2004</td>
+      <td></td>
+      <td>AOT</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Alexandersson</td>
+    </tr>
+    <tr class="odd">
       <td>RubyX</td>
-      <td>2014&#x2011;present</td>
+      <td>2014&#x2011;2020</td>
       <td></td>
       <td>AOT</td>
       <td></td>
@@ -141,6 +196,39 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Rüger</td>
     </tr>
     <tr>
+      <td>Ruby.NET</td>
+      <td>2008</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Kelly</td>
+    </tr>
+    <tr class="odd">
+      <td>Rucy</td>
+      <td>2021</td>
+      <td></td>
+      <td>AOT</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Uchio</td>
+    </tr>
+    <tr>
+      <td>TenderJIT</td>
+      <td>2021</td>
+      <td>MRI</td>
+      <td>JIT</td>
+      <td>Lazy Basic Block Versioning</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Patterson</td>
+    </tr>
+    <tr class="odd">
       <td>Topaz</td>
       <td>2012&#x2011;2014</td>
       <td>Custom RPython and Ruby</td>
@@ -148,10 +236,10 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Metatracing of a stack bytecode interpreter</td>
       <td>Parser to AST</td>
       <td>Stack bytecode interpreter</td>
-      <td>....</td>
+      <td></td>
       <td>Gaynor, Felgentreff</td>
     </tr>
-    <tr class="odd">
+    <tr>
       <td><a href="truffleruby">TruffleRuby</a></td>
       <td>2013&#x2011;present</td>
       <td>Custom Java and Ruby</td>
@@ -162,16 +250,38 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Graphical sea-of-nodes</td>
       <td>Seaton, Daloze, Menard, Chalupa, MacGregor</td>
     </tr>
+    <tr class="odd">
+      <td>yarv2llvm</td>
+      <td>2008&#x2011;2010</td>
+      <td>MRI</td>
+      <td>JIT</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Hideki</td>
+    </tr>
     <tr>
       <td><a href="yarv-mjit">YARV MJIT</a></td>
-      <td></td>
+      <td>2018&#x2011;present</td>
       <td>MRI</td>
       <td>JIT</td>
       <td>Generation of C</td>
       <td></td>
-      <td></td>
+      <td>Base interpreter</td>
       <td></td>
       <td>Kokubun</td>
+    </tr>
+    <tr class="odd">
+      <td>YJIT</td>
+      <td>2020&#x2011;present</td>
+      <td>MRI</td>
+      <td>JIT</td>
+      <td>Lazy Basic-Block Versioning</td>
+      <td>Template compiler of YARV bytecode</td>
+      <td>Base interpreter</td>
+      <td>None</td>
+      <td>Chevalier-Boisvert</td>
     </tr>
   </tbody>
 </table>
