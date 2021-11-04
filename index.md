@@ -347,6 +347,14 @@ There's a page describing each compiler implementation, and an appendix describi
 
 </section>
 
+## Out of scope but related
+
+**[Wilson](https://github.com/seattlerb/wilson)** is a Ruby library for assembling IA-32 machine code.
+
+**[ronin-asm](https://github.com/ronin-rb/ronin-asm)** is a Ruby library for assembling IA-32 and AMD64 machine code.
+
+**[Ruby Compiler](https://github.com/sadiqmmm/ruby-compiler)** is a tool to package Ruby code with a Ruby interpreter, giving a stand-alone executable, but not actually translating the Ruby code to machine code.
+
 ## Sources
 
 We use a running set of [example programs](examples) throughout the survey.
