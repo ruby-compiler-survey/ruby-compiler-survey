@@ -119,6 +119,17 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>McLain, Felgentreff</td>
     </tr>
     <tr class="odd">
+      <td>MRuby JIT</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Hideki</td>
+    </tr>
+    <tr>
       <td>Natalie</td>
       <td>2019&#x2011;present</td>
       <td>Custom C++</td>
@@ -129,7 +140,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Enhanced AST</td>
       <td>Morgan</td>
     </tr>
-    <tr>
+    <tr class="odd">
       <td>Ruby+OMR</td>
       <td>2016&#x2011;2017</td>
       <td>MRI</td>
@@ -140,7 +151,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td></td>
       <td>Gaudet, Stoodley</td>
     </tr>
-    <tr class="odd">
+    <tr>
       <td>RTL MJIT</td>
       <td>2017</td>
       <td>MRI</td>
@@ -151,7 +162,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td></td>
       <td>Makarov</td>
     </tr>
-    <tr>
+    <tr class="odd">
       <td><a href="rubinius">Rubinius</a></td>
       <td>2008&#x2011;2016</td>
       <td>Custom C++ and Ruby</td>
@@ -161,6 +172,17 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Stack bytecode</td>
       <td>None</td>
       <td>Phoenix, Bussink, Shirai</td>
+    </tr>
+    <tr>
+      <td>RuJIT</td>
+      <td>2015</td>
+      <td>MRI</td>
+      <td>JIT</td>
+      <td>Tracing</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Ide</td>
     </tr>
     <tr class="odd">
       <td>Rhizome</td>
@@ -304,6 +326,17 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Base interpreter</td>
       <td>None</td>
       <td>Chevalier-Boisvert</td>
+    </tr>
+    <tr>
+      <td>YTL</td>
+      <td>2009&#x2011;2014</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Hideki</td>
     </tr>
   </tbody>
 </table>
