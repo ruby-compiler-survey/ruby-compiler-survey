@@ -507,7 +507,7 @@ end
 
 The hash would need to be available at runtime, and some extension mechanism would be needed to support `instance_variable_get` and `_set`.
 
-## Garbage collection
+## Garbage collection
 
 For garbage collection, Hokstad uses a modified version of the existing [Tiny Garbage Collector](https://github.com/orangeduck/tgc), which is itself based on the [Cello](http://libcello.org/learn/garbage-collection) garbage collector. It's a conservative, mark and sweep collector. `tgc_add` is the interface to the garbage collector, called by code compiled by Hokstad to ask it to manage an object which it has already allocated, and to collect unreachable objects if the allocation has gone above some threshold.
 
