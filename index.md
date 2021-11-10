@@ -273,7 +273,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Gaynor, Felgentreff</td>
     </tr>
     <tr class="odd">
-      <td><a href="truffleruby">TruffleRuby</a></td>
+      <td>TruffleRuby</td>
       <td>2013&#x2011;present</td>
       <td>Custom Java and Ruby</td>
       <td>JIT</td>
