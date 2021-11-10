@@ -165,7 +165,7 @@ The Rubinius bytecode interpreter uses [*computed gotos*][rbx-goto], an extensio
 goto *insn_locations[stream[call_frame->inc_ip()]];
 ```
 
-<p class="coderef"><a href="https://github.com/ruby-compiler-survey/rubinius/blob/1cc41ddc7c2d3f4a2a70cc39a49e45233f7bc4b3/vm/instructions.cpp#L99">XXXXX</a></p>
+<p class="coderef"><a href="https://github.com/ruby-compiler-survey/rubinius/blob/1cc41ddc7c2d3f4a2a70cc39a49e45233f7bc4b3/vm/instructions.cpp#L99">vm/instructions.cpp:99</a></p>
 
 The `switch` branches are generated from a definition file which contain the C code to imperatively implement the instruction, as well as meta-information such as their effect on the stack which are used by the [bytecode verifier][rbx-verify].
 

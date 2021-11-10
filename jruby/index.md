@@ -574,7 +574,7 @@ IFEQ L4   // note that IFEQ is monadic in Java - it means branch-if-equal-to-zer
 
 If we follow the methods all the way down we can see the actual bytes of the bytecode being written for the `bfalse` call, and how surprisingly complicated it is.
 
-```
+```java
 public void visitJumpInsn(final int opcode, final Label label) {
   lastBytecodeOffset = code.length;
   // Add the instruction to the bytecode of the method.
@@ -639,7 +639,7 @@ JRuby represents all Ruby objects using the interface `IRubyObject`. The concret
 
 JRuby have also experimented with subclasses of `RubyObject` that contain fields for instance variables to reduce indirection in the same way. These used to be present as source code in JRuby but they're now generated on demand at runtime. They are always of type `Object` - they aren't specialised for unboxed primitives.
 
-```
+```java
 for (int i = 0; i < size; i++) {
     final int offset = i;
     defineField("var" + offset, ACC_PUBLIC, ci(Object.class), null);
