@@ -9,7 +9,7 @@ We're interested in how these compilers are designed and implemented, their hist
 
 This isn't a benchmarking game and this isn't a competition. The compilers target a variety of architectures and have diverse goals beyond simple performance so comparing quantitatively would not make sense. We aim to be objective but we do offer informed commentary on the techniques employed and how successful they are in producing efficient machine code from Ruby. The [author](https://chrisseaton.com/) is the founder of the TruffleRuby compiler but is trying to be neutral.
 
-There's a page describing each compiler implementation, and an appendix describing how to build and use it. We assume medium-to-expert knowledge of compilers. Much of the information in this site is archaeological, so we apologies for any omissions or errors.
+There's a page describing each compiler implementation, and an appendix describing how to build and use it. We assume medium-to-expert knowledge of compilers. Much of the information in this site is archaeological, so we apologies for any omissions or errors. Corrections welcome.
 
 <section id="overview">
 
@@ -342,7 +342,7 @@ There's a page describing each compiler implementation, and an appendix describi
 </table>
 
 <ol>
-  <li><a name="jruby-aot"></a>JRuby also includes an AOT mode, but this just embeds the interpreter and IR</li>
+  <li><a name="jruby-aot"></a>JRuby also includes an AOT mode, but today this just embeds the interpreter and IR</li>
 </ol>
 
 </section>
