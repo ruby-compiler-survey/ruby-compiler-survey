@@ -9,7 +9,7 @@ We're interested in how these compilers are designed and implemented, their hist
 
 This isn't a benchmarking game and this isn't a competition. The compilers target a variety of architectures and have diverse goals beyond simple performance so comparing quantitatively would not make sense. We aim to be objective but we do offer informed commentary on the techniques employed and how successful they are in producing efficient machine code from Ruby. The [author](https://chrisseaton.com/) is the founder of the TruffleRuby compiler but is trying to neutral.
 
-There's a page describing each compiler implementation, and an appendix describing how to build and use it. We assume medium-to-expert knowledge of compilers. If you have less experience we have a page with more simple descriptions of basic [concepts](concepts) to give you some context. Much of the information in this site is archaeological, so we apologies for any omissions or errors.
+There's a page describing each compiler implementation, and an appendix describing how to build and use it. We assume medium-to-expert knowledge of compilers. Much of the information in this site is archaeological, so we apologies for any omissions or errors.
 
 <section id="overview">
 
@@ -352,6 +352,8 @@ There's a page describing each compiler implementation, and an appendix describi
 **[Wilson](https://github.com/seattlerb/wilson)** is a Ruby library for assembling IA-32 machine code.
 
 **[ronin-asm](https://github.com/ronin-rb/ronin-asm)** is a Ruby library for assembling IA-32 and AMD64 machine code.
+
+**[Fisk](https://github.com/tenderlove/fisk)** is a Ruby library for assembling AMD64 machine code.
 
 **[Ruby Compiler](https://github.com/sadiqmmm/ruby-compiler)** is a tool to package Ruby code with a Ruby interpreter, giving a stand-alone executable, but not actually translating the Ruby code to machine code.
 
