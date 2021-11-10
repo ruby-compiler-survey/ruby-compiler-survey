@@ -32,7 +32,7 @@ There's a page describing each compiler implementation, and an appendix describi
   <tbody>
     <tr class="odd">
       <td><a href="hokstad">Hokstad</a></td>
-      <td>2008&#x2011;present</td>
+      <td style="white-space: nowrap">2008-present</td>
       <td>Custom Ruby</td>
       <td>AOT</td>
       <td>Template compilation of an AST</td>
@@ -43,7 +43,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr>
       <td>Hyperdrive</td>
-      <td>2019&#x2011;2020</td>
+      <td>2019-2020</td>
       <td>MRI</td>
       <td>JIT</td>
       <td>Tracing of YARV instructions then template compilation to Cranelift</td>
@@ -54,7 +54,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr class="odd">
       <td>IronRuby</td>
-      <td>2007&#x2011;2011</td>
+      <td>2007-2011</td>
       <td>Custom C#</td>
       <td>JIT</td>
       <td>Generation of CIL</td>
@@ -65,7 +65,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr>
       <td><a href="jruby">JRuby</a></td>
-      <td>2006&#x2011;present</td>
+      <td>2006-present</td>
       <td>Custom Java</td>
       <td>JIT&nbsp;<sup><a href="#jruby-aot">1</a></sup></td>
       <td>Generation of JVM bytecode</td>
@@ -87,7 +87,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr>
       <td>Ludicrous</td>
-      <td>2008&#x2011;2009</td>
+      <td>2008-2009</td>
       <td>MRI</td>
       <td>JIT</td>
       <td>Template compilation through DotGNU LibJIT</td>
@@ -98,7 +98,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr class="odd">
       <td>MacRuby</td>
-      <td>2008&#x2011;2013</td>
+      <td>2008-2013</td>
       <td>MRI</td>
       <td>AOT/JIT</td>
       <td>Generation of LLVM IR</td>
@@ -109,7 +109,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr>
       <td>MagLev</td>
-      <td>2008&#x2011;2016</td>
+      <td>2008-2016</td>
       <td>Custom Gemstone Smalltalk</td>
       <td>JIT</td>
       <td></td>
@@ -131,7 +131,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr>
       <td>Natalie</td>
-      <td>2019&#x2011;present</td>
+      <td>2019-present</td>
       <td>Custom C++</td>
       <td>AOT</td>
       <td>AST incrementally lowered to C++</td>
@@ -142,7 +142,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr class="odd">
       <td>Ruby+OMR</td>
-      <td>2016&#x2011;2017</td>
+      <td>2016-2017</td>
       <td>MRI</td>
       <td>JIT</td>
       <td>Generation of J9 IR</td>
@@ -164,7 +164,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr class="odd">
       <td><a href="rubinius">Rubinius</a></td>
-      <td>2008&#x2011;2016</td>
+      <td>2008-2016</td>
       <td>Custom C++ and Ruby</td>
       <td>JIT</td>
       <td>Generation of LLVM IR</td>
@@ -208,7 +208,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr class="odd">
       <td>RubyX</td>
-      <td>2014&#x2011;2020</td>
+      <td>2014-2020</td>
       <td></td>
       <td>AOT</td>
       <td>Conventional compiler with in-process assembler</td>
@@ -241,7 +241,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr>
       <td>Sorbet</td>
-      <td>2019&#x2011;present</td>
+      <td>2019-present</td>
       <td>MRI</td>
       <td>AOT</td>
       <td>Generation of MRI LLVM IR 'C' extension</td>
@@ -263,7 +263,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr>
       <td>Topaz</td>
-      <td>2012&#x2011;2014</td>
+      <td>2012-2014</td>
       <td>Custom RPython and Ruby</td>
       <td>JIT</td>
       <td>Metatracing of a stack bytecode interpreter</td>
@@ -274,7 +274,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr class="odd">
       <td>TruffleRuby</td>
-      <td>2013&#x2011;present</td>
+      <td>2013-present</td>
       <td>Custom Java and Ruby</td>
       <td>JIT</td>
       <td>Partial evaluation of self-specialising AST</td>
@@ -285,7 +285,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr>
       <td>XRuby</td>
-      <td>2006&#x2011;2008</td>
+      <td>2006-2008</td>
       <td>Custom Java</td>
       <td>AOT</td>
       <td>Template compilation to Java bytecode</td>
@@ -296,7 +296,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr class="odd">
       <td>yarv2llvm</td>
-      <td>2008&#x2011;2010</td>
+      <td>2008-2010</td>
       <td>MRI</td>
       <td>JIT</td>
       <td>Generation of LLVM IR</td>
@@ -307,7 +307,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr>
       <td>YARV MJIT</td>
-      <td>2018&#x2011;present</td>
+      <td>2018-present</td>
       <td>MRI</td>
       <td>JIT</td>
       <td>Generation of C</td>
@@ -318,7 +318,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr class="odd">
       <td>YJIT</td>
-      <td>2020&#x2011;present</td>
+      <td>2020-present</td>
       <td>MRI</td>
       <td>JIT</td>
       <td>Lazy Basic-Block Versioning with in-process assembler</td>
@@ -329,7 +329,7 @@ There's a page describing each compiler implementation, and an appendix describi
     </tr>
     <tr>
       <td>YTL</td>
-      <td>2009&#x2011;2014</td>
+      <td>2009-2014</td>
       <td></td>
       <td></td>
       <td></td>
