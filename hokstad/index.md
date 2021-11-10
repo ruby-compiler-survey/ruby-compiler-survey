@@ -30,7 +30,7 @@ c.compile(prog)
 <p class="coderef"><a href="https://github.com/ruby-compiler-survey/hokstad/blob/052df9eee662be6b24f448706297bb179e501732/driver.rb#L65-L77">driver.rb:65-77</a></p>
 
 <figure>
-<img src="hokstad-pipeline.png">
+<img src="hokstad-pipeline.svg">
 </figure>
 
 The parser and compiler lives in top-level files. Code is structured as mix-ins, with a `Compiler` class implemented across several different files such as [`compile_calls.rb`][hokstad-compile-calls] and [`compile_control.rb`][hokstad-compile-control], each grouping methods involved in compiling those parts of the language. Alongside that are some small supporting classes to model constructs in the Ruby language such as [functions and arguments][hokstad-function-arguments] or [name scopes][hokstad-name-scopes].
@@ -593,7 +593,7 @@ The register allocator does use one heuristic - the number of static times a var
 On IA&#x2011;32 the only registers Hokstad actually has available after reserving some for things like `self` are `edx`, `ecx`, and `edi`. Register allocation is much more significant on the AMD64 architecture where there are more registers.
 
 <figure>
-<img src="hokstad-register-allocation.png">
+<img src="hokstad-register-allocation.svg">
 </figure>
 
 This diagram shows the principle of the register allocation algorithm, but due to method call boundaries it's hard to see it this clearly in practice. As each local variable is assigned the value is cached in a register. When control flow merges at the end of the `if` block the cache is emptied and the local variables have to be reloaded, and put back into the cache, for the next statement. A fourth local variable is assigned, which exceeds the three available registers, so the least frequently used, `c`, is evicted and `x` is stored in that vacated register.

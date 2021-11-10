@@ -20,7 +20,7 @@ We're discussing JRuby 9.2.9.0, `458ad3ed9cdb`, 30 October 2019, which is the la
 JRuby is usable on many different implementations of the JVM. In order for us to be able to talk in concrete terms, we're going to explain JRuby in the context of running on OpenJDK 8 (HotSpot). This JVM is the default in this version of JRuby's CI system and in practice is probably the platform that most people will be running JRuby on. We're also going to enable JRuby's `invokedynamic` support, even though this is not the default, in order to show JRuby's compiler in its most sophisticated configuration.
 
 <figure>
-<img src="jruby-pipeline.png">
+<img src="jruby-pipeline.svg">
 </figure>
 
 JRuby parses Ruby code to an AST, and then to an intermediate representation of linear instructions simply called the *IR*, which is interpreted. When a threshold is reached, the IR is transformed to create additional structure and to optimise it. JRuby translates this transformed IR to JVM bytecode in-memory, and then switches to executing the resulting methods, which are effectively synthesised Java code.

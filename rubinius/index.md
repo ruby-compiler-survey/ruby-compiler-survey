@@ -29,7 +29,7 @@ The frontend in Rubinius is written as a set of gems using both C++ in `rbx-code
 Ruby code is parsed by a modified version of the MRI parser as a C++ extension gem, into a C++ AST data structure. This is then read by a visitor into a Ruby structure and transformed into an internal bytecode format. When this meets compilation thresholds, it is translated using a template compiler into LLVM IR. Standard and custom LLVM optimisation passes are run, and machine code is generated and installed. Rubinus can deoptimise back to the interpreter if needed.
 
 <figure>
-<img src="rubinius-pipeline.png">
+<img src="rubinius-pipeline.svg">
 </figure>
 
 ## Building and running
