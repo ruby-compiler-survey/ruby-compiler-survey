@@ -306,7 +306,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Hideki</td>
     </tr>
     <tr>
-      <td><a href="yarv-mjit">YARV MJIT</a></td>
+      <td>YARV MJIT</td>
       <td>2018&#x2011;present</td>
       <td>MRI</td>
       <td>JIT</td>
