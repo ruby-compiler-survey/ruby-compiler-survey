@@ -42,7 +42,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Hokstad</td>
     </tr>
     <tr>
-      <td>Hyperdrive</td>
+      <td><a href="https://github.com/jamatthews/hyperdrive">Hyperdrive</a></td>
       <td>2019-2020</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -53,7 +53,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Matthews</td>
     </tr>
     <tr class="odd">
-      <td>IronRuby</td>
+      <td><a href="http://ironruby.net/">IronRuby</a></td>
       <td>2007-2011</td>
       <td>Custom C#</td>
       <td>JIT</td>
@@ -75,7 +75,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Nutter, Enebo, Sastry</td>
     </tr>
     <tr class="odd">
-      <td>LLRB</td>
+      <td><a href="https://github.com/k0kubun/llrb">LLRB</a></td>
       <td>2017</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -86,7 +86,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Kokubun</td>
     </tr>
     <tr>
-      <td>Ludicrous</td>
+      <td><a href="https://github.com/cout/ludicrous">Ludicrous</a></td>
       <td>2008-2009</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -97,7 +97,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Brannan</td>
     </tr>
     <tr class="odd">
-      <td>MacRuby</td>
+      <td><a href="http://macruby.org/">MacRuby</a></td>
       <td>2008-2013</td>
       <td>MRI</td>
       <td>AOT/JIT</td>
@@ -108,7 +108,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Sansonetti</td>
     </tr>
     <tr>
-      <td>MagLev</td>
+      <td><a href=">https://maglev.github.io/">MagLev</a></td>
       <td>2008-2016</td>
       <td>Custom Gemstone Smalltalk</td>
       <td>JIT</td>
@@ -119,7 +119,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>McLain, Felgentreff</td>
     </tr>
     <tr class="odd">
-      <td>MRuby JIT</td>
+      <td><a href="https://github.com/miura1729/mruby">MRuby JIT</a></td>
       <td></td>
       <td></td>
       <td></td>
@@ -130,7 +130,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Hideki</td>
     </tr>
     <tr>
-      <td>Natalie</td>
+      <td><a href="https://github.com/seven1m/natalie">Natalie</a></td>
       <td>2019-present</td>
       <td>Custom C++</td>
       <td>AOT</td>
@@ -141,7 +141,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Morgan</td>
     </tr>
     <tr class="odd">
-      <td>Ruby+OMR</td>
+      <td><a href="https://github.com/rubyomr-preview/ruby/tree/ruby_2_2_omr">Ruby+OMR</a></td>
       <td>2016-2017</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -152,7 +152,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Gaudet, Stoodley</td>
     </tr>
     <tr>
-      <td>RTL MJIT</td>
+      <td><a href="https://github.com/vnmakarov/ruby/tree/rtl_mjit_branch">RTL MJIT</a></td>
       <td>2017</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -174,7 +174,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Phoenix, Bussink, Shirai</td>
     </tr>
     <tr>
-      <td>RuJIT</td>
+      <td><a href="https://github.com/imasahiro/rujit">RuJIT</a></td>
       <td>2015</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -185,7 +185,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Ide</td>
     </tr>
     <tr class="odd">
-      <td>Rhizome</td>
+      <td><a href="https://github.com/chrisseaton/rhizome">Rhizome</a></td>
       <td>2017</td>
       <td>MRI, JRuby, Rubinius</td>
       <td>JIT</td>
@@ -196,7 +196,8 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Seaton</td>
     </tr>
     <tr>
-      <td>RubyComp</td>
+      <td><a
+      href="https://llvm.org/pubs/2004-Spring-AlexanderssonMSThesis.html">RubyComp</a></td>
       <td>2004</td>
       <td></td>
       <td>AOT</td>
@@ -207,7 +208,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Alexandersson</td>
     </tr>
     <tr class="odd">
-      <td>RubyX</td>
+      <td><a href="https://github.com/ruby-x/rubyx">RubyX</a></td>
       <td>2014-2020</td>
       <td></td>
       <td>AOT</td>
@@ -218,7 +219,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Rüger</td>
     </tr>
     <tr>
-      <td>Ruby.NET</td>
+      <td><a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.294.2678">Ruby.NET</a></td>
       <td>2008</td>
       <td>Custom C#</td>
       <td></td>
@@ -229,7 +230,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Kelly</td>
     </tr>
     <tr class="odd">
-      <td>Rucy</td>
+      <td><a href="https://github.com/udzura/rucy">Rucy</a></td>
       <td>2021</td>
       <td></td>
       <td>AOT</td>
@@ -240,7 +241,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Uchio</td>
     </tr>
     <tr>
-      <td>Sorbet</td>
+      <td><a href="https://sorbet.org/blog/2021/07/30/open-sourcing-sorbet-compiler">Sorbet</a></td>
       <td>2019-present</td>
       <td>MRI</td>
       <td>AOT</td>
@@ -251,7 +252,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Tarjan, Petrashko, Froyd</td>
     </tr>
     <tr class="odd">
-      <td>TenderJIT</td>
+      <td><a href="https://github.com/tenderlove/tenderjit">TenderJIT</a></td>
       <td>2021</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -262,7 +263,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Patterson</td>
     </tr>
     <tr>
-      <td>Topaz</td>
+      <td><a href="https://github.com/topazproject/topaz">Topaz</a></td>
       <td>2012-2014</td>
       <td>Custom RPython and Ruby</td>
       <td>JIT</td>
@@ -273,7 +274,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Gaynor, Felgentreff</td>
     </tr>
     <tr class="odd">
-      <td>TruffleRuby</td>
+      <td><a href="https://github.com/oracle/truffleruby">TruffleRuby</a></td>
       <td>2013-present</td>
       <td>Custom Java and Ruby</td>
       <td>JIT</td>
@@ -284,7 +285,8 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Seaton, Daloze, Menard, Chalupa, MacGregor</td>
     </tr>
     <tr>
-      <td>XRuby</td>
+      <td><a href="https://code.google.com/archive/p/xruby/">XRuby</a>
+          (<a href="https://github.com/leeseon/xruby">unofficial export</a>)</td>
       <td>2006-2008</td>
       <td>Custom Java</td>
       <td>AOT</td>
@@ -295,7 +297,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Zhi</td>
     </tr>
     <tr class="odd">
-      <td>yarv2llvm</td>
+      <td><a href="https://github.com/miura1729/yarv2llvm">yarv2llvm</a></td>
       <td>2008-2010</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -306,7 +308,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Hideki</td>
     </tr>
     <tr>
-      <td>YARV MJIT</td>
+      <td><a href="https://github.com/k0kubun/yarv-mjit">YARV MJIT</a></td>
       <td>2018-present</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -317,7 +319,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Kokubun</td>
     </tr>
     <tr class="odd">
-      <td>YJIT</td>
+      <td><a href="https://github.com/ruby/ruby/blob/master/doc/yjit/yjit.md">YJIT</a></td>
       <td>2020-present</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -328,7 +330,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Chevalier-Boisvert</td>
     </tr>
     <tr>
-      <td>YTL</td>
+      <td><a href="https://github.com/miura1729/ytl">YTL</a></td>
       <td>2009-2014</td>
       <td></td>
       <td></td>
