@@ -42,7 +42,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Hokstad</td>
     </tr>
     <tr>
-      <td><a href="https://github.com/jamatthews/hyperdrive">Hyperdrive</a></td>
+      <td style="white-space: nowrap">Hyperdrive <a href="https://github.com/ruby-compiler-survey/hyperdrive">⎋</a></td>
       <td>2019-2020</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -53,7 +53,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Matthews</td>
     </tr>
     <tr class="odd">
-      <td><a href="http://ironruby.net/">IronRuby</a></td>
+      <td>IronRuby <a href="https://github.com/ruby-compiler-survey/ironruby">⎋</a></td>
       <td>2007-2011</td>
       <td>Custom C#</td>
       <td>JIT</td>
@@ -75,7 +75,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Nutter, Enebo, Sastry</td>
     </tr>
     <tr class="odd">
-      <td><a href="https://github.com/k0kubun/llrb">LLRB</a></td>
+      <td>LLRB <a href="https://github.com/ruby-compiler-survey/llrb">⎋</a></td>
       <td>2017</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -86,7 +86,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Kokubun</td>
     </tr>
     <tr>
-      <td><a href="https://github.com/cout/ludicrous">Ludicrous</a></td>
+      <td>Ludicrous <a href="https://github.com/ruby-compiler-survey/ludicrous">⎋</a></td>
       <td>2008-2009</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -97,7 +97,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Brannan</td>
     </tr>
     <tr class="odd">
-      <td><a href="http://macruby.org/">MacRuby</a></td>
+      <td>MacRuby <a href="https://github.com/ruby-compiler-survey/macruby">⎋</a></td>
       <td>2008-2013</td>
       <td>MRI</td>
       <td>AOT/JIT</td>
@@ -108,7 +108,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Sansonetti</td>
     </tr>
     <tr>
-      <td><a href=">https://maglev.github.io/">MagLev</a></td>
+      <td>MagLev <a href="https://github.com/ruby-compiler-survey/maglev">⎋</a></td>
       <td>2008-2016</td>
       <td>Custom Gemstone Smalltalk</td>
       <td>JIT</td>
@@ -119,7 +119,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>McLain, Felgentreff</td>
     </tr>
     <tr class="odd">
-      <td><a href="https://github.com/miura1729/mruby">MRuby JIT</a></td>
+      <td>MRuby JIT <a href="https://github.com/ruby-compiler-survey/mruby-jit">⎋</a></td>
       <td></td>
       <td></td>
       <td></td>
@@ -130,7 +130,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Hideki</td>
     </tr>
     <tr>
-      <td><a href="https://github.com/seven1m/natalie">Natalie</a></td>
+      <td>Natalie <a href="https://github.com/ruby-compiler-survey/natalie">⎋</a></td>
       <td>2019-present</td>
       <td>Custom C++</td>
       <td>AOT</td>
@@ -141,7 +141,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Morgan</td>
     </tr>
     <tr class="odd">
-      <td><a href="https://github.com/rubyomr-preview/ruby/tree/ruby_2_2_omr">Ruby+OMR</a></td>
+      <td style="white-space: nowrap">Ruby+OMR <a href="https://github.com/ruby-compiler-survey/ruby-omr">⎋</a></td>
       <td>2016-2017</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -152,7 +152,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Gaudet, Stoodley</td>
     </tr>
     <tr>
-      <td><a href="https://github.com/vnmakarov/ruby/tree/rtl_mjit_branch">RTL MJIT</a></td>
+      <td>RTL MJIT <a href="https://github.com/ruby-compiler-survey/rtl-mjit">⎋</a></td>
       <td>2017</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -174,7 +174,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Phoenix, Bussink, Shirai</td>
     </tr>
     <tr>
-      <td><a href="https://github.com/imasahiro/rujit">RuJIT</a></td>
+      <td>RuJIT <a href="https://github.com/ruby-compiler-survey/rujit">⎋</a></td>
       <td>2015</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -185,7 +185,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Ide</td>
     </tr>
     <tr class="odd">
-      <td><a href="https://github.com/chrisseaton/rhizome">Rhizome</a></td>
+      <td>Rhizome <a href="https://github.com/ruby-compiler-survey/rhizome">⎋</a></td>
       <td>2017</td>
       <td>MRI, JRuby, Rubinius</td>
       <td>JIT</td>
@@ -196,8 +196,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Seaton</td>
     </tr>
     <tr>
-      <td><a
-      href="https://llvm.org/pubs/2004-Spring-AlexanderssonMSThesis.html">RubyComp</a></td>
+      <td>RubyComp <a href="https://llvm.org/pubs/2004-Spring-AlexanderssonMSThesis.html">⎋</a></td>
       <td>2004</td>
       <td></td>
       <td>AOT</td>
@@ -208,7 +207,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Alexandersson</td>
     </tr>
     <tr class="odd">
-      <td><a href="https://github.com/ruby-x/rubyx">RubyX</a></td>
+      <td>RubyX <a href="https://github.com/ruby-compiler-survey/rubyx">⎋</a></td>
       <td>2014-2020</td>
       <td></td>
       <td>AOT</td>
@@ -219,7 +218,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Rüger</td>
     </tr>
     <tr>
-      <td><a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.294.2678">Ruby.NET</a></td>
+      <td>Ruby.NET <a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.294.2678">⎋</a></td>
       <td>2008</td>
       <td>Custom C#</td>
       <td></td>
@@ -230,7 +229,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Kelly</td>
     </tr>
     <tr class="odd">
-      <td><a href="https://github.com/udzura/rucy">Rucy</a></td>
+      <td>Rucy <a href="https://github.com/ruby-compiler-survey/rucy">⎋</a></td>
       <td>2021</td>
       <td></td>
       <td>AOT</td>
@@ -241,7 +240,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Uchio</td>
     </tr>
     <tr>
-      <td><a href="https://sorbet.org/blog/2021/07/30/open-sourcing-sorbet-compiler">Sorbet</a></td>
+      <td>Sorbet <a href="https://github.com/ruby-compiler-survey/sorbet">⎋</a></td>
       <td>2019-present</td>
       <td>MRI</td>
       <td>AOT</td>
@@ -252,7 +251,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Tarjan, Petrashko, Froyd</td>
     </tr>
     <tr class="odd">
-      <td><a href="https://github.com/tenderlove/tenderjit">TenderJIT</a></td>
+      <td>TenderJIT <a href="https://github.com/ruby-compiler-survey/tenderjit">⎋</a></td>
       <td>2021</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -263,7 +262,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Patterson</td>
     </tr>
     <tr>
-      <td><a href="https://github.com/topazproject/topaz">Topaz</a></td>
+      <td>Topaz <a href="https://github.com/ruby-compiler-survey/topaz">⎋</a></td>
       <td>2012-2014</td>
       <td>Custom RPython and Ruby</td>
       <td>JIT</td>
@@ -274,7 +273,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Gaynor, Felgentreff</td>
     </tr>
     <tr class="odd">
-      <td><a href="https://github.com/oracle/truffleruby">TruffleRuby</a></td>
+      <td style="white-space: nowrap">TruffleRuby <a href="https://github.com/ruby-compiler-survey/truffleruby">⎋</a></td>
       <td>2013-present</td>
       <td>Custom Java and Ruby</td>
       <td>JIT</td>
@@ -285,8 +284,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Seaton, Daloze, Menard, Chalupa, MacGregor</td>
     </tr>
     <tr>
-      <td><a href="https://code.google.com/archive/p/xruby/">XRuby</a>
-          (<a href="https://github.com/leeseon/xruby">unofficial export</a>)</td>
+      <td>XRuby <a href="https://github.com/ruby-compiler-survey/xruby">⎋</a></td>
       <td>2006-2008</td>
       <td>Custom Java</td>
       <td>AOT</td>
@@ -297,7 +295,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Zhi</td>
     </tr>
     <tr class="odd">
-      <td><a href="https://github.com/miura1729/yarv2llvm">yarv2llvm</a></td>
+      <td>yarv2llvm <a href="https://github.com/ruby-compiler-survey/yarv2llvm">⎋</a></td>
       <td>2008-2010</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -308,7 +306,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Hideki</td>
     </tr>
     <tr>
-      <td><a href="https://github.com/k0kubun/yarv-mjit">YARV MJIT</a></td>
+      <td>YARV MJIT <a href="https://github.com/ruby-compiler-survey/yarv-mjit">⎋</a></td>
       <td>2018-present</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -319,7 +317,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Kokubun</td>
     </tr>
     <tr class="odd">
-      <td><a href="https://github.com/ruby/ruby/blob/master/doc/yjit/yjit.md">YJIT</a></td>
+      <td>YJIT <a href="https://github.com/ruby-compiler-survey/yjit">⎋</a></td>
       <td>2020-present</td>
       <td>MRI</td>
       <td>JIT</td>
@@ -330,7 +328,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td>Chevalier-Boisvert</td>
     </tr>
     <tr>
-      <td><a href="https://github.com/miura1729/ytl">YTL</a></td>
+      <td>YTL <a href="https://github.com/ruby-compiler-survey/ytl">⎋</a></td>
       <td>2009-2014</td>
       <td></td>
       <td></td>
