@@ -342,7 +342,7 @@ block #4 (out: 6): LBL_0:13
 
 Default optimisations are:
 
-* **Local optimisation**, which does peep-home replacement of individual instructions with simpler equivalents, such as replacing a `ToAry` instruction on an `Array` literal with a direct reference to the array
+* **Local optimisation**, which does peep-hole replacement of individual instructions with simpler equivalents, such as replacing a `ToAry` instruction on an `Array` literal with a direct reference to the array
 * **Dead code elimination,** which locally removes side-effect-free instructions that generate results that are not used
 * **Optimise dynamic scopes**, which turns local variables, which are stored on the heap in case the frame escapes, into temporaries, which are stored in JVM local variables when JVM bytecode is generated - but this optimisation is [unsound](https://gist.github.com/headius/5758887) with `Binding.of_caller` as there is no way to retrieve JVM local variables from outside an activation
 * **Optimise delegation**, which limits the need for reifying blocks
