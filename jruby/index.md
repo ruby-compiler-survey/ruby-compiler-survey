@@ -754,7 +754,7 @@ MethodHandle updateInvocationTarget(MethodHandle target, IRubyObject self, RubyM
 }
 ```
 
-Both the difference `invokedynamic` makes and how it's working are most clear when we look at the resulting machine code. First the non-`invokedynamic` case shows how calls are being made into our call helper and then into `CachingCallSite#call`, both of which have actually been inlined here. We cam see the `cmp` and `jne` which checks that the class is as expected and that the cache is valid for this method call. Then there is an `invokevirtual` to call the cached method.
+Both the difference `invokedynamic` makes and how it's working are most clear when we look at the resulting machine code. First the non-`invokedynamic` case shows how calls are being made into our call helper and then into `CachingCallSite#call`, both of which have actually been inlined here. We can see the `cmp` and `jne` which checks that the class is as expected and that the cache is valid for this method call. Then there is an `invokevirtual` to call the cached method.
 
 ```s
   0x000000011e788604:   mov    %rbx,%r8                     ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
