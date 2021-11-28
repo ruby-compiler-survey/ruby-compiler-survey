@@ -363,7 +363,7 @@ def unbox(a)
 end
 ```
 
-When we compile this without the unboxing pass the calls are through generic call instructions, `call_` (and then with an arity and argument type suffix.) You result of the first call instruction can be fed straight into another call as the receiver, and the result of the second can be simply returned.
+When we compile this without the unboxing pass the calls are through generic call instructions, `call_` (and then with an arity and argument type suffix.) The result of the first call instruction can be fed straight into another call as the receiver, and the result of the second can be simply returned.
 
 ```
 check_arity(;req: 1, opt: 0, *r: false, kw: false)
