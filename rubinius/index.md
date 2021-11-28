@@ -1069,7 +1069,7 @@ The compilation of **`capture.rb`** is impressive when the looking at the optimi
 
 The block is allocated using the runtime call `rbx_create_block`.
 
-`capture-meta.rb` and `capture-meta-alias.rb` work correctly in Rubinius. Local variables are always stored on the heap in Rubinius - but then how did the arithmetic in `canary.rb` fold? LLVM is seeing the writes into the heap memory, and the reads from it, from the same addresses, and is re-using the value it wrote, rather than reading it back. This works even though the heap structure isn't subject to scalar replacement.
+`capture-meta.rb` and `capture-meta-alias.rb` work correctly in Rubinius. Local variables are always stored on the heap in Rubinius - but then how did the arithmetic in `capture.rb` fold? LLVM is seeing the writes into the heap memory, and the reads from it, from the same addresses, and is re-using the value it wrote, rather than reading it back. This works even though the heap structure isn't subject to scalar replacement.
 
 What is left in all the `capture` programs is the multiple guards, and the writes of the local variables even though they aren't written back. LLVM does not know that nobody else is reading the frame.
 
