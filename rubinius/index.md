@@ -255,7 +255,7 @@ if(mcode->call_count >= state->shared().config.jit_threshold_compile) {
 
 <p class="coderef"><a href="https://github.com/ruby-compiler-survey/rubinius/blob/1cc41ddc7c2d3f4a2a70cc39a49e45233f7bc4b3/vm/machine_code.cpp#L769-L777">rbx/vm/machine_code.cpp:769-777</a></p>
 
-When a method meets the compilation threshold (BUT WHAT IS IT?), a search starts to find which method in the current call stack to compile. This search uses a number of heuristics, and will stop moving up the call stack when it finds a method that has unusual arguments, that hasn't been called enough, that has too many call sites, or so on. We believe that the intention is that the search finds the outermost method that when compiled will inline the method which originally met the compilation threshold, but we aren't sure how it is ensured that it always does so.
+When a method meets the default compilation threshold of 32000 calls, a search starts to find which method in the current call stack to compile. This search uses a number of heuristics, and will stop moving up the call stack when it finds a method that has unusual arguments, that hasn't been called enough, that has too many call sites, or so on. We believe that the intention is that the search finds the outermost method that when compiled will inline the method which originally met the compilation threshold, but we aren't sure how it is ensured that it always does so.
 
 ```cpp
 // Now start looking at callers.
