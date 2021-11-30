@@ -118,7 +118,9 @@ code {
   padding: 0.25em;
 
   background-color: #f5f3f0;
-  
+}
+
+.highlight pre {
   overflow-x: auto;
 }
 
