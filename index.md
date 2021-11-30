@@ -3,6 +3,8 @@ title: The Ruby Compiler Survey
 layout: page
 ---
 
+<img src="icon.png" style="width: 15%; height: 15%; margin-left: 2em; margin-right: 2em; float: left;">
+
 The *Ruby Compiler Survey* is a project cataloguing, preserving, and dissecting compilers for the [Ruby programming language](https://www.ruby-lang.org/). In this context, a compiler is something that eventually produces machine code from Ruby code, whether that's ahead-of-time or just-in-time. There are a surprisingly large number of attempts to write compilers for Ruby, using very varied approaches, so a comparative study is interesting. Some of these compilers were being lost to time and action was needed now to preserve and document them.
 
 We're interested in how these compilers are designed and implemented, their history, and the output they produce. We're focusing on compilation in order to keep the project in some kind of scope, but we'll describe other parts of the implementation, such as the garbage collector or interpreter, where they're relevant. We apply some judgement for how much we consider to be part of the Ruby implementation. For example where components are shared between multiple language implementations, we consider them to be part of the Ruby compiler when they are co-developed. Some of these compilers are much more serious than others - several of them are learning exercises, demos, or toys.

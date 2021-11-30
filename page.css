@@ -55,8 +55,11 @@ a:hover {
   text-decoration: underline;
 }
 
-footer p {
+footer {
   margin-top: 4em;
+}
+
+footer p {
   text-align: center;
 }
 
