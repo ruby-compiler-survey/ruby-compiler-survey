@@ -278,7 +278,7 @@ There's a page describing each compiler implementation, and an appendix describi
       <td style="white-space: nowrap">TruffleRuby <a href="https://github.com/ruby-compiler-survey/truffleruby">⎋</a></td>
       <td>2013-present</td>
       <td>Custom Java and Ruby</td>
-      <td>JIT</td>
+      <td>JIT and AOT</td>
       <td>Partial evaluation of self-specialising AST</td>
       <td>Parser to AST</td>
       <td>Self-specialising AST interpreter</td>
