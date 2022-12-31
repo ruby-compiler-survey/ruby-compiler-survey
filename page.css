@@ -121,8 +121,10 @@ code {
   padding: 0.25em;
 
   background-color: #f5f3f0;
+}
 
-  overflow-x: scroll;
+.highlight pre {
+  overflow-x: auto;
 }
 
 p.coderef {
