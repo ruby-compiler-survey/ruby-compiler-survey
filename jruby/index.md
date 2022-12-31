@@ -15,7 +15,7 @@ JRuby is likely the only Ruby JIT that has ever had significant use in productio
 
 The JRuby source code is available at [our archive](https://github.com/ruby-compiler-survey/jruby) or the [original repository](https://github.com/jruby/jruby).
 
-We're discussing JRuby 9.2.9.0, `458ad3ed9cdb`, 30 October 2019, which is the latest release as at 3 February 2020. JRuby by default will compile the entire entry-point script on load. This makes it hard to understand the compilation of individual methods, the effect of profiling, and things like compilation threshold. This feature cannot be disabled with an option, so we turn it off by patching the source code.
+We're discussing JRuby 9.2.9.0, `458ad3ed9cdb`, 30 October 2019, which is the latest release as of 3 February 2020. JRuby by default will compile the entire entry-point script on load. This makes it hard to understand the compilation of individual methods, the effect of profiling, and things like compilation threshold. This feature cannot be disabled with an option, so we turn it off by patching the source code.
 
 JRuby is usable on many different implementations of the JVM. In order for us to be able to talk in concrete terms, we're going to explain JRuby in the context of running on OpenJDK 8 (HotSpot). This JVM is the default in this version of JRuby's CI system and in practice is probably the platform that most people will be running JRuby on. We're also going to enable JRuby's `invokedynamic` support, even though this is not the default, in order to show JRuby's compiler in its most sophisticated configuration.
 
@@ -53,7 +53,7 @@ We'll use these flags to help us understand what the JRuby JIT is doing:
 
 We'll use the separate `ast` command to print JRuby's AST.
 
-More details on [building and running Rubinius](building) are available in the appendix.
+More details on [building and running JRuby](building) are available in the appendix.
 
 ## Frontend
 
@@ -342,7 +342,7 @@ block #4 (out: 6): LBL_0:13
 
 Default optimisations are:
 
-* **Local optimisation**, which does peep-home replacement of individual instructions with simpler equivalents, such as replacing a `ToAry` instruction on an `Array` literal with a direct reference to the array
+* **Local optimisation**, which does peep-hole replacement of individual instructions with simpler equivalents, such as replacing a `ToAry` instruction on an `Array` literal with a direct reference to the array
 * **Dead code elimination,** which locally removes side-effect-free instructions that generate results that are not used
 * **Optimise dynamic scopes**, which turns local variables, which are stored on the heap in case the frame escapes, into temporaries, which are stored in JVM local variables when JVM bytecode is generated - but this optimisation is [unsound](https://gist.github.com/headius/5758887) with `Binding.of_caller` as there is no way to retrieve JVM local variables from outside an activation
 * **Optimise delegation**, which limits the need for reifying blocks
@@ -363,7 +363,7 @@ def unbox(a)
 end
 ```
 
-When we compile this without the unboxing pass the calls are through generic call instructions, `call_` (and then with an arity and argument type suffix.) You result of the first call instruction can be fed straight into another call as the receiver, and the result of the second can be simply returned.
+When we compile this without the unboxing pass the calls are through generic call instructions, `call_` (and then with an arity and argument type suffix.) The result of the first call instruction can be fed straight into another call as the receiver, and the result of the second can be simply returned.
 
 ```
 check_arity(;req: 1, opt: 0, *r: false, kw: false)
@@ -754,7 +754,7 @@ MethodHandle updateInvocationTarget(MethodHandle target, IRubyObject self, RubyM
 }
 ```
 
-Both the difference `invokedynamic` makes and how it's working are most clear when we look at the resulting machine code. First the non-`invokedynamic` case shows how calls are being made into our call helper and then into `CachingCallSite#call`, both of which have actually been inlined here. We cam see the `cmp` and `jne` which checks that the class is as expected and that the cache is valid for this method call. Then there is an `invokevirtual` to call the cached method.
+Both the difference `invokedynamic` makes and how it's working are most clear when we look at the resulting machine code. First the non-`invokedynamic` case shows how calls are being made into our call helper and then into `CachingCallSite#call`, both of which have actually been inlined here. We can see the `cmp` and `jne` which checks that the class is as expected and that the cache is valid for this method call. Then there is an `invokevirtual` to call the cached method.
 
 ```s
   0x000000011e788604:   mov    %rbx,%r8                     ;*checkcast {reexecute=0 rethrow=0 return_oop=0}
@@ -912,8 +912,8 @@ With all this taken into account, an activation of a Ruby method running in JRub
 
 * IR interpreter (itself running in the JVM bytecode interpreter)
 * IR interpreter (itself compiled by C1 with limited profiling)
-* IR interpreter inner loop (itself compiled by C2 with full profiling)
-* IR interpreter (itself compiled by C2 with full profiling)
+* IR interpreter inner loop (itself compiled by C1 with full profiling)
+* IR interpreter (itself compiled by C1 with full profiling)
 * IR interpreter (itself compiled by C2)
 * Generated bytecode running in the JVM bytecode interpreter
 * Generated bytecode compiled by C1 with limited profiling
